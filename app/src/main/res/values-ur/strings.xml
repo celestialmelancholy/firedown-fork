@@ -258,7 +258,7 @@
     <string name="trackers_info_action">تحفظ کا انتظام کریں</string>
     <string name="trackers_info_today">%1$s آج بلاک ہوا</string>
     <string name="bookmark_export">بک مارکس برآمد کریں</string>
-    <string name="bookmark_export_done">%1$d بک مارکس Download/Firedown/backup میں برآمد ہو گئے</string>
+    <string name="bookmark_export_done">%1$d بک مارکس Download/Waves/backup میں برآمد ہو گئے</string>
     <string name="bookmark_import">بک مارکس درآمد کریں</string>
     <string name="bookmark_import_done">%1$d بک مارکس درآمد ہو گئے</string>
     <string name="bookmark_io_error">بک مارکس فائل پڑھی نہیں جا سکی</string>
@@ -284,7 +284,7 @@
     <string name="settings_sync_export_continue">جاری رکھیں</string>
     <string name="settings_sync_export_done">ریکوری کوڈ محفوظ ہو گیا</string>
     <string name="settings_sync_export_failed">فائل محفوظ نہیں ہو سکی</string>
-    <string name="settings_sync_export_file_body">Firedown — بک مارک مطابقت پذیری ریکوری کوڈ\n\n%1$s\n\nیہ کوڈ آپ کے مطابقت پذیر بک مارکس کی واحد کنجی ہے — جس کے پاس بھی یہ ہو وہ انہیں پڑھ سکتا ہے، اور کھو جانے پر اسے بحال نہیں کیا جا سکتا۔\n\nیہ فائل خفیہ نہیں ہے۔ کوڈ کو اپنے پاس ورڈ مینیجر (یا کسی اور محفوظ جگہ) میں درآمد کریں، پھر یہ فائل حذف کر دیں۔</string>
+    <string name="settings_sync_export_file_body">Waves — بک مارک مطابقت پذیری ریکوری کوڈ\n\n%1$s\n\nیہ کوڈ آپ کے مطابقت پذیر بک مارکس کی واحد کنجی ہے — جس کے پاس بھی یہ ہو وہ انہیں پڑھ سکتا ہے، اور کھو جانے پر اسے بحال نہیں کیا جا سکتا۔\n\nیہ فائل خفیہ نہیں ہے۔ کوڈ کو اپنے پاس ورڈ مینیجر (یا کسی اور محفوظ جگہ) میں درآمد کریں، پھر یہ فائل حذف کر دیں۔</string>
     <string name="settings_sync_export_summary">کوڈ کو ایک متنی فائل کے طور پر برآمد کریں جسے آپ محفوظ رکھ سکیں</string>
     <string name="settings_sync_export_title">ریکوری کوڈ فائل میں محفوظ کریں</string>
     <string name="settings_sync_faq_a1">جی ہاں۔ ہر بک مارک اپ لوڈ ہونے سے پہلے اسی آلے پر خفیہ کیا جاتا ہے۔ سرور صرف ایسا الجھا ہوا ڈیٹا محفوظ کرتا ہے جسے وہ پڑھ نہیں سکتا۔</string>
@@ -294,7 +294,7 @@
     <string name="settings_sync_faq_a5">نہیں۔ کوئی سائن اپ، ای میل، یا فون نمبر نہیں — صرف ریکوری کوڈ۔ کوئی ذاتی چیز آپ کے بک مارکس سے جُڑی نہیں۔</string>
     <string name="settings_sync_faq_a6">مطابقت پذیری اختیاری ہے اور بطورِ پہلے سے طے شدہ بند ہے۔ آپ ہمیشہ اپنے بک مارکس کسی فائل میں برآمد کر کے بعد میں درآمد کر سکتے ہیں، بغیر کسی سرور کے۔</string>
     <string name="settings_sync_faq_q1">کیا میرے بک مارکس خفیہ ہیں؟</string>
-    <string name="settings_sync_faq_q2">کیا Firedown یا کوئی اور انہیں پڑھ سکتا ہے؟</string>
+    <string name="settings_sync_faq_q2">کیا Waves یا کوئی اور انہیں پڑھ سکتا ہے؟</string>
     <string name="settings_sync_faq_q3">ریکوری کوڈ کیا ہے؟</string>
     <string name="settings_sync_faq_q4">اگر میرا ریکوری کوڈ کھو جائے تو کیا ہوگا؟</string>
     <string name="settings_sync_faq_q5">کیا مجھے اکاؤنٹ یا ای میل کی ضرورت ہے؟</string>

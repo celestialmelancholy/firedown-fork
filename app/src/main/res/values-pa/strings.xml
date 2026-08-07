@@ -289,7 +289,7 @@
     <string name="trackers_info_stat_blocked">ਬਲੌਕ ਕੀਤਾ</string>
     <string name="trackers_info_stat_saved">ਡੇਟਾ ਬਚਾਇਆ</string>
     <string name="bookmark_export">ਬੁੱਕਮਾਰਕ ਨਿਰਯਾਤ ਕਰੋ</string>
-    <string name="bookmark_export_done">%1$d ਬੁੱਕਮਾਰਕ Download/Firedown/backup ਵਿੱਚ ਨਿਰਯਾਤ ਕੀਤੇ</string>
+    <string name="bookmark_export_done">%1$d ਬੁੱਕਮਾਰਕ Download/Waves/backup ਵਿੱਚ ਨਿਰਯਾਤ ਕੀਤੇ</string>
     <string name="bookmark_import">ਬੁੱਕਮਾਰਕ ਆਯਾਤ ਕਰੋ</string>
     <string name="bookmark_import_done">%1$d ਬੁੱਕਮਾਰਕ ਆਯਾਤ ਕੀਤੇ</string>
     <string name="bookmark_io_error">ਬੁੱਕਮਾਰਕ ਫ਼ਾਈਲ ਪੜ੍ਹੀ ਨਹੀਂ ਜਾ ਸਕੀ</string>
@@ -314,7 +314,7 @@
     <string name="settings_sync_export_continue">ਜਾਰੀ ਰੱਖੋ</string>
     <string name="settings_sync_export_done">ਰਿਕਵਰੀ ਕੋਡ ਸੰਭਾਲਿਆ</string>
     <string name="settings_sync_export_failed">ਫ਼ਾਈਲ ਸੰਭਾਲੀ ਨਹੀਂ ਜਾ ਸਕੀ</string>
-    <string name="settings_sync_export_file_body">Firedown — ਬੁੱਕਮਾਰਕ ਸਿੰਕ ਰਿਕਵਰੀ ਕੋਡ\n\n%1$s\n\nਇਹ ਕੋਡ ਹੀ ਤੁਹਾਡੇ ਸਿੰਕ ਕੀਤੇ ਬੁੱਕਮਾਰਕਾਂ ਦੀ ਇੱਕੋ-ਇੱਕ ਕੁੰਜੀ ਹੈ — ਜਿਸ ਕੋਲ ਇਹ ਹੈ ਉਹ ਉਨ੍ਹਾਂ ਨੂੰ ਪੜ੍ਹ ਸਕਦਾ ਹੈ, ਅਤੇ ਗੁਆਚ ਜਾਣ \'ਤੇ ਇਹ ਵਾਪਸ ਨਹੀਂ ਮਿਲ ਸਕਦਾ।\n\nਇਹ ਫ਼ਾਈਲ ਐਨਕ੍ਰਿਪਟ ਨਹੀਂ ਹੈ। ਕੋਡ ਨੂੰ ਆਪਣੇ ਪਾਸਵਰਡ ਮੈਨੇਜਰ ਵਿੱਚ (ਜਾਂ ਕਿਸੇ ਹੋਰ ਸੁਰੱਖਿਅਤ ਥਾਂ) ਆਯਾਤ ਕਰੋ, ਫਿਰ ਇਹ ਫ਼ਾਈਲ ਮਿਟਾ ਦਿਓ।</string>
+    <string name="settings_sync_export_file_body">Waves — ਬੁੱਕਮਾਰਕ ਸਿੰਕ ਰਿਕਵਰੀ ਕੋਡ\n\n%1$s\n\nਇਹ ਕੋਡ ਹੀ ਤੁਹਾਡੇ ਸਿੰਕ ਕੀਤੇ ਬੁੱਕਮਾਰਕਾਂ ਦੀ ਇੱਕੋ-ਇੱਕ ਕੁੰਜੀ ਹੈ — ਜਿਸ ਕੋਲ ਇਹ ਹੈ ਉਹ ਉਨ੍ਹਾਂ ਨੂੰ ਪੜ੍ਹ ਸਕਦਾ ਹੈ, ਅਤੇ ਗੁਆਚ ਜਾਣ \'ਤੇ ਇਹ ਵਾਪਸ ਨਹੀਂ ਮਿਲ ਸਕਦਾ।\n\nਇਹ ਫ਼ਾਈਲ ਐਨਕ੍ਰਿਪਟ ਨਹੀਂ ਹੈ। ਕੋਡ ਨੂੰ ਆਪਣੇ ਪਾਸਵਰਡ ਮੈਨੇਜਰ ਵਿੱਚ (ਜਾਂ ਕਿਸੇ ਹੋਰ ਸੁਰੱਖਿਅਤ ਥਾਂ) ਆਯਾਤ ਕਰੋ, ਫਿਰ ਇਹ ਫ਼ਾਈਲ ਮਿਟਾ ਦਿਓ।</string>
     <string name="settings_sync_export_summary">ਕੋਡ ਨੂੰ ਟੈਕਸਟ ਫ਼ਾਈਲ ਵਜੋਂ ਨਿਰਯਾਤ ਕਰੋ ਜੋ ਤੁਸੀਂ ਸੰਭਾਲ ਸਕੋ</string>
     <string name="settings_sync_export_title">ਰਿਕਵਰੀ ਕੋਡ ਫ਼ਾਈਲ ਵਿੱਚ ਸੰਭਾਲੋ</string>
     <string name="settings_sync_faq_a1">ਹਾਂ। ਹਰ ਬੁੱਕਮਾਰਕ ਅੱਪਲੋਡ ਹੋਣ ਤੋਂ ਪਹਿਲਾਂ ਇਸ ਡਿਵਾਈਸ \'ਤੇ ਐਨਕ੍ਰਿਪਟ ਕੀਤਾ ਜਾਂਦਾ ਹੈ। ਸਰਵਰ ਸਿਰਫ਼ ਅਜਿਹਾ ਉਲਝਿਆ ਡਾਟਾ ਸੰਭਾਲਦਾ ਹੈ ਜਿਸਨੂੰ ਇਹ ਪੜ੍ਹ ਨਹੀਂ ਸਕਦਾ।</string>
@@ -324,7 +324,7 @@
     <string name="settings_sync_faq_a5">ਨਹੀਂ। ਕੋਈ ਸਾਈਨ-ਅੱਪ, ਈਮੇਲ, ਜਾਂ ਫ਼ੋਨ ਨੰਬਰ ਨਹੀਂ — ਸਿਰਫ਼ ਰਿਕਵਰੀ ਕੋਡ। ਤੁਹਾਡੇ ਬੁੱਕਮਾਰਕਾਂ ਨਾਲ ਕੋਈ ਨਿੱਜੀ ਜਾਣਕਾਰੀ ਜੁੜੀ ਨਹੀਂ।</string>
     <string name="settings_sync_faq_a6">ਸਿੰਕ ਵਿਕਲਪਿਕ ਹੈ ਅਤੇ ਮੂਲ ਰੂਪ ਵਿੱਚ ਬੰਦ ਹੈ। ਤੁਸੀਂ ਹਮੇਸ਼ਾ ਆਪਣੇ ਬੁੱਕਮਾਰਕ ਫ਼ਾਈਲ ਵਿੱਚ ਨਿਰਯਾਤ ਕਰਕੇ ਬਾਅਦ ਵਿੱਚ ਆਯਾਤ ਕਰ ਸਕਦੇ ਹੋ, ਬਿਨਾਂ ਕਿਸੇ ਸਰਵਰ ਦੇ।</string>
     <string name="settings_sync_faq_q1">ਕੀ ਮੇਰੇ ਬੁੱਕਮਾਰਕ ਐਨਕ੍ਰਿਪਟ ਕੀਤੇ ਹਨ?</string>
-    <string name="settings_sync_faq_q2">ਕੀ Firedown ਜਾਂ ਕੋਈ ਹੋਰ ਉਨ੍ਹਾਂ ਨੂੰ ਪੜ੍ਹ ਸਕਦਾ ਹੈ?</string>
+    <string name="settings_sync_faq_q2">ਕੀ Waves ਜਾਂ ਕੋਈ ਹੋਰ ਉਨ੍ਹਾਂ ਨੂੰ ਪੜ੍ਹ ਸਕਦਾ ਹੈ?</string>
     <string name="settings_sync_faq_q3">ਰਿਕਵਰੀ ਕੋਡ ਕੀ ਹੈ?</string>
     <string name="settings_sync_faq_q4">ਜੇ ਮੈਂ ਆਪਣਾ ਰਿਕਵਰੀ ਕੋਡ ਗੁਆ ਦਿਆਂ ਤਾਂ ਕੀ?</string>
     <string name="settings_sync_faq_q5">ਕੀ ਮੈਨੂੰ ਖਾਤੇ ਜਾਂ ਈਮੇਲ ਦੀ ਲੋੜ ਹੈ?</string>

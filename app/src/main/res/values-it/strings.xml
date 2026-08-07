@@ -3,8 +3,8 @@
     <string name="settings_oled_theme_summary">Superfici nere pure — risparmia batteria sugli schermi OLED</string>
     <string name="archive_banner_subtitle">Tocca per visualizzare o riaprire</string>
     <string name="action_mode_selected">%d selezionato</string>
-    <string name="app_lock">Sblocca per usare Firedown</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Sblocca per usare Waves</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Sblocca</string>
     <string name="browser_bookmark_added">Segnalibro salvato!</string>
     <string name="browser_cache_cleared">Dati di navigazione cancellati</string>
@@ -29,7 +29,7 @@
     <string name="capture_empty_gifs_message">Nessuna Gif disponibile.</string>
     <string name="capture_empty_images_message">Nessuna immagine disponibile.</string>
     <string name="capture_empty_message">Nessun supporto disponibile per il download.</string>
-    <string name="capture_empty_subtext">Ricarica il sito Web e Firedown rileverà i media disponibili.</string>
+    <string name="capture_empty_subtext">Ricarica il sito Web e Waves rileverà i media disponibili.</string>
     <string name="capture_empty_video_message">Nessun video disponibile.</string>
     <string name="clipboard">Copiato negli appunti</string>
     <string name="clipboard_from">Dagli appunti</string>
@@ -89,7 +89,7 @@
     <string name="empty_list_history">La cronologia dei download è vuota.</string>
     <string name="empty_list_query">Nessun risultato trovato</string>
     <string name="empty_list_type">Non c\'è niente qui.</string>
-    <string name="empty_media_help">Alcuni file multimediali devono essere riprodotti prima che Firedown possa rilevarli come file scaricabili.</string>
+    <string name="empty_media_help">Alcuni file multimediali devono essere riprodotti prima che Waves possa rilevarli come file scaricabili.</string>
     <string name="empty_media_help_title">Riproduci il contenuto multimediale prima di scaricarlo</string>
     <string name="empty_media_subtitle_help">Riprodurre il contenuto multimediale come di consueto. Dovrebbe quindi apparire con gli altri file multimediali, dopo aver premuto il pulsante Fire.</string>
 <string name="error_check_internet_connection">Errore di connessione Internet.</string>
@@ -160,7 +160,7 @@
     <string name="navigation_web_history">Cronologia</string>
     <string name="notifications_downloads_channel">Download</string>
     <string name="open">Apri</string>
-    <string name="open_in_app_subtitle">Vuoi uscire da Firedown per visualizzare questo contenuto?</string>
+    <string name="open_in_app_subtitle">Vuoi uscire da Waves per visualizzare questo contenuto?</string>
     <string name="open_in_app_title">Apri in un\'altra app</string>
     <string name="open_new_private_tab_2">Nuova scheda anonima</string>
     <string name="open_new_tab_2">Nuova scheda</string>
@@ -197,7 +197,7 @@
     <string name="rename_file">Rinomina il file</string>
     <string name="request_geolocation">Condividere la posizione del dispositivo con &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_media_key_system_access">Consentire a &lt;b&gt;%s&lt;/b&gt; di riprodurre contenuti controllati da DRM?</string>
-    <string name="request_media_key_system_access_subtitle">Nota che i file protetti da DRM non possono essere scaricati da Firedown</string>
+    <string name="request_media_key_system_access_subtitle">Nota che i file protetti da DRM non possono essere scaricati da Waves</string>
     <string name="request_storage">Consentire l\'accesso allo spazio di archiviazione del dispositivo per &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_storage_access">Consentire a terze parti di accedere allo spazio di archiviazione della prima parte per &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="restart_origin">Ricomincia</string>
@@ -383,7 +383,7 @@
     <string name="capture_help_banner_title">Video non in elenco?</string>
     <string name="capture_help_banner">Alcuni contenuti incorporati vanno riprodotti prima. Tocca per scoprire come.</string>
     <string name="bookmark_export">Esporta segnalibri</string>
-    <string name="bookmark_export_done">%1$d segnalibri esportati in Download/Firedown/backup</string>
+    <string name="bookmark_export_done">%1$d segnalibri esportati in Download/Waves/backup</string>
     <string name="bookmark_import">Importa segnalibri</string>
     <string name="bookmark_import_done">%1$d segnalibri importati</string>
     <string name="bookmark_io_error">Impossibile leggere il file dei segnalibri</string>
@@ -408,7 +408,7 @@
     <string name="settings_sync_export_continue">Continua</string>
     <string name="settings_sync_export_done">Codice di recupero salvato</string>
     <string name="settings_sync_export_failed">Impossibile salvare il file</string>
-    <string name="settings_sync_export_file_body">Firedown — codice di recupero della sincronizzazione dei segnalibri\n\n%1$s\n\nQuesto codice è l\'unica chiave dei tuoi segnalibri sincronizzati — chiunque lo possieda può leggerli, e non può essere recuperato se viene perso.\n\nQuesto file NON è crittografato. Importa il codice nel tuo gestore di password (o in un altro luogo sicuro), poi elimina questo file.</string>
+    <string name="settings_sync_export_file_body">Waves — codice di recupero della sincronizzazione dei segnalibri\n\n%1$s\n\nQuesto codice è l\'unica chiave dei tuoi segnalibri sincronizzati — chiunque lo possieda può leggerli, e non può essere recuperato se viene perso.\n\nQuesto file NON è crittografato. Importa il codice nel tuo gestore di password (o in un altro luogo sicuro), poi elimina questo file.</string>
     <string name="settings_sync_export_summary">Esporta il codice come file di testo che puoi conservare</string>
     <string name="settings_sync_export_title">Salva il codice di recupero in un file</string>
     <string name="settings_sync_faq_a1">Sì. Ogni segnalibro viene crittografato su questo dispositivo prima di essere caricato. Il server memorizza solo dati cifrati che non può leggere.</string>
@@ -418,7 +418,7 @@
     <string name="settings_sync_faq_a5">No. Non c\'è registrazione, e-mail o numero di telefono — solo il codice di recupero. Nulla di personale è legato ai tuoi segnalibri.</string>
     <string name="settings_sync_faq_a6">La sincronizzazione è facoltativa e disattivata per impostazione predefinita. Puoi sempre esportare i tuoi segnalibri in un file e importarli in seguito, senza alcun server.</string>
     <string name="settings_sync_faq_q1">I miei segnalibri sono crittografati?</string>
-    <string name="settings_sync_faq_q2">Firedown o chiunque altro può leggerli?</string>
+    <string name="settings_sync_faq_q2">Waves o chiunque altro può leggerli?</string>
     <string name="settings_sync_faq_q3">Cos\'è il codice di recupero?</string>
     <string name="settings_sync_faq_q4">Cosa succede se perdo il mio codice di recupero?</string>
     <string name="settings_sync_faq_q5">Mi serve un account o un\'e-mail?</string>

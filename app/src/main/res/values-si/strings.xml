@@ -1,6 +1,6 @@
 <resources>
     <string name="action_mode_selected">%d තෝරන ලදී</string>
-    <string name="app_lock">Firedown භාවිතා කිරීමට අගුලු හරින්න</string>
+    <string name="app_lock">Waves භාවිතා කිරීමට අගුලු හරින්න</string>
     <string name="app_unlock">අගුළු හරින්න</string>
     <string name="browser_bookmark_added">පිටු සලකුණ සුරකින ලදී!</string>
     <string name="browser_cache_cleared">බ්‍රවුස් කිරීමේ දත්ත හිස් කර ඇත</string>
@@ -24,7 +24,7 @@
     <string name="capture_empty_gifs_message">Gifs නොමැත.</string>
     <string name="capture_empty_images_message">පින්තූර නොමැත.</string>
     <string name="capture_empty_message">බාගත කිරීම සඳහා මාධ්‍ය නොමැත.</string>
-    <string name="capture_empty_subtext">වෙබ් අඩවිය නැවත පූරණය කරන්න සහ Firedown පවතින මාධ්‍ය හඳුනා ගනී.</string>
+    <string name="capture_empty_subtext">වෙබ් අඩවිය නැවත පූරණය කරන්න සහ Waves පවතින මාධ්‍ය හඳුනා ගනී.</string>
     <string name="capture_empty_video_message">වීඩියෝ නොමැත.</string>
     <string name="clipboard">පසුරු පුවරුවට පිටපත් කර ඇත</string>
     <string name="close_tab">පටිත්ත වසන්න</string>
@@ -139,7 +139,7 @@
     <string name="navigation_web_history">ඉතිහාසය</string>
     <string name="notifications_downloads_channel">බාගත කිරීම්</string>
     <string name="open">විවෘත</string>
-    <string name="open_in_app_subtitle">ඔබ මෙම අන්තර්ගතය බැලීමට Firedown හැර යාමට කැමතිද?</string>
+    <string name="open_in_app_subtitle">ඔබ මෙම අන්තර්ගතය බැලීමට Waves හැර යාමට කැමතිද?</string>
     <string name="open_in_app_title">වෙනත් යෙදුමකින් විවෘත කරන්න</string>
     <string name="open_new_private_tab_2">නව පෞද්. පටිත්ත</string>
     <string name="open_new_tab_2">නව පටිත්ත</string>
@@ -276,7 +276,7 @@
 
 
     <string name="bookmark_export">පිටුසන් අපනයනය කරන්න</string>
-    <string name="bookmark_export_done">පිටුසන් %1$d ක් Download/Firedown/backup වෙත අපනයනය කරන ලදී</string>
+    <string name="bookmark_export_done">පිටුසන් %1$d ක් Download/Waves/backup වෙත අපනයනය කරන ලදී</string>
     <string name="bookmark_import">පිටුසන් ආයාත කරන්න</string>
     <string name="bookmark_import_done">පිටුසන් %1$d ක් ආයාත කරන ලදී</string>
     <string name="bookmark_io_error">පිටුසන් ගොනුව කියවිය නොහැකි විය</string>
@@ -301,7 +301,7 @@
     <string name="settings_sync_export_continue">ඉදිරියට</string>
     <string name="settings_sync_export_done">ප්‍රතිසාධන කේතය සුරකින ලදී</string>
     <string name="settings_sync_export_failed">ගොනුව සුරැකිය නොහැකි විය</string>
-    <string name="settings_sync_export_file_body">Firedown — පිටුසන් සමමුහුර්ත ප්‍රතිසාධන කේතය\n\n%1$s\n\nමෙම කේතය ඔබේ සමමුහුර්ත කළ පිටුසන් සඳහා ඇති එකම යතුරයි — එය ඇති ඕනෑම අයෙකුට ඒවා කියවිය හැක, නැති වුවහොත් එය ප්‍රතිසාධනය කළ නොහැක.\n\nමෙම ගොනුව සංකේතනය කර නැත. කේතය ඔබේ මුරපද කළමනාකරුවට (හෝ වෙනත් ආරක්ෂිත ස්ථානයකට) ආයාත කර, පසුව මෙම ගොනුව මකන්න.</string>
+    <string name="settings_sync_export_file_body">Waves — පිටුසන් සමමුහුර්ත ප්‍රතිසාධන කේතය\n\n%1$s\n\nමෙම කේතය ඔබේ සමමුහුර්ත කළ පිටුසන් සඳහා ඇති එකම යතුරයි — එය ඇති ඕනෑම අයෙකුට ඒවා කියවිය හැක, නැති වුවහොත් එය ප්‍රතිසාධනය කළ නොහැක.\n\nමෙම ගොනුව සංකේතනය කර නැත. කේතය ඔබේ මුරපද කළමනාකරුවට (හෝ වෙනත් ආරක්ෂිත ස්ථානයකට) ආයාත කර, පසුව මෙම ගොනුව මකන්න.</string>
     <string name="settings_sync_export_summary">කේතය ඔබට ගබඩා කළ හැකි පෙළ ගොනුවක් ලෙස අපනයනය කරන්න</string>
     <string name="settings_sync_export_title">ප්‍රතිසාධන කේතය ගොනුවකට සුරකින්න</string>
     <string name="settings_sync_faq_a1">ඔව්. සෑම පිටුසනක්ම උඩුගත කිරීමට පෙර මෙම උපාංගයේ සංකේතනය කෙරේ. සේවාදායකය තමන්ට කියවිය නොහැකි, අවුල් කළ දත්ත පමණක් ගබඩා කරයි.</string>
@@ -311,7 +311,7 @@
     <string name="settings_sync_faq_a5">නැත. ලියාපදිංචියක්, විද්‍යුත් තැපෑලක් හෝ දුරකථන අංකයක් නැත — ප්‍රතිසාධන කේතය පමණි. ඔබේ පිටුසන් සමඟ පුද්ගලික කිසිවක් බැඳී නැත.</string>
     <string name="settings_sync_faq_a6">සමමුහුර්ත කිරීම විකල්ප වන අතර පෙරනිමියෙන් ක්‍රියාවිරහිතය. ඔබට ඕනෑම විටෙක ඔබේ පිටුසන් ගොනුවකට අපනයනය කර පසුව ආයාත කළ හැක, සේවාදායකයක් සම්බන්ධ නොකරම.</string>
     <string name="settings_sync_faq_q1">මගේ පිටුසන් සංකේතනය කර තිබේද?</string>
-    <string name="settings_sync_faq_q2">Firedown හෝ වෙනත් කවරෙකුට ඒවා කියවිය හැකිද?</string>
+    <string name="settings_sync_faq_q2">Waves හෝ වෙනත් කවරෙකුට ඒවා කියවිය හැකිද?</string>
     <string name="settings_sync_faq_q3">ප්‍රතිසාධන කේතය යනු කුමක්ද?</string>
     <string name="settings_sync_faq_q4">මගේ ප්‍රතිසාධන කේතය නැති වුවහොත් කුමක් වේද?</string>
     <string name="settings_sync_faq_q5">මට ගිණුමක් හෝ විද්‍යුත් තැපෑලක් අවශ්‍යද?</string>

@@ -249,7 +249,7 @@
     <string name="snackbar_tab_closed">ટેબ બંધ કર્યું</string>
     <string name="switch_to_tab_description">ટૅબ બદલો</string>
     <string name="bookmark_export">બુકમાર્ક નિકાસ કરો</string>
-    <string name="bookmark_export_done">%1$d બુકમાર્ક Download/Firedown/backup માં નિકાસ કર્યા</string>
+    <string name="bookmark_export_done">%1$d બુકમાર્ક Download/Waves/backup માં નિકાસ કર્યા</string>
     <string name="bookmark_import">બુકમાર્ક આયાત કરો</string>
     <string name="bookmark_import_done">%1$d બુકમાર્ક આયાત કર્યા</string>
     <string name="bookmark_io_error">બુકમાર્ક ફાઇલ વાંચી શકાઈ નહીં</string>
@@ -275,7 +275,7 @@
     <string name="settings_sync_export_continue">ચાલુ રાખો</string>
     <string name="settings_sync_export_done">પુનઃપ્રાપ્તિ કોડ સાચવ્યો</string>
     <string name="settings_sync_export_failed">ફાઇલ સાચવી શકાઈ નહીં</string>
-    <string name="settings_sync_export_file_body">Firedown — બુકમાર્ક સિંક પુનઃપ્રાપ્તિ કોડ\n\n%1$s\n\nઆ કોડ જ તમારા સિંક કરેલા બુકમાર્કની એકમાત્ર ચાવી છે — જેની પાસે તે છે તે તેમને વાંચી શકે છે, અને ખોવાઈ જાય તો તે પાછી મેળવી શકાતી નથી.\n\nઆ ફાઇલ એન્ક્રિપ્ટ કરેલી નથી. કોડને તમારા પાસવર્ડ મેનેજરમાં (અથવા બીજી કોઈ સલામત જગ્યાએ) આયાત કરો, પછી આ ફાઇલ કાઢી નાખો.</string>
+    <string name="settings_sync_export_file_body">Waves — બુકમાર્ક સિંક પુનઃપ્રાપ્તિ કોડ\n\n%1$s\n\nઆ કોડ જ તમારા સિંક કરેલા બુકમાર્કની એકમાત્ર ચાવી છે — જેની પાસે તે છે તે તેમને વાંચી શકે છે, અને ખોવાઈ જાય તો તે પાછી મેળવી શકાતી નથી.\n\nઆ ફાઇલ એન્ક્રિપ્ટ કરેલી નથી. કોડને તમારા પાસવર્ડ મેનેજરમાં (અથવા બીજી કોઈ સલામત જગ્યાએ) આયાત કરો, પછી આ ફાઇલ કાઢી નાખો.</string>
     <string name="settings_sync_export_summary">કોડને ટેક્સ્ટ ફાઇલ તરીકે નિકાસ કરો જે તમે સંગ્રહી શકો</string>
     <string name="settings_sync_export_title">પુનઃપ્રાપ્તિ કોડ ફાઇલમાં સાચવો</string>
     <string name="settings_sync_faq_a1">હા. દરેક બુકમાર્ક અપલોડ થાય તે પહેલાં આ ઉપકરણ પર એન્ક્રિપ્ટ કરવામાં આવે છે. સર્વર ફક્ત એવો ગૂંચવાયેલો ડેટા સંગ્રહે છે જે તે વાંચી શકતું નથી.</string>
@@ -285,7 +285,7 @@
     <string name="settings_sync_faq_a5">ના. કોઈ સાઇન-અપ, ઇમેઇલ કે ફોન નંબર નથી — ફક્ત પુનઃપ્રાપ્તિ કોડ. તમારા બુકમાર્ક સાથે કોઈ વ્યક્તિગત માહિતી જોડાયેલી નથી.</string>
     <string name="settings_sync_faq_a6">સિંક વૈકલ્પિક છે અને મૂળભૂત રીતે બંધ છે. તમે હંમેશા તમારા બુકમાર્ક ફાઇલમાં નિકાસ કરી પછીથી આયાત કરી શકો છો, કોઈ સર્વર સામેલ કર્યા વગર.</string>
     <string name="settings_sync_faq_q1">શું મારા બુકમાર્ક એન્ક્રિપ્ટ કરેલા છે?</string>
-    <string name="settings_sync_faq_q2">શું Firedown કે બીજું કોઈ તેમને વાંચી શકે છે?</string>
+    <string name="settings_sync_faq_q2">શું Waves કે બીજું કોઈ તેમને વાંચી શકે છે?</string>
     <string name="settings_sync_faq_q3">પુનઃપ્રાપ્તિ કોડ શું છે?</string>
     <string name="settings_sync_faq_q4">જો હું મારો પુનઃપ્રાપ્તિ કોડ ગુમાવું તો શું?</string>
     <string name="settings_sync_faq_q5">શું મારે એકાઉન્ટ કે ઇમેઇલની જરૂર છે?</string>

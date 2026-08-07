@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Rounded thumbnail background for the "Jump back in" cards — corner radius
+     matches the card's 14dp so the preview sits flush with its parent tab. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/home_shortcut_circle" />
+    <corners android:radius="14dp" />
+</shape>

@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">%d hautatua</string>
-    <string name="app_lock">Desblokeatu Firedown erabiltzeko</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Desblokeatu Waves erabiltzeko</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Desblokeatu</string>
     <string name="browser_bookmark_added">Laster-marka gorde da!</string>
     <string name="browser_cache_cleared">Garbitu da arakatze-datuak</string>
@@ -26,7 +26,7 @@
     <string name="capture_empty_gifs_message">Ez dago gifrik eskuragarri.</string>
     <string name="capture_empty_images_message">Ez dago irudirik eskuragarri.</string>
     <string name="capture_empty_message">Ez dago euskarririk deskargatzeko.</string>
-    <string name="capture_empty_subtext">Berriz kargatu webgunea eta Firedown-ek eskuragarri dauden euskarriak detektatuko ditu.</string>
+    <string name="capture_empty_subtext">Berriz kargatu webgunea eta Waves-ek eskuragarri dauden euskarriak detektatuko ditu.</string>
     <string name="capture_empty_video_message">Ez dago bideorik eskuragarri.</string>
     <string name="clipboard">Arbelean kopiatu da</string>
     <string name="close_tab">Itxi fitxa</string>
@@ -71,7 +71,7 @@
     <string name="details_url">URLa</string>
     <string name="download">Deskargatu</string>
     <string name="download_finished">Deskarga amaitu da</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Deskarga kalitatea</string>
     <string name="download_queued">Zain…</string>
     <string name="download_rename_error">Fitxategiaren izena dagoeneko erabiltzen ari da.</string>
@@ -84,7 +84,7 @@
     <string name="empty_list_history">Zure deskarga-historia hutsik dago.</string>
     <string name="empty_list_query">Ez da emaitzarik aurkitu</string>
     <string name="empty_list_type">Hemen ez dago ezer.</string>
-    <string name="empty_media_help">Multimedia-fitxategi batzuk erreproduzitu behar dira Firedown-ek deskarga daitezkeen fitxategi gisa hauteman ahal izateko.</string>
+    <string name="empty_media_help">Multimedia-fitxategi batzuk erreproduzitu behar dira Waves-ek deskarga daitezkeen fitxategi gisa hauteman ahal izateko.</string>
     <string name="empty_media_help_title">Erreproduzitu multimedia deskargatu aurretik</string>
     <string name="empty_media_subtitle_help">Mesedez, erreproduzitu komunikabideak ohi bezala. Ondoren, beste multimedia fitxategiekin agertu beharko litzateke, Fire-Botoia sakatu ondoren.</string>
 <string name="error_check_internet_connection">Interneteko konexioaren errorea.</string>
@@ -144,7 +144,7 @@
     <string name="navigation_web_history">Historia</string>
     <string name="notifications_downloads_channel">Deskargak</string>
     <string name="open">Ireki</string>
-    <string name="open_in_app_subtitle">Firedownetik atera nahi duzu eduki hau ikusteko?</string>
+    <string name="open_in_app_subtitle">Wavesetik atera nahi duzu eduki hau ikusteko?</string>
     <string name="open_in_app_title">Ireki beste aplikazio batean</string>
     <string name="open_new_private_tab_2">Fitxa pribatu berria</string>
     <string name="open_new_tab_2">Fitxa berria</string>
@@ -280,7 +280,7 @@
     <string name="trackers_info_action">Kudeatu babesa</string>
     <string name="trackers_info_today">%1$s blokeatuta gaur</string>
     <string name="bookmark_export">Esportatu laster-markak</string>
-    <string name="bookmark_export_done">%1$d laster-marka esportatu dira Download/Firedown/backup-era</string>
+    <string name="bookmark_export_done">%1$d laster-marka esportatu dira Download/Waves/backup-era</string>
     <string name="bookmark_import">Inportatu laster-markak</string>
     <string name="bookmark_import_done">%1$d laster-marka inportatu dira</string>
     <string name="bookmark_io_error">Ezin izan da laster-marken fitxategia irakurri</string>
@@ -305,7 +305,7 @@
     <string name="settings_sync_export_continue">Jarraitu</string>
     <string name="settings_sync_export_done">Berreskuratze-kodea gorde da</string>
     <string name="settings_sync_export_failed">Ezin izan da fitxategia gorde</string>
-    <string name="settings_sync_export_file_body">Firedown — laster-marken sinkronizazioaren berreskuratze-kodea\n\n%1$s\n\nKode hau zure sinkronizatutako laster-marken gako bakarra da — daukan edonork irakur ditzake, eta ezin da berreskuratu galtzen bada.\n\nFitxategi hau EZ dago zifratuta. Inportatu kodea zure pasahitz-kudeatzailera (edo beste leku seguru batera), eta ezabatu fitxategi hau gero.</string>
+    <string name="settings_sync_export_file_body">Waves — laster-marken sinkronizazioaren berreskuratze-kodea\n\n%1$s\n\nKode hau zure sinkronizatutako laster-marken gako bakarra da — daukan edonork irakur ditzake, eta ezin da berreskuratu galtzen bada.\n\nFitxategi hau EZ dago zifratuta. Inportatu kodea zure pasahitz-kudeatzailera (edo beste leku seguru batera), eta ezabatu fitxategi hau gero.</string>
     <string name="settings_sync_export_summary">Esportatu kodea gorde dezakezun testu-fitxategi gisa</string>
     <string name="settings_sync_export_title">Gorde berreskuratze-kodea fitxategi batean</string>
     <string name="settings_sync_faq_a1">Bai. Laster-marka bakoitza gailu honetan zifratzen da igo aurretik. Zerbitzariak ezin duen datu nahasia baino ez du gordetzen.</string>
@@ -315,7 +315,7 @@
     <string name="settings_sync_faq_a5">Ez. Ez dago izen-ematerik, mezu elektronikorik edo telefono-zenbakirik — berreskuratze-kodea baino ez. Ez zaie ezer pertsonalik lotzen zure laster-markei.</string>
     <string name="settings_sync_faq_a6">Sinkronizazioa hautazkoa da eta lehenetsita desaktibatuta dago. Zure laster-markak fitxategi batera esportatu eta gero inporta ditzakezu beti, zerbitzaririk gabe.</string>
     <string name="settings_sync_faq_q1">Nire laster-markak zifratuta daude?</string>
-    <string name="settings_sync_faq_q2">Firedown-ek edo beste edonork irakur ditzake?</string>
+    <string name="settings_sync_faq_q2">Waves-ek edo beste edonork irakur ditzake?</string>
     <string name="settings_sync_faq_q3">Zer da berreskuratze-kodea?</string>
     <string name="settings_sync_faq_q4">Zer gertatzen da nire berreskuratze-kodea galtzen badut?</string>
     <string name="settings_sync_faq_q5">Konturik edo mezu elektronikorik behar dut?</string>

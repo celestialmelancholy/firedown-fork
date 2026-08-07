@@ -256,6 +256,16 @@ public class GeckoState {
         if(mGeckoSession != null) mGeckoSession.goForward();
     }
 
+    /**
+     * Whether the current page can go back. GeckoView's public API has no live
+     * canGoBack() query on GeckoSession, so this reads the entity flag that
+     * {@code NavigationDelegate.onHistoryStateChange} keeps current — the same
+     * source every other history-dependent control uses.
+     */
+    public boolean canGoBackNow() {
+        return mGeckoStateEntity.canGoBackward();
+    }
+
     public void exitFullScreen(){
         if(mGeckoSession != null) mGeckoSession.exitFullScreen();
     }

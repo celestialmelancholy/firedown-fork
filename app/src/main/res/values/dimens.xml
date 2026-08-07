@@ -84,4 +84,7 @@
     <dimen name="tab_icon_width">18dp</dimen>
     <dimen name="tab_icon_height">18dp</dimen>
     <dimen name="tab_height">205dp</dimen>
+
+    <!-- Custom Firefox-style homepage (Item 1) -->
+    <dimen name="home_card_radius">14dp</dimen>
 </resources>

@@ -10,8 +10,8 @@
     <string name="popup_group_this_page">See leht</string>
     <string name="popup_group_library">Teek</string>
     <string name="action_mode_selected">%d valitud</string>
-    <string name="app_lock">Firedowni kasutamiseks avage lukustus</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Wavesi kasutamiseks avage lukustus</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Avage lukustus</string>
     <string name="browser_bookmark_added">Järjehoidja salvestatud!</string>
     <string name="browser_cache_cleared">Sirvimisandmed on kustutatud</string>
@@ -34,7 +34,7 @@
     <string name="capture_empty_gifs_message">Gifi pole saadaval.</string>
     <string name="capture_empty_images_message">Pildid pole saadaval.</string>
     <string name="capture_empty_message">Allalaadimiseks pole meediume saadaval.</string>
-    <string name="capture_empty_subtext">Laadige veebisait uuesti ja Firedown tuvastab saadaoleva meedia.</string>
+    <string name="capture_empty_subtext">Laadige veebisait uuesti ja Waves tuvastab saadaoleva meedia.</string>
     <string name="capture_empty_video_message">Saadaval pole ühtegi videot.</string>
     <string name="clipboard">Kopeeriti lõikelauale</string>
     <string name="close_tab">Sulge kaart</string>
@@ -82,7 +82,7 @@
     <string name="empty_learn_more">Lisateave</string>
     <string name="restore_downloads_button">Taasta varasemad allalaadimised</string>
     <string name="restore_downloads_settings_summary">Taasta allalaadimiste loend pärast rakenduse uuesti installimist</string>
-    <string name="restore_downloads_message">Kui installisid Firedowni uuesti, võivad su allalaadimised endiselt olla kaustas Download/Firedown. Vali see kaust ja Firedown taastab su allalaadimiste loendi.</string>
+    <string name="restore_downloads_message">Kui installisid Wavesi uuesti, võivad su allalaadimised endiselt olla kaustas Download/Waves. Vali see kaust ja Waves taastab su allalaadimiste loendi.</string>
     <string name="restore_downloads_choose">Vali kaust</string>
     <string name="restore_downloads_progress">Allalaadimiste taastamine…</string>
     <string name="restore_downloads_done">Taastatud allalaadimisi: %1$d</string>
@@ -97,7 +97,7 @@
     <string name="empty_list_query">Tulemusi ei leitud</string>
     <string name="empty_list_type">Siin pole midagi.</string>
     <string name="empty_list_vault">Turvalises kaustas pole veel midagi.\n\nVali suvalise allalaadimise ⋮ menüüst „Teisalda turvalisse kausta“, et see siia salvestada.</string>
-    <string name="empty_media_help">Mõnda meediumifaili tuleb esitada enne, kui Firedown suudab need allalaaditavate failidena tuvastada.</string>
+    <string name="empty_media_help">Mõnda meediumifaili tuleb esitada enne, kui Waves suudab need allalaaditavate failidena tuvastada.</string>
     <string name="empty_media_help_title">Enne allalaadimist esitage meediat</string>
     <string name="empty_media_subtitle_help">Palun esitage meediat nagu tavaliselt. Pärast tulekahju-nupu vajutamist peaks see ilmuma koos teiste meediumifailidega.</string>
 <string name="error_check_internet_connection">Interneti-ühenduse viga.</string>
@@ -157,7 +157,7 @@
     <string name="navigation_web_history">Ajalugu</string>
     <string name="notifications_downloads_channel">Allalaadimised</string>
     <string name="open">Avatud</string>
-    <string name="open_in_app_subtitle">Kas soovite selle sisu vaatamiseks Firedownist lahkuda?</string>
+    <string name="open_in_app_subtitle">Kas soovite selle sisu vaatamiseks Wavesist lahkuda?</string>
     <string name="open_in_app_title">Avage teises rakenduses</string>
     <string name="open_new_private_tab_2">Uus privaatne kaart</string>
     <string name="open_new_tab_2">Uus kaart</string>
@@ -182,7 +182,7 @@
     <string name="rename_file">Nimeta fail ümber</string>
     <string name="request_geolocation">Kas jagada oma seadme asukohta kasutajaga &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_media_key_system_access">Kas lubada rakendusel &lt;b&gt;%s&lt;/b&gt; esitada DRM-iga juhitud sisu?</string>
-    <string name="request_media_key_system_access_subtitle">Pange tähele, et Firedown ei saa DRM-iga kaitstud faile alla laadida</string>
+    <string name="request_media_key_system_access_subtitle">Pange tähele, et Waves ei saa DRM-iga kaitstud faile alla laadida</string>
     <string name="request_storage">Kas lubada seadmele &lt;b&gt;%s&lt;/b&gt; juurdepääs seadme salvestusruumile?</string>
     <string name="request_storage_access">Kas lubada kolmandatel osapooltel juurdepääs esimese osapoole salvestusruumile &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="restart_origin">Taaskäivita</string>
@@ -294,7 +294,7 @@
     <string name="crash_sheet_send">Saada raport</string>
     <string name="crash_sheet_sent">Raport saadetud — aitäh</string>
     <string name="crash_sheet_send_failed">Saatmine ebaõnnestus. Kontrolli ühendust — või kasuta Kopeeri / Teata.</string>
-    <string name="crash_sheet_send_note">Saadetakse anonüümselt Firedowni serverisse — ainult ülal olev raport, ilma identifikaatoriteta.</string>
+    <string name="crash_sheet_send_note">Saadetakse anonüümselt Wavesi serverisse — ainult ülal olev raport, ilma identifikaatoriteta.</string>
     <string name="home_trackers_title">Jälitajad ja reklaamid blokeeritud</string>
     <string name="home_trackers_subtitle_idle">Kaitse aktiivne</string>
     <string name="trackers_info_count_label">jälitajat ja reklaami blokeeritud</string>
@@ -334,7 +334,7 @@
     <string name="settings_sync_help_close">Selge</string>
     <string name="settings_sync_faq_q1">Kas mu järjehoidjad ja varundatud failid on krüptitud?</string>
     <string name="settings_sync_faq_a1">Jah. Kõik krüptitakse selles seadmes enne, kui see seadmest lahkub — iga järjehoidja ja iga fail, mille varundad. Server salvestab ainult andmeid, mida ta lugeda ei saa.</string>
-    <string name="settings_sync_faq_q2">Kas Firedown või keegi teine saab mu faile lugeda?</string>
+    <string name="settings_sync_faq_q2">Kas Waves või keegi teine saab mu faile lugeda?</string>
     <string name="settings_sync_faq_a2">Ei. Neid saab avada ainult sinu taastekood ja see ei lahku kunagi sinu seadmest. Ei meie, ei servereid haldavad inimesed ega keegi, kes neist koopia varastab: kõigil on krüptitud andmed ja mitte ühtegi võtit.</string>
     <string name="settings_sync_faq_q3">Mis on taastekood?</string>
     <string name="settings_sync_faq_a3">Võti, mis luuakse sinu seadmes. See on ainus asi, mis suudab sinu järjehoidjaid ja varundatud faile dekrüptida — nii selles kui ka uues seadmes.</string>
@@ -351,7 +351,7 @@
     <string name="settings_sync_export_summary">Ekspordi kood tekstifailina, mida saad hoiustada</string>
     <string name="settings_sync_export_caveat_message">See fail salvestatakse krüptimata — igaüks, kes seda lugeda saab, saab lugeda su järjehoidjaid. Impordi kood oma paroolihaldurisse (või muusse turvalisse kohta) ja kustuta seejärel fail. Paroolihaldur hoiab seda krüptituna; lahtine fail mitte.</string>
     <string name="settings_sync_export_continue">Jätka</string>
-    <string name="settings_sync_export_file_body">Firedown — taastekood\n\n%1$s\n\nSee kood on ainus võti teie järjehoidjate, allalaadimiste varukoopia ja salvestusruumi krediidi juurde — igaüks, kellel see on, saab neid lugeda, ja kaotamise korral ei saa seda taastada.\n\nSee fail EI OLE krüpteeritud. Importige kood oma paroolihaldurisse (või mõnda teise turvalisse kohta) ja seejärel kustutage see fail.</string>
+    <string name="settings_sync_export_file_body">Waves — taastekood\n\n%1$s\n\nSee kood on ainus võti teie järjehoidjate, allalaadimiste varukoopia ja salvestusruumi krediidi juurde — igaüks, kellel see on, saab neid lugeda, ja kaotamise korral ei saa seda taastada.\n\nSee fail EI OLE krüpteeritud. Importige kood oma paroolihaldurisse (või mõnda teise turvalisse kohta) ja seejärel kustutage see fail.</string>
     <string name="settings_sync_export_done">Taastekood salvestatud</string>
     <string name="settings_sync_export_failed">Faili ei õnnestunud salvestada</string>
     <string name="settings_sync_code_warning">See taastekood on ainus võti teie järjehoidjate, allalaadimiste varukoopia ja salvestusruumi krediidi juurde. Salvestage see oma paroolihaldurisse — või mõnda teise turvalisse kohta. Kaotamise korral ei saa seda taastada.</string>
@@ -360,7 +360,7 @@
     <string name="browser_snapshot_saving">Lehe hetktõmmise salvestamine…</string>
     <string name="browser_snapshot_saved">Hetktõmmis salvestatud</string>
     <string name="bookmark_export">Ekspordi järjehoidjad</string>
-    <string name="bookmark_export_done">Eksporditi %1$d järjehoidjat kausta Download/Firedown/backup</string>
+    <string name="bookmark_export_done">Eksporditi %1$d järjehoidjat kausta Download/Waves/backup</string>
     <string name="bookmark_import">Impordi järjehoidjad</string>
     <string name="bookmark_import_done">Imporditi %1$d järjehoidjat</string>
     <string name="bookmark_io_error">Järjehoidjate faili ei õnnestunud lugeda</string>
@@ -520,7 +520,7 @@
     <string name="buy_credit_wallet_connect_link">Ühenda rahakott ja maksa ühe puudutusega</string>
     <string name="buy_credit_wallet_manage_link">Muuda või ühenda rahakott lahti</string>
     <string name="buy_credit_wallet_dialog_title">Ühenda Lightningi rahakott</string>
-    <string name="buy_credit_wallet_dialog_body">Kleebi Nostr Wallet Connecti string või skanni see oma rahakotist. Seejärel saab Firedown maksta arveid sellest rahakotist, seal määratud eelarve piires.</string>
+    <string name="buy_credit_wallet_dialog_body">Kleebi Nostr Wallet Connecti string või skanni see oma rahakotist. Seejärel saab Waves maksta arveid sellest rahakotist, seal määratud eelarve piires.</string>
     <string name="buy_credit_wallet_dialog_connected">Ühendatud rahakotiga %1$s. Asendamiseks kleebi või skanni uus string.</string>
     <string name="buy_credit_wallet_hint">nostr+walletconnect://…</string>
     <string name="buy_credit_wallet_connect_action">Ühenda</string>
@@ -642,9 +642,9 @@
     <string name="p2p_send">Saada</string>
     <string name="p2p_send_title">Saada otse</string>
     <string name="p2p_receive_title">Võta fail vastu</string>
-    <string name="p2p_send_lead">Saada see fail otse teise Firedowni kasutavasse seadmesse — krüptitult, seadmest seadmesse, ilma vahepealse serverita.</string>
-    <string name="p2p_receive_lead">Võta fail vastu otse teisest Firedowni kasutavast seadmest.</string>
-    <string name="p2p_code_hint_send">Skanni see kood teise seadmega — Firedownis jaotises Allalaadimised → Võta fail vastu või lihtsalt selle kaameraga. Samas võrgus jätkub ülekanne iseenesest; kui kuvatakse vastuskood, skanni see tagasi.</string>
+    <string name="p2p_send_lead">Saada see fail otse teise Wavesi kasutavasse seadmesse — krüptitult, seadmest seadmesse, ilma vahepealse serverita.</string>
+    <string name="p2p_receive_lead">Võta fail vastu otse teisest Wavesi kasutavast seadmest.</string>
+    <string name="p2p_code_hint_send">Skanni see kood teise seadmega — Wavesis jaotises Allalaadimised → Võta fail vastu või lihtsalt selle kaameraga. Samas võrgus jätkub ülekanne iseenesest; kui kuvatakse vastuskood, skanni see tagasi.</string>
     <string name="p2p_code_hint_reply">Näita seda vastust saatjale või saada see tagasi samal viisil, nagu saatja kood saabus.</string>
     <string name="p2p_share_code">Saada kood muul viisil</string>
     <string name="p2p_scan_reply">Skanni vastus</string>
@@ -662,13 +662,13 @@
     <string name="p2p_done_received">Salvestatud kausta Allalaadimised</string>
     <string name="p2p_done">Valmis</string>
     <string name="p2p_error_no_path">Teise seadmega ei õnnestunud otseühendust luua. See juhtub mobiilses andmesides või VPN-i taga — proovi sama Wi-Fi võrku ja lülita VPN välja.</string>
-    <string name="p2p_error_no_path_vpn">Selle seadme VPN blokeerib otseühenduse. Jäta Firedown VPN-ist välja — või peata see — ja proovi uuesti.</string>
+    <string name="p2p_error_no_path_vpn">Selle seadme VPN blokeerib otseühenduse. Jäta Waves VPN-ist välja — või peata see — ja proovi uuesti.</string>
     <string name="p2p_error_generic">Ülekanne ebaõnnestus.</string>
     <string name="p2p_error_bad_code">See kood ei kehti — proovi uuesti.</string>
     <string name="p2p_clipboard_empty">Lõikelaual pole koodi.</string>
     <string name="p2p_footer">Krüptitud ülekanne seadmest seadmesse. Fail ei läbi kunagi serverit.</string>
     <string name="p2p_footer_relayed">Otspunktkrüptitud. Edastatakse läbi firedown.app (otseühendus puudub), mis ei saa seda lugeda.</string>
-    <string name="p2p_hint_vpn">Vihje: Firedowni VPN-ist väljajätmine võimaldab otseühendust.</string>
+    <string name="p2p_hint_vpn">Vihje: Wavesi VPN-ist väljajätmine võimaldab otseühendust.</string>
     <string name="p2p_scan_hint">Suuna kaamera saatja koodile</string>
     <string name="p2p_camera_denied">Skannimiseks on vaja kaameraluba. Selle asemel võid koodi kleepida.</string>
     <string name="p2p_send_link">Saada link</string>
@@ -729,13 +729,13 @@
     <string name="cloud_backup_state_low_credit">Krediiti pole piisavalt</string>
     <string name="cloud_backup_state_too_many">Liiga palju faile</string>
     <string name="cloud_backup_state_no_space">Ruumi pole piisavalt</string>
-    <string name="share_app_title">Jaga Firedowni</string>
+    <string name="share_app_title">Jaga Wavesi</string>
     <string name="share_app_blurb">Privaatne brauser ja allalaadija. Salvesta videot, heli ja pilte igalt lehelt, blokeeri reklaamid ja jälitajad – kõik jääb sinu seadmesse.</string>
-    <string name="share_app_get_at">Firedowni saad aadressilt</string>
+    <string name="share_app_get_at">Wavesi saad aadressilt</string>
     <string name="share_app_scan">Või suuna teise telefoni kaamera ülalolevale koodile, et rakendus paigaldada</string>
     <string name="share_app_share">Jaga linki</string>
-    <string name="share_app_qr_desc">QR-kood Firedowni allalaadimislehele</string>
-    <string name="share_app_message">Firedown – privaatne brauser ja allalaadija Androidile. %1$s</string>
+    <string name="share_app_qr_desc">QR-kood Wavesi allalaadimislehele</string>
+    <string name="share_app_message">Waves – privaatne brauser ja allalaadija Androidile. %1$s</string>
     <string name="settings_sync_faq_q8">Mida server tegelikult näeb?</string>
     <string name="settings_sync_faq_a8">Sinu failide krüptitud tükke, nende suurust ja saabumisaega — lisaks juhuslikku kontonumbrit, mille su seade tuletab taastekoodist, mitte kunagi nime ega e-posti aadressi. Failinimed, -tüübid ja eelvaated on samuti krüptitud, pitseeritud loendis, mille saab avada ainult sinu seade. Server ei saa teada isegi faili nime, rääkimata selle sisust.</string>
     <string name="settings_update_check_title">Otsi uuendusi</string>

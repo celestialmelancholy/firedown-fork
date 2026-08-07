@@ -15,10 +15,11 @@
         android:elevation="0dp"
         android:importantForAccessibility="no"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/top_bar_actions"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_goneMarginStart="12dp" />
+        app:layout_goneMarginStart="12dp"
+        app:layout_goneMarginEnd="8dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/security_button"
@@ -181,6 +182,134 @@
 
         </FrameLayout>
 
+
+        <!-- Chrome-style focus icons (readthis.md spec): mic + Google Lens
+             appear on the far-right INSIDE the pill ONLY while the field is
+             focused. Order left→right: mic, then image-search. ~8dp gap
+             between them; ~16dp from the pill's inner right edge. GONE at
+             rest — toggled in GeckoToolbar.updateViewVisibility. -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mic_button"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="4dp"
+            android:importantForAccessibility="no"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            android:padding="@dimen/button_icons_padding"
+            android:stateListAnimator="@null"
+            android:visibility="gone"
+            app:elevation="0dp"
+            app:icon="@drawable/ic_mic_24"
+            app:iconSize="22dp"
+            app:iconTint="?attr/colorOnSurfaceVariant"
+            app:shapeAppearance="@style/ShapeAppearanceOverlay.Button.Circle" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/image_search_button"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:importantForAccessibility="no"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            android:padding="@dimen/button_icons_padding"
+            android:stateListAnimator="@null"
+            android:visibility="gone"
+            app:elevation="0dp"
+            app:icon="@drawable/ic_image_search_24"
+            app:iconSize="22dp"
+            app:iconTint="?attr/colorOnSurfaceVariant"
+            app:shapeAppearance="@style/ShapeAppearanceOverlay.Button.Circle" />
+
+    </LinearLayout>
+
+
+    <!--
+        Single top bar action cluster (Item 2): the bottom bar's controls
+        relocated to the top bar, right of the address pill. Order per spec:
+        flame download (compact) → + new tab → tab counter → 3-dot menu.
+        Bookmarks lives in the 3-dot popup menu, not the top bar.
+        Buttons keep their original IDs + classes so every fragment's
+        onBottomBarButtonClick handler works unchanged.
+    -->
+    <LinearLayout
+        android:id="@+id/top_bar_actions"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Compact download button (rebrand: was the flame/Firedown logo — now
+             the standard Material download icon). Neutral onSurfaceVariant at
+             rest; turns brand-primary (coral) only while media is being caught
+             (onMediaDetected) — matching main Firedown's download affordance. -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/download_button"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="@string/download"
+            android:elevation="0dp"
+            android:gravity="center"
+            android:importantForAccessibility="yes"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="0dp"
+            app:elevation="0dp"
+            app:icon="@drawable/download_24"
+            app:iconGravity="textTop"
+            app:iconPadding="0dp"
+            app:iconSize="@dimen/app_bar_icon_size"
+            app:iconTint="?attr/colorOnSurfaceVariant"
+            app:shapeAppearance="@style/ShapeAppearanceOverlay.Button.Circle" />
+
+        <!-- + new tab (long-press: new-tabs dialog) -->
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/new_tab_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/popup_tabs_new"
+            android:padding="6dp"
+            android:scaleType="centerInside"
+            android:tint="?attr/colorOnSurface"
+            android:src="@drawable/add_24" />
+
+        <!-- Tab counter (TabsBrowserButton renders TabCountDrawable) -->
+        <com.solarized.firedown.ui.browser.TabsBrowserButton
+            android:id="@+id/tab_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="6dp"
+            android:tint="?attr/colorOnSurface" />
+
+        <!-- 3-dot menu -->
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/more_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="6dp"
+            android:scaleType="centerInside"
+            android:tint="?attr/colorOnSurface"
+            android:src="@drawable/ic_baseline_more_vert_24" />
 
     </LinearLayout>
 

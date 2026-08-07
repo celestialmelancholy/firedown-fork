@@ -165,6 +165,8 @@ public class GeckoToolbar extends FrameLayout implements View.OnClickListener, V
         mSearchDownButton.setOnClickListener(this);
         mClearButton.setOnClickListener(this);
         mReloadButton.setOnClickListener(this);
+        v.findViewById(R.id.image_search_button).setOnClickListener(this);
+        v.findViewById(R.id.mic_button).setOnClickListener(this);
 
 
         mAnimColorFrom = ContextCompat.getColor(context, R.color.md_theme_surfaceContainerHigh);
@@ -536,6 +538,17 @@ public class GeckoToolbar extends FrameLayout implements View.OnClickListener, V
             btn.setIconTint(ColorStateList.valueOf(onSurfaceColor));
         }
 
+        // 7b. Chrome-style focus icons (image-search + mic) — onSurfaceVariant
+        // (quieter than the primary controls, like the search up/down).
+        View imageSearchBtn = findViewById(R.id.image_search_button);
+        if (imageSearchBtn instanceof MaterialButton btn) {
+            btn.setIconTint(ColorStateList.valueOf(onSurfaceVariant));
+        }
+        View micBtn = findViewById(R.id.mic_button);
+        if (micBtn instanceof MaterialButton btn) {
+            btn.setIconTint(ColorStateList.valueOf(onSurfaceVariant));
+        }
+
         // 8. Search text color
         if (mSearchText != null) {
             mSearchText.setTextColor(onSurfaceVariant);
@@ -566,6 +579,21 @@ public class GeckoToolbar extends FrameLayout implements View.OnClickListener, V
         } else {
             mReloadButton.setVisibility(hasFocus ? GONE : VISIBLE);
         }
+
+        // Full-width focused pill (Firefox-style): while the address bar is
+        // focused the whole action cluster (+ / tab counter / flame download /
+        // menu) hides so the pill stretches edge-to-edge. The pill's
+        // constraint end points at this LinearLayout; GONE activates its
+        // goneMarginEnd (8dp) and the pill fills the row. Restored on blur.
+        View cluster = findViewById(R.id.top_bar_actions);
+        if (cluster != null) {
+            cluster.setVisibility(hasFocus ? GONE : VISIBLE);
+        }
+
+        // Chrome-style focus icons: image-search + mic appear on the right of
+        // the pill ONLY while focused (hidden at rest, like the shield).
+        findViewById(R.id.image_search_button).setVisibility(hasFocus ? VISIBLE : GONE);
+        findViewById(R.id.mic_button).setVisibility(hasFocus ? VISIBLE : GONE);
     }
 
     // ─────────────────────────────────────────────────────────────────────────

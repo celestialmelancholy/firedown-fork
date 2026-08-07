@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">Đã chọn %d</string>
-    <string name="app_lock">Mở khóa để sử dụng Firedown</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Mở khóa để sử dụng Waves</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Mở khóa</string>
     <string name="browser_bookmark_added">Đã lưu dấu trang!</string>
     <string name="browser_cache_cleared">Đã xóa dữ liệu duyệt web</string>
@@ -26,7 +26,7 @@
     <string name="capture_empty_gifs_message">Không có sẵn Gifs.</string>
     <string name="capture_empty_images_message">Không có sẵn hình ảnh nào.</string>
     <string name="capture_empty_message">Không có sẵn phương tiện để tải xuống.</string>
-    <string name="capture_empty_subtext">Tải lại trang web và Firedown sẽ phát hiện phương tiện có sẵn.</string>
+    <string name="capture_empty_subtext">Tải lại trang web và Waves sẽ phát hiện phương tiện có sẵn.</string>
     <string name="capture_empty_video_message">Không có video nào.</string>
     <string name="clipboard">Sao chép vào clipboard</string>
     <string name="clipboard_from">Từ bộ nhớ tạm</string>
@@ -72,7 +72,7 @@
     <string name="details_url">URL</string>
     <string name="download">Tải xuống</string>
     <string name="download_finished">Tải xuống đã hoàn tất</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Chất lượng tải xuống</string>
     <string name="download_queued">Đang chờ xử lý…</string>
     <string name="download_rename_error">Tên tập tin đã được sử dụng.</string>
@@ -85,7 +85,7 @@
     <string name="empty_list_history">Lịch sử tải xuống của bạn trống.</string>
     <string name="empty_list_query">Không tìm thấy kết quả nào</string>
     <string name="empty_list_type">Không có gì ở đây.</string>
-    <string name="empty_media_help">Một số tệp phương tiện cần được phát trước khi Firedown có thể phát hiện chúng dưới dạng tệp có thể tải xuống.</string>
+    <string name="empty_media_help">Một số tệp phương tiện cần được phát trước khi Waves có thể phát hiện chúng dưới dạng tệp có thể tải xuống.</string>
     <string name="empty_media_help_title">Phát phương tiện trước khi tải xuống</string>
     <string name="empty_media_subtitle_help">Vui lòng phát phương tiện như bình thường. Sau đó, nó sẽ xuất hiện cùng với các tệp phương tiện khác sau khi nhấn Fire-Button.</string>
 <string name="error_check_internet_connection">Lỗi kết nối Internet.</string>
@@ -145,7 +145,7 @@
     <string name="navigation_web_history">Lịch sử</string>
     <string name="notifications_downloads_channel">Tải xuống</string>
     <string name="open">Mở</string>
-    <string name="open_in_app_subtitle">Bạn có muốn thoát khỏi Firedown để xem nội dung này không?</string>
+    <string name="open_in_app_subtitle">Bạn có muốn thoát khỏi Waves để xem nội dung này không?</string>
     <string name="open_in_app_title">Mở trong ứng dụng khác</string>
     <string name="open_new_private_tab_2">Thẻ riêng tư mới</string>
     <string name="open_new_tab_2">Thẻ mới</string>
@@ -172,7 +172,7 @@
     <string name="rename_file">Đổi tên tập tin</string>
     <string name="request_geolocation">Chia sẻ vị trí thiết bị của bạn với &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_media_key_system_access">Cho phép &lt;b&gt;%s&lt;/b&gt; phát nội dung được kiểm soát bởi DRM?</string>
-    <string name="request_media_key_system_access_subtitle">Lưu ý rằng các tệp được bảo vệ bằng DRM không thể được tải xuống bằng Firedown</string>
+    <string name="request_media_key_system_access_subtitle">Lưu ý rằng các tệp được bảo vệ bằng DRM không thể được tải xuống bằng Waves</string>
     <string name="request_storage">Cho phép truy cập vào bộ nhớ thiết bị cho &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_storage_access">Cho phép bên thứ ba truy cập vào bộ nhớ của bên thứ nhất cho &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="restart_origin">Khởi động lại</string>
@@ -289,7 +289,7 @@
     <string name="capture_help_banner_title">Không thấy video?</string>
     <string name="capture_help_banner">Một số nội dung nhúng phải được phát trước. Nhấn để tìm hiểu cách.</string>
     <string name="bookmark_export">Xuất dấu trang</string>
-    <string name="bookmark_export_done">Đã xuất %1$d dấu trang vào Download/Firedown/backup</string>
+    <string name="bookmark_export_done">Đã xuất %1$d dấu trang vào Download/Waves/backup</string>
     <string name="bookmark_import">Nhập dấu trang</string>
     <string name="bookmark_import_done">Đã nhập %1$d dấu trang</string>
     <string name="bookmark_io_error">Không thể đọc tệp dấu trang</string>
@@ -314,7 +314,7 @@
     <string name="settings_sync_export_continue">Tiếp tục</string>
     <string name="settings_sync_export_done">Đã lưu mã khôi phục</string>
     <string name="settings_sync_export_failed">Không thể lưu tệp</string>
-    <string name="settings_sync_export_file_body">Firedown — mã khôi phục đồng bộ dấu trang\n\n%1$s\n\nMã này là chìa khóa duy nhất cho các dấu trang đã đồng bộ của bạn — bất kỳ ai có nó đều có thể đọc chúng, và không thể khôi phục nếu bị mất.\n\nTệp này KHÔNG được mã hóa. Nhập mã vào trình quản lý mật khẩu (hoặc một nơi an toàn khác), rồi xóa tệp này.</string>
+    <string name="settings_sync_export_file_body">Waves — mã khôi phục đồng bộ dấu trang\n\n%1$s\n\nMã này là chìa khóa duy nhất cho các dấu trang đã đồng bộ của bạn — bất kỳ ai có nó đều có thể đọc chúng, và không thể khôi phục nếu bị mất.\n\nTệp này KHÔNG được mã hóa. Nhập mã vào trình quản lý mật khẩu (hoặc một nơi an toàn khác), rồi xóa tệp này.</string>
     <string name="settings_sync_export_summary">Xuất mã dưới dạng tệp văn bản bạn có thể lưu trữ</string>
     <string name="settings_sync_export_title">Lưu mã khôi phục vào tệp</string>
     <string name="settings_sync_faq_a1">Có. Mỗi dấu trang được mã hóa trên thiết bị này trước khi tải lên. Máy chủ chỉ lưu dữ liệu bị xáo trộn mà nó không thể đọc.</string>
@@ -324,7 +324,7 @@
     <string name="settings_sync_faq_a5">Không. Không cần đăng ký, email hay số điện thoại — chỉ cần mã khôi phục. Không có thông tin cá nhân nào gắn với dấu trang của bạn.</string>
     <string name="settings_sync_faq_a6">Đồng bộ là tùy chọn và mặc định tắt. Bạn luôn có thể xuất dấu trang ra tệp và nhập lại sau, không cần máy chủ.</string>
     <string name="settings_sync_faq_q1">Dấu trang của tôi có được mã hóa không?</string>
-    <string name="settings_sync_faq_q2">Firedown hoặc bất kỳ ai khác có đọc được chúng không?</string>
+    <string name="settings_sync_faq_q2">Waves hoặc bất kỳ ai khác có đọc được chúng không?</string>
     <string name="settings_sync_faq_q3">Mã khôi phục là gì?</string>
     <string name="settings_sync_faq_q4">Nếu tôi mất mã khôi phục thì sao?</string>
     <string name="settings_sync_faq_q5">Tôi có cần tài khoản hoặc email không?</string>

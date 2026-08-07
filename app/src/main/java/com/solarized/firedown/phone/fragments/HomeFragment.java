@@ -1,13 +1,7 @@
 package com.solarized.firedown.phone.fragments;
 
-import android.animation.Animator;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.content.Intent;
-import android.icu.text.CompactDecimalFormat;
 import android.os.Bundle;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
@@ -27,13 +22,12 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleEventObserver;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.card.MaterialCardView;
 
 import com.solarized.firedown.ui.IncognitoColors;
 import com.solarized.firedown.Keys;
-import com.solarized.firedown.Preferences;
 import com.solarized.firedown.R;
 import com.solarized.firedown.data.entity.GeckoStateEntity;
 import com.solarized.firedown.data.entity.AutoCompleteEntity;
@@ -42,7 +36,6 @@ import com.solarized.firedown.data.models.BrowserDialogViewModel;
 import com.solarized.firedown.data.models.BrowserURIViewModel;
 import com.solarized.firedown.data.models.GeckoStateViewModel;
 import com.solarized.firedown.data.models.IncognitoStateViewModel;
-import com.solarized.firedown.data.models.RecentDownloadsViewModel;
 import com.solarized.firedown.geckoview.GeckoState;
 import com.solarized.firedown.geckoview.GeckoToolbar;
 import com.solarized.firedown.geckoview.GeckoUblockHelper;
@@ -50,12 +43,6 @@ import com.solarized.firedown.manager.DownloadRequest;
 
 import com.solarized.firedown.phone.DownloadsActivity;
 import com.solarized.firedown.phone.SettingsActivity;
-import com.solarized.firedown.sync.CloudBackupManager;
-import com.solarized.firedown.sync.VaultBackupWorker;
-import com.solarized.firedown.sync.StorageApiClient;
-
-import androidx.work.WorkInfo;
-import androidx.work.WorkManager;
 
 import com.solarized.firedown.phone.VaultActivity;
 import com.solarized.firedown.autocomplete.AutoCompleteEditText;
@@ -63,16 +50,13 @@ import com.solarized.firedown.autocomplete.AutoCompleteView;
 import com.solarized.firedown.geckoview.toolbar.BottomNavigationBar;
 import com.solarized.firedown.phone.dialogs.TrackersInfoSheet;
 import com.solarized.firedown.ui.OnItemClickListener;
+import com.solarized.firedown.ui.adapters.JumpBackInAdapter;
+import com.solarized.firedown.ui.adapters.MostVisitedTilesAdapter;
 import com.solarized.firedown.ui.adapters.SearchAutocompleteAdapter;
 import com.solarized.firedown.ui.diffs.SearchDiffCallback;
 import com.solarized.firedown.IntentActions;
 import com.solarized.firedown.utils.NavigationUtils;
 import com.solarized.firedown.utils.Utils;
-
-import java.time.Instant;
-import java.time.OffsetDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -87,8 +71,6 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
 
 
     private static final String TAG = HomeFragment.class.getName();
-    /** Resting-line fade-in (ms) — alpha only; see fadeInRestLine. */
-    private static final long REST_LINE_FADE_MS = 300;
     private BrowserURIViewModel mBrowserURIViewModel;
     private BrowserDialogViewModel mBrowserDialogViewModel;
     private GeckoStateViewModel mGeckoStateViewModel;
@@ -99,81 +81,30 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
     private GeckoToolbar mGeckoToolbar;
     private BottomNavigationBar mBottomNavigationBar;
     private View mHomeScroll;
-    // The home is a calm minimalist landing — the centred brand mark plus ONE
-    // quiet subtitle line of two independently-tappable live figures: trackers
-    // blocked (→ trackers info sheet) and total downloaded (→ Downloads). Each
-    // half hides at 0 and the divider hides unless both show, so a fresh install
-    // reads just the wordmark. Everything else (tabs, downloads badge, vault)
-    // lives in the bottom bar / menu — no dashboard.
-    private RecentDownloadsViewModel mRecentDownloadsViewModel;
-    private View mSubtitle;
-    // The two figures are MaterialCardView pills (own the tap target + ripple +
-    // visibility); their text lives in the inner *_text TextViews.
-    private View mSubtitleBlocked;
-    private TextView mSubtitleBlockedText;
-    private View mSubtitleSep;
-    private View mSubtitleSaved;
-    private TextView mSubtitleSavedText;
-
-    // Cloud Backup slot/card (home v4): ALL cloud state on home lives in this
-    // ONE slot under the subtitle — never as a third subtitle counter (that
-    // was built and reverted; see the layout comment). Priority order, see
-    // applyBackupPill: "Paused" CARD (metered credit ran out, setUp-gated),
-    // "Backing up…" CHIP (a transfer is RUNNING), "Waiting to back up" CHIP
-    // (enqueued-only), then the resting "N backed up" QUIET LINE, and nothing
-    // when the account isn't set up or has nothing in it.
-    /** Fixed-height frame hosting BOTH calm presentations (transfer chip +
-     *  resting line). Kept VISIBLE with INVISIBLE children for a set-up
-     *  account so the resting total — a late NETWORK value — fades in without
-     *  growing the centred brand block and shifting the flame. See the
-     *  home_backup_slot layout comment for the full rationale. */
-    private View mBackupSlot;
-    /** The transfer chip — "Backing up…" / "Waiting to back up" ONLY. The
-     *  resting total moved to {@link #mBackupRest}; the chip's ground, ink
-     *  and upload glyph are static XML now. */
-    private MaterialCardView mBackupPill;
-    private TextView mBackupPillText;
-    /** The resting quiet line — "N backed up" in the counters' own grammar
-     *  (transparent card, onSurfaceVariant ink, 12sp, plain 14dp cloud). See
-     *  the layout comment for why the chip treatment was demoted. */
-    private MaterialCardView mBackupRest;
-    private TextView mBackupRestText;
-    /** The deadline card — a different SILHOUETTE from the chip, never shown
-     *  at the same time. See applyBackupPill. */
-    private MaterialCardView mBackupCard;
-    private TextView mBackupCardTitle;
-    private TextView mBackupCardDetail;
-    /** An identified backup worker is actually TRANSFERRING right now. */
-    private boolean mCloudRunning;
-    /** …or merely enqueued (constraints unmet / retry backoff) — rendered as
-     *  "Waiting to back up", never "Backing up…". */
-    private boolean mCloudQueued;
-    /** Where a calm-slot tap goes (chip or resting line — one shared
-     *  listener), decided when the state was RENDERED (transfer/resting →
-     *  Backups list, Paused → Cloud screen). */
-    private boolean mPillToFiles;
-    /** Drops a stale loadStatus result when a newer refresh started (two rapid
-     *  resumes complete in NETWORK order, not call order). */
-    private int mCloudStatusGen;
-    private StorageApiClient.Quota mCloudQuota;
-    /** Lifetime bytes held in Cloud Backup — the resting pill's figure.
-     *  <b>-1 = unknown</b> (never pulled, or the pull failed), which renders as
-     *  NO pill rather than "0 B": the total is the one cloud fact we cannot
-     *  derive locally, so an unknown must stay silent instead of claiming a
-     *  number. Cleared to -1 whenever the account isn't set up. */
-    private long mCloudTotalBytes = -1;
-    // The brand flame doubles as the live "a download is running" indicator:
-    // a soft ember glow that breathes behind the logo while the active+queued
-    // count (the same signal as the bottom-bar badge) is > 0, and is GONE
-    // otherwise so the idle home is just the wordmark. Identity-as-status, no
-    // extra widget — status that's actionable lives on the bottom bar (the
-    // badge); the home only gives the calm ambient heartbeat.
-    private View mBrandGlow;
-    private Animator mBrandGlowAnimator;
+    // Custom Firefox-style home (Item 1): branding header → shortcuts grid
+    // (most-visited sites) → tracker capsule → "Jump back in" recents card.
+    // Shortcuts grid — 4×2 most-visited tiles, same data source as the
+    // autocomplete strip (real usage, no hardcoded sites).
+    private RecyclerView mShortcutsGrid;
+    private MostVisitedTilesAdapter mShortcutsAdapter;
+    // Shortcuts section: header + grid, shown only when there are most-visited
+    // sites; "Show all >" only when there are multiple (Firefox parity).
+    private View mShortcutsHeader;
+    // Privacy tracker capsule — live uBlock count, hidden at 0.
+    private View mTrackerCapsule;
+    private TextView mTrackerCapsuleText;
+    // "Jump back in" — the last browsed (non-home) tab. Header + strip shown
+    // only when there is at least one recent tab; "Show all >" only with
+    // multiple (Firefox parity).
+    private RecyclerView mJumpBackIn;
+    private JumpBackInAdapter mJumpBackInAdapter;
+    private View mJumpHeader;
+    // Infinity (private mode) button in the branding header.
+    private View mPrivateInfinity;
+    private View mShortcutsShowAll;
+    private View mJumpShowAll;
     @Inject
     GeckoUblockHelper mGeckoUblockHelper;
-    @Inject
-    CloudBackupManager mCloudBackup;
 
 
     @Override
@@ -181,7 +112,6 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
         super.onCreate(savedInstanceState);
 
         mAutoCompleteViewModel = new ViewModelProvider(this).get(AutoCompleteViewModel.class);
-        mRecentDownloadsViewModel = new ViewModelProvider(this).get(RecentDownloadsViewModel.class);
         mGeckoStateViewModel = new ViewModelProvider(mActivity).get(GeckoStateViewModel.class);
         mIncognitoStateViewModel = new ViewModelProvider(mActivity).get(IncognitoStateViewModel.class);
         mBrowserURIViewModel = new ViewModelProvider(mActivity).get(BrowserURIViewModel.class);
@@ -192,7 +122,22 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
+                // 1. Autocomplete overlay up → dismiss it (first back lowers the
+                //    keyboard, second closes the overlay — see the method).
                 if (dismissAutocompleteOverlayIfVisible()) return;
+
+                // 2. Address field focused (overlay not visible — e.g. focus
+                //    without suggestions): back must NOT exit the app. Clear
+                //    the focus/editing state instead, so back behaves like any
+                //    standard browser (close the keyboard/editing, stay put).
+                if (mGeckoToolbar != null && mAutoCompleteEditText != null
+                        && mAutoCompleteEditText.hasFocus()) {
+                    mGeckoToolbar.clearFocus();
+                    mGeckoToolbar.startAnimation(false);
+                    mGeckoToolbar.updateViewVisibility(false);
+                    return;
+                }
+
                 setEnabled(false);
                 mActivity.getOnBackPressedDispatcher().onBackPressed();
             }
@@ -211,9 +156,10 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
         if (mGeckoStateViewModel != null) {
             mGeckoStateViewModel.ensureHomeTabIfEmpty();
         }
-        // Cloud Backup status can change while away (a backup finishes, credit is
-        // added, or it's set up for the first time) — recompute the home line.
-        refreshCloudStatus();
+        // Refresh most-visited so the shortcuts grid is current after browsing.
+        if (mAutoCompleteViewModel != null) {
+            mAutoCompleteViewModel.loadMostVisited();
+        }
     }
 
     /**
@@ -250,122 +196,69 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
         mBottomNavigationBar = v.findViewById(R.id.bottom_app_bar);
 
 
-        // Brand mark + the two-figure subtitle. Each half is its own tap target:
-        // blocked → the trackers info sheet, saved → Downloads. (VaultActivity /
-        // DownloadsActivity own their own auth/result handling.)
-        mBrandGlow = v.findViewById(R.id.home_brand_glow);
-        mSubtitle = v.findViewById(R.id.home_subtitle);
-        mSubtitleBlocked = v.findViewById(R.id.home_subtitle_blocked);
-        mSubtitleBlockedText = v.findViewById(R.id.home_subtitle_blocked_text);
-        mSubtitleSep = v.findViewById(R.id.home_subtitle_sep);
-        mSubtitleSaved = v.findViewById(R.id.home_subtitle_saved);
-        mSubtitleSavedText = v.findViewById(R.id.home_subtitle_saved_text);
-        // Within-segment graceful wrap, the level the Flow can't cover: a SINGLE
-        // translated segment (es "Creando copia de seguridad…") plus font scale
-        // 2.0 on a narrow screen can be wider than the whole line by itself — the
-        // Flow would give it its own row, but the row itself would clip at the
-        // screen edge. Cap each counter's text to the line's real width so the
-        // extreme case wraps INSIDE its chip (two centred lines) instead.
-        if (mSubtitle != null) {
-            mSubtitle.addOnLayoutChangeListener(
-                    (view, l, t, r, b, oldL, oldT, oldR, oldB) -> {
-                        int chipPadding = Math.round(
-                                24 * getResources().getDisplayMetrics().density);
-                        int cap = (r - l) - chipPadding;
-                        if (cap > 0) {
-                            applyTextWidthCap(mSubtitleBlockedText, cap);
-                            applyTextWidthCap(mSubtitleSavedText, cap);
-                        }
-                    });
-        }
-        if (mSubtitleBlocked != null) {
-            mSubtitleBlocked.setOnClickListener(view ->
+        // Custom Firefox-style home (Item 1). Shortcuts grid = the same
+        // most-visited data the autocomplete strip uses (real usage, never
+        // hardcoded sites), rendered 4-across in a 2-row grid; tapping opens
+        // the URL (same path as a strip tile). Long-press hides the site.
+        mShortcutsGrid = v.findViewById(R.id.home_shortcuts_grid);
+        mShortcutsGrid.setLayoutManager(new GridLayoutManager(mActivity, 4));
+        mShortcutsGrid.setItemAnimator(null);
+        mShortcutsAdapter = new MostVisitedTilesAdapter(
+                mActivity, url -> openUri(url), url -> showShortcutMenu(url));
+        mShortcutsGrid.setAdapter(mShortcutsAdapter);
+        mShortcutsHeader = v.findViewById(R.id.home_shortcuts_header);
+
+        // Tracker capsule — live uBlock cumulative count, hidden at 0, tap →
+        // the trackers info sheet.
+        mTrackerCapsule = v.findViewById(R.id.home_tracker_capsule);
+        mTrackerCapsuleText = v.findViewById(R.id.home_tracker_capsule_text);
+        if (mTrackerCapsule != null) {
+            mTrackerCapsule.setOnClickListener(view ->
                     TrackersInfoSheet.show(getChildFragmentManager()));
         }
-        if (mSubtitleSaved != null) {
-            mSubtitleSaved.setOnClickListener(view ->
-                    mStartForResult.launch(new Intent(mActivity, DownloadsActivity.class)));
-        }
 
-        // Cloud Backup calm slot — see applyBackupPill for the state machine.
-        // Tap routes by the state the slot CURRENTLY SHOWS (mPillToFiles is
-        // set at render, so a tap can't race a state flip between render and
-        // click): transfer/resting states → the Backups list, Paused → the
-        // Cloud status screen. ONE listener shared by the chip and the resting
-        // line — they are two presentations of the same door, and a shared
-        // lambda can't drift.
-        mBackupSlot = v.findViewById(R.id.home_backup_slot);
-        mBackupPill = v.findViewById(R.id.home_backup_pill);
-        mBackupPillText = v.findViewById(R.id.home_backup_pill_text);
-        mBackupRest = v.findViewById(R.id.home_backup_rest);
-        mBackupRestText = v.findViewById(R.id.home_backup_rest_text);
-        mBackupCard = v.findViewById(R.id.home_backup_card);
-        mBackupCardTitle = v.findViewById(R.id.home_backup_card_title);
-        mBackupCardDetail = v.findViewById(R.id.home_backup_card_detail);
-        View.OnClickListener openCloud = view -> {
-            Intent intent = new Intent(mActivity, SettingsActivity.class);
-            intent.putExtra(mPillToFiles
-                            ? SettingsActivity.EXTRA_OPEN_CLOUD_BACKUP_FILES
-                            : SettingsActivity.EXTRA_OPEN_CLOUD_BACKUP,
-                    true);
-            startActivity(intent);
-        };
-        if (mBackupPill != null) {
-            mBackupPill.setOnClickListener(openCloud);
+        // "Jump back in" — the last browsed (non-home) tab, rendered as a
+        // card with its thumbnail. Driven by real tab data (GeckoStateEntity
+        // uri/title/thumb/lastAccess), never hardcoded.
+        mJumpBackIn = v.findViewById(R.id.home_jump_back_in);
+        mJumpBackIn.setLayoutManager(new LinearLayoutManager(
+                mActivity, LinearLayoutManager.HORIZONTAL, false));
+        mJumpBackIn.setItemAnimator(null);
+        mJumpBackInAdapter = new JumpBackInAdapter(
+                mActivity, sessionId -> openSessionId(sessionId));
+        mJumpBackIn.setAdapter(mJumpBackInAdapter);
+        mJumpHeader = v.findViewById(R.id.home_jump_header);
+
+        // Branding header: incognito icon → new private tab (same logic as the
+        // home popup's "New private tab" action).
+        mPrivateInfinity = v.findViewById(R.id.home_private_infinity);
+        if (mPrivateInfinity != null) {
+            mPrivateInfinity.setOnClickListener(view -> openIncognitoTab());
         }
-        if (mBackupRest != null) {
-            mBackupRest.setOnClickListener(openCloud);
+        // "Show all" under Shortcuts → the history screen (all visited sites).
+        mShortcutsShowAll = v.findViewById(R.id.home_shortcuts_show_all);
+        if (mShortcutsShowAll != null) {
+            mShortcutsShowAll.setOnClickListener(view ->
+                    NavigationUtils.navigateSafe(mNavController, R.id.action_home_to_history));
         }
-        if (mBackupCard != null) {
-            // The card only ever renders the paused state, so unlike the pill it
-            // needs no mPillToFiles routing — it always opens the Cloud status
-            // screen, where the top-up lives.
-            mBackupCard.setOnClickListener(view -> {
-                Intent intent = new Intent(mActivity, SettingsActivity.class);
-                intent.putExtra(SettingsActivity.EXTRA_OPEN_CLOUD_BACKUP, true);
-                startActivity(intent);
+        // "Show all" under Jump back in → the tabs screen.
+        mJumpShowAll = v.findViewById(R.id.home_jump_show_all);
+        if (mJumpShowAll != null) {
+            mJumpShowAll.setOnClickListener(view -> {
+                Bundle args = new Bundle();
+                args.putBoolean(Keys.OPEN_INCOGNITO, false);
+                NavigationUtils.navigateSafe(mNavController, R.id.tabs, R.id.home, args);
             });
         }
-        WorkManager.getInstance(mActivity.getApplicationContext())
-                .getWorkInfosByTagLiveData(CloudBackupManager.WORK_TAG)
-                .observe(getViewLifecycleOwner(), infos -> {
-                    // RUNNING and ENQUEUED tracked SEPARATELY: an enqueued
-                    // worker may be hours from transferring (retry backoff, or
-                    // waiting for network offline), and rendering it as
-                    // "Backing up…" was the audit's honesty gap — it gets its
-                    // own "Waiting to back up" copy instead.
-                    boolean running = false;
-                    boolean queued = false;
-                    if (infos != null) {
-                        for (WorkInfo wi : infos) {
-                            // Only IDENTIFIED backup workers count: restores and
-                            // legacy pre-tag WorkSpecs render no row anywhere, so
-                            // they must not raise a transfer pill pointing at an
-                            // empty list (the on-device ghost state).
-                            if (!hasBackupTag(wi)) {
-                                continue;
-                            }
-                            WorkInfo.State st = wi.getState();
-                            if (st == WorkInfo.State.RUNNING) {
-                                running = true;
-                                break; // strongest state — nothing can upgrade it
-                            }
-                            if (st == WorkInfo.State.ENQUEUED) {
-                                queued = true;
-                            }
-                        }
-                    }
-                    mCloudRunning = running;
-                    mCloudQueued = queued;
-                    applyBackupPill();
-                });
 
         mBottomNavigationBar.setListener(this);
+        // Bind the top-bar action cluster to THIS fragment's toolbar (see
+        // BottomNavigationBar.bindButtons — must use our own root, never the
+        // window root, or navigation could bind another fragment's buttons).
+        mBottomNavigationBar.bindButtons(v);
 
-        // Bookmarks is the flat middle-slot button in the bottom bar
-        // (see onBottomBarButtonClick's R.id.search_button branch); the
-        // URL bar at the top covers search. The former hero FAB was
-        // removed in favour of this plain in-bar affordance.
+        // The bookmarks entry lives in the 3-dot popup menu
+        // (see HomeFragment's getOptionsEvent popup_bookmarks branch).
 
         mGeckoToolbar = v.findViewById(R.id.toolbar_layout);
         mGeckoToolbar.setListener(this);
@@ -424,9 +317,6 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
         // 'something is downloading' cue left on Home.
         mTaskViewModel.getRegularCount().observe(getViewLifecycleOwner(), count -> {
             mBottomNavigationBar.onBadgeCount(count);
-            // Same active+queued signal drives the breathing ember behind the
-            // flame: on while something downloads, off (idle wordmark) at 0.
-            setBrandGlowActive(count != null && count > 0);
         });
 
         // Floor the displayed count at 1: while Home is on screen the user IS
@@ -436,36 +326,52 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
         mGeckoStateViewModel.getTabsCount().observe(getViewLifecycleOwner(), count
                 -> mBottomNavigationBar.onTabsCount(count == null ? 1 : Math.max(1, count)));
 
-        // Subtitle, left half — lifetime trackers blocked (uBlock cumulative,
-        // pushed by firedown.js). Compact + locale-aware ("10.5K"); hidden at 0.
+        // Privacy tracker capsule — lifetime trackers blocked (uBlock
+        // cumulative, pushed by firedown.js), shown as a count; hidden at 0.
         mGeckoUblockHelper.getCumulativeBlockedLive().observe(getViewLifecycleOwner(), blocked -> {
-            if (mSubtitleBlocked == null || mSubtitleBlockedText == null) return;
+            if (mTrackerCapsule == null || mTrackerCapsuleText == null) return;
             long n = blocked == null ? 0L : blocked;
             if (n > 0) {
-                CompactDecimalFormat fmt = CompactDecimalFormat.getInstance(
-                        Locale.getDefault(), CompactDecimalFormat.CompactStyle.SHORT);
-                fmt.setMaximumFractionDigits(1);
-                mSubtitleBlockedText.setText(getString(R.string.home_subtitle_blocked, fmt.format(n)));
-                mSubtitleBlocked.setVisibility(View.VISIBLE);
+                mTrackerCapsuleText.setText(getString(R.string.home_trackers_blocked, n));
+                mTrackerCapsule.setVisibility(View.VISIBLE);
             } else {
-                mSubtitleBlocked.setVisibility(View.GONE);
+                mTrackerCapsule.setVisibility(View.GONE);
             }
-            updateSubtitleVisibility();
         });
 
-        // Subtitle, right half — total bytes of finished regular downloads,
-        // locale-formatted ("9.5 GB"); hidden at 0.
-        mRecentDownloadsViewModel.getFinishedSize().observe(getViewLifecycleOwner(), size -> {
-            if (mSubtitleSaved == null || mSubtitleSavedText == null) return;
-            long bytes = size == null ? 0L : size;
-            if (bytes > 0) {
-                mSubtitleSavedText.setText(getString(R.string.home_subtitle_saved,
-                        Utils.readableFileSize(bytes)));
-                mSubtitleSaved.setVisibility(View.VISIBLE);
-            } else {
-                mSubtitleSaved.setVisibility(View.GONE);
+        // Shortcuts grid — most-visited sites (same data as the autocomplete
+        // strip; the grid is a 4×2 viewport of it). Loaded on focus below; this
+        // observer fills the grid whenever the list changes. Section (header +
+        // grid) shows only when there are sites; "Show all >" only with
+        // multiple (Firefox parity).
+        mAutoCompleteViewModel.getMostVisited().observe(getViewLifecycleOwner(),
+                list -> {
+                    if (mShortcutsAdapter == null || mShortcutsGrid == null) return;
+                    mShortcutsAdapter.setItems(list);
+                    int n = mShortcutsAdapter.size();
+                    mShortcutsGrid.setVisibility(n > 0 ? View.VISIBLE : View.GONE);
+                    if (mShortcutsHeader != null) {
+                        mShortcutsHeader.setVisibility(n > 0 ? View.VISIBLE : View.GONE);
+                    }
+                    if (mShortcutsShowAll != null) {
+                        mShortcutsShowAll.setVisibility(n > 1 ? View.VISIBLE : View.GONE);
+                    }
+                });
+
+        // "Jump back in" — the last browsed non-home tab(s), ordered by last
+        // access. Real tab data, never hardcoded. Section shows only when there
+        // is at least one recent tab; "Show all >" only with multiple.
+        mGeckoStateViewModel.getTabs().observe(getViewLifecycleOwner(), tabs -> {
+            if (mJumpBackInAdapter == null || mJumpBackIn == null) return;
+            mJumpBackInAdapter.setTabs(tabs);
+            int n = mJumpBackInAdapter.size();
+            mJumpBackIn.setVisibility(n > 0 ? View.VISIBLE : View.GONE);
+            if (mJumpHeader != null) {
+                mJumpHeader.setVisibility(n > 0 ? View.VISIBLE : View.GONE);
             }
-            updateSubtitleVisibility();
+            if (mJumpShowAll != null) {
+                mJumpShowAll.setVisibility(n > 1 ? View.VISIBLE : View.GONE);
+            }
         });
 
         mAutoCompleteViewModel.setIncognito(false);
@@ -514,13 +420,11 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
                 flashNewTab(mNewTabView);
                 addNewTab();
             } else if(id == R.id.new_incognito_tab){
-                GeckoStateEntity entity = new GeckoStateEntity(true);
-                entity.setIncognito(true);
-                GeckoState geckoState = new GeckoState(entity);
-                mIncognitoStateViewModel.setGeckoState(geckoState, true);
-                NavigationUtils.navigateSafe(mNavController, R.id.action_home_to_home_incognito);
+                openIncognitoTab();
             } else if (id == R.id.popup_history) {
                 NavigationUtils.navigateSafe(mNavController, R.id.action_home_to_history);
+            } else if (id == R.id.popup_bookmarks) {
+                NavigationUtils.navigateSafe(mNavController, R.id.action_home_to_bookmarks);
             } else if (id == R.id.popup_vault) {
                 mStartForResult.launch(new Intent(mActivity, VaultActivity.class));
             } else if (id == R.id.popup_sync) {
@@ -546,6 +450,10 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
                 return true;
             }
         });
+
+        // Load most-visited once at home so the shortcuts grid is populated
+        // (same source the autocomplete strip uses on focus).
+        mAutoCompleteViewModel.loadMostVisited();
 
 
         ViewCompat.setOnApplyWindowInsetsListener(mHomeScroll, (v, windowInsets) -> {
@@ -636,398 +544,25 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
 
     }
 
-    /**
-     * Shows/hides the breathing ember behind the flame. ON while a download is
-     * active (a soft, constant "something's happening" pulse — deliberately NOT
-     * progress-linked: how-far belongs to the bottom bar, the home only says
-     * whether); OFF returns the home to the plain wordmark. The glow is sized
-     * to the flame and grown into a halo purely by the SCALE transform, so it
-     * costs no layout and bleeds past its box (wrappers clipChildren="false").
-     */
-    private void setBrandGlowActive(boolean active) {
-        if (mBrandGlow == null) return;
-        if (active) {
-            mBrandGlow.setVisibility(View.VISIBLE);
-            if (mBrandGlowAnimator == null) {
-                mBrandGlowAnimator = buildBrandGlowAnimator(mBrandGlow);
-            }
-            if (!mBrandGlowAnimator.isStarted()) {
-                mBrandGlowAnimator.start();
-            }
-        } else {
-            if (mBrandGlowAnimator != null) {
-                mBrandGlowAnimator.cancel();
-            }
-            mBrandGlow.setVisibility(View.GONE);
-            mBrandGlow.setAlpha(0f);
-        }
-    }
-
-    /**
-     * A slow alpha+scale breath, infinite and reversing, on the ember view.
-     * Soft on purpose (never fully dies, never flares) so it reads as a calm
-     * heartbeat rather than a notification blink; the scale carries the halo
-     * out beyond the flame.
-     */
-    private static Animator buildBrandGlowAnimator(View v) {
-        v.setScaleX(1.3f);
-        v.setScaleY(1.3f);
-        ObjectAnimator alpha = ObjectAnimator.ofFloat(v, View.ALPHA, 0.15f, 0.42f);
-        ObjectAnimator scaleX = ObjectAnimator.ofFloat(v, View.SCALE_X, 1.3f, 1.6f);
-        ObjectAnimator scaleY = ObjectAnimator.ofFloat(v, View.SCALE_Y, 1.3f, 1.6f);
-        ObjectAnimator[] parts = {alpha, scaleX, scaleY};
-        for (ObjectAnimator part : parts) {
-            part.setRepeatCount(ValueAnimator.INFINITE);
-            part.setRepeatMode(ValueAnimator.REVERSE);
-        }
-        AnimatorSet set = new AnimatorSet();
-        set.setDuration(2200);
-        set.setInterpolator(new AccelerateDecelerateInterpolator());
-        set.playTogether(alpha, scaleX, scaleY);
-        return set;
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (mBrandGlowAnimator != null) {
-            mBrandGlowAnimator.cancel();
-            mBrandGlowAnimator = null;
-        }
-        mBrandGlow = null;
         mHomeScroll = null;
         mAutoCompleteView = null;
         mGeckoToolbar = null;
         mNewTabView = null;
         mBottomNavigationBar = null;
-        mSubtitle = null;
-        mSubtitleBlocked = null;
-        mSubtitleBlockedText = null;
-        mSubtitleSep = null;
-        mSubtitleSaved = null;
-        mSubtitleSavedText = null;
-        mBackupSlot = null;
-        mBackupPill = null;
-        mBackupPillText = null;
-        mBackupRest = null;
-        mBackupRestText = null;
-        mBackupCard = null;
-        mBackupCardTitle = null;
-        mBackupCardDetail = null;
-    }
-
-    /** Guarded setter — setMaxWidth always requestLayout()s, so an unguarded
-     *  call from the layout-change listener would loop the layout pass. */
-    private static void applyTextWidthCap(TextView text, int cap) {
-        if (text != null && text.getMaxWidth() != cap) {
-            text.setMaxWidth(cap);
-        }
-    }
-
-    /**
-     * Shows the subtitle row only when at least one counter has a value, and
-     * the middle-dot divider only between visible neighbours. So a fresh
-     * install shows just the wordmark; any subset composes cleanly:
-     * "10.5K blocked · 9.5 GB saved". Called by both counters' bindings (they
-     * update on independent cadences). Cloud Backup state deliberately does
-     * NOT live here — it's the bottom pill (see the field doc), which is
-     * state-only and transient.
-     */
-    private void updateSubtitleVisibility() {
-        if (mSubtitle == null) return;
-        boolean blocked = mSubtitleBlocked != null && mSubtitleBlocked.getVisibility() == View.VISIBLE;
-        boolean saved = mSubtitleSaved != null && mSubtitleSaved.getVisibility() == View.VISIBLE;
-        // The dot shows only BETWEEN two visible counters. With exactly two
-        // segments that is just "both visible" — a third one made this an
-        // "anything to my left?" test, and its separator was what ended up
-        // orphaned at the end of a wrapped row. Two segments cannot wrap at
-        // real values, so the line stays one row.
-        if (mSubtitleSep != null) {
-            mSubtitleSep.setVisibility(blocked && saved ? View.VISIBLE : View.GONE);
-        }
-        mSubtitle.setVisibility(blocked || saved ? View.VISIBLE : View.GONE);
-    }
-
-    /**
-     * Loads the quota when set up (the pill's "Paused" input), then re-renders
-     * the pill. Called on resume; the transfer-active state comes from the
-     * WorkManager observer wired in onViewCreated.
-     */
-    private void refreshCloudStatus() {
-        if (mBackupPill == null) {
-            return;
-        }
-        if (!mCloudBackup.isSetUp()) {
-            // Not set up (fresh install, never used, or erased): clear BOTH
-            // inputs so a later render can't resurrect a stale figure, and hide
-            // the surfaces now rather than waiting on a network round-trip that
-            // will never be made.
-            mCloudQuota = null;
-            mCloudTotalBytes = -1;
-            applyBackupPill();
-            return;
-        }
-        // CACHED-FIRST, the status hero's rule: seed the resting figure from the
-        // last successful pull so the pill is already correct on entry, then let
-        // the async result update it in place. Rendering only from the network
-        // result would pop the pill in ~a second into every resume.
-        CloudBackupManager.Status cached = mCloudBackup.lastStatus();
-        if (cached == null) {
-            // No in-memory snapshot: either a COLD process, or the manager
-            // dropped it because usage changed ("Delete backed-up files" nulls
-            // mLastStatus). Fall through to the DURABLE total, which separates
-            // those two — it survives the process but is cleared by the erase
-            // and by the dead-account reconcile, so it answers -1 in exactly the
-            // cases where the in-memory null meant "don't trust the old number".
-            // This is what stops the pill popping in a second after launch.
-            mCloudTotalBytes = mCloudBackup.lastKnownTotalBytes();
-        } else if (cached.totalBytes >= 0) {
-            mCloudTotalBytes = cached.totalBytes;
-        }
-        applyBackupPill(); // show promptly with whatever we already have
-        // One combined load with the guarded reconciliation: retiring flips
-        // isSetUp() false (pill hides); a heal makes the paused check reachable.
-        // Gen-guarded so two rapid resumes can't apply results in the wrong
-        // order (network order != call order on the manager's pooled executor).
-        final int gen = ++mCloudStatusGen;
-        mCloudBackup.loadStatus(status -> {
-            if (isAdded() && mBackupPill != null && gen == mCloudStatusGen) {
-                mCloudQuota = status.quota;
-                // -1 means the pull couldn't report a total (offline, transient
-                // failure). KEEP the previous figure rather than blanking it —
-                // an offline resume must not make the pill vanish and come back.
-                if (status.totalBytes >= 0) {
-                    mCloudTotalBytes = status.totalBytes;
-                }
-                applyBackupPill();
-            }
-        });
-    }
-
-    /** Whether a WorkInfo carries the backup identity tags stamped at enqueue
-     *  (restores and legacy pre-tag WorkSpecs don't). */
-    private static boolean hasBackupTag(WorkInfo wi) {
-        for (String tag : wi.getTags()) {
-            if (tag.startsWith(VaultBackupWorker.TAG_NAME)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /** Renders the ONE home cloud slot from the latest transfer/quota/total
-     *  state. Four rungs, highest first:
-     *
-     *  <ol>
-     *    <li><b>Paused</b> — metered credit ran out. The CARD, tap → the status
-     *        screen. It BEATS both transfer states because in grace every upload
-     *        402s at create, so a doomed queued backup rendering "Backing up…"
-     *        would hide the one actionable fact (top up).</li>
-     *    <li><b>Backing up…</b> — an identified backup worker is RUNNING.</li>
-     *    <li><b>Waiting to back up</b> — enqueued only (constraints unmet /
-     *        retry backoff; hours may pass with nothing transferring, so it
-     *        never claims to be backing up).</li>
-     *    <li><b>N backed up</b> — the RESTING state, the lifetime total —
-     *        rendered as the QUIET LINE ({@code home_backup_rest}), never the
-     *        chip: a standing total earns no fill (see the layout comment for
-     *        the demotion's full rationale). This is what a set-up account
-     *        sees when nothing is happening.</li>
-     *  </ol>
-     *
-     *  <p><b>What each rung is gated on, and why they differ.</b> The three
-     *  states above the resting one are EVIDENCE-based — a paused quota, a live
-     *  WorkInfo — and that evidence only exists because the user engaged with
-     *  the feature, so they are self-gating (this is why "Backing up…" is
-     *  deliberately NOT setUp-gated: the very FIRST backup runs before
-     *  markEnabled lands, and suppressing it would blank the pill for exactly
-     *  the transfer that most wants reporting). The resting rung has no such
-     *  evidence — it is a standing claim — so it takes the strict gate:
-     *  {@code isSetUp()} read LIVE here (never a cached copy, so the erase path
-     *  can't leave it showing) AND a known, non-zero total. A fresh install
-     *  fails both; an erased account fails both; a set-up account that has
-     *  backed up nothing yet fails the second and stays silent rather than
-     *  saying "0 B".
-     *
-     *  <p><b>Visibility contract.</b> At most ONE of chip / resting line /
-     *  card is ever VISIBLE, and every branch sets ALL THREE (they are
-     *  persistent views that flip, so a one-sided set leaves the previous
-     *  state on screen). The chip and the line hide as INVISIBLE inside the
-     *  fixed-height slot; the slot itself stays up (empty) for a set-up
-     *  account so the resting total's late network arrival can't grow the
-     *  centred brand block and shift the flame — see the home_backup_slot
-     *  layout comment. Everything else drops the slot — the calm home is the
-     *  default. */
-    private void applyBackupPill() {
-        if (mBackupPill == null || mBackupPillText == null
-                || mBackupRest == null || mBackupRestText == null) {
-            return;
-        }
-        if (!mSharedPreferences.getBoolean(Preferences.SETTINGS_CLOUD_HOME_STATUS, true)) {
-            // The user turned the home status off (Settings → Cloud). It gates
-            // EVERY rung including the grace card: a control that says "show
-            // backup status on home" and still paints one would be lying, and
-            // the deadline is reported on the Cloud screen and the Backups list
-            // header regardless. Read live on each render, so returning from
-            // Settings applies it on the next resume with no extra plumbing.
-            // The slot goes too — a reserved-but-forever-empty band under the
-            // subtitle would be dead space the control said wouldn't be there.
-            mBackupPill.setVisibility(View.INVISIBLE);
-            hideRestLine();
-            setCalmSlotVisible(false);
-            if (mBackupCard != null) {
-                mBackupCard.setVisibility(View.GONE);
-            }
-            return;
-        }
-        String text = null;
-        boolean attention = false;
-        boolean toFiles = false;
-        boolean resting = false;
-        boolean setUp = mCloudBackup.isSetUp();
-        if (setUp && mCloudQuota != null && mCloudQuota.metered && mCloudQuota.readOnly) {
-            text = getString(R.string.home_cloud_paused);
-            attention = true;
-        } else if (mCloudRunning) {
-            text = getString(R.string.home_cloud_backing_up);
-            toFiles = true;
-        } else if (mCloudQueued) {
-            text = getString(R.string.home_cloud_waiting);
-            toFiles = true;
-        } else if (setUp && mCloudTotalBytes > 0) {
-            text = getString(R.string.home_cloud_backed_up,
-                    Utils.readableFileSize(mCloudTotalBytes));
-            toFiles = true;
-            resting = true;
-        }
-        if (text == null) {
-            // Nothing to report. The chip/line go INVISIBLE, and the SLOT
-            // stays up for a set-up account (height reserved) so a total that
-            // arrives a beat later fades in with zero reflow; a not-set-up
-            // account drops the slot entirely — the bare fresh-install home.
-            mBackupPill.setVisibility(View.INVISIBLE);
-            hideRestLine();
-            setCalmSlotVisible(setUp);
-            if (mBackupCard != null) {
-                mBackupCard.setVisibility(View.GONE);
-            }
-            return;
-        }
-        mPillToFiles = toFiles;
-        // The states are told apart by SHAPE, not colour. A live/promised
-        // transfer is a small filled chip (fill is earned by WORK — transient,
-        // self-clearing); the resting total is a naked status line in the
-        // counters' grammar; the DEADLINE is a wide two-line card with a verb,
-        // because it reports 30 days ending in deleted files rather than
-        // something that resolves itself. None carries a semantic hue — see
-        // the note in values/colors.xml for why the amber container that
-        // briefly lived here was removed.
-        if (attention) {
-            // The alarm replaces the calm slot outright (GONE, not reserved):
-            // the card is taller than the slot anyway, and an alarm is allowed
-            // to move things.
-            mBackupPill.setVisibility(View.INVISIBLE);
-            hideRestLine();
-            setCalmSlotVisible(false);
-            showBackupCard(text);
-            return;
-        }
-        if (mBackupCard != null) {
-            mBackupCard.setVisibility(View.GONE);
-        }
-        setCalmSlotVisible(true);
-        if (resting) {
-            // Fade only on an actual appearance: applyBackupPill re-runs on
-            // every resume and WorkInfo tick, and re-fading a line that is
-            // already up would read as a refresh that never happened.
-            boolean appearing = mBackupRest.getVisibility() != View.VISIBLE;
-            mBackupPill.setVisibility(View.INVISIBLE);
-            mBackupRestText.setText(text);
-            mBackupRest.setVisibility(View.VISIBLE);
-            if (appearing) {
-                fadeInRestLine();
-            }
-        } else {
-            hideRestLine();
-            mBackupPillText.setText(text);
-            mBackupPill.setVisibility(View.VISIBLE);
-        }
-    }
-
-    /** Shows (reserves) or drops the fixed-height calm slot. GONE — never
-     *  INVISIBLE — when dropped: the reservation trick lives on the slot's
-     *  CHILDREN; the slot itself is either holding space or absent. */
-    private void setCalmSlotVisible(boolean visible) {
-        if (mBackupSlot != null) {
-            mBackupSlot.setVisibility(visible ? View.VISIBLE : View.GONE);
-        }
-    }
-
-    /** Hides the resting line, cancelling any fade in flight and resetting
-     *  alpha — a cancelled ViewPropertyAnimator leaves alpha wherever it
-     *  stopped, and the next appearance must not start half-transparent. */
-    private void hideRestLine() {
-        if (mBackupRest == null) {
-            return;
-        }
-        mBackupRest.animate().cancel();
-        mBackupRest.setAlpha(1f);
-        mBackupRest.setVisibility(View.INVISIBLE);
-    }
-
-    /** Fades the resting line in — alpha only, no translation: a late network
-     *  value should seep in, not mount (the arrival pop was half of why the
-     *  old resting chip read as "the component working"). Skipped when the
-     *  user has animations off (Settings.Global.ANIMATOR_DURATION_SCALE = 0;
-     *  {@link ValueAnimator#areAnimatorsEnabled()} is the platform's read of
-     *  it) — the Android analogue of prefers-reduced-motion. */
-    private void fadeInRestLine() {
-        if (!ValueAnimator.areAnimatorsEnabled()) {
-            mBackupRest.setAlpha(1f);
-            return;
-        }
-        mBackupRest.setAlpha(0f);
-        mBackupRest.animate().alpha(1f).setDuration(REST_LINE_FADE_MS).start();
-    }
-
-    /** Renders the deadline card. The detail line is the COUNTDOWN — "3 days
-     *  left before your files are removed" is what makes the state actionable,
-     *  where "Paused" only named it — computed from the quota's graceUntil,
-     *  which the server already sends, so this needs no API change.
-     *
-     *  <p>Falls back to the title alone when graceUntil is missing or
-     *  unparseable (an older server, a clock skew): the card still says the
-     *  backup is paused, it just can't say for how long. Never shows a negative
-     *  or zero count — past the deadline the reap is already due, so it reads
-     *  "today" rather than a stale number. */
-    private void showBackupCard(String title) {
-        if (mBackupCard == null || mBackupCardTitle == null) {
-            return;
-        }
-        mBackupCardTitle.setText(title);
-        if (mBackupCardDetail != null) {
-            String detail = graceCountdown();
-            mBackupCardDetail.setText(detail);
-            mBackupCardDetail.setVisibility(detail == null ? View.GONE : View.VISIBLE);
-        }
-        mBackupCard.setVisibility(View.VISIBLE);
-    }
-
-    /** Whole days from now until the read-only grace ends, as the localized
-     *  plural, or null when the deadline isn't known. */
-    @Nullable
-    private String graceCountdown() {
-        if (mCloudQuota == null || mCloudQuota.graceUntil == null) {
-            return null;
-        }
-        try {
-            long days = ChronoUnit.DAYS.between(Instant.now(),
-                    OffsetDateTime.parse(mCloudQuota.graceUntil).toInstant());
-            int shown = (int) Math.max(1, days);
-            return getResources().getQuantityString(
-                    R.plurals.home_cloud_grace_days, shown, shown);
-        } catch (RuntimeException e) {
-            return null;
-        }
+        mShortcutsGrid = null;
+        mShortcutsAdapter = null;
+        mShortcutsHeader = null;
+        mTrackerCapsule = null;
+        mTrackerCapsuleText = null;
+        mJumpBackIn = null;
+        mJumpBackInAdapter = null;
+        mJumpHeader = null;
+        mPrivateInfinity = null;
+        mShortcutsShowAll = null;
+        mJumpShowAll = null;
     }
 
     @Override
@@ -1038,15 +573,14 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
             Bundle args = new Bundle();
             args.putBoolean(Keys.OPEN_INCOGNITO, false);
             NavigationUtils.navigateSafe(mNavController, R.id.tabs, R.id.home, args);
-        } else if(id == R.id.downloads_button){
+        } else if(id == R.id.download_button){
+            // Compact flame in the top bar (Item 2) — same action as the old
+            // bottom-bar downloads button.
             Intent downloadsIntent = new Intent(mActivity, DownloadsActivity.class);
             mStartForResult.launch(downloadsIntent);
         } else if(id == R.id.new_tab_button){
             flashNewTab(mNewTabView);
             addNewTab();
-        } else if (id == R.id.search_button) {
-            // The middle slot is the flat Bookmarks button.
-            NavigationUtils.navigateSafe(mNavController, R.id.action_home_to_bookmarks);
         }
     }
 
@@ -1164,6 +698,48 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
     }
 
 
+    /** Opens a new private (incognito) tab — same logic as the home popup's
+     *  "New private tab" action. */
+    private void openIncognitoTab() {
+        GeckoStateEntity entity = new GeckoStateEntity(true);
+        entity.setIncognito(true);
+        GeckoState geckoState = new GeckoState(entity);
+        mIncognitoStateViewModel.setGeckoState(geckoState, true);
+        NavigationUtils.navigateSafe(mNavController, R.id.action_home_to_home_incognito);
+    }
+
+
+    /** Context menu for a long-pressed shortcut: open in a new tab, or remove
+     *  it from the shortcuts (never silently — the user asked for it). */
+    private void showShortcutMenu(String url) {
+        if (mShortcutsGrid == null) return;
+        PopupMenu menu = new PopupMenu(mActivity, mShortcutsGrid);
+        menu.getMenu().add(0, 1, 0, R.string.home_shortcut_open_new_tab);
+        menu.getMenu().add(0, 2, 1, R.string.home_shortcut_remove);
+        menu.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == 1) {
+                addNewTabToUrl(url);
+            } else if (item.getItemId() == 2) {
+                mAutoCompleteViewModel.hideFromMostVisited(url);
+            }
+            return true;
+        });
+        menu.show();
+    }
+
+
+    /** Opens the given URL in a brand-new tab (used by the shortcut menu). */
+    private void addNewTabToUrl(String url) {
+        GeckoStateEntity entity = new GeckoStateEntity(true);
+        entity.setUri(url);
+        entity.setHome(false);
+        GeckoState geckoState = new GeckoState(entity);
+        mGeckoStateViewModel.setGeckoState(geckoState, true);
+        mBrowserURIViewModel.onEventSelected(entity, IntentActions.OPEN_URI);
+        NavigationUtils.navigateToBrowser(mNavController, false);
+    }
+
+
     @Override
     public void onToolbarButtonClick(View v, int id) {
         if (id == R.id.clear_button) {
@@ -1174,12 +750,31 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
             mGeckoToolbar.clearText();
         }else if (id == R.id.security_button) {
             NavigationUtils.navigateSafe(mNavController, R.id.dialog_search_engine, R.id.home);
+        } else if (id == R.id.mic_button) {
+            launchVoiceSearch();
+        } else if (id == R.id.image_search_button) {
+            launchImageSearch();
         }
     }
 
     @Override
     public void onToolbarKey(int keyCode, KeyEvent event) {
 
+    }
+
+    /** Image-search result (Lens URL) opens like any typed URL from Home. */
+    @Override
+    protected void openUriInCurrentTab(String url) {
+        openUri(url);
+    }
+
+    /** Voice-search result lands in the address bar and commits (search). */
+    @Override
+    protected void onVoiceSearchResult(String text) {
+        if (mGeckoToolbar != null) {
+            mGeckoToolbar.setUri(text, false);
+            onCommit();
+        }
     }
 
     @Override

@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">%d odabrano</string>
-    <string name="app_lock">Otključajte da koristite Firedown</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Otključajte da koristite Waves</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Otključaj</string>
     <string name="browser_bookmark_added">Bookmark Sačuvano!</string>
     <string name="browser_cache_cleared">Podaci o pregledavanju su obrisani</string>
@@ -26,7 +26,7 @@
     <string name="capture_empty_gifs_message">Nema dostupnih GIF-ova.</string>
     <string name="capture_empty_images_message">Nema dostupnih slika.</string>
     <string name="capture_empty_message">Nema dostupnih medija za preuzimanje.</string>
-    <string name="capture_empty_subtext">Ponovo učitajte web stranicu i Firedown će otkriti dostupne medije.</string>
+    <string name="capture_empty_subtext">Ponovo učitajte web stranicu i Waves će otkriti dostupne medije.</string>
     <string name="capture_empty_video_message">Nema dostupnih videozapisa.</string>
     <string name="clipboard">Kopirano u međuspremnik</string>
     <string name="close_tab">Zatvori tab</string>
@@ -71,7 +71,7 @@
     <string name="details_url">URL</string>
     <string name="download">Skinuti</string>
     <string name="download_finished">Preuzimanje je završeno</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Kvaliteta preuzimanja</string>
     <string name="download_queued">Na čekanju…</string>
     <string name="download_rename_error">Ime datoteke je već u upotrebi.</string>
@@ -84,7 +84,7 @@
     <string name="empty_list_history">Vaša historija preuzimanja je prazna.</string>
     <string name="empty_list_query">Nema rezultata</string>
     <string name="empty_list_type">Ovde nema ničega.</string>
-    <string name="empty_media_help">Neke medijske datoteke moraju se reproducirati prije nego što ih Firedown otkrije kao datoteke za preuzimanje.</string>
+    <string name="empty_media_help">Neke medijske datoteke moraju se reproducirati prije nego što ih Waves otkrije kao datoteke za preuzimanje.</string>
     <string name="empty_media_help_title">Pustite medije prije preuzimanja</string>
     <string name="empty_media_subtitle_help">Pustite medije kao i obično. Zatim bi se trebao pojaviti s drugim medijskim datotekama, nakon pritiska na tipku Fire.</string>
 <string name="error_check_internet_connection">Greška internetske veze.</string>
@@ -144,7 +144,7 @@
     <string name="navigation_web_history">Historija</string>
     <string name="notifications_downloads_channel">Preuzimanja</string>
     <string name="open">Otvori</string>
-    <string name="open_in_app_subtitle">Želite li napustiti Firedown da pogledate ovaj sadržaj?</string>
+    <string name="open_in_app_subtitle">Želite li napustiti Waves da pogledate ovaj sadržaj?</string>
     <string name="open_in_app_title">Otvorite u drugoj aplikaciji</string>
     <string name="open_new_private_tab_2">Novi privatni tab</string>
     <string name="open_new_tab_2">Novi tab</string>
@@ -279,7 +279,7 @@
     <string name="trackers_info_action">Upravljanje zaštitom</string>
     <string name="trackers_info_today">%1$s blokirano danas</string>
     <string name="bookmark_export">Izvezi zabilješke</string>
-    <string name="bookmark_export_done">Izvezeno %1$d zabilješki u Download/Firedown/backup</string>
+    <string name="bookmark_export_done">Izvezeno %1$d zabilješki u Download/Waves/backup</string>
     <string name="bookmark_import">Uvezi zabilješke</string>
     <string name="bookmark_import_done">Uvezeno %1$d zabilješki</string>
     <string name="bookmark_io_error">Nije moguće pročitati datoteku zabilješki</string>
@@ -304,7 +304,7 @@
     <string name="settings_sync_export_continue">Nastavi</string>
     <string name="settings_sync_export_done">Kôd za oporavak sačuvan</string>
     <string name="settings_sync_export_failed">Datoteku nije moguće sačuvati</string>
-    <string name="settings_sync_export_file_body">Firedown — kôd za oporavak sinhronizacije zabilješki\n\n%1$s\n\nOvaj kôd je jedini ključ za vaše sinhronizirane zabilješke — svako ko ga ima može ih pročitati, a ako ga izgubite, ne može se oporaviti.\n\nOva datoteka NIJE šifrirana. Uvezite kôd u upravitelj lozinki (ili na drugo sigurno mjesto), zatim izbrišite ovu datoteku.</string>
+    <string name="settings_sync_export_file_body">Waves — kôd za oporavak sinhronizacije zabilješki\n\n%1$s\n\nOvaj kôd je jedini ključ za vaše sinhronizirane zabilješke — svako ko ga ima može ih pročitati, a ako ga izgubite, ne može se oporaviti.\n\nOva datoteka NIJE šifrirana. Uvezite kôd u upravitelj lozinki (ili na drugo sigurno mjesto), zatim izbrišite ovu datoteku.</string>
     <string name="settings_sync_export_summary">Izvezite kôd kao tekstualnu datoteku koju možete pohraniti</string>
     <string name="settings_sync_export_title">Sačuvaj kôd za oporavak u datoteku</string>
     <string name="settings_sync_faq_a1">Da. Svaka zabilješka se šifrira na ovom uređaju prije nego što se prenese. Server uvijek pohranjuje samo nečitljive podatke koje ne može pročitati.</string>
@@ -314,7 +314,7 @@
     <string name="settings_sync_faq_a5">Ne. Nema registracije, e-pošte ni broja telefona — samo kôd za oporavak. Uz vaše zabilješke nije vezano ništa lično.</string>
     <string name="settings_sync_faq_a6">Sinhronizacija je opcionalna i podrazumijevano isključena. Svoje zabilješke uvijek možete izvesti u datoteku i kasnije ih uvesti, bez ikakvog servera.</string>
     <string name="settings_sync_faq_q1">Jesu li moje zabilješke šifrirane?</string>
-    <string name="settings_sync_faq_q2">Mogu li ih Firedown ili neko drugi pročitati?</string>
+    <string name="settings_sync_faq_q2">Mogu li ih Waves ili neko drugi pročitati?</string>
     <string name="settings_sync_faq_q3">Šta je kôd za oporavak?</string>
     <string name="settings_sync_faq_q4">Šta ako izgubim svoj kôd za oporavak?</string>
     <string name="settings_sync_faq_q5">Trebam li nalog ili e-poštu?</string>

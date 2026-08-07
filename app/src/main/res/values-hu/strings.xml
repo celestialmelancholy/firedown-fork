@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">%d kiválasztva</string>
-    <string name="app_lock">Oldja fel a zárolást a Firedown használatához</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Oldja fel a zárolást a Waves használatához</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Kinyit</string>
     <string name="browser_bookmark_added">Könyvjelző mentve!</string>
     <string name="browser_cache_cleared">A böngészési adatok törölve</string>
@@ -26,7 +26,7 @@
     <string name="capture_empty_gifs_message">Nincsenek elérhető Gif-ek.</string>
     <string name="capture_empty_images_message">Nincsenek elérhető képek.</string>
     <string name="capture_empty_message">Nincs letölthető média.</string>
-    <string name="capture_empty_subtext">Töltse be újra a webhelyet, és a Firedown észleli az elérhető médiát.</string>
+    <string name="capture_empty_subtext">Töltse be újra a webhelyet, és a Waves észleli az elérhető médiát.</string>
     <string name="capture_empty_video_message">Nincsenek elérhető videók.</string>
     <string name="clipboard">Vágólapra másolva</string>
     <string name="clipboard_from">A vágólapról</string>
@@ -72,7 +72,7 @@
     <string name="details_url">URL</string>
     <string name="download">Letöltés</string>
     <string name="download_finished">Letöltés kész</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Letöltési minőség</string>
     <string name="download_queued">Függőben levő…</string>
     <string name="download_rename_error">A fájlnév már használatban van.</string>
@@ -85,7 +85,7 @@
     <string name="empty_list_history">A letöltési előzmények üresek.</string>
     <string name="empty_list_query">Nincs találat</string>
     <string name="empty_list_type">Nincs itt semmi.</string>
-    <string name="empty_media_help">Egyes médiafájlokat le kell játszani, mielőtt a Firedown letölthető fájlként észlelné őket.</string>
+    <string name="empty_media_help">Egyes médiafájlokat le kell játszani, mielőtt a Waves letölthető fájlként észlelné őket.</string>
     <string name="empty_media_help_title">Letöltés előtt játssza le a médiát</string>
     <string name="empty_media_subtitle_help">Kérjük, játssza le a médiát a szokásos módon. Ezután a tűz gomb megnyomása után a többi médiafájllal együtt kell megjelennie.</string>
 <string name="error_check_internet_connection">Internetkapcsolati hiba.</string>
@@ -145,7 +145,7 @@
     <string name="navigation_web_history">Előzmények</string>
     <string name="notifications_downloads_channel">Letöltések</string>
     <string name="open">Megnyitás</string>
-    <string name="open_in_app_subtitle">Kilép a Firedownból a tartalom megtekintéséhez?</string>
+    <string name="open_in_app_subtitle">Kilép a Wavesból a tartalom megtekintéséhez?</string>
     <string name="open_in_app_title">Nyissa meg egy másik alkalmazásban</string>
     <string name="open_new_private_tab_2">Új privát lap</string>
     <string name="open_new_tab_2">Új lap</string>
@@ -172,7 +172,7 @@
     <string name="rename_file">Fájl átnevezése</string>
     <string name="request_geolocation">Megosztja eszköze helyét a következővel: &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_media_key_system_access">Engedélyezi a(z) &lt;b&gt;%s&lt;/b&gt; számára a DRM által vezérelt tartalmak lejátszását?</string>
-    <string name="request_media_key_system_access_subtitle">Vegye figyelembe, hogy a DRM-védett fájlokat a Firedown nem tudja letölteni</string>
+    <string name="request_media_key_system_access_subtitle">Vegye figyelembe, hogy a DRM-védett fájlokat a Waves nem tudja letölteni</string>
     <string name="request_storage">Engedélyezi a hozzáférést az eszköztárhoz a következő számára: &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_storage_access">Engedélyezi harmadik feleknek a saját tárhely elérését a következőhöz: &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="restart_origin">Újrakezd</string>
@@ -300,7 +300,7 @@
     <string name="capture_help_banner_title">Nincs a listában a videó?</string>
     <string name="capture_help_banner">Egyes beágyazott médiákat előbb le kell játszani. Koppints a részletekért.</string>
     <string name="bookmark_export">Könyvjelzők exportálása</string>
-    <string name="bookmark_export_done">%1$d könyvjelző exportálva ide: Download/Firedown/backup</string>
+    <string name="bookmark_export_done">%1$d könyvjelző exportálva ide: Download/Waves/backup</string>
     <string name="bookmark_import">Könyvjelzők importálása</string>
     <string name="bookmark_import_done">%1$d könyvjelző importálva</string>
     <string name="bookmark_io_error">Nem sikerült beolvasni a könyvjelzőfájlt</string>
@@ -325,7 +325,7 @@
     <string name="settings_sync_export_continue">Folytatás</string>
     <string name="settings_sync_export_done">Helyreállítási kód elmentve</string>
     <string name="settings_sync_export_failed">Nem sikerült menteni a fájlt</string>
-    <string name="settings_sync_export_file_body">Firedown — könyvjelző-szinkronizálás helyreállítási kódja\n\n%1$s\n\nEz a kód az egyetlen kulcs a szinkronizált könyvjelzőidhez — bárki, akinek megvan, el tudja olvasni őket, és ha elveszik, nem állítható vissza.\n\nEz a fájl NINCS titkosítva. Importáld a kódot a jelszókezelődbe (vagy más biztonságos helyre), majd töröld ezt a fájlt.</string>
+    <string name="settings_sync_export_file_body">Waves — könyvjelző-szinkronizálás helyreállítási kódja\n\n%1$s\n\nEz a kód az egyetlen kulcs a szinkronizált könyvjelzőidhez — bárki, akinek megvan, el tudja olvasni őket, és ha elveszik, nem állítható vissza.\n\nEz a fájl NINCS titkosítva. Importáld a kódot a jelszókezelődbe (vagy más biztonságos helyre), majd töröld ezt a fájlt.</string>
     <string name="settings_sync_export_summary">Exportáld a kódot szövegfájlként, amelyet eltárolhatsz</string>
     <string name="settings_sync_export_title">Helyreállítási kód mentése fájlba</string>
     <string name="settings_sync_faq_a1">Igen. Minden könyvjelző titkosítva van ezen az eszközön, mielőtt feltöltődik. A szerver csak olvashatatlan, összekevert adatokat tárol.</string>
@@ -335,7 +335,7 @@
     <string name="settings_sync_faq_a5">Nem. Nincs regisztráció, e-mail vagy telefonszám — csak a helyreállítási kód. Semmilyen személyes adat nem kapcsolódik a könyvjelzőidhez.</string>
     <string name="settings_sync_faq_a6">A szinkronizálás opcionális és alapból ki van kapcsolva. Bármikor exportálhatod a könyvjelzőidet egy fájlba, és később importálhatod őket, szerver nélkül.</string>
     <string name="settings_sync_faq_q1">Titkosítva vannak a könyvjelzőim?</string>
-    <string name="settings_sync_faq_q2">El tudja olvasni őket a Firedown vagy bárki más?</string>
+    <string name="settings_sync_faq_q2">El tudja olvasni őket a Waves vagy bárki más?</string>
     <string name="settings_sync_faq_q3">Mi a helyreállítási kód?</string>
     <string name="settings_sync_faq_q4">Mi van, ha elvesztem a helyreállítási kódomat?</string>
     <string name="settings_sync_faq_q5">Szükségem van fiókra vagy e-mailre?</string>

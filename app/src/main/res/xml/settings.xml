@@ -211,38 +211,12 @@
     </PreferenceCategory>
 
 
+    <!-- About only (rebrand: Share/Donate/Help removed per user; the section
+         header/title is dropped too). Licenses lives INSIDE About
+         (settings_about.xml) — a once-ever legal row folded into the screen
+         that carries the version info, the Fenix pattern. -->
     <PreferenceCategory
-        android:title="@string/app_name"
         app:iconSpaceReserved="false">
-
-
-        <!-- Title-only like every row in this category (Help/About are bare
-             too — a lone summary here reads as out of place). Deliberately
-             "Share Firedown", never a bare "Share": Downloads already has a
-             "Direct share" row (the P2P file share), so the object is doing
-             disambiguation work. Same reason the icon is the QR glyph (the
-             ShareAppFragment is QR-centric) rather than ic_share_24, which
-             the Direct share door already wears. -->
-        <Preference
-            android:key="com.solarized.firedown.preferences.share.app"
-            android:title="@string/share_app_title"
-            app:icon="@drawable/qr_code_24" />
-
-        <Preference
-            android:key="com.solarized.firedown.preferences.donate"
-            android:title="@string/settings_donate"
-            app:icon="@drawable/ic_favorite_24" />
-
-        <!-- Licenses lives INSIDE About (settings_about.xml) — a once-ever
-             legal row folded into the screen that carries the version info,
-             the Fenix pattern. Don't re-add a root row for it. -->
-
-        <Preference
-            android:key="com.solarized.firedown.preferences.support"
-            android:title="@string/settings_help"
-            app:icon="@drawable/ic_help_24">
-
-        </Preference>
 
         <Preference
             android:key="com.solarized.firedown.preferences.about"

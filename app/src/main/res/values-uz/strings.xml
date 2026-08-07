@@ -1,6 +1,6 @@
 <resources>
     <string name="action_mode_selected">%d ta tanlandi</string>
-    <string name="app_lock">Firedown-dan foydalanish uchun qulfni oching</string>
+    <string name="app_lock">Waves-dan foydalanish uchun qulfni oching</string>
     <string name="app_unlock">Qulfni ochish</string>
     <string name="browser_bookmark_added">Xatcho‘p saqlandi!</string>
     <string name="browser_cache_cleared">Brauzer maʼlumotlari tozalandi</string>
@@ -23,7 +23,7 @@
     <string name="capture_empty_gifs_message">Hech qanday Gif mavjud emas.</string>
     <string name="capture_empty_images_message">Tasvirlar mavjud emas.</string>
     <string name="capture_empty_message">Yuklab olish uchun hech qanday media mavjud emas.</string>
-    <string name="capture_empty_subtext">Veb-saytni qayta yuklang va Firedown mavjud mediani aniqlaydi.</string>
+    <string name="capture_empty_subtext">Veb-saytni qayta yuklang va Waves mavjud mediani aniqlaydi.</string>
     <string name="capture_empty_video_message">Hech qanday video mavjud emas.</string>
     <string name="clipboard">Buferga nusxalandi</string>
     <string name="close_tab">Varaqni yopish</string>
@@ -81,7 +81,7 @@
     <string name="empty_list_history">Yuklab olishlar tarixi boʻsh.</string>
     <string name="empty_list_query">Hech qanday natija topilmadi</string>
     <string name="empty_list_type">Bu yerda hech narsa yo‘q.</string>
-    <string name="empty_media_help">Firedown ularni yuklab olinadigan fayllar sifatida aniqlashidan oldin ba\'zi media fayllarni o\'ynatish kerak.</string>
+    <string name="empty_media_help">Waves ularni yuklab olinadigan fayllar sifatida aniqlashidan oldin ba\'zi media fayllarni o\'ynatish kerak.</string>
     <string name="empty_media_help_title">Yuklab olishdan oldin mediani o\'ynang</string>
     <string name="empty_media_subtitle_help">Iltimos, mediani odatdagidek o\'ynang. Keyin u Fire-tugmasini bosgandan so\'ng boshqa media fayllar bilan birga paydo bo\'lishi kerak.</string>
 <string name="error_check_internet_connection">Internetga ulanish xatosi.</string>
@@ -138,7 +138,7 @@
     <string name="navigation_web_history">Tarix</string>
     <string name="notifications_downloads_channel">Yuklashlar</string>
     <string name="open">Ochiq</string>
-    <string name="open_in_app_subtitle">Ushbu kontentni ko\'rish uchun Firedownni tark etishni xohlaysizmi?</string>
+    <string name="open_in_app_subtitle">Ushbu kontentni ko\'rish uchun Wavesni tark etishni xohlaysizmi?</string>
     <string name="open_in_app_title">Boshqa ilovada oching</string>
     <string name="open_new_private_tab_2">Yangi maxfiy varaq</string>
     <string name="open_new_tab_2">Yangi varaq</string>
@@ -271,7 +271,7 @@
 
 
     <string name="bookmark_export">Xatcho\'plarni eksport qilish</string>
-    <string name="bookmark_export_done">%1$d ta xatcho\'p Download/Firedown/backup ga eksport qilindi</string>
+    <string name="bookmark_export_done">%1$d ta xatcho\'p Download/Waves/backup ga eksport qilindi</string>
     <string name="bookmark_import">Xatcho\'plarni import qilish</string>
     <string name="bookmark_import_done">%1$d ta xatcho\'p import qilindi</string>
     <string name="bookmark_io_error">Xatcho\'p faylini o\'qib bo\'lmadi</string>
@@ -297,7 +297,7 @@
     <string name="settings_sync_export_continue">Davom etish</string>
     <string name="settings_sync_export_done">Tiklash kodi saqlandi</string>
     <string name="settings_sync_export_failed">Faylni saqlab bo\'lmadi</string>
-    <string name="settings_sync_export_file_body">Firedown — xatcho\'p sinxronlash tiklash kodi\n\n%1$s\n\nBu kod sinxronlangan xatcho\'plaringizga yagona kalitdir — unga ega bo\'lgan har kim ularni o\'qiy oladi va yo\'qotilsa, uni tiklab bo\'lmaydi.\n\nBu fayl shifrlanMAGAN. Kodni parol menejeringizga (yoki boshqa xavfsiz joyga) import qiling, so\'ng bu faylni o\'chiring.</string>
+    <string name="settings_sync_export_file_body">Waves — xatcho\'p sinxronlash tiklash kodi\n\n%1$s\n\nBu kod sinxronlangan xatcho\'plaringizga yagona kalitdir — unga ega bo\'lgan har kim ularni o\'qiy oladi va yo\'qotilsa, uni tiklab bo\'lmaydi.\n\nBu fayl shifrlanMAGAN. Kodni parol menejeringizga (yoki boshqa xavfsiz joyga) import qiling, so\'ng bu faylni o\'chiring.</string>
     <string name="settings_sync_export_summary">Kodni saqlashingiz mumkin bo\'lgan matn fayli sifatida eksport qiling</string>
     <string name="settings_sync_export_title">Tiklash kodini faylga saqlash</string>
     <string name="settings_sync_faq_a1">Ha. Har bir xatcho\'p yuklanishidan oldin bu qurilmada shifrlanadi. Server faqat o\'qiy olmaydigan aralashtirilgan ma\'lumotlarni saqlaydi.</string>
@@ -307,7 +307,7 @@
     <string name="settings_sync_faq_a5">Yo\'q. Ro\'yxatdan o\'tish, e-pochta yoki telefon raqami yo\'q — faqat tiklash kodi. Xatcho\'plaringizga hech qanday shaxsiy narsa bog\'lanmaydi.</string>
     <string name="settings_sync_faq_a6">Sinxronlash ixtiyoriy va sukut bo\'yicha o\'chirilgan. Xatcho\'plaringizni istalgan vaqtda faylga eksport qilib, keyinroq serversiz import qilishingiz mumkin.</string>
     <string name="settings_sync_faq_q1">Xatcho\'plarim shifrlanadimi?</string>
-    <string name="settings_sync_faq_q2">Firedown yoki boshqa birov ularni o\'qiy oladimi?</string>
+    <string name="settings_sync_faq_q2">Waves yoki boshqa birov ularni o\'qiy oladimi?</string>
     <string name="settings_sync_faq_q3">Tiklash kodi nima?</string>
     <string name="settings_sync_faq_q4">Tiklash kodimni yo\'qotsam-chi?</string>
     <string name="settings_sync_faq_q5">Menga hisob yoki e-pochta kerakmi?</string>

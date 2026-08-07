@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">%d sélectionné</string>
-    <string name="app_lock">Déverrouiller pour utiliser Firedown</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Déverrouiller pour utiliser Waves</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Déverrouiller</string>
     <string name="browser_bookmark_added">Marque-page enregistré !</string>
     <string name="browser_cache_cleared">Données de navigation effacées</string>
@@ -16,7 +16,7 @@
     <string name="capture_empty_gifs_message">Aucun Gif disponible.</string>
     <string name="capture_empty_images_message">Aucune image disponible.</string>
     <string name="capture_empty_message">Aucun média disponible en téléchargement.</string>
-    <string name="capture_empty_subtext">Rechargez le site Web et Firedown détectera les médias disponibles.</string>
+    <string name="capture_empty_subtext">Rechargez le site Web et Waves détectera les médias disponibles.</string>
     <string name="capture_empty_video_message">Aucune vidéo disponible.</string>
     <string name="clipboard">Copié dans le presse-papier</string>
 <string name="connection_secure">La connexion est sécurisée</string>
@@ -56,7 +56,7 @@
     <string name="empty_list_history">Votre historique de téléchargements est vide.</string>
     <string name="empty_list_query">Aucun résultat trouvé</string>
     <string name="empty_list_type">Il n\'y a rien ici.</string>
-    <string name="empty_media_help">Certains fichiers multimédias doivent être lus avant que Firedown puisse les détecter en tant que fichiers téléchargeables.</string>
+    <string name="empty_media_help">Certains fichiers multimédias doivent être lus avant que Waves puisse les détecter en tant que fichiers téléchargeables.</string>
     <string name="empty_media_help_title">Lire le média avant de le télécharger</string>
     <string name="empty_media_subtitle_help">Veuillez lire le média comme d\'habitude. Il devrait alors apparaître avec les autres fichiers multimédias, après avoir appuyé sur le bouton Fire.</string>
 <string name="error_check_internet_connection">Erreur de connexion Internet.</string>
@@ -111,7 +111,7 @@
     <string name="navigation_web_history">Historique</string>
     <string name="notifications_downloads_channel">Téléchargements</string>
     <string name="open">Ouvrir</string>
-    <string name="open_in_app_subtitle">Souhaitez-vous quitter Firedown pour voir ce contenu ?</string>
+    <string name="open_in_app_subtitle">Souhaitez-vous quitter Waves pour voir ce contenu ?</string>
     <string name="open_in_app_title">Ouvrir dans une autre application</string>
     <string name="open_origin">Ouvrir dans un nouvel onglet</string>
     <string name="open_with">Ouvrir avec</string>
@@ -129,7 +129,7 @@
     <string name="rename_file">Renommer le fichier</string>
     <string name="request_geolocation">Partager la position de votre appareil avec &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_media_key_system_access">Autoriser &lt;b&gt;%s&lt;/b&gt; à lire du contenu contrôlé par DRM?</string>
-    <string name="request_media_key_system_access_subtitle">Notez que les fichiers protégés par DRM ne peuvent pas être téléchargés par Firedown</string>
+    <string name="request_media_key_system_access_subtitle">Notez que les fichiers protégés par DRM ne peuvent pas être téléchargés par Waves</string>
     <string name="request_storage">Autoriser l’accès au stockage de l’appareil pour &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_storage_access">Autoriser des tiers à accéder au stockage propriétaire pour &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="restart_origin">Redémarrage</string>
@@ -217,7 +217,7 @@
     <string name="trackers_info_action">Gérer la protection</string>
     <string name="trackers_info_today">%1$s bloqués aujourd\'hui</string>
     <string name="bookmark_export">Exporter les favoris</string>
-    <string name="bookmark_export_done">%1$d favoris exportés vers Download/Firedown/backup</string>
+    <string name="bookmark_export_done">%1$d favoris exportés vers Download/Waves/backup</string>
     <string name="bookmark_import">Importer des favoris</string>
     <string name="bookmark_import_done">%1$d favoris importés</string>
     <string name="bookmark_io_error">Impossible de lire le fichier de favoris</string>
@@ -243,7 +243,7 @@
     <string name="settings_sync_export_continue">Continuer</string>
     <string name="settings_sync_export_done">Code de récupération enregistré</string>
     <string name="settings_sync_export_failed">Impossible d\'enregistrer le fichier</string>
-    <string name="settings_sync_export_file_body">Firedown — code de récupération de la synchronisation des favoris\n\n%1$s\n\nCe code est la seule clé de vos favoris synchronisés — quiconque le possède peut les lire, et il ne peut pas être récupéré s\'il est perdu.\n\nCe fichier n\'est PAS chiffré. Importez le code dans votre gestionnaire de mots de passe (ou un autre endroit sûr), puis supprimez ce fichier.</string>
+    <string name="settings_sync_export_file_body">Waves — code de récupération de la synchronisation des favoris\n\n%1$s\n\nCe code est la seule clé de vos favoris synchronisés — quiconque le possède peut les lire, et il ne peut pas être récupéré s\'il est perdu.\n\nCe fichier n\'est PAS chiffré. Importez le code dans votre gestionnaire de mots de passe (ou un autre endroit sûr), puis supprimez ce fichier.</string>
     <string name="settings_sync_export_summary">Exportez le code dans un fichier texte que vous pouvez conserver</string>
     <string name="settings_sync_export_title">Enregistrer le code de récupération dans un fichier</string>
     <string name="settings_sync_faq_a1">Oui. Chaque favori est chiffré sur cet appareil avant d\'être envoyé. Le serveur ne stocke que des données brouillées qu\'il ne peut pas lire.</string>
@@ -253,7 +253,7 @@
     <string name="settings_sync_faq_a5">Non. Il n\'y a aucune inscription, courriel ni numéro de téléphone — uniquement le code de récupération. Aucune information personnelle n\'est liée à vos favoris.</string>
     <string name="settings_sync_faq_a6">La synchronisation est facultative et désactivée par défaut. Vous pouvez toujours exporter vos favoris vers un fichier et les importer plus tard, sans aucun serveur.</string>
     <string name="settings_sync_faq_q1">Mes favoris sont-ils chiffrés ?</string>
-    <string name="settings_sync_faq_q2">Firedown ou quelqu\'un d\'autre peut-il les lire ?</string>
+    <string name="settings_sync_faq_q2">Waves ou quelqu\'un d\'autre peut-il les lire ?</string>
     <string name="settings_sync_faq_q3">Qu\'est-ce que le code de récupération ?</string>
     <string name="settings_sync_faq_q4">Que se passe-t-il si je perds mon code de récupération ?</string>
     <string name="settings_sync_faq_q5">Ai-je besoin d\'un compte ou d\'un courriel ?</string>

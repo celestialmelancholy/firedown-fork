@@ -1,6 +1,6 @@
 <resources>
     <string name="action_mode_selected">%d ang napili</string>
-    <string name="app_lock">I-unlock para magamit ang Firedown</string>
+    <string name="app_lock">I-unlock para magamit ang Waves</string>
     <string name="app_unlock">I-unlock</string>
     <string name="browser_bookmark_added">Nai-save ang Bookmark!</string>
     <string name="browser_cache_cleared">Na-clear ang data sa pagba-browse</string>
@@ -24,7 +24,7 @@
     <string name="capture_empty_gifs_message">Walang available na Gif.</string>
     <string name="capture_empty_images_message">Walang available na mga Larawan.</string>
     <string name="capture_empty_message">Walang magagamit na media para sa pag-download.</string>
-    <string name="capture_empty_subtext">I-reload ang website at makikita ng Firedown ang available na media.</string>
+    <string name="capture_empty_subtext">I-reload ang website at makikita ng Waves ang available na media.</string>
     <string name="capture_empty_video_message">Walang available na video.</string>
     <string name="clipboard">Kinopya sa clipboard</string>
     <string name="close_tab">Isara ang tab</string>
@@ -69,7 +69,7 @@
     <string name="details_url">URL</string>
     <string name="download">I-download</string>
     <string name="download_finished">Tapos na ang pag-download</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Kalidad ng pag-download</string>
     <string name="download_queued">Nakabinbin…</string>
     <string name="download_rename_error">Ginagamit na ang pangalan ng file.</string>
@@ -82,7 +82,7 @@
     <string name="empty_list_history">Walang laman ang iyong history ng pag-download.</string>
     <string name="empty_list_query">Walang nahanap na resulta</string>
     <string name="empty_list_type">Wala dito.</string>
-    <string name="empty_media_help">Kailangang i-play ang ilang media file bago matukoy ng Firedown ang mga ito bilang isang nada-download na file.</string>
+    <string name="empty_media_help">Kailangang i-play ang ilang media file bago matukoy ng Waves ang mga ito bilang isang nada-download na file.</string>
     <string name="empty_media_help_title">I-play ang media bago mag-download</string>
     <string name="empty_media_subtitle_help">Paki-play ang media gaya ng dati. Dapat itong lumabas kasama ng iba pang mga media file, pagkatapos pindutin ang Fire-Button.</string>
 <string name="error_check_internet_connection">Error sa koneksyon sa internet.</string>
@@ -142,7 +142,7 @@
     <string name="navigation_web_history">Kasaysayan</string>
     <string name="notifications_downloads_channel">Mga download</string>
     <string name="open">Bukas</string>
-    <string name="open_in_app_subtitle">Gusto mo bang umalis sa Firedown upang tingnan ang nilalamang ito?</string>
+    <string name="open_in_app_subtitle">Gusto mo bang umalis sa Waves upang tingnan ang nilalamang ito?</string>
     <string name="open_in_app_title">Buksan sa ibang app</string>
     <string name="open_new_private_tab_2">Bagong pribadong tab</string>
     <string name="open_new_tab_2">Bagong tab</string>
@@ -273,7 +273,7 @@
     <string name="trackers_info_action">Pamahalaan ang proteksyon</string>
     <string name="trackers_info_today">%1$s na-block ngayon</string>
     <string name="bookmark_export">I-export ang mga bookmark</string>
-    <string name="bookmark_export_done">Na-export ang %1$d na bookmark sa Download/Firedown/backup</string>
+    <string name="bookmark_export_done">Na-export ang %1$d na bookmark sa Download/Waves/backup</string>
     <string name="bookmark_import">I-import ang mga bookmark</string>
     <string name="bookmark_import_done">Na-import ang %1$d na bookmark</string>
     <string name="bookmark_io_error">Hindi mabasa ang file ng bookmark</string>
@@ -298,7 +298,7 @@
     <string name="settings_sync_export_continue">Magpatuloy</string>
     <string name="settings_sync_export_done">Na-save ang recovery code</string>
     <string name="settings_sync_export_failed">Hindi ma-save ang file</string>
-    <string name="settings_sync_export_file_body">Firedown — recovery code sa bookmark sync\n\n%1$s\n\nAng code na ito ang tanging susi sa iyong mga naka-sync na bookmark — kahit sino na may hawak nito ay makakabasa ng mga ito, at hindi ito maibabalik kung mawala.\n\nHINDI naka-encrypt ang file na ito. I-import ang code sa iyong password manager (o ibang ligtas na lugar), pagkatapos ay tanggalin ang file na ito.</string>
+    <string name="settings_sync_export_file_body">Waves — recovery code sa bookmark sync\n\n%1$s\n\nAng code na ito ang tanging susi sa iyong mga naka-sync na bookmark — kahit sino na may hawak nito ay makakabasa ng mga ito, at hindi ito maibabalik kung mawala.\n\nHINDI naka-encrypt ang file na ito. I-import ang code sa iyong password manager (o ibang ligtas na lugar), pagkatapos ay tanggalin ang file na ito.</string>
     <string name="settings_sync_export_summary">I-export ang code bilang text file na maaari mong itago</string>
     <string name="settings_sync_export_title">I-save ang recovery code sa file</string>
     <string name="settings_sync_faq_a1">Oo. Ang bawat bookmark ay naka-encrypt sa device na ito bago i-upload. Ang gumugulong na data lamang na hindi nito mababasa ang iniimbak ng server.</string>
@@ -308,7 +308,7 @@
     <string name="settings_sync_faq_a5">Hindi. Walang sign-up, email, o numero ng telepono — recovery code lamang. Walang personal na nakatali sa iyong mga bookmark.</string>
     <string name="settings_sync_faq_a6">Opsyonal ang sync at naka-off bilang default. Maaari mo palaging i-export ang iyong mga bookmark sa file at i-import ang mga ito mamaya, nang walang server na kasangkot.</string>
     <string name="settings_sync_faq_q1">Naka-encrypt ba ang aking mga bookmark?</string>
-    <string name="settings_sync_faq_q2">Mababasa ba ng Firedown o ng iba ang mga ito?</string>
+    <string name="settings_sync_faq_q2">Mababasa ba ng Waves o ng iba ang mga ito?</string>
     <string name="settings_sync_faq_q3">Ano ang recovery code?</string>
     <string name="settings_sync_faq_q4">Paano kung mawala ang aking recovery code?</string>
     <string name="settings_sync_faq_q5">Kailangan ko ba ng account o email?</string>

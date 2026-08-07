@@ -13,8 +13,8 @@
     <string name="settings_oled_theme_summary">Saf siyah yüzeyler — OLED ekranlarda pil tasarrufu sağlar</string>
     <string name="archive_banner_subtitle">Görüntülemek veya yeniden açmak için dokunun</string>
     <string name="action_mode_selected">%d seçildi</string>
-    <string name="app_lock">Firedown\'ı kullanmak için kilidi açın</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Waves\'ı kullanmak için kilidi açın</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Kilidini aç</string>
     <string name="browser_bookmark_added">Yer İşareti Kaydedildi!</string>
     <string name="browser_cache_cleared">Tarama verileri temizlendi</string>
@@ -39,7 +39,7 @@
     <string name="capture_empty_gifs_message">Gif mevcut değil.</string>
     <string name="capture_empty_images_message">Resim mevcut değil.</string>
     <string name="capture_empty_message">İndirilebilecek medya yok.</string>
-    <string name="capture_empty_subtext">Web sitesini yeniden yüklediğinizde Firedown mevcut medyayı algılayacaktır.</string>
+    <string name="capture_empty_subtext">Web sitesini yeniden yüklediğinizde Waves mevcut medyayı algılayacaktır.</string>
     <string name="capture_empty_video_message">Hiçbir video mevcut değil.</string>
     <string name="clipboard">Panoya kopyalandı</string>
     <string name="clipboard_from">Panodan</string>
@@ -95,7 +95,7 @@
     <string name="empty_learn_more">Daha fazla bilgi</string>
     <string name="restore_downloads_button">Önceki indirmeleri geri yükle</string>
     <string name="restore_downloads_settings_summary">Uygulamayı yeniden yükledikten sonra indirme listenizi geri alın</string>
-    <string name="restore_downloads_message">Firedown\'u yeniden yüklediyseniz indirmeleriniz hâlâ Download/Firedown klasöründe olabilir. Bu klasörü seçin, Firedown indirme listenizi geri yüklesin.</string>
+    <string name="restore_downloads_message">Waves\'u yeniden yüklediyseniz indirmeleriniz hâlâ Download/Waves klasöründe olabilir. Bu klasörü seçin, Waves indirme listenizi geri yüklesin.</string>
     <string name="restore_downloads_choose">Klasör seç</string>
     <string name="restore_downloads_progress">İndirilenler geri yükleniyor…</string>
     <string name="restore_downloads_done">Geri yüklenen indirmeler: %1$d</string>
@@ -110,7 +110,7 @@
     <string name="empty_list_query">Sonuç bulunamadı</string>
     <string name="empty_list_type">Burada hiçbir şey yok.</string>
     <string name="empty_list_vault">Güvenli klasörde henüz bir şey yok.\n\nBuraya kaydetmek için herhangi bir indirmenin ⋮ menüsünden „Güvenli klasöre taşı“ seçeneğini seçin.</string>
-    <string name="empty_media_help">Firedown\'ın bunları indirilebilir dosyalar olarak algılayabilmesi için bazı medya dosyalarının oynatılması gerekir.</string>
+    <string name="empty_media_help">Waves\'ın bunları indirilebilir dosyalar olarak algılayabilmesi için bazı medya dosyalarının oynatılması gerekir.</string>
     <string name="empty_media_help_title">İndirmeden önce medyayı oynatın</string>
     <string name="empty_media_subtitle_help">Lütfen medyayı her zamanki gibi oynatın. Ateş Düğmesine bastıktan sonra diğer medya dosyalarıyla birlikte görünmelidir.</string>
 <string name="error_check_internet_connection">İnternet bağlantısı hatası.</string>
@@ -182,7 +182,7 @@
     <string name="navigation_web_history">Geçmiş</string>
     <string name="notifications_downloads_channel">İndirilenler</string>
     <string name="open">Açık</string>
-    <string name="open_in_app_subtitle">Bu içeriği görüntülemek için Firedown\'dan ayrılmak ister misiniz?</string>
+    <string name="open_in_app_subtitle">Bu içeriği görüntülemek için Waves\'dan ayrılmak ister misiniz?</string>
     <string name="open_in_app_title">Başka bir uygulamada aç</string>
     <string name="open_new_private_tab_2">Yeni gizli sekme</string>
     <string name="open_new_tab_2">Yeni sekme</string>
@@ -204,7 +204,7 @@
     <string name="settings_jit_disabled_summary">JIT, JavaScript ağırlıklı siteleri hızlandırır ancak saldırı yüzeyini genişletir. Varsayılan olarak açıktır; tarayıcıyı bir miktar performans pahasına sıkılaştırmak için bunu açın. Bu değişiklik tarayıcınızı yeniden başlatır</string>
     <string name="settings_webgl_disabled">"WebGL'i devre dışı bırak"</string>
     <string name="settings_drm_enabled">DRM oynatmayı etkinleştir</string>
-    <string name="settings_drm_enabled_summary">DRM gerektiren sitelerde (Netflix, Spotify, …) Widevine oynatmasına izin verir. Firedown DRM korumalı içerikleri yine de indiremez.</string>
+    <string name="settings_drm_enabled_summary">DRM gerektiren sitelerde (Netflix, Spotify, …) Widevine oynatmasına izin verir. Waves DRM korumalı içerikleri yine de indiremez.</string>
     <string name="settings_wasm_disabled">WebAssembly\'yi devre dışı bırak</string>
     <string name="settings_wasm_disabled_summary">Sitelerin derlenmiş WASM modüllerini çalıştırmasını engeller. Saldırı yüzeyini azaltır ancak bazı uygulamaları bozar — aşağıda izin verilen siteler etkin kalır</string>
 <string name="protection_panel_etp_toggle_disabled_description_2">İzlenme korumasını açmanız önerilir.</string>
@@ -229,7 +229,7 @@
     <string name="rename_file">Dosyayı yeniden adlandır</string>
     <string name="request_geolocation">Cihazınızın konumu &lt;b&gt;%s&lt;/b&gt; ile paylaşılsın mı?</string>
     <string name="request_media_key_system_access">&lt;b&gt;%s&lt;/b&gt; uygulamasının DRM kontrollü içerikleri oynatmasına izin verilsin mi?</string>
-    <string name="request_media_key_system_access_subtitle">DRM korumalı dosyaların Firedown tarafından indirilemeyeceğini unutmayın</string>
+    <string name="request_media_key_system_access_subtitle">DRM korumalı dosyaların Waves tarafından indirilemeyeceğini unutmayın</string>
     <string name="request_storage">&lt;b&gt;%s&lt;/b&gt; için cihaz depolama alanına erişime izin verilsin mi?</string>
     <string name="request_storage_access">Üçüncü tarafların &lt;b&gt;%s&lt;/b&gt; için birinci taraf depolama alanına erişmesine izin verilsin mi?</string>
     <string name="restart_origin">Tekrar başlat</string>
@@ -388,7 +388,7 @@
     <string name="crash_sheet_send">Raporu gönder</string>
     <string name="crash_sheet_sent">Rapor gönderildi — teşekkürler</string>
     <string name="crash_sheet_send_failed">Gönderilemedi. Bağlantıyı kontrol edin — veya Kopyala / Bildir kullanın.</string>
-    <string name="crash_sheet_send_note">Firedown sunucusuna anonim olarak gönderilir — yalnızca yukarıdaki rapor, kimlik bilgisi yok.</string>
+    <string name="crash_sheet_send_note">Waves sunucusuna anonim olarak gönderilir — yalnızca yukarıdaki rapor, kimlik bilgisi yok.</string>
     <string name="home_trackers_title">İzleyiciler ve reklamlar engellendi</string>
     <string name="home_trackers_subtitle_idle">Koruma etkin</string>
     <string name="trackers_info_count_label">izleyici ve reklam engellendi</string>
@@ -463,7 +463,7 @@
     <string name="settings_sync_help_close">Anladım</string>
     <string name="settings_sync_faq_q1">Yer imlerim ve yedeklediğim dosyalar şifreleniyor mu?</string>
     <string name="settings_sync_faq_a1">Evet. Her şey cihazdan çıkmadan önce bu cihazda şifrelenir — her yer imi ve yedeklediğiniz her dosya. Sunucu yalnızca okuyamadığı verileri saklar.</string>
-    <string name="settings_sync_faq_q2">Firedown ya da bir başkası dosyalarımı okuyabilir mi?</string>
+    <string name="settings_sync_faq_q2">Waves ya da bir başkası dosyalarımı okuyabilir mi?</string>
     <string name="settings_sync_faq_a2">Hayır. Onları yalnızca kurtarma kodunuz açabilir ve o kod cihazınızdan hiç çıkmaz. Ne biz, ne sunucuları işleten kişiler, ne de onlardan bir kopya çalan biri: hepsinin elinde şifreli veri var ve anahtar yok.</string>
     <string name="settings_sync_faq_q3">Kurtarma kodu nedir?</string>
     <string name="settings_sync_faq_a3">Cihazınızda üretilen bir anahtar. Yer imlerinizin ve yedeklediğiniz dosyaların şifresini çözebilecek tek şey odur — bu cihazda da, yeni bir cihazda da.</string>
@@ -480,7 +480,7 @@
     <string name="settings_sync_export_summary">Kodu saklayabileceğiniz bir metin dosyası olarak dışa aktarın</string>
     <string name="settings_sync_export_caveat_message">Bu dosya şifrelenmemiş olarak kaydedilir — onu okuyabilen herkes yer imlerinizi okuyabilir. Kodu parola yöneticinize (veya başka bir güvenli yere) aktarın, ardından dosyayı silin. Bir parola yöneticisi onu şifreli tutar; başıboş bir dosya tutmaz.</string>
     <string name="settings_sync_export_continue">Devam et</string>
-    <string name="settings_sync_export_file_body">Firedown — kurtarma kodu\n\n%1$s\n\nBu kod; yer imlerinize, indirme yedeğinize ve depolama kredinize erişimin tek anahtarıdır — ona sahip olan herkes bunları okuyabilir ve kaybedilirse kurtarılamaz.\n\nBu dosya şifrelenmemiştir. Kodu parola yöneticinize (ya da başka güvenli bir yere) aktarın, ardından bu dosyayı silin.</string>
+    <string name="settings_sync_export_file_body">Waves — kurtarma kodu\n\n%1$s\n\nBu kod; yer imlerinize, indirme yedeğinize ve depolama kredinize erişimin tek anahtarıdır — ona sahip olan herkes bunları okuyabilir ve kaybedilirse kurtarılamaz.\n\nBu dosya şifrelenmemiştir. Kodu parola yöneticinize (ya da başka güvenli bir yere) aktarın, ardından bu dosyayı silin.</string>
     <string name="settings_sync_export_done">Kurtarma kodu kaydedildi</string>
     <string name="settings_sync_export_failed">Dosya kaydedilemedi</string>
     <string name="settings_sync_code_warning">Bu kurtarma kodu; yer imlerinize, indirme yedeğinize ve depolama kredinize erişimin tek anahtarıdır. Onu parola yöneticinize — ya da başka güvenli bir yere kaydedin. Kaybedilirse kurtarılamaz.</string>
@@ -489,7 +489,7 @@
     <string name="browser_snapshot_saving">Sayfa anlık görüntüsü kaydediliyor…</string>
     <string name="browser_snapshot_saved">Anlık görüntü kaydedildi</string>
     <string name="bookmark_export">Yer imlerini dışa aktar</string>
-    <string name="bookmark_export_done">%1$d yer imi Download/Firedown/backup konumuna aktarıldı</string>
+    <string name="bookmark_export_done">%1$d yer imi Download/Waves/backup konumuna aktarıldı</string>
     <string name="bookmark_import">Yer imlerini içe aktar</string>
     <string name="bookmark_import_done">%1$d yer imi içe aktarıldı</string>
     <string name="bookmark_io_error">Yer imi dosyası okunamadı</string>
@@ -649,7 +649,7 @@
     <string name="buy_credit_wallet_connect_link">Tek dokunuşla ödemek için bir cüzdan bağlayın</string>
     <string name="buy_credit_wallet_manage_link">Cüzdanı değiştir veya bağlantıyı kes</string>
     <string name="buy_credit_wallet_dialog_title">Lightning cüzdanı bağla</string>
-    <string name="buy_credit_wallet_dialog_body">Bir Nostr Wallet Connect dizesi yapıştırın ya da cüzdanınızdan tarayın. Firedown sonrasında, orada belirlediğiniz bütçe dahilinde o cüzdandan fatura ödeyebilir.</string>
+    <string name="buy_credit_wallet_dialog_body">Bir Nostr Wallet Connect dizesi yapıştırın ya da cüzdanınızdan tarayın. Waves sonrasında, orada belirlediğiniz bütçe dahilinde o cüzdandan fatura ödeyebilir.</string>
     <string name="buy_credit_wallet_dialog_connected">%1$s ile bağlı. Değiştirmek için yeni bir dize yapıştırın veya tarayın.</string>
     <string name="buy_credit_wallet_hint">nostr+walletconnect://…</string>
     <string name="buy_credit_wallet_connect_action">Bağlan</string>
@@ -771,9 +771,9 @@
     <string name="p2p_send">Gönder</string>
     <string name="p2p_send_title">Doğrudan gönder</string>
     <string name="p2p_receive_title">Dosya al</string>
-    <string name="p2p_send_lead">Bu dosyayı Firedown çalıştıran başka bir cihaza doğrudan gönderin — şifreli, cihazdan cihaza, arada sunucu olmadan.</string>
-    <string name="p2p_receive_lead">Firedown çalıştıran başka bir cihazdan doğrudan dosya alın.</string>
-    <string name="p2p_code_hint_send">Bu kodu diğer cihazla tarayın — Firedown\'da İndirilenler → Dosya al bölümünden ya da doğrudan cihazın kamerasıyla. Aynı ağda aktarım kendiliğinden devam eder; bir yanıt kodu görünürse onu geri tarayın.</string>
+    <string name="p2p_send_lead">Bu dosyayı Waves çalıştıran başka bir cihaza doğrudan gönderin — şifreli, cihazdan cihaza, arada sunucu olmadan.</string>
+    <string name="p2p_receive_lead">Waves çalıştıran başka bir cihazdan doğrudan dosya alın.</string>
+    <string name="p2p_code_hint_send">Bu kodu diğer cihazla tarayın — Waves\'da İndirilenler → Dosya al bölümünden ya da doğrudan cihazın kamerasıyla. Aynı ağda aktarım kendiliğinden devam eder; bir yanıt kodu görünürse onu geri tarayın.</string>
     <string name="p2p_code_hint_reply">Bu yanıtı gönderene gösterin veya kodun geldiği yoldan geri gönderin.</string>
     <string name="p2p_share_code">Kodu başka bir yolla gönder</string>
     <string name="p2p_scan_reply">Yanıtı tara</string>
@@ -791,13 +791,13 @@
     <string name="p2p_done_received">İndirilenler\'e kaydedildi</string>
     <string name="p2p_done">Bitti</string>
     <string name="p2p_error_no_path">Diğer cihaza doğrudan ulaşılamadı. Bu, mobil veride veya VPN arkasında olur — varsa VPN\'i kapatarak aynı Wi-Fi ağını deneyin.</string>
-    <string name="p2p_error_no_path_vpn">Bu cihazdaki VPN doğrudan bağlantıyı engelliyor. Firedown\'u VPN\'den hariç tutun — veya VPN\'i duraklatın — ve yeniden deneyin.</string>
+    <string name="p2p_error_no_path_vpn">Bu cihazdaki VPN doğrudan bağlantıyı engelliyor. Waves\'u VPN\'den hariç tutun — veya VPN\'i duraklatın — ve yeniden deneyin.</string>
     <string name="p2p_error_generic">Aktarım başarısız oldu.</string>
     <string name="p2p_error_bad_code">Bu kod geçerli değil — tekrar deneyin.</string>
     <string name="p2p_clipboard_empty">Panoda kod yok.</string>
     <string name="p2p_footer">Şifreli, cihazdan cihaza aktarım. Dosya hiçbir zaman bir sunucuya uğramaz.</string>
     <string name="p2p_footer_relayed">Uçtan uca şifreli. Doğrudan yol olmadığından firedown.app üzerinden aktarılıyor; onu okuyamaz.</string>
-    <string name="p2p_hint_vpn">İpucu: Firedown\'u VPN\'den hariç tutmak doğrudan bağlantı sağlar.</string>
+    <string name="p2p_hint_vpn">İpucu: Waves\'u VPN\'den hariç tutmak doğrudan bağlantı sağlar.</string>
     <string name="p2p_scan_hint">Kamerayı gönderenin koduna doğrultun</string>
     <string name="p2p_camera_denied">Taramak için kamera erişimi gerekir. Bunun yerine kodu yapıştırabilirsiniz.</string>
     <string name="p2p_send_link">Bağlantı gönder</string>
@@ -858,13 +858,13 @@
     <string name="cloud_backup_state_low_credit">Kredi yetersiz</string>
     <string name="cloud_backup_state_too_many">Çok fazla dosya</string>
     <string name="cloud_backup_state_no_space">Yer yetersiz</string>
-    <string name="share_app_title">Firedown\'ı paylaş</string>
+    <string name="share_app_title">Waves\'ı paylaş</string>
     <string name="share_app_blurb">Gizliliğe saygılı bir tarayıcı ve indirici. Her sayfadan video, ses ve görselleri kaydedin, reklamları ve izleyicileri engelleyin; her şey cihazınızda kalsın.</string>
-    <string name="share_app_get_at">Firedown\'ı şuradan edinin</string>
+    <string name="share_app_get_at">Waves\'ı şuradan edinin</string>
     <string name="share_app_scan">Ya da kurmak için başka bir telefonun kamerasını yukarıdaki koda tutun</string>
     <string name="share_app_share">Bağlantıyı paylaş</string>
-    <string name="share_app_qr_desc">Firedown indirme sayfasına giden QR kodu</string>
-    <string name="share_app_message">Firedown — Android için gizliliğe saygılı bir tarayıcı ve indirici. %1$s</string>
+    <string name="share_app_qr_desc">Waves indirme sayfasına giden QR kodu</string>
+    <string name="share_app_message">Waves — Android için gizliliğe saygılı bir tarayıcı ve indirici. %1$s</string>
     <string name="settings_sync_faq_q8">Sunucu aslında neyi görüyor?</string>
     <string name="settings_sync_faq_a8">Dosyalarınızın şifrelenmiş parçalarını, ne kadar büyük olduklarını ve ne zaman geldiklerini — ayrıca cihazınızın kurtarma kodunuzdan türettiği rastgele bir hesap numarasını; asla bir ad ya da e-posta değil. Dosya adları, türleri ve önizlemeleri de şifrelidir; yalnızca sizin cihazınızın açabildiği mühürlü bir listenin içinde. Sunucu bir dosyanın adını bile öğrenmez, içindekileri hiç.</string>
     <string name="settings_update_check_title">Güncellemeleri kontrol et</string>

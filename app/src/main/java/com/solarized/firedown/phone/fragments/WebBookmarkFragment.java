@@ -116,7 +116,7 @@ public class WebBookmarkFragment extends BaseFocusFragment implements OnItemClic
                     intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI,
                             DocumentsContract.buildDocumentUri(
                                     "com.android.externalstorage.documents",
-                                    "primary:Download/Firedown/backup"));
+                                    "primary:Download/Waves/backup"));
                     return intent;
                 }
             }, uri -> { if (uri != null) doImport(uri); });

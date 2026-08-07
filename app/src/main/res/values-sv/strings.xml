@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">%d har valts</string>
-    <string name="app_lock">Lås upp för att använda Firedown</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Lås upp för att använda Waves</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Låsa upp</string>
     <string name="browser_bookmark_added">Bokmärke har sparats!</string>
     <string name="browser_cache_cleared">Webbläsardata har rensats</string>
@@ -16,7 +16,7 @@
     <string name="capture_empty_gifs_message">Inga gifs tillgängliga.</string>
     <string name="capture_empty_images_message">Inga bilder tillgängliga.</string>
     <string name="capture_empty_message">Ingen media tillgänglig för nedladdning.</string>
-    <string name="capture_empty_subtext">Ladda om webbplatsen och Firedown kommer att upptäcka tillgänglig media.</string>
+    <string name="capture_empty_subtext">Ladda om webbplatsen och Waves kommer att upptäcka tillgänglig media.</string>
     <string name="capture_empty_video_message">Inga videor tillgängliga.</string>
     <string name="clipboard">Kopierade till urklipp</string>
     <string name="clipboard_from">Från urklipp</string>
@@ -44,7 +44,7 @@
     <string name="details_url">URL</string>
     <string name="download">Ladda ner</string>
     <string name="download_finished">Nedladdningen är klar</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Ladda ner kvalitet</string>
     <string name="download_queued">I väntan på…</string>
     <string name="download_rename_error">Filnamnet används redan.</string>
@@ -58,7 +58,7 @@
     <string name="empty_list_history">Din nedladdningshistorik är tom.</string>
     <string name="empty_list_query">Inga resultat funna</string>
     <string name="empty_list_type">Det finns ingenting här.</string>
-    <string name="empty_media_help">Vissa mediefiler måste spelas upp innan Firedown kan upptäcka dem som nedladdningsbara filer.</string>
+    <string name="empty_media_help">Vissa mediefiler måste spelas upp innan Waves kan upptäcka dem som nedladdningsbara filer.</string>
     <string name="empty_media_help_title">Spela upp media innan du laddar ner</string>
     <string name="empty_media_subtitle_help">Vänligen spela media som vanligt. Den ska då visas tillsammans med de andra mediefilerna efter att ha tryckt på Fire-knappen.</string>
 <string name="error_check_internet_connection">Internetanslutningsfel.</string>
@@ -126,7 +126,7 @@
     <string name="navigation_web_history">Historik</string>
     <string name="notifications_downloads_channel">Nedladdningar</string>
     <string name="open">Öppna</string>
-    <string name="open_in_app_subtitle">Vill du lämna Firedown för att se det här innehållet?</string>
+    <string name="open_in_app_subtitle">Vill du lämna Waves för att se det här innehållet?</string>
     <string name="open_in_app_title">Öppna i en annan app</string>
     <string name="open_origin">Öppna i Ny flik</string>
     <string name="open_with">Öppna med</string>
@@ -144,7 +144,7 @@
     <string name="rename_file">Döp om fil</string>
     <string name="request_geolocation">Vill du dela enhetens plats med &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_media_key_system_access">Vill du tillåta &lt;b&gt;%s&lt;/b&gt; att spela upp DRM-kontrollerat innehåll?</string>
-    <string name="request_media_key_system_access_subtitle">Observera att DRM-skyddade filer inte kan laddas ner av Firedown</string>
+    <string name="request_media_key_system_access_subtitle">Observera att DRM-skyddade filer inte kan laddas ner av Waves</string>
     <string name="request_storage">Vill du tillåta åtkomst till enhetslagring för &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_storage_access">Vill du ge tredje part åtkomst till förstapartslagring för &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="restart_origin">Omstart</string>
@@ -337,7 +337,7 @@
     <string name="capture_help_banner_title">Saknas videon?</string>
     <string name="capture_help_banner">Vissa inbäddade media måste spelas upp först. Tryck för att läsa mer.</string>
     <string name="bookmark_export">Exportera bokmärken</string>
-    <string name="bookmark_export_done">Exporterade %1$d bokmärken till Download/Firedown/backup</string>
+    <string name="bookmark_export_done">Exporterade %1$d bokmärken till Download/Waves/backup</string>
     <string name="bookmark_import">Importera bokmärken</string>
     <string name="bookmark_import_done">Importerade %1$d bokmärken</string>
     <string name="bookmark_io_error">Det gick inte att läsa bokmärkesfilen</string>
@@ -362,7 +362,7 @@
     <string name="settings_sync_export_continue">Fortsätt</string>
     <string name="settings_sync_export_done">Återställningskod sparad</string>
     <string name="settings_sync_export_failed">Det gick inte att spara filen</string>
-    <string name="settings_sync_export_file_body">Firedown — återställningskod för bokmärkessynkronisering\n\n%1$s\n\nDen här koden är den enda nyckeln till dina synkroniserade bokmärken — alla som har den kan läsa dem, och den kan inte återställas om den förloras.\n\nDen här filen är INTE krypterad. Importera koden i din lösenordshanterare (eller en annan säker plats) och radera sedan den här filen.</string>
+    <string name="settings_sync_export_file_body">Waves — återställningskod för bokmärkessynkronisering\n\n%1$s\n\nDen här koden är den enda nyckeln till dina synkroniserade bokmärken — alla som har den kan läsa dem, och den kan inte återställas om den förloras.\n\nDen här filen är INTE krypterad. Importera koden i din lösenordshanterare (eller en annan säker plats) och radera sedan den här filen.</string>
     <string name="settings_sync_export_summary">Exportera koden som en textfil du kan spara</string>
     <string name="settings_sync_export_title">Spara återställningskod till fil</string>
     <string name="settings_sync_faq_a1">Ja. Varje bokmärke krypteras på den här enheten innan det laddas upp. Servern lagrar bara krypterade data som den inte kan läsa.</string>
@@ -372,7 +372,7 @@
     <string name="settings_sync_faq_a5">Nej. Det finns ingen registrering, e-post eller telefonnummer — bara återställningskoden. Inget personligt är kopplat till dina bokmärken.</string>
     <string name="settings_sync_faq_a6">Synkronisering är valfri och avstängd som standard. Du kan alltid exportera dina bokmärken till en fil och importera dem senare, utan att en server är inblandad.</string>
     <string name="settings_sync_faq_q1">Är mina bokmärken krypterade?</string>
-    <string name="settings_sync_faq_q2">Kan Firedown eller någon annan läsa dem?</string>
+    <string name="settings_sync_faq_q2">Kan Waves eller någon annan läsa dem?</string>
     <string name="settings_sync_faq_q3">Vad är återställningskoden?</string>
     <string name="settings_sync_faq_q4">Vad händer om jag förlorar min återställningskod?</string>
     <string name="settings_sync_faq_q5">Behöver jag ett konto eller e-post?</string>

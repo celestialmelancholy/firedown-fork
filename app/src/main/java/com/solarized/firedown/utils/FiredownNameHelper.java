@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
  */
 public final class FiredownNameHelper {
 
-    private static final String PREFIX = "[Firedown]";
+    private static final String PREFIX = "[Waves]";
 
     // Pure numeric IDs (Twitter media IDs, Instagram IDs, etc.) — unique
     // but tell the user nothing about the source. Hex content hashes are

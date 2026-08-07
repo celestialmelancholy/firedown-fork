@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><resources xmlns:tools="http://schemas.android.com/tools" tools:locale="es">
   <string name="action_mode_selected">%d seleccionado</string>
-  <string name="app_lock">Desbloquear para usar Firedown</string>
-  <string name="app_name" translatable="false">Firedown</string>
+  <string name="app_lock">Desbloquear para usar Waves</string>
+  <string name="app_name" translatable="false">Waves</string>
   <string name="app_unlock">Desbloquear</string>
   <string name="browser_bookmark_added">Marcador guardado!</string>
     <string name="browser_cache_cleared">Datos de navegación borrados</string>
@@ -16,7 +16,7 @@
   <string name="capture_empty_gifs_message">No hay gifs disponibles.</string>
   <string name="capture_empty_images_message">No hay imágenes disponibles.</string>
   <string name="capture_empty_message">No hay medios disponibles para descargar.</string>
-  <string name="capture_empty_subtext">Vuelve a cargar el sitio web y Firedown detectará los medios disponibles.</string>
+  <string name="capture_empty_subtext">Vuelve a cargar el sitio web y Waves detectará los medios disponibles.</string>
   <string name="capture_empty_video_message">No hay vídeos disponibles.</string>
     <string name="clipboard">Copiado al portapapeles</string>
 <string name="connection_secure">La conexión es segura</string>
@@ -43,7 +43,7 @@
   <string name="details_url">URL</string>
   <string name="download">Descargar</string>
   <string name="download_finished">Descarga terminada</string>
-  <string name="download_ongoing_notification">Firedown</string>
+  <string name="download_ongoing_notification">Waves</string>
   <string name="download_quality">Calidad de descarga</string>
   <string name="download_queued">Pendiente…</string>
   <string name="download_rename_error">El nombre del archivo ya está en uso.</string>
@@ -56,9 +56,9 @@
   <string name="empty_list_history">Tu historial de descargas está vacío.</string>
   <string name="empty_list_query">No se han encontrado resultados</string>
   <string name="empty_list_type">No hay nada aquí.</string>
-  <string name="empty_media_help">Algunos archivos multimedia deben reproducirse antes de que Firedown pueda detectarlos como archivos descargables.</string>
+  <string name="empty_media_help">Algunos archivos multimedia deben reproducirse antes de que Waves pueda detectarlos como archivos descargables.</string>
   <string name="empty_media_help_title">Reproducir el contenido multimedia antes de descargarlo</string>
-  <string name="empty_media_subtitle_help">Por favor, reproduce los medios como de costumbre. Luego debería aparecer con los otros archivos multimedia, después de presionar el botón de Firedown.</string>
+  <string name="empty_media_subtitle_help">Por favor, reproduce los medios como de costumbre. Luego debería aparecer con los otros archivos multimedia, después de presionar el botón de Waves.</string>
 <string name="error_check_internet_connection">Error de conexión a Internet.</string>
   <string name="error_cipher">Error de cifrado de archivo</string>
   <string name="error_external_storage">Almacenamiento externo no disponible</string>
@@ -111,7 +111,7 @@
   <string name="navigation_web_history">Historial</string>
   <string name="notifications_downloads_channel">Descargas</string>
   <string name="open">Abrir</string>
-  <string name="open_in_app_subtitle">¿Te gustaría salir de Firedown para ver este contenido?</string>
+  <string name="open_in_app_subtitle">¿Te gustaría salir de Waves para ver este contenido?</string>
     <string name="open_in_app_title">Abrir en otra aplicación</string>
   <string name="open_origin">Abrir en una pestaña nueva</string>
   <string name="open_with">Abrir con</string>
@@ -129,7 +129,7 @@
   <string name="rename_file">Renombrar archivo</string>
   <string name="request_geolocation">¿Quieres compartir la ubicación de tu dispositivo con &lt;b&gt;%s&lt;/b&gt;?</string>
   <string name="request_media_key_system_access">¿Permitir que &lt;b&gt;%s&lt;/b&gt; reproduzca contenido controlado por DRM?</string>
-  <string name="request_media_key_system_access_subtitle">Ten en cuenta que Firedown no puede descargar archivos protegidos por DRM.</string>
+  <string name="request_media_key_system_access_subtitle">Ten en cuenta que Waves no puede descargar archivos protegidos por DRM.</string>
   <string name="request_storage">¿Permitir el acceso al almacenamiento del dispositivo para &lt;b&gt;%s&lt;/b&gt;?</string>
   <string name="request_storage_access">¿Permitir que terceros accedan al almacenamiento propio de &lt;b&gt;%s&lt;/b&gt;?</string>
   <string name="restart_origin">Reanudar</string>
@@ -217,7 +217,7 @@
     <string name="trackers_info_action">Gestionar protección</string>
     <string name="trackers_info_today">%1$s bloqueados hoy</string>
     <string name="bookmark_export">Exportar marcadores</string>
-    <string name="bookmark_export_done">Se exportaron %1$d marcadores a Download/Firedown/backup</string>
+    <string name="bookmark_export_done">Se exportaron %1$d marcadores a Download/Waves/backup</string>
     <string name="bookmark_import">Importar marcadores</string>
     <string name="bookmark_import_done">Se importaron %1$d marcadores</string>
     <string name="bookmark_io_error">No se pudo leer el archivo de marcadores</string>
@@ -242,7 +242,7 @@
     <string name="settings_sync_export_continue">Continuar</string>
     <string name="settings_sync_export_done">Código de recuperación guardado</string>
     <string name="settings_sync_export_failed">No se pudo guardar el archivo</string>
-    <string name="settings_sync_export_file_body">Firedown — código de recuperación de la sincronización de marcadores\n\n%1$s\n\nEste código es la única clave de tus marcadores sincronizados — cualquiera que lo tenga puede leerlos, y no se puede recuperar si lo pierdes.\n\nEste archivo NO está cifrado. Importa el código a tu gestor de contraseñas (o a otro lugar seguro) y luego elimina este archivo.</string>
+    <string name="settings_sync_export_file_body">Waves — código de recuperación de la sincronización de marcadores\n\n%1$s\n\nEste código es la única clave de tus marcadores sincronizados — cualquiera que lo tenga puede leerlos, y no se puede recuperar si lo pierdes.\n\nEste archivo NO está cifrado. Importa el código a tu gestor de contraseñas (o a otro lugar seguro) y luego elimina este archivo.</string>
     <string name="settings_sync_export_summary">Exporta el código como un archivo de texto que puedas guardar</string>
     <string name="settings_sync_export_title">Guardar código de recuperación en un archivo</string>
     <string name="settings_sync_faq_a1">Sí. Cada marcador se cifra en este dispositivo antes de subirse. El servidor solo almacena datos cifrados que no puede leer.</string>
@@ -252,7 +252,7 @@
     <string name="settings_sync_faq_a5">No. No hay registro, correo electrónico ni número de teléfono — solo el código de recuperación. Nada personal queda vinculado a tus marcadores.</string>
     <string name="settings_sync_faq_a6">La sincronización es opcional y está desactivada de forma predeterminada. Siempre puedes exportar tus marcadores a un archivo e importarlos más tarde, sin servidor de por medio.</string>
     <string name="settings_sync_faq_q1">¿Mis marcadores están cifrados?</string>
-    <string name="settings_sync_faq_q2">¿Firedown u otra persona puede leerlos?</string>
+    <string name="settings_sync_faq_q2">¿Waves u otra persona puede leerlos?</string>
     <string name="settings_sync_faq_q3">¿Qué es el código de recuperación?</string>
     <string name="settings_sync_faq_q4">¿Qué pasa si pierdo mi código de recuperación?</string>
     <string name="settings_sync_faq_q5">¿Necesito una cuenta o un correo electrónico?</string>

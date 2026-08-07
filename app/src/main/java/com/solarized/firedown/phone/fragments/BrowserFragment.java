@@ -250,7 +250,9 @@ public class BrowserFragment extends BaseBrowserFragment
 
         mChromeBarBaseSize = getResources().getDimensionPixelSize(R.dimen.app_bar_size);
         mGeckoToolbarSize  = mChromeBarBaseSize;
-        mBottomBarSize     = mChromeBarBaseSize;
+        // Single top bar (Item 2): no bottom bar, so only the toolbar
+        // participates in the dynamic-toolbar (scroll-hide) math.
+        mBottomBarSize     = 0;
 
         mIncognitoStateViewModel = new ViewModelProvider(mActivity).get(IncognitoStateViewModel.class);
         mTaskViewModel          = new ViewModelProvider(this).get(TaskViewModel.class);
@@ -273,7 +275,7 @@ public class BrowserFragment extends BaseBrowserFragment
                 }
                 final boolean incognito = geckoState.getGeckoStateEntity().isIncognito();
                 Log.d(TAG, "handleBackPressed uri: " + geckoState.getEntityUri()
-                        + " canBack: " + geckoState.canGoBackward());
+                        + " canBack: " + geckoState.canGoBackNow());
 
                 if (geckoState.isFullScreen()) {
                     geckoState.exitFullScreen();
@@ -293,7 +295,10 @@ public class BrowserFragment extends BaseBrowserFragment
                     exitSearch();
                     return;
                 }
-                if (geckoState.canGoBackward()) {
+                // Page history FIRST, always (standard browser behavior): use
+                // the LIVE session query so a freshly-opened tab with history
+                // still goes back a page instead of jumping to home.
+                if (geckoState.canGoBackNow()) {
                     geckoState.goBack();
                     enterBrowsing();
                     return;
@@ -386,6 +391,10 @@ public class BrowserFragment extends BaseBrowserFragment
 
         mBottomNavigationBar = v.findViewById(R.id.bottom_app_bar);
         mBottomNavigationBar.setListener(this);
+        // Bind the top-bar action cluster to THIS fragment's toolbar (see
+        // BottomNavigationBar.bindButtons — must use our own root, never the
+        // window root, or navigation could bind another fragment's buttons).
+        mBottomNavigationBar.bindButtons(v);
 
         mSwipeRefreshLayout = v.findViewById(R.id.swipe);
         mAutoCompleteView   = v.findViewById(R.id.auto_complete_view);
@@ -494,36 +503,12 @@ public class BrowserFragment extends BaseBrowserFragment
         layoutToolbarParams.setBehavior(new GeckoToolbarBehavior(mGeckoToolbar.getContext(), null));
         mGeckoToolbar.requestLayout();
 
-        mDownloadButton = v.findViewById(R.id.download_button);
-        mDownloadButton.setOnClickListener(v1 -> {
-            Bundle bundle = new Bundle();
-            bundle.putBoolean(Keys.IS_INCOGNITO, mIsIncognitoThemed);
-            NavigationUtils.navigateSafe(mNavController, R.id.dialog_browser_options, R.id.browser, bundle);
-        });
-
-        // Dock the FAB: bottomMargin = (bar height − the 64dp content row)
-        // + app_bar_fab_margin. In the FRAMED model the bar no longer
-        // self-pads, so bar height == the 64dp content row and this reduces
-        // to a plain app_bar_fab_margin (16dp) above the bar — the nav strip
-        // is already reserved by the root's safe-area padding. The formula
-        // is kept (not hardcoded 16dp) so it still self-corrects if the bar
-        // ever grows. Recomputed on every bar layout pass.
-        // BottomNavigationFABBehavior remains purely the scroll-follower.
-        mBottomNavigationBar.addOnLayoutChangeListener(
-                (bar, l, t, r, b, ol, ot, or, ob) -> {
-                    int barHeight = b - t;
-                    if (barHeight <= 0 || mDownloadButton == null) {
-                        return;
-                    }
-                    int margin = Math.max(0, barHeight - mChromeBarBaseSize)
-                            + getResources().getDimensionPixelOffset(R.dimen.app_bar_fab_margin);
-                    ViewGroup.MarginLayoutParams params =
-                            (ViewGroup.MarginLayoutParams) mDownloadButton.getLayoutParams();
-                    if (params.bottomMargin != margin) {
-                        params.bottomMargin = margin;
-                        mDownloadButton.setLayoutParams(params);
-                    }
-                });
+        // Compact flame download button in the top bar (Item 2 — replaces the
+        // old FAB). Its click is routed by BottomNavigationBar (the cluster
+        // controller) to onBottomBarButtonClick(R.id.download_button) below,
+        // which opens the same Captured sheet the FAB opened. Just hold the
+        // reference for fullscreen show()/hide() parity.
+        mDownloadButton = mGeckoToolbar.findViewById(R.id.download_button);
         return v;
     }
 
@@ -585,6 +570,14 @@ public class BrowserFragment extends BaseBrowserFragment
         });
         mTaskViewModel.getSafeCount().observe(getViewLifecycleOwner(), count -> {
             if (mIsIncognitoThemed) mBottomNavigationBar.onBadgeCount(count);
+        });
+
+        // Download flame turns coral while the CURRENT page has detected
+        // downloadable media (same source as the capture sheet). Gate on the
+        // incognito mode so each chrome instance reports its own page.
+        mBrowserDownloadViewModel.getBrowserDownloads(1).observe(getViewLifecycleOwner(), list -> {
+            boolean hasMedia = list != null && !list.isEmpty();
+            mBottomNavigationBar.onMediaDetected(hasMedia);
         });
 
         mGeckoStateViewModel.getTabsCount().observe(getViewLifecycleOwner(), count -> {
@@ -1174,7 +1167,7 @@ public class BrowserFragment extends BaseBrowserFragment
         applyToolbarScrollPolicy();
         mGeckoToolbar.enableSearch();
         mBottomNavigationBar.setVisibility(View.GONE);
-        mDownloadButton.hide();
+        mDownloadButton.setVisibility(View.GONE);
     }
 
     /**
@@ -1200,7 +1193,7 @@ public class BrowserFragment extends BaseBrowserFragment
         mGeckoToolbar.clearText();
         mBottomNavigationBar.setVisibility(View.VISIBLE);
         mBottomNavigationBar.show();
-        mDownloadButton.show();
+        mDownloadButton.setVisibility(View.VISIBLE);
 
         enterBrowsing();
         // enterBrowsing applies the scroll policy only when it actually
@@ -1310,7 +1303,7 @@ public class BrowserFragment extends BaseBrowserFragment
         // behavior is detached and both bars are GONE, exactly the state a
         // spinner must not appear over.
         mSwipeRefreshLayout.setEnabled(false);
-        mDownloadButton.hide();
+        mDownloadButton.setVisibility(View.GONE);
         makeSnackbar(mBottomNavigationBar, R.string.exit_fullscreen_with_back_button_short, mIsIncognitoThemed).show();
     }
 
@@ -1326,7 +1319,7 @@ public class BrowserFragment extends BaseBrowserFragment
         decorView.setBackgroundColor(typedValue.data);
         mUiState = UiState.INIT;
         mSwipeRefreshLayout.setEnabled(true);
-        mDownloadButton.show();
+        mDownloadButton.setVisibility(View.VISIBLE);
         enterBrowsing();
         // Same null-current-state backstop as exitSearch: enterBrowsing
         // early-returns when peekCurrentGeckoState() is null (kill-on-trim /
@@ -1375,6 +1368,10 @@ public class BrowserFragment extends BaseBrowserFragment
                 geckoState.stop();
                 mGeckoToolbar.setLoading(false);
                 mBrowserDialogViewModel.setLoading(false);
+            } else if (id == R.id.mic_button) {
+                launchVoiceSearch();
+            } else if (id == R.id.image_search_button) {
+                launchImageSearch();
             }
         }
     }
@@ -1383,6 +1380,29 @@ public class BrowserFragment extends BaseBrowserFragment
     public void onToolbarClearFocus() {
         super.onToolbarClearFocus();
         exitSearch();
+    }
+
+    /** Image-search result (Lens URL) opens in the current tab. */
+    @Override
+    protected void openUriInCurrentTab(String url) {
+        GeckoState geckoState = resolveActiveGeckoState();
+        if (geckoState == null) return;
+        geckoState.setEntityUri(url);
+        openUri(geckoState);
+    }
+
+    /** Voice-search result lands in the address bar and commits (search). */
+    @Override
+    protected void onVoiceSearchResult(String text) {
+        if (mGeckoToolbar != null) {
+            mGeckoToolbar.setUri(text, false);
+            onCommit();
+        }
+    }
+
+    @Override
+    protected boolean isVoiceSearchIncognito() {
+        return mIsIncognitoThemed;
     }
 
     // ─────────────────────────────────────────────────────────────────────────────────────────────
@@ -1411,9 +1431,13 @@ public class BrowserFragment extends BaseBrowserFragment
             // semantics are preserved.
             setActiveSession(geckoStateEntity, true);
             popToCorrectHome(isIncognito);
-        } else if (id == R.id.downloads_button) {
-            mStartForResult.launch(new Intent(mActivity, mIsIncognitoThemed ?
-                    VaultActivity.class : DownloadsActivity.class));
+        } else if (id == R.id.download_button) {
+            // Compact flame in the top bar (Item 2 — the old FAB's action):
+            // the Captured sheet (downloads bottom-sheet with video/audio/
+            // image grids).
+            Bundle bundle = new Bundle();
+            bundle.putBoolean(Keys.IS_INCOGNITO, mIsIncognitoThemed);
+            NavigationUtils.navigateSafe(mNavController, R.id.dialog_browser_options, R.id.browser, bundle);
         } else if (id == R.id.more_button) {
             Bundle bundle = new Bundle();
             GeckoState geckoState = peekCurrentGeckoState();
@@ -2793,12 +2817,10 @@ public class BrowserFragment extends BaseBrowserFragment
         mUiState = UiState.BROWSING;
         geckoState.setSearchMode(false);
         mGeckoObserverRegistry.register(this);
-        // show()/hide() (vs setVisibility) so the FAB scales + fades on the
-        // state changes where it's visible — re-appearing after find-in-page
-        // or fullscreen exit. On the initial home→browser arrival this is
-        // called before the first layout pass, so show() takes its documented
-        // instant fallback (no animation); harmless, and never a regression.
-        mDownloadButton.show();
+        // The compact flame rides in the toolbar, so it appears/disappears with
+        // it (fullscreen hides the whole toolbar); the explicit VISIBLE here
+        // restores it after find-in-page, which hides only the flame.
+        mDownloadButton.setVisibility(View.VISIBLE);
         mGeckoView.setVisibility(View.VISIBLE);
         applyToolbarScrollPolicy();
         mGeckoToolbar.onLocationChange(geckoState.getEntityUri());

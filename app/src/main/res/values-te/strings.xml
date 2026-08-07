@@ -1,6 +1,6 @@
 <resources>
     <string name="action_mode_selected">%d ఎంచుకోబడింది</string>
-    <string name="app_lock">Firedownని ఉపయోగించడానికి అన్‌లాక్ చేయండి</string>
+    <string name="app_lock">Wavesని ఉపయోగించడానికి అన్‌లాక్ చేయండి</string>
     <string name="app_unlock">అన్‌లాక్ చేయండి</string>
     <string name="browser_bookmark_added">బుక్‌మార్క్ సేవ్ చేయబడింది!</string>
     <string name="browser_cache_cleared">బ్రౌజింగ్ డేటా క్లియర్ చేయబడింది</string>
@@ -134,7 +134,7 @@
     <string name="navigation_web_history">చరిత్ర</string>
     <string name="notifications_downloads_channel">డౌన్‌లోడ్‌లు</string>
     <string name="open">తెరవండి</string>
-    <string name="open_in_app_subtitle">మీరు ఈ కంటెంట్‌ని వీక్షించడానికి Firedown నుండి నిష్క్రమించాలనుకుంటున్నారా?</string>
+    <string name="open_in_app_subtitle">మీరు ఈ కంటెంట్‌ని వీక్షించడానికి Waves నుండి నిష్క్రమించాలనుకుంటున్నారా?</string>
     <string name="open_in_app_title">మరొక యాప్‌లో తెరవండి</string>
     <string name="open_new_private_tab_2">కొత్త అంతరంగిక ట్యాబు</string>
     <string name="open_new_tab_2">కొత్త ట్యాబు</string>
@@ -156,7 +156,7 @@
     <string name="rename_file">ఫైల్ పేరు మార్చండి</string>
     <string name="request_geolocation">మీ పరికర స్థానాన్ని &lt;b&gt; %s &lt;/b&gt;తో భాగస్వామ్యం చేయాలా?</string>
     <string name="request_media_key_system_access">DRM-నియంత్రిత కంటెంట్‌ని ప్లే చేయడానికి &lt;b&gt; %s &lt;/b&gt;ని అనుమతించాలా?</string>
-    <string name="request_media_key_system_access_subtitle">DRM రక్షిత ఫైల్‌లను Firedown ద్వారా డౌన్‌లోడ్ చేయడం సాధ్యం కాదని గమనించండి</string>
+    <string name="request_media_key_system_access_subtitle">DRM రక్షిత ఫైల్‌లను Waves ద్వారా డౌన్‌లోడ్ చేయడం సాధ్యం కాదని గమనించండి</string>
     <string name="request_storage">&lt;b&gt; %s &lt;/b&gt; కోసం పరికర నిల్వకు ప్రాప్యతను అనుమతించాలా?</string>
     <string name="request_storage_access">&lt;b&gt; %s &lt;/b&gt; కోసం మొదటి పార్టీ నిల్వను యాక్సెస్ చేయడానికి మూడవ పక్షాలను అనుమతించాలా?</string>
     <string name="restart_origin">పునఃప్రారంభించండి</string>
@@ -264,7 +264,7 @@
 
 
     <string name="bookmark_export">బుక్‌మార్క్‌లను ఎగుమతి చేయి</string>
-    <string name="bookmark_export_done">%1$d బుక్‌మార్క్‌లు Download/Firedown/backup కు ఎగుమతి చేయబడ్డాయి</string>
+    <string name="bookmark_export_done">%1$d బుక్‌మార్క్‌లు Download/Waves/backup కు ఎగుమతి చేయబడ్డాయి</string>
     <string name="bookmark_import">బుక్‌మార్క్‌లను దిగుమతి చేయి</string>
     <string name="bookmark_import_done">%1$d బుక్‌మార్క్‌లు దిగుమతి చేయబడ్డాయి</string>
     <string name="bookmark_io_error">బుక్‌మార్క్ ఫైల్‌ను చదవలేకపోయాం</string>
@@ -289,7 +289,7 @@
     <string name="settings_sync_export_continue">కొనసాగించు</string>
     <string name="settings_sync_export_done">రికవరీ కోడ్ భద్రపరచబడింది</string>
     <string name="settings_sync_export_failed">ఫైల్‌ను సేవ్ చేయలేకపోయాం</string>
-    <string name="settings_sync_export_file_body">Firedown — బుక్‌మార్క్ సింక్ రికవరీ కోడ్\n\n%1$s\n\nఈ కోడ్ మీ సింక్ చేయబడిన బుక్‌మార్క్‌లకు ఏకైక కీ — దీన్ని కలిగి ఉన్న ఎవరైనా వాటిని చదవగలరు, పోతే దీన్ని తిరిగి పొందలేరు.\n\nఈ ఫైల్ గుప్తీకరించబడలేదు. కోడ్‌ను మీ పాస్‌వర్డ్ మేనేజర్‌లోకి (లేదా మరో సురక్షిత స్థలంలోకి) దిగుమతి చేసి, ఆపై ఈ ఫైల్‌ను తొలగించండి.</string>
+    <string name="settings_sync_export_file_body">Waves — బుక్‌మార్క్ సింక్ రికవరీ కోడ్\n\n%1$s\n\nఈ కోడ్ మీ సింక్ చేయబడిన బుక్‌మార్క్‌లకు ఏకైక కీ — దీన్ని కలిగి ఉన్న ఎవరైనా వాటిని చదవగలరు, పోతే దీన్ని తిరిగి పొందలేరు.\n\nఈ ఫైల్ గుప్తీకరించబడలేదు. కోడ్‌ను మీ పాస్‌వర్డ్ మేనేజర్‌లోకి (లేదా మరో సురక్షిత స్థలంలోకి) దిగుమతి చేసి, ఆపై ఈ ఫైల్‌ను తొలగించండి.</string>
     <string name="settings_sync_export_summary">కోడ్‌ను మీరు భద్రపరచగల టెక్స్ట్ ఫైల్‌గా ఎగుమతి చేయి</string>
     <string name="settings_sync_export_title">రికవరీ కోడ్‌ను ఫైల్‌కు సేవ్ చేయి</string>
     <string name="settings_sync_faq_a1">అవును. ప్రతి బుక్‌మార్క్ అప్‌లోడ్ చేయబడే ముందు ఈ పరికరంలో గుప్తీకరించబడుతుంది. సర్వర్ తాను చదవలేని, గందరగోళమైన డేటాను మాత్రమే నిల్వ చేస్తుంది.</string>
@@ -299,7 +299,7 @@
     <string name="settings_sync_faq_a5">లేదు. సైన్-అప్, ఇమెయిల్ లేదా ఫోన్ నంబర్ ఏదీ లేదు — కేవలం రికవరీ కోడ్ మాత్రమే. మీ బుక్‌మార్క్‌లకు వ్యక్తిగతమైనది ఏదీ ముడిపడి లేదు.</string>
     <string name="settings_sync_faq_a6">సింక్ ఐచ్ఛికం మరియు డిఫాల్ట్‌గా ఆఫ్‌లో ఉంటుంది. మీరు ఎప్పుడైనా మీ బుక్‌మార్క్‌లను ఫైల్‌కు ఎగుమతి చేసి తర్వాత దిగుమతి చేయవచ్చు, సర్వర్ ప్రమేయం లేకుండా.</string>
     <string name="settings_sync_faq_q1">నా బుక్‌మార్క్‌లు గుప్తీకరించబడ్డాయా?</string>
-    <string name="settings_sync_faq_q2">Firedown లేదా మరెవరైనా వాటిని చదవగలరా?</string>
+    <string name="settings_sync_faq_q2">Waves లేదా మరెవరైనా వాటిని చదవగలరా?</string>
     <string name="settings_sync_faq_q3">రికవరీ కోడ్ అంటే ఏమిటి?</string>
     <string name="settings_sync_faq_q4">నా రికవరీ కోడ్‌ను కోల్పోతే ఏమవుతుంది?</string>
     <string name="settings_sync_faq_q5">నాకు ఖాతా లేదా ఇమెయిల్ అవసరమా?</string>

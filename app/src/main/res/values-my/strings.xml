@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">%d ရွေးထားသည်။</string>
-    <string name="app_lock">Firedown ကိုအသုံးပြုရန် လော့ခ်ဖွင့်ပါ။</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Waves ကိုအသုံးပြုရန် လော့ခ်ဖွင့်ပါ။</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">သော့ဖွင့်ပါ။</string>
     <string name="browser_bookmark_added">လိပ်စာကို သိမ်းပြီးပါပြီ။</string>
     <string name="browser_cache_cleared">ရှာဖွေမှုဒေတာကို ရှင်းလင်းထားသည်။</string>
@@ -24,7 +24,7 @@
     <string name="capture_empty_gifs_message">Gifs မရရှိနိုင်ပါ။</string>
     <string name="capture_empty_images_message">ပုံများမရရှိနိုင်ပါ။</string>
     <string name="capture_empty_message">ဒေါင်းလုဒ်လုပ်ရန် မီဒီယာမရှိပါ။</string>
-    <string name="capture_empty_subtext">ဝဘ်ဆိုက်ကို ပြန်လည်စတင်ပြီး Firedown သည် ရရှိနိုင်သောမီဒီယာကို ရှာဖွေတွေ့ရှိမည်ဖြစ်သည်။</string>
+    <string name="capture_empty_subtext">ဝဘ်ဆိုက်ကို ပြန်လည်စတင်ပြီး Waves သည် ရရှိနိုင်သောမီဒီယာကို ရှာဖွေတွေ့ရှိမည်ဖြစ်သည်။</string>
     <string name="capture_empty_video_message">ဗီဒီယိုများ မရရှိနိုင်ပါ။</string>
     <string name="clipboard">ကလစ်ဘုတ်သို့ ကူးယူထားသည်။</string>
     <string name="close_tab">တပ်ဗ်ကို ပိတ်ရန်</string>
@@ -76,7 +76,7 @@
     <string name="empty_list_history">သင့်ဒေါင်းလုဒ်မှတ်တမ်းသည် ဗလာဖြစ်နေသည်။</string>
     <string name="empty_list_query">ရလဒ်များမတွေ့ပါ။</string>
     <string name="empty_list_type">ဒီမှာ ဘာမှ မရှိဘူး။</string>
-    <string name="empty_media_help">Firedown သည် ၎င်းတို့အား ဒေါင်းလုဒ်လုပ်နိုင်သောဖိုင်များအဖြစ် မတွေ့ရှိမီတွင် အချို့သောမီဒီယာဖိုင်များကို ဖွင့်ရန်လိုအပ်သည်။</string>
+    <string name="empty_media_help">Waves သည် ၎င်းတို့အား ဒေါင်းလုဒ်လုပ်နိုင်သောဖိုင်များအဖြစ် မတွေ့ရှိမီတွင် အချို့သောမီဒီယာဖိုင်များကို ဖွင့်ရန်လိုအပ်သည်။</string>
     <string name="empty_media_help_title">ဒေါင်းလုဒ်မလုပ်မီ မီဒီယာကိုဖွင့်ပါ။</string>
     <string name="empty_media_subtitle_help">မီဒီယာကို ပုံမှန်အတိုင်း ဖွင့်ပါ။ Fire-Button ကိုနှိပ်ပြီးနောက် ၎င်းသည် အခြားမီဒီယာဖိုင်များနှင့်အတူ ပေါ်လာမည်ဖြစ်သည်။</string>
 <string name="error_check_internet_connection">အင်တာနက်ချိတ်ဆက်မှု အမှားအယွင်း။</string>
@@ -135,7 +135,7 @@
     <string name="navigation_web_history">မှတ်တမ်းံ</string>
     <string name="notifications_downloads_channel">ဒေါင်းလုဒ်များ</string>
     <string name="open">ဖွင့်သည်။</string>
-    <string name="open_in_app_subtitle">ဤအကြောင်းအရာကို ကြည့်ရှုရန် Firedown မှ ထွက်ခွာလိုပါသလား။</string>
+    <string name="open_in_app_subtitle">ဤအကြောင်းအရာကို ကြည့်ရှုရန် Waves မှ ထွက်ခွာလိုပါသလား။</string>
     <string name="open_in_app_title">အခြားအက်ပ်တွင်ဖွင့်ပါ။</string>
     <string name="open_new_private_tab_2">တစ်ကိုယ်ရေသုံး တပ်ဗ်အသစ်</string>
     <string name="open_new_tab_2">တပ်ဗ် အသစ်</string>
@@ -252,7 +252,7 @@
     <string name="trackers_info_action">ကာကွယ်မှု စီမံ</string>
     <string name="trackers_info_today">%1$s ယနေ့ ပိတ်ပင်ထား</string>
     <string name="bookmark_export">ဘွတ်မှတ်များ ထုတ်ယူရန်</string>
-    <string name="bookmark_export_done">ဘွတ်မှတ် %1$d ခုကို Download/Firedown/backup သို့ ထုတ်ယူပြီးပါပြီ</string>
+    <string name="bookmark_export_done">ဘွတ်မှတ် %1$d ခုကို Download/Waves/backup သို့ ထုတ်ယူပြီးပါပြီ</string>
     <string name="bookmark_import">ဘွတ်မှတ်များ ထည့်သွင်းရန်</string>
     <string name="bookmark_import_done">ဘွတ်မှတ် %1$d ခု ထည့်သွင်းပြီးပါပြီ</string>
     <string name="bookmark_io_error">ဘွတ်မှတ်ဖိုင်ကို ဖတ်၍မရပါ</string>
@@ -278,7 +278,7 @@
     <string name="settings_sync_export_continue">ဆက်လုပ်ရန်</string>
     <string name="settings_sync_export_done">ပြန်လည်ရယူရေးကုဒ် သိမ်းဆည်းပြီးပါပြီ</string>
     <string name="settings_sync_export_failed">ဖိုင်ကို သိမ်းဆည်း၍မရပါ</string>
-    <string name="settings_sync_export_file_body">Firedown — ဘွတ်မှတ်ထပ်တူပြုခြင်း ပြန်လည်ရယူရေးကုဒ်\n\n%1$s\n\nဤကုဒ်သည် သင်ထပ်တူပြုထားသော ဘွတ်မှတ်များအတွက် တစ်ခုတည်းသော သော့ဖြစ်သည် — ၎င်းကိုရှိသူတိုင်း ၎င်းတို့ကို ဖတ်နိုင်ပြီး ပျောက်ဆုံးပါက ပြန်လည်ရယူ၍မရပါ။\n\nဤဖိုင်ကို ကုဒ်ဝှက်မထားပါ။ ကုဒ်ကို စကားဝှက်စီမံခန့်ခွဲမှု (သို့မဟုတ် အခြားလုံခြုံသောနေရာ) သို့ ထည့်သွင်းပြီး ဤဖိုင်ကို ဖျက်ပါ။</string>
+    <string name="settings_sync_export_file_body">Waves — ဘွတ်မှတ်ထပ်တူပြုခြင်း ပြန်လည်ရယူရေးကုဒ်\n\n%1$s\n\nဤကုဒ်သည် သင်ထပ်တူပြုထားသော ဘွတ်မှတ်များအတွက် တစ်ခုတည်းသော သော့ဖြစ်သည် — ၎င်းကိုရှိသူတိုင်း ၎င်းတို့ကို ဖတ်နိုင်ပြီး ပျောက်ဆုံးပါက ပြန်လည်ရယူ၍မရပါ။\n\nဤဖိုင်ကို ကုဒ်ဝှက်မထားပါ။ ကုဒ်ကို စကားဝှက်စီမံခန့်ခွဲမှု (သို့မဟုတ် အခြားလုံခြုံသောနေရာ) သို့ ထည့်သွင်းပြီး ဤဖိုင်ကို ဖျက်ပါ။</string>
     <string name="settings_sync_export_summary">ကုဒ်ကို သင်သိမ်းဆည်းနိုင်သော စာသားဖိုင်အဖြစ် ထုတ်ယူရန်</string>
     <string name="settings_sync_export_title">ပြန်လည်ရယူရေးကုဒ်ကို ဖိုင်သို့ သိမ်းရန်</string>
     <string name="settings_sync_faq_a1">ဟုတ်ပါသည်။ ဘွတ်မှတ်တစ်ခုစီကို အပ်လုဒ်မတင်မီ ဤစက်ပစ္စည်းတွင် ကုဒ်ဝှက်ပါသည်။ ဆာဗာသည် ၎င်းဖတ်၍မရသော ရှုပ်ထွေးဒေတာကိုသာ သိမ်းဆည်းပါသည်။</string>
@@ -288,7 +288,7 @@
     <string name="settings_sync_faq_a5">မလိုပါ။ စာရင်းသွင်းခြင်း၊ အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ် မလိုပါ — ပြန်လည်ရယူရေးကုဒ်သာ။ သင့်ဘွတ်မှတ်များနှင့် ကိုယ်ရေးကိုယ်တာ မည်သည့်အရာမှ မချိတ်ဆက်ထားပါ။</string>
     <string name="settings_sync_faq_a6">ထပ်တူပြုခြင်းသည် ရွေးချယ်နိုင်ပြီး မူရင်းအတိုင်း ပိတ်ထားပါသည်။ ဆာဗာမပါဝင်ဘဲ သင့်ဘွတ်မှတ်များကို ဖိုင်သို့ ထုတ်ယူပြီး နောက်မှ ထည့်သွင်းနိုင်သည်။</string>
     <string name="settings_sync_faq_q1">ကျွန်ုပ်၏ ဘွတ်မှတ်များကို ကုဒ်ဝှက်ထားပါသလား။</string>
-    <string name="settings_sync_faq_q2">Firedown သို့မဟုတ် အခြားသူက ၎င်းတို့ကို ဖတ်နိုင်ပါသလား။</string>
+    <string name="settings_sync_faq_q2">Waves သို့မဟုတ် အခြားသူက ၎င်းတို့ကို ဖတ်နိုင်ပါသလား။</string>
     <string name="settings_sync_faq_q3">ပြန်လည်ရယူရေးကုဒ် ဆိုသည်မှာ ဘာနည်း။</string>
     <string name="settings_sync_faq_q4">ကျွန်ုပ်၏ ပြန်လည်ရယူရေးကုဒ် ပျောက်ဆုံးပါက မည်သို့ဖြစ်မည်နည်း။</string>
     <string name="settings_sync_faq_q5">ကျွန်ုပ်တွင် အကောင့် သို့မဟုတ် အီးမေးလ် လိုအပ်ပါသလား။</string>

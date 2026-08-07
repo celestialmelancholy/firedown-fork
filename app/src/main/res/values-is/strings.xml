@@ -1,6 +1,6 @@
 <resources>
     <string name="action_mode_selected">%d valið</string>
-    <string name="app_lock">Opnaðu til að nota Firedown</string>
+    <string name="app_lock">Opnaðu til að nota Waves</string>
     <string name="app_unlock">Opnaðu</string>
     <string name="browser_bookmark_added">Bókamerki vistað!</string>
     <string name="browser_cache_cleared">Vafragögn hreinsuð</string>
@@ -25,7 +25,7 @@
     <string name="capture_empty_gifs_message">Engin gifs í boði.</string>
     <string name="capture_empty_images_message">Engar myndir tiltækar.</string>
     <string name="capture_empty_message">Enginn miðill tiltækur til niðurhals.</string>
-    <string name="capture_empty_subtext">Endurhlaðið vefsíðuna og Firedown finnur tiltæka miðla.</string>
+    <string name="capture_empty_subtext">Endurhlaðið vefsíðuna og Waves finnur tiltæka miðla.</string>
     <string name="capture_empty_video_message">Engin myndskeið í boði.</string>
     <string name="clipboard">Afritað á klippiborð</string>
     <string name="close_tab">Loka flipa</string>
@@ -70,7 +70,7 @@
     <string name="details_url">URL</string>
     <string name="download">Sækja</string>
     <string name="download_finished">Niðurhali lokið</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Sækja gæði</string>
     <string name="download_queued">Í bið…</string>
     <string name="download_rename_error">Skráarnafnið er þegar í notkun.</string>
@@ -83,7 +83,7 @@
     <string name="empty_list_history">Niðurhalsferillinn þinn er tómur.</string>
     <string name="empty_list_query">Engar niðurstöður fundust</string>
     <string name="empty_list_type">Það er ekkert hérna.</string>
-    <string name="empty_media_help">Sumar skrár þarf að spila áður en Firedown getur greint þær sem skrár sem hægt er að hlaða niður.</string>
+    <string name="empty_media_help">Sumar skrár þarf að spila áður en Waves getur greint þær sem skrár sem hægt er að hlaða niður.</string>
     <string name="empty_media_help_title">Spilaðu fjölmiðla áður en þú hleður niður</string>
     <string name="empty_media_subtitle_help">Vinsamlegast spilaðu fjölmiðla eins og venjulega. Það ætti þá að birtast með öðrum miðlunarskrám, eftir að hafa ýtt á Fire-hnappinn.</string>
 <string name="error_check_internet_connection">Villa við nettengingu.</string>
@@ -141,7 +141,7 @@
     <string name="navigation_web_history">Ferill</string>
     <string name="notifications_downloads_channel">Niðurhal</string>
     <string name="open">Opið</string>
-    <string name="open_in_app_subtitle">Viltu yfirgefa Firedown til að skoða þetta efni?</string>
+    <string name="open_in_app_subtitle">Viltu yfirgefa Waves til að skoða þetta efni?</string>
     <string name="open_in_app_title">Opnaðu í öðru forriti</string>
     <string name="open_new_private_tab_2">Nýr huliðsflipi</string>
     <string name="open_new_tab_2">Nýr flipi</string>
@@ -277,7 +277,7 @@
     <string name="trackers_info_action">Stjórna vörn</string>
     <string name="trackers_info_today">%1$s blokkað í dag</string>
     <string name="bookmark_export">Flytja út bókamerki</string>
-    <string name="bookmark_export_done">Flutti út %1$d bókamerki í Download/Firedown/backup</string>
+    <string name="bookmark_export_done">Flutti út %1$d bókamerki í Download/Waves/backup</string>
     <string name="bookmark_import">Flytja inn bókamerki</string>
     <string name="bookmark_import_done">Flutti inn %1$d bókamerki</string>
     <string name="bookmark_io_error">Tókst ekki að lesa bókamerkjaskrána</string>
@@ -302,7 +302,7 @@
     <string name="settings_sync_export_continue">Halda áfram</string>
     <string name="settings_sync_export_done">Endurheimtarkóði vistaður</string>
     <string name="settings_sync_export_failed">Tókst ekki að vista skrána</string>
-    <string name="settings_sync_export_file_body">Firedown — endurheimtarkóði fyrir bókamerkjasamstillingu\n\n%1$s\n\nÞessi kóði er eini lykillinn að samstilltu bókamerkjunum þínum — hver sem hefur hann getur lesið þau, og ekki er hægt að endurheimta hann ef hann týnist.\n\nÞessi skrá er EKKI dulkóðuð. Flyttu kóðann inn í lykilorðastjórann þinn (eða á annan öruggan stað) og eyddu síðan þessari skrá.</string>
+    <string name="settings_sync_export_file_body">Waves — endurheimtarkóði fyrir bókamerkjasamstillingu\n\n%1$s\n\nÞessi kóði er eini lykillinn að samstilltu bókamerkjunum þínum — hver sem hefur hann getur lesið þau, og ekki er hægt að endurheimta hann ef hann týnist.\n\nÞessi skrá er EKKI dulkóðuð. Flyttu kóðann inn í lykilorðastjórann þinn (eða á annan öruggan stað) og eyddu síðan þessari skrá.</string>
     <string name="settings_sync_export_summary">Flyttu kóðann út sem textaskrá sem þú getur geymt</string>
     <string name="settings_sync_export_title">Vista endurheimtarkóða í skrá</string>
     <string name="settings_sync_faq_a1">Já. Hvert bókamerki er dulkóðað á þessu tæki áður en því er hlaðið upp. Þjónninn geymir aðeins ruglað gögn sem hann getur ekki lesið.</string>
@@ -312,7 +312,7 @@
     <string name="settings_sync_faq_a5">Nei. Það er engin skráning, tölvupóstur eða símanúmer — bara endurheimtarkóðinn. Ekkert persónulegt er tengt bókamerkjunum þínum.</string>
     <string name="settings_sync_faq_a6">Samstilling er valfrjáls og slökkt sjálfgefið. Þú getur alltaf flutt bókamerkin þín út í skrá og flutt þau inn síðar, án þess að þjónn komi við sögu.</string>
     <string name="settings_sync_faq_q1">Eru bókamerkin mín dulkóðuð?</string>
-    <string name="settings_sync_faq_q2">Geta Firedown eða einhver annar lesið þau?</string>
+    <string name="settings_sync_faq_q2">Geta Waves eða einhver annar lesið þau?</string>
     <string name="settings_sync_faq_q3">Hvað er endurheimtarkóðinn?</string>
     <string name="settings_sync_faq_q4">Hvað ef ég týni endurheimtarkóðanum mínum?</string>
     <string name="settings_sync_faq_q5">Þarf ég reikning eða tölvupóst?</string>

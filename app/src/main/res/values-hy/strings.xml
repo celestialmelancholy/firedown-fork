@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">Ընտրված է %d</string>
-    <string name="app_lock">Ապակողպեք՝ Firedown-ն օգտագործելու համար</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Ապակողպեք՝ Waves-ն օգտագործելու համար</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Ապակողպել</string>
     <string name="browser_bookmark_added">Էջանիշը պահված է:</string>
     <string name="browser_cache_cleared">Զննարկման տվյալները ջնջվեցին</string>
@@ -16,7 +16,7 @@
     <string name="capture_empty_gifs_message">Gif-ներ չկան:</string>
     <string name="capture_empty_images_message">Պատկերներ չկան:</string>
     <string name="capture_empty_message">Ներբեռնման համար հասանելի մեդիա չկա:</string>
-    <string name="capture_empty_subtext">Վերբեռնեք կայքը և Firedown-ը կհայտնաբերի հասանելի լրատվամիջոցները:</string>
+    <string name="capture_empty_subtext">Վերբեռնեք կայքը և Waves-ը կհայտնաբերի հասանելի լրատվամիջոցները:</string>
     <string name="capture_empty_video_message">Տեսանյութեր չկան։</string>
     <string name="clipboard">Պատճենվել է սեղմատախտակում</string>
 <string name="connection_secure">Միացումն ապահով է</string>
@@ -56,7 +56,7 @@
     <string name="empty_list_history">Ձեր ներբեռնումների պատմությունը դատարկ է:</string>
     <string name="empty_list_query">Ոչ մի արդյունք չի գտնվել</string>
     <string name="empty_list_type">Այստեղ ոչինչ չկա:</string>
-    <string name="empty_media_help">Որոշ մեդիա ֆայլեր պետք է նվագարկվեն, նախքան Firedown-ը դրանք հայտնաբերի որպես ներբեռնվող ֆայլեր:</string>
+    <string name="empty_media_help">Որոշ մեդիա ֆայլեր պետք է նվագարկվեն, նախքան Waves-ը դրանք հայտնաբերի որպես ներբեռնվող ֆայլեր:</string>
     <string name="empty_media_help_title">Ներբեռնելուց առաջ նվագարկեք մեդիա</string>
     <string name="empty_media_subtitle_help">Խնդրում ենք նվագարկել մեդիա ինչպես միշտ: Այնուհետև այն պետք է հայտնվի այլ մեդիա ֆայլերի հետ՝ սեղմելով Fire-Button-ը:</string>
 <string name="error_check_internet_connection">Ինտերնետ կապի սխալ:</string>
@@ -111,7 +111,7 @@
     <string name="navigation_web_history">Պատմություն</string>
     <string name="notifications_downloads_channel">Ներբեռնումներ</string>
     <string name="open">Բաց</string>
-    <string name="open_in_app_subtitle">Ցանկանու՞մ եք լքել Firedown-ը՝ այս բովանդակությունը դիտելու համար:</string>
+    <string name="open_in_app_subtitle">Ցանկանու՞մ եք լքել Waves-ը՝ այս բովանդակությունը դիտելու համար:</string>
     <string name="open_in_app_title">Բացեք մեկ այլ հավելվածում</string>
     <string name="open_origin">Բացեք նոր ներդիրում</string>
     <string name="open_with">Բացել հետ</string>
@@ -283,7 +283,7 @@
     <string name="trackers_info_stat_blocked">Արգելափակված</string>
     <string name="trackers_info_stat_saved">Խնայված տվյալներ</string>
     <string name="bookmark_export">Արտահանել էջանիշերը</string>
-    <string name="bookmark_export_done">%1$d էջանիշ արտահանվեց Download/Firedown/backup</string>
+    <string name="bookmark_export_done">%1$d էջանիշ արտահանվեց Download/Waves/backup</string>
     <string name="bookmark_import">Ներմուծել էջանիշերը</string>
     <string name="bookmark_import_done">%1$d էջանիշ ներմուծվեց</string>
     <string name="bookmark_io_error">Չհաջողվեց կարդալ էջանիշերի ֆայլը</string>
@@ -308,7 +308,7 @@
     <string name="settings_sync_export_continue">Շարունակել</string>
     <string name="settings_sync_export_done">Վերականգնման կոդը պահպանվեց</string>
     <string name="settings_sync_export_failed">Չհաջողվեց պահպանել ֆայլը</string>
-    <string name="settings_sync_export_file_body">Firedown — էջանիշերի համաժամացման վերականգնման կոդ\n\n%1$s\n\nԱյս կոդը ձեր համաժամացված էջանիշերի միակ բանալին է՝ ով ունի այն, կարող է կարդալ դրանք, և կորստի դեպքում այն հնարավոր չէ վերականգնել։\n\nԱյս ֆայլը գաղտնագրված ՉԷ։ Ներմուծեք կոդը ձեր գաղտնաբառերի կառավարիչ (կամ այլ ապահով տեղ), ապա ջնջեք այս ֆայլը։</string>
+    <string name="settings_sync_export_file_body">Waves — էջանիշերի համաժամացման վերականգնման կոդ\n\n%1$s\n\nԱյս կոդը ձեր համաժամացված էջանիշերի միակ բանալին է՝ ով ունի այն, կարող է կարդալ դրանք, և կորստի դեպքում այն հնարավոր չէ վերականգնել։\n\nԱյս ֆայլը գաղտնագրված ՉԷ։ Ներմուծեք կոդը ձեր գաղտնաբառերի կառավարիչ (կամ այլ ապահով տեղ), ապա ջնջեք այս ֆայլը։</string>
     <string name="settings_sync_export_summary">Արտահանեք կոդը որպես տեքստային ֆայլ, որը կարող եք պահել</string>
     <string name="settings_sync_export_title">Պահպանել վերականգնման կոդը ֆայլում</string>
     <string name="settings_sync_faq_a1">Այո։ Յուրաքանչյուր էջանիշ գաղտնագրվում է այս սարքում մինչև վերբեռնելը։ Սերվերը պահում է միայն խառնված տվյալներ, որոնք չի կարող կարդալ։</string>
@@ -318,7 +318,7 @@
     <string name="settings_sync_faq_a5">Ոչ։ Չկա գրանցում, էլ. փոստ կամ հեռախոսահամար՝ միայն վերականգնման կոդ։ Ոչ մի անձնական բան կապված չէ ձեր էջանիշերի հետ։</string>
     <string name="settings_sync_faq_a6">Համաժամացումը ընտրովի է և լռելյայն անջատված է։ Դուք միշտ կարող եք արտահանել ձեր էջանիշերը ֆայլ և ավելի ուշ ներմուծել դրանք՝ առանց որևէ սերվերի մասնակցության։</string>
     <string name="settings_sync_faq_q1">Իմ էջանիշերը գաղտնագրվա՞ծ են։</string>
-    <string name="settings_sync_faq_q2">Firedown-ը կամ որևէ մեկ ուրիշը կարո՞ղ է կարդալ դրանք։</string>
+    <string name="settings_sync_faq_q2">Waves-ը կամ որևէ մեկ ուրիշը կարո՞ղ է կարդալ դրանք։</string>
     <string name="settings_sync_faq_q3">Ի՞նչ է վերականգնման կոդը։</string>
     <string name="settings_sync_faq_q4">Ի՞նչ կլինի, եթե կորցնեմ իմ վերականգնման կոդը։</string>
     <string name="settings_sync_faq_q5">Ինձ պե՞տք է հաշիվ կամ էլ. փոստ։</string>

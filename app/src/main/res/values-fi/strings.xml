@@ -10,8 +10,8 @@
     <string name="popup_group_this_page">Tämä sivu</string>
     <string name="popup_group_library">Kirjasto</string>
     <string name="action_mode_selected">%d valittu</string>
-    <string name="app_lock">Avaa lukitus käyttääksesi Firedownia</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Avaa lukitus käyttääksesi Wavesia</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Avata</string>
     <string name="browser_bookmark_added">Kirjanmerkki Tallennettu!</string>
     <string name="browser_cache_cleared">Selaustiedot tyhjennetty</string>
@@ -36,7 +36,7 @@
     <string name="capture_empty_gifs_message">Gifiä ei ole saatavilla.</string>
     <string name="capture_empty_images_message">Ei kuvia saatavilla.</string>
     <string name="capture_empty_message">Mediaa ei ole ladattavissa.</string>
-    <string name="capture_empty_subtext">Lataa verkkosivusto uudelleen, niin Firedown havaitsee käytettävissä olevan median.</string>
+    <string name="capture_empty_subtext">Lataa verkkosivusto uudelleen, niin Waves havaitsee käytettävissä olevan median.</string>
     <string name="capture_empty_video_message">Ei videoita saatavilla.</string>
     <string name="clipboard">Kopioitu leikepöydälle</string>
     <string name="clipboard_from">Leikepöydältä</string>
@@ -82,7 +82,7 @@
     <string name="details_url">URL-osoite</string>
     <string name="download">Ladata</string>
     <string name="download_finished">Lataus valmis</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Latauksen laatu</string>
     <string name="download_queued">Odottaa…</string>
     <string name="download_rename_error">Tiedostonimi on jo käytössä.</string>
@@ -92,7 +92,7 @@
     <string name="empty_learn_more">Lue lisää</string>
     <string name="restore_downloads_button">Palauta aiemmat lataukset</string>
     <string name="restore_downloads_settings_summary">Palauta latausluettelo sovelluksen uudelleenasennuksen jälkeen</string>
-    <string name="restore_downloads_message">Jos asensit Firedownin uudelleen, latauksesi voivat yhä olla Download/Firedown-kansiossa. Valitse kyseinen kansio, niin Firedown palauttaa latausluettelosi.</string>
+    <string name="restore_downloads_message">Jos asensit Wavesin uudelleen, latauksesi voivat yhä olla Download/Waves-kansiossa. Valitse kyseinen kansio, niin Waves palauttaa latausluettelosi.</string>
     <string name="restore_downloads_choose">Valitse kansio</string>
     <string name="restore_downloads_progress">Palautetaan latauksia…</string>
     <string name="restore_downloads_done">Palautettuja latauksia: %1$d</string>
@@ -107,7 +107,7 @@
     <string name="empty_list_query">Ei tuloksia</string>
     <string name="empty_list_type">Täällä ei ole mitään.</string>
     <string name="empty_list_vault">Turvakansiossa ei ole vielä mitään.\n\nValitse minkä tahansa latauksen ⋮-valikosta „Siirrä turvakansioon“, niin se säilyy täällä.</string>
-    <string name="empty_media_help">Jotkut mediatiedostot on toistettava ennen kuin Firedown voi tunnistaa ne ladattaviksi tiedostoiksi.</string>
+    <string name="empty_media_help">Jotkut mediatiedostot on toistettava ennen kuin Waves voi tunnistaa ne ladattaviksi tiedostoiksi.</string>
     <string name="empty_media_help_title">Toista media ennen lataamista</string>
     <string name="empty_media_subtitle_help">Toista mediaa tavalliseen tapaan. Sen pitäisi sitten ilmestyä muiden mediatiedostojen kanssa, kun olet painanut Fire-painiketta.</string>
 <string name="error_check_internet_connection">Internet-yhteyden virhe.</string>
@@ -179,7 +179,7 @@
     <string name="navigation_web_history">Historia</string>
     <string name="notifications_downloads_channel">Lataukset</string>
     <string name="open">Avata</string>
-    <string name="open_in_app_subtitle">Haluatko poistua Firedownista nähdäksesi tämän sisällön?</string>
+    <string name="open_in_app_subtitle">Haluatko poistua Wavesista nähdäksesi tämän sisällön?</string>
     <string name="open_in_app_title">Avaa toisessa sovelluksessa</string>
     <string name="open_new_private_tab_2">Uusi yksityinen välilehti</string>
     <string name="open_new_tab_2">Uusi välilehti</string>
@@ -208,7 +208,7 @@
     <string name="rename_file">Nimeä tiedosto uudelleen</string>
     <string name="request_geolocation">Jaa laitteesi sijainti henkilön &lt;b&gt;%s&lt;/b&gt; kanssa?</string>
     <string name="request_media_key_system_access">Saako &lt;b&gt;%s&lt;/b&gt; toistaa DRM-ohjattua sisältöä?</string>
-    <string name="request_media_key_system_access_subtitle">Huomaa, että Firedown ei voi ladata DRM-suojattuja tiedostoja</string>
+    <string name="request_media_key_system_access_subtitle">Huomaa, että Waves ei voi ladata DRM-suojattuja tiedostoja</string>
     <string name="request_storage">Sallitaanko laitteen &lt;b&gt;%s&lt;/b&gt; käyttö laitteen tallennustilaan?</string>
     <string name="request_storage_access">Saako kolmansien osapuolien käyttää ensimmäisen osapuolen tallennustilaa verkkotunnukselle &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="restart_origin">Uudelleenkäynnistää</string>
@@ -328,7 +328,7 @@
     <string name="crash_sheet_send">Lähetä raportti</string>
     <string name="crash_sheet_sent">Raportti lähetetty — kiitos</string>
     <string name="crash_sheet_send_failed">Lähetys epäonnistui. Tarkista yhteys — tai käytä Kopioi / Ilmoita.</string>
-    <string name="crash_sheet_send_note">Lähetetään nimettömänä Firedownin palvelimelle — vain yllä oleva raportti, ei tunnisteita.</string>
+    <string name="crash_sheet_send_note">Lähetetään nimettömänä Wavesin palvelimelle — vain yllä oleva raportti, ei tunnisteita.</string>
     <string name="home_trackers_title">Seurantaohjelmat ja mainokset estetty</string>
     <string name="home_trackers_subtitle_idle">Suojaus käytössä</string>
     <string name="trackers_info_count_label">seurantaohjelmaa ja mainosta estetty</string>
@@ -403,7 +403,7 @@
     <string name="settings_sync_help_close">Selvä</string>
     <string name="settings_sync_faq_q1">Ovatko kirjanmerkkini ja varmuuskopioidut tiedostoni salattuja?</string>
     <string name="settings_sync_faq_a1">Kyllä. Kaikki salataan tällä laitteella ennen kuin se lähtee laitteesta — jokainen kirjanmerkki ja jokainen varmuuskopioimasi tiedosto. Palvelin tallentaa vain dataa, jota se ei voi lukea.</string>
-    <string name="settings_sync_faq_q2">Voivatko Firedown tai joku muu lukea tiedostojani?</string>
+    <string name="settings_sync_faq_q2">Voivatko Waves tai joku muu lukea tiedostojani?</string>
     <string name="settings_sync_faq_a2">Ei. Vain palautuskoodisi voi avata ne, eikä se poistu laitteeltasi koskaan. Emme me, eivät palvelimia ylläpitävät ihmiset eikä kukaan, joka varastaisi niistä kopion: kaikilla on salattua dataa eikä avainta.</string>
     <string name="settings_sync_faq_q3">Mikä palautuskoodi on?</string>
     <string name="settings_sync_faq_a3">Laitteellasi luotu avain. Se on ainoa asia, joka voi purkaa kirjanmerkkiesi ja varmuuskopioitujen tiedostojesi salauksen — tällä laitteella tai uudella.</string>
@@ -420,7 +420,7 @@
     <string name="settings_sync_export_summary">Vie koodi tekstitiedostona, jonka voit tallentaa</string>
     <string name="settings_sync_export_caveat_message">Tämä tiedosto tallennetaan salaamattomana — kuka tahansa, joka voi lukea sen, voi lukea kirjanmerkkisi. Tuo koodi salasanojen hallintaasi (tai muuhun turvalliseen paikkaan) ja poista sitten tiedosto. Salasanojen hallinta pitää sen salattuna; irrallinen tiedosto ei.</string>
     <string name="settings_sync_export_continue">Jatka</string>
-    <string name="settings_sync_export_file_body">Firedown — palautuskoodi\n\n%1$s\n\nTämä koodi on ainoa avain kirjanmerkkeihisi, latausten varmuuskopioon ja tallennustilan saldoon — kuka tahansa, jolla se on, voi lukea ne, eikä sitä voi palauttaa, jos se katoaa.\n\nTätä tiedostoa EI ole salattu. Tuo koodi salasanojen hallintaan (tai muuhun turvalliseen paikkaan) ja poista sitten tämä tiedosto.</string>
+    <string name="settings_sync_export_file_body">Waves — palautuskoodi\n\n%1$s\n\nTämä koodi on ainoa avain kirjanmerkkeihisi, latausten varmuuskopioon ja tallennustilan saldoon — kuka tahansa, jolla se on, voi lukea ne, eikä sitä voi palauttaa, jos se katoaa.\n\nTätä tiedostoa EI ole salattu. Tuo koodi salasanojen hallintaan (tai muuhun turvalliseen paikkaan) ja poista sitten tämä tiedosto.</string>
     <string name="settings_sync_export_done">Palautuskoodi tallennettu</string>
     <string name="settings_sync_export_failed">Tiedostoa ei voitu tallentaa</string>
     <string name="settings_sync_code_warning">Tämä palautuskoodi on ainoa avain kirjanmerkkeihisi, latausten varmuuskopioon ja tallennustilan saldoon. Tallenna se salasanojen hallintaan — tai muuhun turvalliseen paikkaan. Sitä ei voi palauttaa, jos se katoaa.</string>
@@ -429,7 +429,7 @@
     <string name="browser_snapshot_saving">Tallennetaan sivun tilannevedosta…</string>
     <string name="browser_snapshot_saved">Tilannevedos tallennettu</string>
     <string name="bookmark_export">Vie kirjanmerkit</string>
-    <string name="bookmark_export_done">Vietiin %1$d kirjanmerkkiä kansioon Download/Firedown/backup</string>
+    <string name="bookmark_export_done">Vietiin %1$d kirjanmerkkiä kansioon Download/Waves/backup</string>
     <string name="bookmark_import">Tuo kirjanmerkit</string>
     <string name="bookmark_import_done">Tuotiin %1$d kirjanmerkkiä</string>
     <string name="bookmark_io_error">Kirjanmerkkitiedostoa ei voitu lukea</string>
@@ -589,7 +589,7 @@
     <string name="buy_credit_wallet_connect_link">Liitä lompakko ja maksa yhdellä napautuksella</string>
     <string name="buy_credit_wallet_manage_link">Vaihda tai irrota lompakko</string>
     <string name="buy_credit_wallet_dialog_title">Liitä Lightning-lompakko</string>
-    <string name="buy_credit_wallet_dialog_body">Liitä Nostr Wallet Connect -merkkijono tai skannaa se lompakostasi. Sen jälkeen Firedown voi maksaa laskuja siitä lompakosta, siellä asettamasi budjetin rajoissa.</string>
+    <string name="buy_credit_wallet_dialog_body">Liitä Nostr Wallet Connect -merkkijono tai skannaa se lompakostasi. Sen jälkeen Waves voi maksaa laskuja siitä lompakosta, siellä asettamasi budjetin rajoissa.</string>
     <string name="buy_credit_wallet_dialog_connected">Yhdistetty lompakkoon %1$s. Korvaa liittämällä tai skannaamalla uusi merkkijono.</string>
     <string name="buy_credit_wallet_hint">nostr+walletconnect://…</string>
     <string name="buy_credit_wallet_connect_action">Liitä</string>
@@ -711,9 +711,9 @@
     <string name="p2p_send">Lähetä</string>
     <string name="p2p_send_title">Lähetä suoraan</string>
     <string name="p2p_receive_title">Vastaanota tiedosto</string>
-    <string name="p2p_send_lead">Lähetä tämä tiedosto suoraan toiseen Firedownia käyttävään laitteeseen — salattuna, laitteesta laitteeseen, ilman välissä olevaa palvelinta.</string>
-    <string name="p2p_receive_lead">Vastaanota tiedosto suoraan toisesta Firedownia käyttävästä laitteesta.</string>
-    <string name="p2p_code_hint_send">Skannaa tämä koodi toisella laitteella — Firedownissa kohdassa Lataukset → Vastaanota tiedosto tai vain sen kameralla. Samassa verkossa siirto jatkuu itsestään; jos vastauskoodi tulee näkyviin, skannaa se takaisin.</string>
+    <string name="p2p_send_lead">Lähetä tämä tiedosto suoraan toiseen Wavesia käyttävään laitteeseen — salattuna, laitteesta laitteeseen, ilman välissä olevaa palvelinta.</string>
+    <string name="p2p_receive_lead">Vastaanota tiedosto suoraan toisesta Wavesia käyttävästä laitteesta.</string>
+    <string name="p2p_code_hint_send">Skannaa tämä koodi toisella laitteella — Wavesissa kohdassa Lataukset → Vastaanota tiedosto tai vain sen kameralla. Samassa verkossa siirto jatkuu itsestään; jos vastauskoodi tulee näkyviin, skannaa se takaisin.</string>
     <string name="p2p_code_hint_reply">Näytä tämä vastaus lähettäjälle tai lähetä se takaisin samaa reittiä, jota pitkin lähettäjän koodi saapui.</string>
     <string name="p2p_share_code">Lähetä koodi muulla tavalla</string>
     <string name="p2p_scan_reply">Skannaa vastaus</string>
@@ -731,13 +731,13 @@
     <string name="p2p_done_received">Tallennettu Lataukset-kansioon</string>
     <string name="p2p_done">Valmis</string>
     <string name="p2p_error_no_path">Toiseen laitteeseen ei saatu suoraa yhteyttä. Näin käy mobiilidatalla tai VPN:n takana — kokeile samaa Wi-Fi-verkkoa ja kytke VPN pois päältä.</string>
-    <string name="p2p_error_no_path_vpn">Tämän laitteen VPN estää suoran yhteyden. Sulje Firedown VPN:n ulkopuolelle — tai keskeytä VPN — ja yritä uudelleen.</string>
+    <string name="p2p_error_no_path_vpn">Tämän laitteen VPN estää suoran yhteyden. Sulje Waves VPN:n ulkopuolelle — tai keskeytä VPN — ja yritä uudelleen.</string>
     <string name="p2p_error_generic">Siirto epäonnistui.</string>
     <string name="p2p_error_bad_code">Koodi ei kelpaa — yritä uudelleen.</string>
     <string name="p2p_clipboard_empty">Leikepöydällä ei ole koodia.</string>
     <string name="p2p_footer">Salattu siirto laitteesta laitteeseen. Tiedosto ei koskaan kulje palvelimen kautta.</string>
     <string name="p2p_footer_relayed">Päästä päähän salattu. Välitetään firedown.appin kautta (ei suoraa yhteyttä), joka ei voi lukea sitä.</string>
-    <string name="p2p_hint_vpn">Vinkki: Firedownin jättäminen VPN:n ulkopuolelle mahdollistaa suoran yhteyden.</string>
+    <string name="p2p_hint_vpn">Vinkki: Wavesin jättäminen VPN:n ulkopuolelle mahdollistaa suoran yhteyden.</string>
     <string name="p2p_scan_hint">Osoita kameralla lähettäjän koodia</string>
     <string name="p2p_camera_denied">Skannaus vaatii kameran käyttöoikeuden. Voit liittää koodin sen sijaan.</string>
     <string name="p2p_send_link">Lähetä linkki</string>
@@ -798,13 +798,13 @@
     <string name="cloud_backup_state_low_credit">Saldo ei riitä</string>
     <string name="cloud_backup_state_too_many">Liikaa tiedostoja</string>
     <string name="cloud_backup_state_no_space">Tila ei riitä</string>
-    <string name="share_app_title">Jaa Firedown</string>
+    <string name="share_app_title">Jaa Waves</string>
     <string name="share_app_blurb">Yksityinen selain ja lataaja. Tallenna videot, äänet ja kuvat miltä tahansa sivulta, estä mainokset ja seuraimet – kaikki pysyy laitteellasi.</string>
-    <string name="share_app_get_at">Hanki Firedown osoitteesta</string>
+    <string name="share_app_get_at">Hanki Waves osoitteesta</string>
     <string name="share_app_scan">Tai asenna se osoittamalla toisen puhelimen kameralla yllä olevaa koodia</string>
     <string name="share_app_share">Jaa linkki</string>
-    <string name="share_app_qr_desc">QR-koodi Firedownin lataussivulle</string>
-    <string name="share_app_message">Firedown – yksityinen selain ja lataaja Androidille. %1$s</string>
+    <string name="share_app_qr_desc">QR-koodi Wavesin lataussivulle</string>
+    <string name="share_app_message">Waves – yksityinen selain ja lataaja Androidille. %1$s</string>
     <string name="settings_sync_faq_q8">Mitä palvelin oikeastaan näkee?</string>
     <string name="settings_sync_faq_a8">Salattuja paloja tiedostoistasi, niiden koon ja saapumisajan — sekä satunnaisen tilinumeron, jonka laitteesi johtaa palautuskoodistasi, ei koskaan nimeä tai sähköpostiosoitetta. Tiedostojen nimet, tyypit ja esikatselukuvat ovat myös salattuja, sinetöidyssä luettelossa, jonka vain sinun laitteesi voi avata. Palvelin ei saa tietää edes tiedoston nimeä, saati sen sisältöä.</string>
     <string name="settings_update_check_title">Tarkista päivitykset</string>

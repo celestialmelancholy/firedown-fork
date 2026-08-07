@@ -1,6 +1,6 @@
 <resources>
     <string name="action_mode_selected">Არჩეულია %d</string>
-    <string name="app_lock">Განბლოკეთ Firedown-ის გამოსაყენებლად</string>
+    <string name="app_lock">Განბლოკეთ Waves-ის გამოსაყენებლად</string>
     <string name="app_unlock">Განბლოკვა</string>
     <string name="browser_bookmark_added">Სანიშნე შენახულია!</string>
     <string name="browser_cache_cleared">Დათვალიერების მონაცემები გასუფთავებულია</string>
@@ -25,7 +25,7 @@
     <string name="capture_empty_gifs_message">Არ არის ხელმისაწვდომი გიფები.</string>
     <string name="capture_empty_images_message">Სურათები არ არის ხელმისაწვდომი.</string>
     <string name="capture_empty_message">Არ არის ხელმისაწვდომი მედია ჩამოსატვირთად.</string>
-    <string name="capture_empty_subtext">Გადატვირთეთ ვებგვერდი და Firedown აღმოაჩენს ხელმისაწვდომ მედიას.</string>
+    <string name="capture_empty_subtext">Გადატვირთეთ ვებგვერდი და Waves აღმოაჩენს ხელმისაწვდომ მედიას.</string>
     <string name="capture_empty_video_message">Ვიდეოები ხელმისაწვდომი არ არის.</string>
     <string name="clipboard">Კოპირებულია ბუფერში</string>
     <string name="close_tab">ჩანართის დახურვა</string>
@@ -70,7 +70,7 @@
     <string name="details_url">URL</string>
     <string name="download">Ჩამოტვირთვა</string>
     <string name="download_finished">Ჩამოტვირთვა დასრულდა</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Ჩამოტვირთვის ხარისხი</string>
     <string name="download_queued">Მომლოდინე…</string>
     <string name="download_rename_error">Ფაილის სახელი უკვე გამოიყენება.</string>
@@ -83,7 +83,7 @@
     <string name="empty_list_history">Თქვენი ჩამოტვირთვების ისტორია ცარიელია.</string>
     <string name="empty_list_query">Შედეგები არ მოიძებნა</string>
     <string name="empty_list_type">Აქ არაფერია.</string>
-    <string name="empty_media_help">Ზოგიერთი მედია ფაილი უნდა დაკვრას, სანამ Firedown აღმოაჩენს მათ, როგორც ჩამოსატვირთ ფაილს.</string>
+    <string name="empty_media_help">Ზოგიერთი მედია ფაილი უნდა დაკვრას, სანამ Waves აღმოაჩენს მათ, როგორც ჩამოსატვირთ ფაილს.</string>
     <string name="empty_media_help_title">Ჩამოტვირთვამდე დაუკარით მედია</string>
     <string name="empty_media_subtitle_help">Გთხოვთ, დაუკარით მედია ჩვეულებრივად. შემდეგ ის უნდა გამოჩნდეს სხვა მედია ფაილებთან ერთად, ცეცხლის ღილაკის დაჭერის შემდეგ.</string>
 <string name="error_check_internet_connection">Ინტერნეტ კავშირის შეცდომა.</string>
@@ -143,7 +143,7 @@
     <string name="navigation_web_history">ისტორია</string>
     <string name="notifications_downloads_channel">Ჩამოტვირთვები</string>
     <string name="open">Გახსენით</string>
-    <string name="open_in_app_subtitle">Გსურთ დატოვოთ Firedown ამ კონტენტის სანახავად?</string>
+    <string name="open_in_app_subtitle">Გსურთ დატოვოთ Waves ამ კონტენტის სანახავად?</string>
     <string name="open_in_app_title">Გახსენით სხვა აპლიკაციაში</string>
     <string name="open_new_private_tab_2">ახალი პირადი ჩანართი</string>
     <string name="open_new_tab_2">ახალი ჩანართი</string>
@@ -279,7 +279,7 @@
     <string name="trackers_info_action">დაცვის მართვა</string>
     <string name="trackers_info_today">%1$s დღეს დაბლოკილია</string>
     <string name="bookmark_export">სანიშნეების ექსპორტი</string>
-    <string name="bookmark_export_done">%1$d სანიშნე ექსპორტირდა საქაღალდეში Download/Firedown/backup</string>
+    <string name="bookmark_export_done">%1$d სანიშნე ექსპორტირდა საქაღალდეში Download/Waves/backup</string>
     <string name="bookmark_import">სანიშნეების იმპორტი</string>
     <string name="bookmark_import_done">%1$d სანიშნე იმპორტირდა</string>
     <string name="bookmark_io_error">სანიშნეების ფაილის წაკითხვა ვერ მოხერხდა</string>
@@ -304,7 +304,7 @@
     <string name="settings_sync_export_continue">გაგრძელება</string>
     <string name="settings_sync_export_done">აღდგენის კოდი შენახულია</string>
     <string name="settings_sync_export_failed">ფაილის შენახვა ვერ მოხერხდა</string>
-    <string name="settings_sync_export_file_body">Firedown — სანიშნეების სინქრონიზაციის აღდგენის კოდი\n\n%1$s\n\nეს კოდი თქვენი სინქრონიზებული სანიშნეების ერთადერთი გასაღებია — ვისაც აქვს იგი, შეუძლია მათი წაკითხვა, და დაკარგვის შემთხვევაში მისი აღდგენა შეუძლებელია.\n\nეს ფაილი დაშიფრული არ არის. დააიმპორტეთ კოდი თქვენს პაროლების მმართველში (ან სხვა უსაფრთხო ადგილას), შემდეგ კი წაშალეთ ეს ფაილი.</string>
+    <string name="settings_sync_export_file_body">Waves — სანიშნეების სინქრონიზაციის აღდგენის კოდი\n\n%1$s\n\nეს კოდი თქვენი სინქრონიზებული სანიშნეების ერთადერთი გასაღებია — ვისაც აქვს იგი, შეუძლია მათი წაკითხვა, და დაკარგვის შემთხვევაში მისი აღდგენა შეუძლებელია.\n\nეს ფაილი დაშიფრული არ არის. დააიმპორტეთ კოდი თქვენს პაროლების მმართველში (ან სხვა უსაფრთხო ადგილას), შემდეგ კი წაშალეთ ეს ფაილი.</string>
     <string name="settings_sync_export_summary">ექსპორტი გაუკეთეთ კოდს ტექსტურ ფაილად, რომელიც შეგიძლიათ შეინახოთ</string>
     <string name="settings_sync_export_title">აღდგენის კოდის ფაილში შენახვა</string>
     <string name="settings_sync_faq_a1">დიახ. თითოეული სანიშნე იშიფრება ამ მოწყობილობაზე ატვირთვამდე. სერვერი ინახავს მხოლოდ არეულ მონაცემებს, რომელთა წაკითხვაც მას არ შეუძლია.</string>
@@ -314,7 +314,7 @@
     <string name="settings_sync_faq_a5">არა. არ არის რეგისტრაცია, ელფოსტა ან ტელეფონის ნომერი — მხოლოდ აღდგენის კოდი. არაფერი პირადი არ არის მიბმული თქვენს სანიშნეებზე.</string>
     <string name="settings_sync_faq_a6">სინქრონიზაცია არჩევითია და ნაგულისხმევად გამორთულია. ყოველთვის შეგიძლიათ თქვენი სანიშნეების ფაილში ექსპორტი და მოგვიანებით იმპორტი, ყოველგვარი სერვერის გარეშე.</string>
     <string name="settings_sync_faq_q1">ჩემი სანიშნეები დაშიფრულია?</string>
-    <string name="settings_sync_faq_q2">შეუძლია Firedown-ს ან ვინმე სხვას მათი წაკითხვა?</string>
+    <string name="settings_sync_faq_q2">შეუძლია Waves-ს ან ვინმე სხვას მათი წაკითხვა?</string>
     <string name="settings_sync_faq_q3">რა არის აღდგენის კოდი?</string>
     <string name="settings_sync_faq_q4">რა მოხდება, თუ აღდგენის კოდს დავკარგავ?</string>
     <string name="settings_sync_faq_q5">მჭირდება ანგარიში ან ელფოსტა?</string>

@@ -179,7 +179,7 @@ dependencies {
     // Skip this if you don't want to use integration libraries or configure Glide.
     annotationProcessor 'com.github.bumptech.glide:compiler:5.0.9'
 
-    implementation "org.mozilla.geckoview:geckoview-default:${geckoviewVersion}"
+    implementation "org.mozilla.geckoview:geckoview:${geckoviewVersion}"
 
     // GeckoView's own transitive dependencies are now SUPPLIED BY ITS POM. The
     // firedown-geckoview build injects them into the published geckoview-default POM

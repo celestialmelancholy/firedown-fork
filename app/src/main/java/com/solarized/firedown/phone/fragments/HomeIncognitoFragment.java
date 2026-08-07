@@ -103,6 +103,16 @@ public class HomeIncognitoFragment extends BaseBrowserFragment implements
                     @Override
                     public void handleOnBackPressed() {
                         if (dismissAutocompleteOverlayIfVisible()) return;
+                        // Address field focused (overlay not visible): back must
+                        // NOT pop/exit — clear the editing state instead, like a
+                        // standard browser.
+                        if (mGeckoToolbar != null && mAutoCompleteEditText != null
+                                && mAutoCompleteEditText.hasFocus()) {
+                            mGeckoToolbar.clearFocus();
+                            mGeckoToolbar.startAnimation(false);
+                            mGeckoToolbar.updateViewVisibility(false);
+                            return;
+                        }
                         // Default back from incognito home pops to regular home.
                         setEnabled(false);
                         mActivity.getOnBackPressedDispatcher().onBackPressed();
@@ -143,11 +153,13 @@ public class HomeIncognitoFragment extends BaseBrowserFragment implements
         mAutoCompleteView = v.findViewById(R.id.auto_complete_view);
         mBottomNavigationBar = v.findViewById(R.id.bottom_app_bar);
         mBottomNavigationBar.setListener(this);
+        // Bind the top-bar action cluster to THIS fragment's toolbar (see
+        // BottomNavigationBar.bindButtons — must use our own root, never the
+        // window root, or navigation could bind another fragment's buttons).
+        mBottomNavigationBar.bindButtons(v);
 
-        // Bookmarks is the flat middle-slot button in the bottom bar
-        // (see onBottomBarButtonClick's R.id.search_button branch). The
-        // former hero FAB was removed in favour of this plain in-bar
-        // affordance.
+        // The bookmarks entry lives in the 3-dot popup menu
+        // (see HomeIncognitoFragment's getOptionsEvent popup_bookmarks branch).
 
         mGeckoToolbar = v.findViewById(R.id.toolbar_layout);
         mGeckoToolbar.setListener(this);
@@ -286,6 +298,14 @@ public class HomeIncognitoFragment extends BaseBrowserFragment implements
                 args.putBoolean(Keys.IS_INCOGNITO, true);
                 NavigationUtils.navigateSafe(mNavController,
                         R.id.action_home_incognito_to_history, args);
+            } else if (id == R.id.popup_bookmarks) {
+                // Bookmarks list is just URLs the user explicitly saved — no
+                // private-browsing state leaks, so it's available in both modes
+                // (same as the Browser popup's Library group).
+                Bundle args = new Bundle();
+                args.putBoolean(Keys.IS_INCOGNITO, true);
+                NavigationUtils.navigateSafe(mNavController,
+                        R.id.action_home_incognito_to_bookmarks, args);
             } else if (id == R.id.popup_settings) {
                 Intent settingsIntent = new Intent(mActivity, SettingsActivity.class);
                 mStartForResult.launch(settingsIntent);
@@ -368,16 +388,11 @@ public class HomeIncognitoFragment extends BaseBrowserFragment implements
         } else if (id == R.id.new_tab_button) {
             flashNewTab(mNewTabView);
             addNewIncognitoTab();
-        } else if (id == R.id.downloads_button) {
+        } else if (id == R.id.download_button) {
+            // Compact flame in the top bar (Item 2) — same action as the old
+            // bottom-bar downloads button (Vault for private mode).
             Intent downloadsIntent = new Intent(mActivity, VaultActivity.class);
             mStartForResult.launch(downloadsIntent);
-        } else if (id == R.id.search_button) {
-            // The middle slot is the flat Bookmarks button. Pass the
-            // incognito flag through so the list paints in incognito
-            // tones and tapping an entry opens an incognito tab.
-            Bundle args = new Bundle();
-            args.putBoolean(Keys.IS_INCOGNITO, true);
-            NavigationUtils.navigateSafe(mNavController, R.id.action_home_incognito_to_bookmarks, args);
         }
     }
 
@@ -433,11 +448,35 @@ public class HomeIncognitoFragment extends BaseBrowserFragment implements
             Bundle bundle = new Bundle();
             bundle.putBoolean(Keys.IS_INCOGNITO, true);
             NavigationUtils.navigateSafe(mNavController, R.id.dialog_search_engine, R.id.home_incognito, bundle);
+        } else if (id == R.id.mic_button) {
+            launchVoiceSearch();
+        } else if (id == R.id.image_search_button) {
+            launchImageSearch();
         }
     }
 
     @Override
     public void onToolbarKey(int keyCode, KeyEvent event) { }
+
+    /** Image-search result (Lens URL) opens like any typed URL from incognito Home. */
+    @Override
+    protected void openUriInCurrentTab(String url) {
+        openUri(url);
+    }
+
+    /** Voice-search result lands in the address bar and commits (search). */
+    @Override
+    protected void onVoiceSearchResult(String text) {
+        if (mGeckoToolbar != null) {
+            mGeckoToolbar.setUri(text, false);
+            onCommit();
+        }
+    }
+
+    @Override
+    protected boolean isVoiceSearchIncognito() {
+        return true;
+    }
 
     // ── Item click (autocomplete results) ───────────────────────────
 

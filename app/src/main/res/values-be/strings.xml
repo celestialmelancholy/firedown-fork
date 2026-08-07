@@ -1,6 +1,6 @@
 <resources>
     <string name="action_mode_selected">%d выбрана</string>
-    <string name="app_lock">Разблакіруйце, каб выкарыстоўваць Firedown</string>
+    <string name="app_lock">Разблакіруйце, каб выкарыстоўваць Waves</string>
     <string name="app_unlock">Разблакіраваць</string>
     <string name="browser_bookmark_added">Закладка захавана!</string>
     <string name="browser_cache_cleared">Даныя прагляду выдалены</string>
@@ -25,7 +25,7 @@
     <string name="capture_empty_gifs_message">Няма даступных гіф-файлаў.</string>
     <string name="capture_empty_images_message">Выяў няма.</string>
     <string name="capture_empty_message">Няма даступных мультымедыя для спампоўкі.</string>
-    <string name="capture_empty_subtext">Перазагрузіце вэб-сайт, і Firedown выявіць даступны носьбіт.</string>
+    <string name="capture_empty_subtext">Перазагрузіце вэб-сайт, і Waves выявіць даступны носьбіт.</string>
     <string name="capture_empty_video_message">Няма даступных відэа.</string>
     <string name="clipboard">Скапіравана ў буфер абмену</string>
     <string name="close_tab">Закрыць картку</string>
@@ -83,7 +83,7 @@
     <string name="empty_list_history">Ваша гісторыя спамповак пустая.</string>
     <string name="empty_list_query">Нічога не знойдзена</string>
     <string name="empty_list_type">Тут нічога няма.</string>
-    <string name="empty_media_help">Некаторыя мультымедыйныя файлы неабходна прайграць, перш чым Firedown зможа выявіць іх як файлы для спампоўкі.</string>
+    <string name="empty_media_help">Некаторыя мультымедыйныя файлы неабходна прайграць, перш чым Waves зможа выявіць іх як файлы для спампоўкі.</string>
     <string name="empty_media_help_title">Прайграйце мультымедыя перад загрузкай</string>
     <string name="empty_media_subtitle_help">Прайграйце мультымедыя як звычайна. Затым ён павінен з\'явіцца разам з іншымі медыя-файламі пасля націску кнопкі Fire.</string>
 <string name="error_check_internet_connection">Памылка інтэрнэт-злучэння.</string>
@@ -140,7 +140,7 @@
     <string name="navigation_web_history">Гісторыя</string>
     <string name="notifications_downloads_channel">Загрузкі</string>
     <string name="open">Адкрыты</string>
-    <string name="open_in_app_subtitle">Вы хочаце пакінуць Firedown, каб праглядзець гэты кантэнт?</string>
+    <string name="open_in_app_subtitle">Вы хочаце пакінуць Waves, каб праглядзець гэты кантэнт?</string>
     <string name="open_in_app_title">Адкрыць у іншай праграме</string>
     <string name="open_new_private_tab_2">Прыватная картка</string>
     <string name="open_new_tab_2">Новая картка</string>
@@ -163,7 +163,7 @@
     <string name="rename_file">Перайменаваць файл</string>
     <string name="request_geolocation">Падзяліцца месцазнаходжаннем прылады з &lt;b&gt; %s &lt;/b&gt;?</string>
     <string name="request_media_key_system_access">Дазволіць &lt;b&gt; %s &lt;/b&gt; прайграваць кантэнт, які кантралюецца DRM?</string>
-    <string name="request_media_key_system_access_subtitle">Звярніце ўвагу, што файлы, абароненыя DRM, не могуць быць загружаны Firedown</string>
+    <string name="request_media_key_system_access_subtitle">Звярніце ўвагу, што файлы, абароненыя DRM, не могуць быць загружаны Waves</string>
     <string name="request_storage">Дазволіць доступ да сховішча прылады для &lt;b&gt; %s &lt;/b&gt;?</string>
     <string name="request_storage_access">Дазволіць староннім асобам доступ да ўласнага сховішча &lt;b&gt; %s &lt;/b&gt;?</string>
     <string name="restart_origin">Перазапуск</string>
@@ -282,7 +282,7 @@
 
 
     <string name="bookmark_export">Экспартаваць закладкі</string>
-    <string name="bookmark_export_done">Экспартавана закладак: %1$d у Download/Firedown/backup</string>
+    <string name="bookmark_export_done">Экспартавана закладак: %1$d у Download/Waves/backup</string>
     <string name="bookmark_import">Імпартаваць закладкі</string>
     <string name="bookmark_import_done">Імпартавана закладак: %1$d</string>
     <string name="bookmark_io_error">Не ўдалося прачытаць файл закладак</string>
@@ -307,7 +307,7 @@
     <string name="settings_sync_export_continue">Працягнуць</string>
     <string name="settings_sync_export_done">Код аднаўлення захаваны</string>
     <string name="settings_sync_export_failed">Не ўдалося захаваць файл</string>
-    <string name="settings_sync_export_file_body">Firedown — код аднаўлення сінхранізацыі закладак\n\n%1$s\n\nГэты код — адзіны ключ да вашых сінхранізаваных закладак: кожны, хто яго мае, можа іх прачытаць, і яго немагчыма аднавіць у выпадку страты.\n\nГэты файл НЕ зашыфраваны. Імпартуйце код у свой менеджар пароляў (ці іншае бяспечнае месца), затым выдаліце гэты файл.</string>
+    <string name="settings_sync_export_file_body">Waves — код аднаўлення сінхранізацыі закладак\n\n%1$s\n\nГэты код — адзіны ключ да вашых сінхранізаваных закладак: кожны, хто яго мае, можа іх прачытаць, і яго немагчыма аднавіць у выпадку страты.\n\nГэты файл НЕ зашыфраваны. Імпартуйце код у свой менеджар пароляў (ці іншае бяспечнае месца), затым выдаліце гэты файл.</string>
     <string name="settings_sync_export_summary">Экспартаваць код як тэкставы файл, які можна захаваць</string>
     <string name="settings_sync_export_title">Захаваць код аднаўлення ў файл</string>
     <string name="settings_sync_faq_a1">Так. Кожная закладка шыфруецца на гэтай прыладзе перад загрузкай. Сервер заўсёды захоўвае толькі зашыфраваныя дадзеныя, якія ён не можа прачытаць.</string>
@@ -317,7 +317,7 @@
     <string name="settings_sync_faq_a5">Не. Няма ні рэгістрацыі, ні электроннай пошты, ні нумара тэлефона — толькі код аднаўлення. Нічога асабістага не звязана з вашымі закладкамі.</string>
     <string name="settings_sync_faq_a6">Сінхранізацыя неабавязковая і па змаўчанні выключана. Вы заўсёды можаце экспартаваць свае закладкі ў файл і імпартаваць іх пазней, без удзелу сервера.</string>
     <string name="settings_sync_faq_q1">Ці зашыфраваны мае закладкі?</string>
-    <string name="settings_sync_faq_q2">Ці можа Firedown ці хтосьці іншы прачытаць іх?</string>
+    <string name="settings_sync_faq_q2">Ці можа Waves ці хтосьці іншы прачытаць іх?</string>
     <string name="settings_sync_faq_q3">Што такое код аднаўлення?</string>
     <string name="settings_sync_faq_q4">Што, калі я страчу свой код аднаўлення?</string>
     <string name="settings_sync_faq_q5">Ці патрэбны мне акаўнт ці электронная пошта?</string>

@@ -1,6 +1,6 @@
 <resources>
     <string name="action_mode_selected">%d dipilih</string>
-    <string name="app_lock">Buka kunci untuk menggunakan Firedown</string>
+    <string name="app_lock">Buka kunci untuk menggunakan Waves</string>
     <string name="app_unlock">Membuka kunci</string>
     <string name="browser_bookmark_added">Tandai Disimpan!</string>
     <string name="browser_cache_cleared">Data penjelajahan dihapus</string>
@@ -25,7 +25,7 @@
     <string name="capture_empty_gifs_message">Tidak ada Gif yang tersedia.</string>
     <string name="capture_empty_images_message">Tidak ada Gambar yang tersedia.</string>
     <string name="capture_empty_message">Tidak ada media yang tersedia untuk diunduh.</string>
-    <string name="capture_empty_subtext">Muat ulang situs web dan Firedown akan mendeteksi media yang tersedia.</string>
+    <string name="capture_empty_subtext">Muat ulang situs web dan Waves akan mendeteksi media yang tersedia.</string>
     <string name="capture_empty_video_message">Tidak ada video yang tersedia.</string>
     <string name="clipboard">Disalin ke papan klip</string>
     <string name="clipboard_from">Dari papan klip</string>
@@ -84,7 +84,7 @@
     <string name="empty_list_history">Riwayat unduhan Anda kosong.</string>
     <string name="empty_list_query">Tidak ada hasil yang ditemukan</string>
     <string name="empty_list_type">Tidak ada apa-apa di sini.</string>
-    <string name="empty_media_help">Beberapa file media perlu diputar sebelum Firedown dapat mendeteksinya sebagai file yang dapat diunduh.</string>
+    <string name="empty_media_help">Beberapa file media perlu diputar sebelum Waves dapat mendeteksinya sebagai file yang dapat diunduh.</string>
     <string name="empty_media_help_title">Putar media sebelum mengunduh</string>
     <string name="empty_media_subtitle_help">Silakan putar media seperti biasa. Ini kemudian akan muncul dengan file media lainnya, setelah menekan Tombol Api.</string>
 <string name="error_check_internet_connection">Kesalahan koneksi internet.</string>
@@ -144,7 +144,7 @@
     <string name="navigation_web_history">Riwayat</string>
     <string name="notifications_downloads_channel">Unduhan</string>
     <string name="open">Membuka</string>
-    <string name="open_in_app_subtitle">Apakah Anda ingin keluar dari Firedown untuk melihat konten ini?</string>
+    <string name="open_in_app_subtitle">Apakah Anda ingin keluar dari Waves untuk melihat konten ini?</string>
     <string name="open_in_app_title">Buka di aplikasi lain</string>
     <string name="open_new_private_tab_2">Tab pribadi baru</string>
     <string name="open_new_tab_2">Tab baru</string>
@@ -291,7 +291,7 @@
     <string name="capture_help_banner_title">Video tidak ada di daftar?</string>
     <string name="capture_help_banner">Beberapa media tersemat harus diputar dulu. Ketuk untuk mempelajari caranya.</string>
     <string name="bookmark_export">Ekspor markah</string>
-    <string name="bookmark_export_done">%1$d markah diekspor ke Download/Firedown/backup</string>
+    <string name="bookmark_export_done">%1$d markah diekspor ke Download/Waves/backup</string>
     <string name="bookmark_import">Impor markah</string>
     <string name="bookmark_import_done">%1$d markah diimpor</string>
     <string name="bookmark_io_error">Tidak dapat membaca berkas markah</string>
@@ -316,7 +316,7 @@
     <string name="settings_sync_export_continue">Lanjutkan</string>
     <string name="settings_sync_export_done">Kode pemulihan disimpan</string>
     <string name="settings_sync_export_failed">Tidak dapat menyimpan berkas</string>
-    <string name="settings_sync_export_file_body">Firedown — kode pemulihan sinkronisasi markah\n\n%1$s\n\nKode ini adalah satu-satunya kunci untuk markah tersinkronisasi Anda — siapa pun yang memilikinya dapat membacanya, dan kode ini tidak dapat dipulihkan jika hilang.\n\nBerkas ini TIDAK dienkripsi. Impor kode ke pengelola kata sandi Anda (atau tempat aman lain), lalu hapus berkas ini.</string>
+    <string name="settings_sync_export_file_body">Waves — kode pemulihan sinkronisasi markah\n\n%1$s\n\nKode ini adalah satu-satunya kunci untuk markah tersinkronisasi Anda — siapa pun yang memilikinya dapat membacanya, dan kode ini tidak dapat dipulihkan jika hilang.\n\nBerkas ini TIDAK dienkripsi. Impor kode ke pengelola kata sandi Anda (atau tempat aman lain), lalu hapus berkas ini.</string>
     <string name="settings_sync_export_summary">Ekspor kode sebagai berkas teks yang dapat Anda simpan</string>
     <string name="settings_sync_export_title">Simpan kode pemulihan ke berkas</string>
     <string name="settings_sync_faq_a1">Ya. Setiap markah dienkripsi di perangkat ini sebelum diunggah. Server hanya menyimpan data teracak yang tidak dapat dibacanya.</string>
@@ -326,7 +326,7 @@
     <string name="settings_sync_faq_a5">Tidak. Tidak ada pendaftaran, email, atau nomor telepon — hanya kode pemulihan. Tidak ada informasi pribadi yang terikat dengan markah Anda.</string>
     <string name="settings_sync_faq_a6">Sinkronisasi bersifat opsional dan mati secara baku. Anda selalu dapat mengekspor markah Anda ke berkas dan mengimpornya nanti, tanpa melibatkan server.</string>
     <string name="settings_sync_faq_q1">Apakah markah saya dienkripsi?</string>
-    <string name="settings_sync_faq_q2">Dapatkah Firedown atau orang lain membacanya?</string>
+    <string name="settings_sync_faq_q2">Dapatkah Waves atau orang lain membacanya?</string>
     <string name="settings_sync_faq_q3">Apa itu kode pemulihan?</string>
     <string name="settings_sync_faq_q4">Bagaimana jika saya kehilangan kode pemulihan saya?</string>
     <string name="settings_sync_faq_q5">Apakah saya memerlukan akun atau email?</string>

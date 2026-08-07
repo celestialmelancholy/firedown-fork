@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">%d ተመርጧል</string>
-    <string name="app_lock">Firedownን ለመጠቀም ይክፈቱ</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Wavesን ለመጠቀም ይክፈቱ</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">ክፈት</string>
     <string name="browser_bookmark_added">ዕልባት ተቀምጧል!</string>
     <string name="browser_cache_cleared">የአሰሳ ውሂብ ጸድቷል</string>
@@ -26,7 +26,7 @@
     <string name="capture_empty_gifs_message">ምንም Gifs አይገኙም።</string>
     <string name="capture_empty_images_message">ምንም ምስሎች አይገኙም።</string>
     <string name="capture_empty_message">ለማውረድ ምንም ሚዲያ የለም።</string>
-    <string name="capture_empty_subtext">ድርጣቢያውን እንደገና ይጫኑ እና Firedown ያለውን ሚዲያ ያገኛል።</string>
+    <string name="capture_empty_subtext">ድርጣቢያውን እንደገና ይጫኑ እና Waves ያለውን ሚዲያ ያገኛል።</string>
     <string name="capture_empty_video_message">ምንም ቪዲዮዎች አይገኙም።</string>
     <string name="clipboard">ወደ ቅንጥብ ሰሌዳ ተቀድቷል</string>
     <string name="close_tab">ትርን ዝጋ</string>
@@ -71,7 +71,7 @@
     <string name="details_url">URL</string>
     <string name="download">አውርድ</string>
     <string name="download_finished">ማውረዱ አልቋል</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">የማውረድ ጥራት</string>
     <string name="download_queued">በመጠባበቅ ላይ…</string>
     <string name="download_rename_error">የፋይሉ ስም አስቀድሞ ጥቅም ላይ ውሏል።</string>
@@ -84,7 +84,7 @@
     <string name="empty_list_history">የወርዶች ታሪክዎ ባዶ ነው።</string>
     <string name="empty_list_query">ምንም ውጤቶች አልተገኙም</string>
     <string name="empty_list_type">እዚህ ምንም የለም።</string>
-    <string name="empty_media_help">አንዳንድ የሚዲያ ፋይሎች Firedown ሊወርዱ እንደሚችሉ ፋይሎች ሳያገኛቸው በፊት መጫወት አለባቸው።</string>
+    <string name="empty_media_help">አንዳንድ የሚዲያ ፋይሎች Waves ሊወርዱ እንደሚችሉ ፋይሎች ሳያገኛቸው በፊት መጫወት አለባቸው።</string>
     <string name="empty_media_help_title">ከማውረድዎ በፊት ሚዲያውን ያጫውቱ</string>
     <string name="empty_media_subtitle_help">እባካችሁ ሚዲያውን እንደተለመደው አጫውት። ከዚያም የእሳት-አዝራሩን ከተጫኑ በኋላ ከሌሎች የሚዲያ ፋይሎች ጋር መታየት አለበት።</string>
 <string name="error_check_internet_connection">የበይነመረብ ግንኙነት ስህተት።</string>
@@ -142,7 +142,7 @@
     <string name="navigation_web_history">ሙሉ ታሪክ</string>
     <string name="notifications_downloads_channel">ውርዶች</string>
     <string name="open">ክፈት</string>
-    <string name="open_in_app_subtitle">ይህን ይዘት ለማየት ከFiredown መውጣት ይፈልጋሉ?</string>
+    <string name="open_in_app_subtitle">ይህን ይዘት ለማየት ከWaves መውጣት ይፈልጋሉ?</string>
     <string name="open_in_app_title">በሌላ መተግበሪያ ክፈት</string>
     <string name="open_new_private_tab_2">አዲስ የግል ትር</string>
     <string name="open_new_tab_2">አዲስ ትር</string>
@@ -167,7 +167,7 @@
     <string name="rename_file">ፋይል እንደገና ይሰይሙ</string>
     <string name="request_geolocation">የመሣሪያዎ አካባቢ ለ&lt;b&gt;%s&lt;/b&gt; ይጋራ?</string>
     <string name="request_media_key_system_access">&lt;b&gt;%s&lt;/b&gt; በDRM የሚቆጣጠረውን ይዘት እንዲያጫውት ይፈቀድለት?</string>
-    <string name="request_media_key_system_access_subtitle">ማስታወሻ፣ በDRM የተጠበቁ ፋይሎች በFiredown ሊወርዱ አይችሉም</string>
+    <string name="request_media_key_system_access_subtitle">ማስታወሻ፣ በDRM የተጠበቁ ፋይሎች በWaves ሊወርዱ አይችሉም</string>
     <string name="request_storage">ለ&lt;b&gt;%s&lt;/b&gt; የመሣሪያ ማከማቻ መዳረሻ ይፈቀድ?</string>
     <string name="request_storage_access">ለ&lt;b&gt;%s&lt;/b&gt; ሶስተኛ ወገኖች የመጀመሪያ ወገን ማከማቻ እንዲደርሱ ይፈቀድላቸው?</string>
     <string name="restart_origin">እንደገና ጀምር</string>
@@ -280,7 +280,7 @@
     <string name="trackers_info_action">ጥበቃ አስተዳድር</string>
     <string name="trackers_info_today">%1$s ዛሬ ተዘግተዋል</string>
     <string name="bookmark_export">ዕልባቶችን ላክ</string>
-    <string name="bookmark_export_done">%1$d ዕልባቶች ወደ Download/Firedown/backup ተልከዋል</string>
+    <string name="bookmark_export_done">%1$d ዕልባቶች ወደ Download/Waves/backup ተልከዋል</string>
     <string name="bookmark_import">ዕልባቶችን አስገባ</string>
     <string name="bookmark_import_done">%1$d ዕልባቶች ገብተዋል</string>
     <string name="bookmark_io_error">የዕልባቶች ፋይል ማንበብ አልተቻለም</string>
@@ -305,7 +305,7 @@
     <string name="settings_sync_export_continue">ቀጥል</string>
     <string name="settings_sync_export_done">የመልሶ ማግኛ ኮድ ተቀምጧል</string>
     <string name="settings_sync_export_failed">ፋይሉን ማስቀመጥ አልተቻለም</string>
-    <string name="settings_sync_export_file_body">Firedown — የዕልባት ማመሳሰል መልሶ ማግኛ ኮድ\n\n%1$s\n\nይህ ኮድ ወደ የተመሳሰሉ ዕልባቶችዎ ብቸኛው ቁልፍ ነው — ያለው ማንኛውም ሰው ሊያነባቸው ይችላል፣ ከጠፋም መልሶ ማግኘት አይቻልም።\n\nይህ ፋይል አልተመሰጠረም። ኮዱን ወደ ይለፍ ቃል አስተዳዳሪዎ (ወይም ሌላ ደህንነቱ የተጠበቀ ቦታ) አስገብተው ከዚያ ይህን ፋይል ይሰርዙ።</string>
+    <string name="settings_sync_export_file_body">Waves — የዕልባት ማመሳሰል መልሶ ማግኛ ኮድ\n\n%1$s\n\nይህ ኮድ ወደ የተመሳሰሉ ዕልባቶችዎ ብቸኛው ቁልፍ ነው — ያለው ማንኛውም ሰው ሊያነባቸው ይችላል፣ ከጠፋም መልሶ ማግኘት አይቻልም።\n\nይህ ፋይል አልተመሰጠረም። ኮዱን ወደ ይለፍ ቃል አስተዳዳሪዎ (ወይም ሌላ ደህንነቱ የተጠበቀ ቦታ) አስገብተው ከዚያ ይህን ፋይል ይሰርዙ።</string>
     <string name="settings_sync_export_summary">ኮዱን ሊያከማቹት እንደሚችሉት የጽሑፍ ፋይል ላክ</string>
     <string name="settings_sync_export_title">የመልሶ ማግኛ ኮድ ወደ ፋይል አስቀምጥ</string>
     <string name="settings_sync_faq_a1">አዎ። እያንዳንዱ ዕልባት ከመጫኑ በፊት በዚህ መሳሪያ ላይ ይመሰጠራል። አገልጋዩ ሊያነበው የማይችለውን የተበጣጠሰ ውሂብ ብቻ ነው የሚያከማቸው።</string>
@@ -315,7 +315,7 @@
     <string name="settings_sync_faq_a5">አይ። ምዝገባ፣ ኢሜይል ወይም ስልክ ቁጥር የለም — የመልሶ ማግኛ ኮድ ብቻ ነው። ምንም የግል ነገር ከዕልባቶችዎ ጋር አልተሳሰረም።</string>
     <string name="settings_sync_faq_a6">ማመሳሰል አማራጭ ነው እና በነባሪ ጠፍቷል። ዕልባቶችዎን ወደ ፋይል ሁልጊዜ ላክተው ቆይተው ምንም አገልጋይ ሳይኖር ማስገባት ይችላሉ።</string>
     <string name="settings_sync_faq_q1">ዕልባቶቼ ተመስጥረዋል?</string>
-    <string name="settings_sync_faq_q2">Firedown ወይም ሌላ ማንም ሊያነባቸው ይችላል?</string>
+    <string name="settings_sync_faq_q2">Waves ወይም ሌላ ማንም ሊያነባቸው ይችላል?</string>
     <string name="settings_sync_faq_q3">የመልሶ ማግኛ ኮድ ምንድን ነው?</string>
     <string name="settings_sync_faq_q4">የመልሶ ማግኛ ኮዴን ብታጣ?</string>
     <string name="settings_sync_faq_q5">መለያ ወይም ኢሜይል እፈልጋለሁ?</string>

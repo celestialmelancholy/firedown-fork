@@ -36,7 +36,7 @@ public final class StoragePaths {
 
     public static final int PERMISSIONS_REQUESTS = 100;
 
-    private static final String FOLDERNAME = "Firedown";
+    private static final String FOLDERNAME = "Waves";
     private static final String SAFE_FOLDERNAME = "safe";
     private static final String CACHE_FOLDERNAME = "content";
     private static final String THUMBS_FOLDERNAME = "thumbs";

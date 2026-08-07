@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">נבחרו %d</string>
-    <string name="app_lock">בטל את הנעילה כדי להשתמש ב-Firedown</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">בטל את הנעילה כדי להשתמש ב-Waves</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">לבטל נעילה</string>
     <string name="browser_bookmark_added">הסימנייה נשמרה!</string>
     <string name="browser_cache_cleared">נתוני הגלישה נוקו</string>
@@ -26,7 +26,7 @@
     <string name="capture_empty_gifs_message">אין קובצי GIF זמינים.</string>
     <string name="capture_empty_images_message">אין תמונות זמינות.</string>
     <string name="capture_empty_message">אין מדיה זמינה להורדה.</string>
-    <string name="capture_empty_subtext">טען מחדש את האתר ו-Firedown יזהה מדיה זמינה.</string>
+    <string name="capture_empty_subtext">טען מחדש את האתר ו-Waves יזהה מדיה זמינה.</string>
     <string name="capture_empty_video_message">אין סרטונים זמינים.</string>
     <string name="clipboard">הועתק ללוח</string>
     <string name="close_tab">סגירת לשונית</string>
@@ -71,7 +71,7 @@
     <string name="details_url">כתובת אתר</string>
     <string name="download">הורד</string>
     <string name="download_finished">ההורדה הסתיימה</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">איכות הורדה</string>
     <string name="download_queued">ממתין ל…</string>
     <string name="download_rename_error">שם הקובץ כבר בשימוש.</string>
@@ -85,7 +85,7 @@
     <string name="empty_list_history">היסטוריית ההורדות שלך ריקה.</string>
     <string name="empty_list_query">לא נמצאו תוצאות</string>
     <string name="empty_list_type">אין פה כלום.</string>
-    <string name="empty_media_help">יש להפעיל קובצי מדיה מסוימים לפני ש-Firedown תוכל לזהות אותם כקבצים להורדה.</string>
+    <string name="empty_media_help">יש להפעיל קובצי מדיה מסוימים לפני ש-Waves תוכל לזהות אותם כקבצים להורדה.</string>
     <string name="empty_media_help_title">הפעל את המדיה לפני ההורדה</string>
     <string name="empty_media_subtitle_help">נא לשחק במדיה כרגיל. לאחר מכן, הוא אמור להופיע עם קובצי המדיה האחרים, לאחר לחיצה על לחצן האש.</string>
 <string name="error_check_internet_connection">שגיאת חיבור לאינטרנט.</string>
@@ -156,7 +156,7 @@
     <string name="navigation_web_history">היסטוריה</string>
     <string name="notifications_downloads_channel">הורדות</string>
     <string name="open">לִפְתוֹחַ</string>
-    <string name="open_in_app_subtitle">האם תרצה לעזוב את Firedown כדי לצפות בתוכן זה?</string>
+    <string name="open_in_app_subtitle">האם תרצה לעזוב את Waves כדי לצפות בתוכן זה?</string>
     <string name="open_in_app_title">פתח באפליקציה אחרת</string>
     <string name="open_new_private_tab_2">לשונית פרטית חדשה</string>
     <string name="open_new_tab_2">לשונית חדשה</string>
@@ -183,7 +183,7 @@
     <string name="rename_file">שנה את שם הקובץ</string>
     <string name="request_geolocation">האם לשתף את מיקום המכשיר שלך עם &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_media_key_system_access">האם לאפשר ל-&lt;b&gt;%s&lt;/b&gt; להפעיל תוכן הנשלט על ידי DRM?</string>
-    <string name="request_media_key_system_access_subtitle">שימו לב, לא ניתן להוריד קבצים מוגנים ב-DRM על ידי Firedown</string>
+    <string name="request_media_key_system_access_subtitle">שימו לב, לא ניתן להוריד קבצים מוגנים ב-DRM על ידי Waves</string>
     <string name="request_storage">האם לאפשר גישה לאחסון המכשיר עבור &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_storage_access">האם לאפשר לצדדים שלישיים לגשת לאחסון של צד ראשון עבור &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="restart_origin">איתחול</string>
@@ -336,7 +336,7 @@
     <string name="capture_help_banner_title">הסרטון לא מופיע?</string>
     <string name="capture_help_banner">יש להפעיל קודם חלק מהמדיה המוטמעת. הקש כדי ללמוד איך.</string>
     <string name="bookmark_export">ייצוא סימניות</string>
-    <string name="bookmark_export_done">%1$d סימניות יוצאו אל Download/Firedown/backup</string>
+    <string name="bookmark_export_done">%1$d סימניות יוצאו אל Download/Waves/backup</string>
     <string name="bookmark_import">ייבוא סימניות</string>
     <string name="bookmark_import_done">%1$d סימניות יובאו</string>
     <string name="bookmark_io_error">לא ניתן לקרוא את קובץ הסימניות</string>
@@ -361,7 +361,7 @@
     <string name="settings_sync_export_continue">המשך</string>
     <string name="settings_sync_export_done">קוד השחזור נשמר</string>
     <string name="settings_sync_export_failed">לא ניתן לשמור את הקובץ</string>
-    <string name="settings_sync_export_file_body">Firedown — קוד שחזור לסנכרון סימניות\n\n%1$s\n\nקוד זה הוא המפתח היחיד לסימניות המסונכרנות שלך — כל מי שמחזיק בו יכול לקרוא אותן, ולא ניתן לשחזר אותו אם יאבד.\n\nקובץ זה אינו מוצפן. ייבא את הקוד למנהל הסיסמאות שלך (או למקום בטוח אחר), ואז מחק קובץ זה.</string>
+    <string name="settings_sync_export_file_body">Waves — קוד שחזור לסנכרון סימניות\n\n%1$s\n\nקוד זה הוא המפתח היחיד לסימניות המסונכרנות שלך — כל מי שמחזיק בו יכול לקרוא אותן, ולא ניתן לשחזר אותו אם יאבד.\n\nקובץ זה אינו מוצפן. ייבא את הקוד למנהל הסיסמאות שלך (או למקום בטוח אחר), ואז מחק קובץ זה.</string>
     <string name="settings_sync_export_summary">ייצא את הקוד כקובץ טקסט שתוכל לאחסן</string>
     <string name="settings_sync_export_title">שמירת קוד השחזור לקובץ</string>
     <string name="settings_sync_faq_a1">כן. כל סימנייה מוצפנת במכשיר זה לפני שהיא מועלית. השרת שומר רק נתונים מעורבלים שאינו יכול לקרוא.</string>
@@ -371,7 +371,7 @@
     <string name="settings_sync_faq_a5">לא. אין הרשמה, אימייל או מספר טלפון — רק קוד השחזור. שום דבר אישי אינו קשור לסימניות שלך.</string>
     <string name="settings_sync_faq_a6">הסנכרון הוא אופציונלי וכבוי כברירת מחדל. תמיד תוכל לייצא את הסימניות שלך לקובץ ולייבא אותן מאוחר יותר, ללא מעורבות שרת.</string>
     <string name="settings_sync_faq_q1">האם הסימניות שלי מוצפנות?</string>
-    <string name="settings_sync_faq_q2">האם Firedown או מישהו אחר יכול לקרוא אותן?</string>
+    <string name="settings_sync_faq_q2">האם Waves או מישהו אחר יכול לקרוא אותן?</string>
     <string name="settings_sync_faq_q3">מהו קוד השחזור?</string>
     <string name="settings_sync_faq_q4">מה אם אאבד את קוד השחזור שלי?</string>
     <string name="settings_sync_faq_q5">האם אני זקוק לחשבון או לאימייל?</string>

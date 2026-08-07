@@ -1,6 +1,6 @@
 <resources>
     <string name="action_mode_selected">%d таңдалды</string>
-    <string name="app_lock">Firedown пайдалану үшін құлыпты ашыңыз</string>
+    <string name="app_lock">Waves пайдалану үшін құлыпты ашыңыз</string>
     <string name="app_unlock">Ашу</string>
     <string name="browser_bookmark_added">Бетбелгі сақталды!</string>
     <string name="browser_cache_cleared">Шолу деректері өшірілді</string>
@@ -25,7 +25,7 @@
     <string name="capture_empty_gifs_message">Gif жоқ.</string>
     <string name="capture_empty_images_message">Суреттер жоқ.</string>
     <string name="capture_empty_message">Жүктеп алуға болатын медиа жоқ.</string>
-    <string name="capture_empty_subtext">Веб-сайтты қайта жүктеңіз және Firedown қол жетімді медианы анықтайды.</string>
+    <string name="capture_empty_subtext">Веб-сайтты қайта жүктеңіз және Waves қол жетімді медианы анықтайды.</string>
     <string name="capture_empty_video_message">Бейнелер жоқ.</string>
     <string name="clipboard">Буферге көшірілді</string>
     <string name="close_tab">Бетті жабу</string>
@@ -83,7 +83,7 @@
     <string name="empty_list_history">Жүктеп алу тарихыңыз бос.</string>
     <string name="empty_list_query">Нәтиже табылмады</string>
     <string name="empty_list_type">Мұнда ештеңе жоқ.</string>
-    <string name="empty_media_help">Кейбір медиа файлдарды Firedown оларды жүктеп алынатын файлдар ретінде анықтау үшін ойнату қажет.</string>
+    <string name="empty_media_help">Кейбір медиа файлдарды Waves оларды жүктеп алынатын файлдар ретінде анықтау үшін ойнату қажет.</string>
     <string name="empty_media_help_title">Жүктеп алмас бұрын медианы ойнатыңыз</string>
     <string name="empty_media_subtitle_help">Мультимедианы әдеттегідей ойнатыңыз. Ол Өрт түймешігін басқаннан кейін басқа медиа файлдармен бірге пайда болуы керек.</string>
 <string name="error_check_internet_connection">Интернетке қосылу қатесі.</string>
@@ -143,7 +143,7 @@
     <string name="navigation_web_history">Шолу тарихы</string>
     <string name="notifications_downloads_channel">Жүктеулер</string>
     <string name="open">Ашық</string>
-    <string name="open_in_app_subtitle">Осы мазмұнды көру үшін Firedown бағдарламасынан шыққыңыз келе ме?</string>
+    <string name="open_in_app_subtitle">Осы мазмұнды көру үшін Waves бағдарламасынан шыққыңыз келе ме?</string>
     <string name="open_in_app_title">Басқа қолданбада ашыңыз</string>
     <string name="open_new_private_tab_2">Жаңа жекелік беті</string>
     <string name="open_new_tab_2">Жаңа бет</string>
@@ -279,7 +279,7 @@
     <string name="trackers_info_action">Қорғанысты басқару</string>
     <string name="trackers_info_today">%1$s бүгін бұғатталды</string>
     <string name="bookmark_export">Бетбелгілерді экспорттау</string>
-    <string name="bookmark_export_done">%1$d бетбелгі Download/Firedown/backup ішіне экспортталды</string>
+    <string name="bookmark_export_done">%1$d бетбелгі Download/Waves/backup ішіне экспортталды</string>
     <string name="bookmark_import">Бетбелгілерді импорттау</string>
     <string name="bookmark_import_done">%1$d бетбелгі импортталды</string>
     <string name="bookmark_io_error">Бетбелгілер файлын оқу мүмкін болмады</string>
@@ -304,7 +304,7 @@
     <string name="settings_sync_export_continue">Жалғастыру</string>
     <string name="settings_sync_export_done">Қалпына келтіру коды сақталды</string>
     <string name="settings_sync_export_failed">Файлды сақтау мүмкін болмады</string>
-    <string name="settings_sync_export_file_body">Firedown — бетбелгі синхрондауының қалпына келтіру коды\n\n%1$s\n\nБұл код — синхрондалған бетбелгілеріңіздің жалғыз кілті — оны иеленген кез келген адам оларды оқи алады, ал жоғалса оны қалпына келтіру мүмкін емес.\n\nБұл файл шифрланБАҒАН. Кодты құпиясөз менеджеріңізге (немесе басқа қауіпсіз жерге) импорттап, содан кейін осы файлды жойыңыз.</string>
+    <string name="settings_sync_export_file_body">Waves — бетбелгі синхрондауының қалпына келтіру коды\n\n%1$s\n\nБұл код — синхрондалған бетбелгілеріңіздің жалғыз кілті — оны иеленген кез келген адам оларды оқи алады, ал жоғалса оны қалпына келтіру мүмкін емес.\n\nБұл файл шифрланБАҒАН. Кодты құпиясөз менеджеріңізге (немесе басқа қауіпсіз жерге) импорттап, содан кейін осы файлды жойыңыз.</string>
     <string name="settings_sync_export_summary">Кодты сақтай алатын мәтіндік файл ретінде экспорттау</string>
     <string name="settings_sync_export_title">Қалпына келтіру кодын файлға сақтау</string>
     <string name="settings_sync_faq_a1">Иә. Әрбір бетбелгі жүктелмес бұрын осы құрылғыда шифрланады. Сервер тек өзі оқи алмайтын шатастырылған деректерді ғана сақтайды.</string>
@@ -314,7 +314,7 @@
     <string name="settings_sync_faq_a5">Жоқ. Тіркелу, электрондық пошта немесе телефон нөмірі қажет емес — тек қалпына келтіру коды. Бетбелгілеріңізбен ешқандай жеке дерек байланыстырылмаған.</string>
     <string name="settings_sync_faq_a6">Синхрондау міндетті емес және әдепкіде өшірулі. Бетбелгілеріңізді кез келген уақытта файлға экспорттап, кейін серверсіз импорттай аласыз.</string>
     <string name="settings_sync_faq_q1">Бетбелгілерім шифрланған ба?</string>
-    <string name="settings_sync_faq_q2">Firedown немесе басқа біреу оларды оқи ала ма?</string>
+    <string name="settings_sync_faq_q2">Waves немесе басқа біреу оларды оқи ала ма?</string>
     <string name="settings_sync_faq_q3">Қалпына келтіру коды дегеніміз не?</string>
     <string name="settings_sync_faq_q4">Қалпына келтіру кодымды жоғалтсам ше?</string>
     <string name="settings_sync_faq_q5">Маған тіркелгі немесе электрондық пошта қажет пе?</string>

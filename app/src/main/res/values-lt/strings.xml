@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">Pasirinkta %d</string>
-    <string name="app_lock">Atrakinkite, kad galėtumėte naudoti „Firedown“.</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Atrakinkite, kad galėtumėte naudoti „Waves“.</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Atrakinti</string>
     <string name="browser_bookmark_added">Žymė išsaugota!</string>
     <string name="browser_cache_cleared">Naršymo duomenys išvalyti</string>
@@ -24,7 +24,7 @@
     <string name="capture_empty_gifs_message">Gif failų nėra.</string>
     <string name="capture_empty_images_message">Nėra vaizdų.</string>
     <string name="capture_empty_message">Nėra medijos, kurią būtų galima atsisiųsti.</string>
-    <string name="capture_empty_subtext">Iš naujo įkraukite svetainę ir „Firedown“ aptiks galimą mediją.</string>
+    <string name="capture_empty_subtext">Iš naujo įkraukite svetainę ir „Waves“ aptiks galimą mediją.</string>
     <string name="capture_empty_video_message">Vaizdo įrašų nėra.</string>
     <string name="clipboard">Nukopijuota į mainų sritį</string>
     <string name="close_tab">Užverti kortelę</string>
@@ -63,7 +63,7 @@
     <string name="details_url">URL</string>
     <string name="download">parsisiųsti</string>
     <string name="download_finished">Atsisiuntimas baigtas</string>
-    <string name="download_ongoing_notification">„Firedown“</string>
+    <string name="download_ongoing_notification">„Waves“</string>
     <string name="download_quality">Atsisiuntimo kokybė</string>
     <string name="download_queued">Ruošiama…</string>
     <string name="download_rename_error">Toks failo pavadinimas jau naudojamas.</string>
@@ -76,7 +76,7 @@
     <string name="empty_list_history">Atsisiuntimų istorija tuščia.</string>
     <string name="empty_list_query">Nieko nerasta</string>
     <string name="empty_list_type">Čia nieko nėra.</string>
-    <string name="empty_media_help">Kai kuriuos medijos failus reikia paleisti, kad „Firedown“ galėtų juos aptikti kaip atsisiunčiamus failus.</string>
+    <string name="empty_media_help">Kai kuriuos medijos failus reikia paleisti, kad „Waves“ galėtų juos aptikti kaip atsisiunčiamus failus.</string>
     <string name="empty_media_help_title">Leisti mediją prieš atsisiunčiant</string>
     <string name="empty_media_subtitle_help">Leisti mediją kaip įprasta. Tada ji turėtų pasirodyti kartu su kitais medijos failais, paspaudus „Ugnies“ mygtuką.</string>
 <string name="error_check_internet_connection">Interneto ryšio klaida.</string>
@@ -135,7 +135,7 @@
     <string name="navigation_web_history">Žurnalas</string>
     <string name="notifications_downloads_channel">Atsisiuntimai</string>
     <string name="open">Atidaryti</string>
-    <string name="open_in_app_subtitle">Ar norėtumėte išeiti iš „Firedown“ ir peržiūrėti šį turinį?</string>
+    <string name="open_in_app_subtitle">Ar norėtumėte išeiti iš „Waves“ ir peržiūrėti šį turinį?</string>
     <string name="open_in_app_title">Atidaryti kitoje programoje</string>
     <string name="open_new_private_tab_2">Nauja privačioji kortelė</string>
     <string name="open_new_tab_2">Nauja kortelė</string>
@@ -157,7 +157,7 @@
     <string name="rename_file">Pervardyti failą</string>
     <string name="request_geolocation">Bendrinti įrenginio vietą su &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_media_key_system_access">Suteikti leidimą &lt;b&gt;%s&lt;/b&gt; leisti DRM valdomą turinį?</string>
-    <string name="request_media_key_system_access_subtitle">Atminkite, kad „Firedown“ negali atsisiųsti DRM apsaugotų failų</string>
+    <string name="request_media_key_system_access_subtitle">Atminkite, kad „Waves“ negali atsisiųsti DRM apsaugotų failų</string>
     <string name="request_storage">Suteikti leidimą pasiekti įrenginio saugyklą &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_storage_access">Suteikti leidimą trečiosioms šalims pasiekti pirmosios šalies saugyklą, skirtą &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="restart_origin">Perkrauti</string>
@@ -259,7 +259,7 @@
     <string name="trackers_info_action">Valdyti apsaugą</string>
     <string name="trackers_info_today">%1$s šiandien užblokuota</string>
     <string name="bookmark_export">Eksportuoti žymes</string>
-    <string name="bookmark_export_done">Eksportuota %1$d žymių į Download/Firedown/backup</string>
+    <string name="bookmark_export_done">Eksportuota %1$d žymių į Download/Waves/backup</string>
     <string name="bookmark_import">Importuoti žymes</string>
     <string name="bookmark_import_done">Importuota %1$d žymių</string>
     <string name="bookmark_io_error">Nepavyko nuskaityti žymių failo</string>
@@ -285,7 +285,7 @@
     <string name="settings_sync_export_continue">Tęsti</string>
     <string name="settings_sync_export_done">Atkūrimo kodas išsaugotas</string>
     <string name="settings_sync_export_failed">Nepavyko išsaugoti failo</string>
-    <string name="settings_sync_export_file_body">Firedown — žymių sinchronizavimo atkūrimo kodas\n\n%1$s\n\nŠis kodas yra vienintelis raktas į jūsų sinchronizuotas žymes — kiekvienas, kuris jį turi, gali jas perskaityti, o praradus jo atkurti neįmanoma.\n\nŠis failas NĖRA užšifruotas. Importuokite kodą į slaptažodžių tvarkyklę (ar kitą saugią vietą), tada ištrinkite šį failą.</string>
+    <string name="settings_sync_export_file_body">Waves — žymių sinchronizavimo atkūrimo kodas\n\n%1$s\n\nŠis kodas yra vienintelis raktas į jūsų sinchronizuotas žymes — kiekvienas, kuris jį turi, gali jas perskaityti, o praradus jo atkurti neįmanoma.\n\nŠis failas NĖRA užšifruotas. Importuokite kodą į slaptažodžių tvarkyklę (ar kitą saugią vietą), tada ištrinkite šį failą.</string>
     <string name="settings_sync_export_summary">Eksportuoti kodą kaip tekstinį failą, kurį galite saugoti</string>
     <string name="settings_sync_export_title">Išsaugoti atkūrimo kodą į failą</string>
     <string name="settings_sync_faq_a1">Taip. Kiekviena žymė užšifruojama šiame įrenginyje prieš įkeliant. Serveris visada saugo tik nesuprantamus duomenis, kurių negali perskaityti.</string>
@@ -295,7 +295,7 @@
     <string name="settings_sync_faq_a5">Ne. Jokios registracijos, el. pašto ar telefono numerio — tik atkūrimo kodas. Prie jūsų žymių nesusietas joks asmeninis duomuo.</string>
     <string name="settings_sync_faq_a6">Sinchronizavimas yra neprivalomas ir pagal numatytuosius nustatymus išjungtas. Visada galite eksportuoti savo žymes į failą ir vėliau jas importuoti be jokio serverio.</string>
     <string name="settings_sync_faq_q1">Ar mano žymės užšifruotos?</string>
-    <string name="settings_sync_faq_q2">Ar Firedown ar kas nors kitas gali jas perskaityti?</string>
+    <string name="settings_sync_faq_q2">Ar Waves ar kas nors kitas gali jas perskaityti?</string>
     <string name="settings_sync_faq_q3">Kas yra atkūrimo kodas?</string>
     <string name="settings_sync_faq_q4">Kas, jei prarasiu savo atkūrimo kodą?</string>
     <string name="settings_sync_faq_q5">Ar man reikia paskyros ar el. pašto?</string>

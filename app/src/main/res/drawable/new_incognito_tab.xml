@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- New incognito-tab glyph (rebrand: was the Firedown flame — now the
+     standard Material add icon on the incognito surface tone). -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:drawable="@color/incognito"
         android:gravity="fill"/>
     <item
-        android:drawable="@drawable/ic_firedown_new_tab" />
+        android:drawable="@drawable/add_24" />
 
 </layer-list>

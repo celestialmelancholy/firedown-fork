@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">%d e zgjedhur</string>
-    <string name="app_lock">Zhbllokoni për të përdorur Firedown</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Zhbllokoni për të përdorur Waves</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Hap</string>
     <string name="browser_bookmark_added">Faqeshënuesi u ruajt!</string>
     <string name="browser_cache_cleared">Të dhënat e shfletimit u pastruan</string>
@@ -26,7 +26,7 @@
     <string name="capture_empty_gifs_message">Nuk ka GIF në dispozicion.</string>
     <string name="capture_empty_images_message">Nuk ka imazhe të disponueshme.</string>
     <string name="capture_empty_message">Nuk ka media të disponueshme për shkarkim.</string>
-    <string name="capture_empty_subtext">Rifresko faqen e internetit dhe Firedown do të zbulojë mediat e disponueshme.</string>
+    <string name="capture_empty_subtext">Rifresko faqen e internetit dhe Waves do të zbulojë mediat e disponueshme.</string>
     <string name="capture_empty_video_message">Nuk ka video të disponueshme.</string>
     <string name="clipboard">Kopjuar në kujtesën e fragmenteve</string>
     <string name="close_tab">Mbylle skedën</string>
@@ -84,7 +84,7 @@
     <string name="empty_list_history">Historia juaj e shkarkimeve është bosh.</string>
     <string name="empty_list_query">Nuk u gjet asnjë rezultat</string>
     <string name="empty_list_type">Nuk ka asgjë këtu.</string>
-    <string name="empty_media_help">Disa skedarë media duhet të luhen përpara se Firedown t\'i zbulojë ato si skedarë të shkarkueshëm.</string>
+    <string name="empty_media_help">Disa skedarë media duhet të luhen përpara se Waves t\'i zbulojë ato si skedarë të shkarkueshëm.</string>
     <string name="empty_media_help_title">Luaj median përpara shkarkimit</string>
     <string name="empty_media_subtitle_help">Ju lutem luani median si zakonisht. Më pas duhet të shfaqet me skedarët e tjerë të medias, pasi të keni shtypur butonin e zjarrit.</string>
 <string name="error_check_internet_connection">Gabim i lidhjes në internet.</string>
@@ -144,7 +144,7 @@
     <string name="navigation_web_history">Historik</string>
     <string name="notifications_downloads_channel">Shkarkimet</string>
     <string name="open">Hapur</string>
-    <string name="open_in_app_subtitle">Dëshironi të largoheni nga Firedown për të parë këtë përmbajtje?</string>
+    <string name="open_in_app_subtitle">Dëshironi të largoheni nga Waves për të parë këtë përmbajtje?</string>
     <string name="open_in_app_title">Hape në një aplikacion tjetër</string>
     <string name="open_new_private_tab_2">Skedë e re private</string>
     <string name="open_new_tab_2">Skedë e re</string>
@@ -278,7 +278,7 @@
     <string name="trackers_info_action">Menaxho mbrojtjen</string>
     <string name="trackers_info_today">%1$s të bllokuara sot</string>
     <string name="bookmark_export">Eksporto faqeshënuesit</string>
-    <string name="bookmark_export_done">U eksportuan %1$d faqeshënues te Download/Firedown/backup</string>
+    <string name="bookmark_export_done">U eksportuan %1$d faqeshënues te Download/Waves/backup</string>
     <string name="bookmark_import">Importo faqeshënuesit</string>
     <string name="bookmark_import_done">U importuan %1$d faqeshënues</string>
     <string name="bookmark_io_error">Skedari i faqeshënuesve nuk u lexua dot</string>
@@ -303,7 +303,7 @@
     <string name="settings_sync_export_continue">Vazhdo</string>
     <string name="settings_sync_export_done">Kodi i rikuperimit u ruajt</string>
     <string name="settings_sync_export_failed">Skedari nuk u ruajt dot</string>
-    <string name="settings_sync_export_file_body">Firedown — kodi i rikuperimit të sinkronizimit të faqeshënuesve\n\n%1$s\n\nKy kod është çelësi i vetëm i faqeshënuesve të tu të sinkronizuar — kushdo që e ka mund t\'i lexojë, dhe nuk mund të rikuperohet nëse humbet.\n\nKy skedar NUK është i enkriptuar. Importo kodin në menaxherin tënd të fjalëkalimeve (ose në një vend tjetër të sigurt), pastaj fshi këtë skedar.</string>
+    <string name="settings_sync_export_file_body">Waves — kodi i rikuperimit të sinkronizimit të faqeshënuesve\n\n%1$s\n\nKy kod është çelësi i vetëm i faqeshënuesve të tu të sinkronizuar — kushdo që e ka mund t\'i lexojë, dhe nuk mund të rikuperohet nëse humbet.\n\nKy skedar NUK është i enkriptuar. Importo kodin në menaxherin tënd të fjalëkalimeve (ose në një vend tjetër të sigurt), pastaj fshi këtë skedar.</string>
     <string name="settings_sync_export_summary">Eksporto kodin si një skedar teksti që mund ta ruash</string>
     <string name="settings_sync_export_title">Ruaj kodin e rikuperimit në skedar</string>
     <string name="settings_sync_faq_a1">Po. Çdo faqeshënues enkriptohet në këtë pajisje përpara se të ngarkohet. Serveri ruan vetëm të dhëna të ngatërruara që nuk i lexon dot.</string>
@@ -313,7 +313,7 @@
     <string name="settings_sync_faq_a5">Jo. Nuk ka regjistrim, email, ose numër telefoni — vetëm kodin e rikuperimit. Asgjë personale nuk është e lidhur me faqeshënuesit e tu.</string>
     <string name="settings_sync_faq_a6">Sinkronizimi është opsional dhe i çaktivizuar si parazgjedhje. Gjithmonë mund t\'i eksportosh faqeshënuesit e tu në një skedar dhe t\'i importosh më vonë, pa përfshirë asnjë server.</string>
     <string name="settings_sync_faq_q1">A janë të enkriptuar faqeshënuesit e mi?</string>
-    <string name="settings_sync_faq_q2">A mund t\'i lexojë Firedown ose dikush tjetër?</string>
+    <string name="settings_sync_faq_q2">A mund t\'i lexojë Waves ose dikush tjetër?</string>
     <string name="settings_sync_faq_q3">Çfarë është kodi i rikuperimit?</string>
     <string name="settings_sync_faq_q4">Po nëse e humbas kodin tim të rikuperimit?</string>
     <string name="settings_sync_faq_q5">A më duhet një llogari ose email?</string>

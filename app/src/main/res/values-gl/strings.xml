@@ -1,6 +1,6 @@
 <resources>
     <string name="action_mode_selected">%d seleccionado</string>
-    <string name="app_lock">Desbloquear para usar Firedown</string>
+    <string name="app_lock">Desbloquear para usar Waves</string>
     <string name="app_unlock">Desbloquear</string>
     <string name="browser_bookmark_added">Marcador gardado!</string>
     <string name="browser_cache_cleared">Borráronse os datos de navegación</string>
@@ -25,7 +25,7 @@
     <string name="capture_empty_gifs_message">Non hai Gifs dispoñibles.</string>
     <string name="capture_empty_images_message">Non hai imaxes dispoñibles.</string>
     <string name="capture_empty_message">Non hai medios dispoñibles para descargar.</string>
-    <string name="capture_empty_subtext">Volve cargar o sitio web e Firedown detectará os medios dispoñibles.</string>
+    <string name="capture_empty_subtext">Volve cargar o sitio web e Waves detectará os medios dispoñibles.</string>
     <string name="capture_empty_video_message">Non hai vídeos dispoñibles.</string>
     <string name="clipboard">Copiouse no portapapeis</string>
     <string name="close_tab">Pechar lapela</string>
@@ -70,7 +70,7 @@
     <string name="details_url">URL</string>
     <string name="download">Descargar</string>
     <string name="download_finished">Descarga rematada</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Calidade de descarga</string>
     <string name="download_queued">Pendente…</string>
     <string name="download_rename_error">O nome do ficheiro xa está en uso.</string>
@@ -83,7 +83,7 @@
     <string name="empty_list_history">O teu historial de descargas está baleiro.</string>
     <string name="empty_list_query">Non se atoparon resultados</string>
     <string name="empty_list_type">Aquí non hai nada.</string>
-    <string name="empty_media_help">Hai que reproducir algúns ficheiros multimedia para que Firedown poida detectalos como ficheiros descargables.</string>
+    <string name="empty_media_help">Hai que reproducir algúns ficheiros multimedia para que Waves poida detectalos como ficheiros descargables.</string>
     <string name="empty_media_help_title">Reproduce os medios antes de descargar</string>
     <string name="empty_media_subtitle_help">Reproduce os medios como de costume. Despois debería aparecer cos outros ficheiros multimedia, despois de premer o botón Fire.</string>
 <string name="error_check_internet_connection">Erro de conexión a Internet.</string>
@@ -143,7 +143,7 @@
     <string name="navigation_web_history">Historia completa</string>
     <string name="notifications_downloads_channel">Descargas</string>
     <string name="open">Aberto</string>
-    <string name="open_in_app_subtitle">Queres saír de Firedown para ver este contido?</string>
+    <string name="open_in_app_subtitle">Queres saír de Waves para ver este contido?</string>
     <string name="open_in_app_title">Abre noutra aplicación</string>
     <string name="open_new_private_tab_2">Nova lapela privada</string>
     <string name="open_new_tab_2">Nova lapela</string>
@@ -279,7 +279,7 @@
     <string name="trackers_info_action">Xestionar protección</string>
     <string name="trackers_info_today">%1$s bloqueados hoxe</string>
     <string name="bookmark_export">Exportar marcadores</string>
-    <string name="bookmark_export_done">Exportáronse %1$d marcadores a Download/Firedown/backup</string>
+    <string name="bookmark_export_done">Exportáronse %1$d marcadores a Download/Waves/backup</string>
     <string name="bookmark_import">Importar marcadores</string>
     <string name="bookmark_import_done">Importáronse %1$d marcadores</string>
     <string name="bookmark_io_error">Non foi posible ler o ficheiro de marcadores</string>
@@ -304,7 +304,7 @@
     <string name="settings_sync_export_continue">Continuar</string>
     <string name="settings_sync_export_done">Código de recuperación gardado</string>
     <string name="settings_sync_export_failed">Non foi posible gardar o ficheiro</string>
-    <string name="settings_sync_export_file_body">Firedown — código de recuperación da sincronización de marcadores\n\n%1$s\n\nEste código é a única chave dos teus marcadores sincronizados — calquera que o teña pode lelos, e non se pode recuperar se o perdes.\n\nEste ficheiro NON está cifrado. Importa o código no teu xestor de contrasinais (ou noutro lugar seguro) e despois elimina este ficheiro.</string>
+    <string name="settings_sync_export_file_body">Waves — código de recuperación da sincronización de marcadores\n\n%1$s\n\nEste código é a única chave dos teus marcadores sincronizados — calquera que o teña pode lelos, e non se pode recuperar se o perdes.\n\nEste ficheiro NON está cifrado. Importa o código no teu xestor de contrasinais (ou noutro lugar seguro) e despois elimina este ficheiro.</string>
     <string name="settings_sync_export_summary">Exporta o código como un ficheiro de texto que poidas gardar</string>
     <string name="settings_sync_export_title">Gardar o código de recuperación nun ficheiro</string>
     <string name="settings_sync_faq_a1">Si. Cada marcador cífrase neste dispositivo antes de subirse. O servidor só almacena datos cifrados que non pode ler.</string>
@@ -314,7 +314,7 @@
     <string name="settings_sync_faq_a5">Non. Non hai rexistro, correo electrónico nin número de teléfono — só o código de recuperación. Nada persoal queda vinculado aos teus marcadores.</string>
     <string name="settings_sync_faq_a6">A sincronización é opcional e está desactivada de maneira predeterminada. Sempre podes exportar os teus marcadores a un ficheiro e importalos máis tarde, sen ningún servidor polo medio.</string>
     <string name="settings_sync_faq_q1">Están cifrados os meus marcadores?</string>
-    <string name="settings_sync_faq_q2">Pode lelos Firedown ou outra persoa?</string>
+    <string name="settings_sync_faq_q2">Pode lelos Waves ou outra persoa?</string>
     <string name="settings_sync_faq_q3">Que é o código de recuperación?</string>
     <string name="settings_sync_faq_q4">Que pasa se perdo o meu código de recuperación?</string>
     <string name="settings_sync_faq_q5">Necesito unha conta ou un correo electrónico?</string>

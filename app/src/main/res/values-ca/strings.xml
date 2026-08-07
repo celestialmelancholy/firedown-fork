@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">%d seleccionats</string>
-    <string name="app_lock">Desbloqueja per utilitzar Firedown</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Desbloqueja per utilitzar Waves</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Desbloquejar</string>
     <string name="browser_bookmark_added">Marcador desat!</string>
     <string name="browser_cache_cleared">S\'han esborrat les dades de navegació</string>
@@ -26,7 +26,7 @@
     <string name="capture_empty_gifs_message">No hi ha gifs disponibles.</string>
     <string name="capture_empty_images_message">No hi ha imatges disponibles.</string>
     <string name="capture_empty_message">No hi ha cap mitjà disponible per fer la baixada.</string>
-    <string name="capture_empty_subtext">Torneu a carregar el lloc web i Firedown detectarà els mitjans disponibles.</string>
+    <string name="capture_empty_subtext">Torneu a carregar el lloc web i Waves detectarà els mitjans disponibles.</string>
     <string name="capture_empty_video_message">No hi ha vídeos disponibles.</string>
     <string name="clipboard">S\'ha copiat al porta-retalls</string>
     <string name="clipboard_from">Del porta-retalls</string>
@@ -72,7 +72,7 @@
     <string name="details_url">URL</string>
     <string name="download">Descarregar</string>
     <string name="download_finished">Descàrrega acabada</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Qualitat de descàrrega</string>
     <string name="download_queued">Pendents…</string>
     <string name="download_rename_error">El nom del fitxer ja està en ús.</string>
@@ -85,7 +85,7 @@
     <string name="empty_list_history">El teu historial de baixades està buit.</string>
     <string name="empty_list_query">No s\'ha trobat cap resultat</string>
     <string name="empty_list_type">Aquí no hi ha res.</string>
-    <string name="empty_media_help">Alguns fitxers multimèdia s\'han de reproduir abans que Firedown pugui detectar-los com a fitxers descarregables.</string>
+    <string name="empty_media_help">Alguns fitxers multimèdia s\'han de reproduir abans que Waves pugui detectar-los com a fitxers descarregables.</string>
     <string name="empty_media_help_title">Reprodueix els mitjans abans de descarregar-los</string>
     <string name="empty_media_subtitle_help">Si us plau, reprodueix els mitjans com de costum. Aleshores hauria d\'aparèixer amb els altres fitxers multimèdia, després de prémer el botó de foc.</string>
 <string name="error_check_internet_connection">Error de connexió a Internet.</string>
@@ -145,7 +145,7 @@
     <string name="navigation_web_history">Historial</string>
     <string name="notifications_downloads_channel">Descàrregues</string>
     <string name="open">Obert</string>
-    <string name="open_in_app_subtitle">Voleu sortir de Firedown per veure aquest contingut?</string>
+    <string name="open_in_app_subtitle">Voleu sortir de Waves per veure aquest contingut?</string>
     <string name="open_in_app_title">Obre en una altra aplicació</string>
     <string name="open_new_private_tab_2">Pestanya privada nova</string>
     <string name="open_new_tab_2">Pestanya nova</string>
@@ -172,7 +172,7 @@
     <string name="rename_file">Canvia el nom del fitxer</string>
     <string name="request_geolocation">Vols compartir la ubicació del teu dispositiu amb &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_media_key_system_access">Vols permetre que &lt;b&gt;%s&lt;/b&gt; reprodueixi contingut controlat per DRM?</string>
-    <string name="request_media_key_system_access_subtitle">Tingues en compte que Firedown no pot baixar els fitxers protegits per DRM</string>
+    <string name="request_media_key_system_access_subtitle">Tingues en compte que Waves no pot baixar els fitxers protegits per DRM</string>
     <string name="request_storage">Vols permetre l\'accés a l\'emmagatzematge del dispositiu per a &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_storage_access">Vols permetre que tercers accedeixin a l\'emmagatzematge propi per a &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="restart_origin">Reinicia</string>
@@ -308,7 +308,7 @@
     <string name="tabs_incognito_empty">Cap pestanya privada</string>
     <string name="security_stat_blocked_scope">blocat en aquesta pàgina</string>
     <string name="bookmark_export">Exporta les adreces d\'interès</string>
-    <string name="bookmark_export_done">S\'han exportat %1$d adreces d\'interès a Download/Firedown/backup</string>
+    <string name="bookmark_export_done">S\'han exportat %1$d adreces d\'interès a Download/Waves/backup</string>
     <string name="bookmark_import">Importa les adreces d\'interès</string>
     <string name="bookmark_import_done">S\'han importat %1$d adreces d\'interès</string>
     <string name="bookmark_io_error">No s\'ha pogut llegir el fitxer d\'adreces d\'interès</string>
@@ -333,7 +333,7 @@
     <string name="settings_sync_export_continue">Continua</string>
     <string name="settings_sync_export_done">S\'ha desat el codi de recuperació</string>
     <string name="settings_sync_export_failed">No s\'ha pogut desar el fitxer</string>
-    <string name="settings_sync_export_file_body">Firedown — codi de recuperació de la sincronització d\'adreces d\'interès\n\n%1$s\n\nAquest codi és l\'única clau de les teves adreces d\'interès sincronitzades — qualsevol que el tingui les pot llegir, i no es pot recuperar si el perds.\n\nAquest fitxer NO està xifrat. Importa el codi al teu gestor de contrasenyes (o en un altre lloc segur) i després suprimeix aquest fitxer.</string>
+    <string name="settings_sync_export_file_body">Waves — codi de recuperació de la sincronització d\'adreces d\'interès\n\n%1$s\n\nAquest codi és l\'única clau de les teves adreces d\'interès sincronitzades — qualsevol que el tingui les pot llegir, i no es pot recuperar si el perds.\n\nAquest fitxer NO està xifrat. Importa el codi al teu gestor de contrasenyes (o en un altre lloc segur) i després suprimeix aquest fitxer.</string>
     <string name="settings_sync_export_summary">Exporta el codi com un fitxer de text que puguis desar</string>
     <string name="settings_sync_export_title">Desa el codi de recuperació en un fitxer</string>
     <string name="settings_sync_faq_a1">Sí. Cada adreça d\'interès es xifra en aquest dispositiu abans de pujar-se. El servidor només emmagatzema dades xifrades que no pot llegir.</string>
@@ -343,7 +343,7 @@
     <string name="settings_sync_faq_a5">No. No hi ha registre, correu electrònic ni número de telèfon — només el codi de recuperació. Res personal no queda vinculat a les teves adreces d\'interès.</string>
     <string name="settings_sync_faq_a6">La sincronització és opcional i està desactivada per defecte. Sempre pots exportar les teves adreces d\'interès a un fitxer i importar-les més tard, sense cap servidor pel mig.</string>
     <string name="settings_sync_faq_q1">Les meves adreces d\'interès estan xifrades?</string>
-    <string name="settings_sync_faq_q2">Firedown o algú altre les pot llegir?</string>
+    <string name="settings_sync_faq_q2">Waves o algú altre les pot llegir?</string>
     <string name="settings_sync_faq_q3">Què és el codi de recuperació?</string>
     <string name="settings_sync_faq_q4">Què passa si perdo el meu codi de recuperació?</string>
     <string name="settings_sync_faq_q5">Necessito un compte o un correu electrònic?</string>

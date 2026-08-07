@@ -63,7 +63,7 @@
                 android:gravity="center"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
                 android:textColor="?attr/colorPrimary"
-                tools:text="Firedown 1.1.90" />
+                tools:text="Waves 1.1.90" />
 
             <TextView
                 android:id="@+id/update_sheet_current"

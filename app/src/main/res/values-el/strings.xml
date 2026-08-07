@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">Επιλέχθηκε %d</string>
-    <string name="app_lock">Ξεκλειδώστε για να χρησιμοποιήσετε το Firedown</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Ξεκλειδώστε για να χρησιμοποιήσετε το Waves</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Ξεκλείδωμα</string>
     <string name="browser_bookmark_added">Ο σελιδοδείκτης αποθηκεύτηκε!</string>
     <string name="browser_cache_cleared">Τα δεδομένα περιήγησης διαγράφηκαν</string>
@@ -26,7 +26,7 @@
     <string name="capture_empty_gifs_message">Δεν υπάρχουν διαθέσιμα Gif.</string>
     <string name="capture_empty_images_message">Δεν υπάρχουν διαθέσιμες εικόνες.</string>
     <string name="capture_empty_message">Δεν υπάρχουν διαθέσιμα μέσα για λήψη.</string>
-    <string name="capture_empty_subtext">Επαναλάβετε τη φόρτωση του ιστότοπου και το Firedown θα εντοπίσει τα διαθέσιμα μέσα.</string>
+    <string name="capture_empty_subtext">Επαναλάβετε τη φόρτωση του ιστότοπου και το Waves θα εντοπίσει τα διαθέσιμα μέσα.</string>
     <string name="capture_empty_video_message">Δεν υπάρχουν διαθέσιμα βίντεο.</string>
     <string name="clipboard">Αντιγράφηκε στο πρόχειρο</string>
     <string name="clipboard_from">Από το πρόχειρο</string>
@@ -72,7 +72,7 @@
     <string name="details_url">Διεύθυνση URL</string>
     <string name="download">Λήψη</string>
     <string name="download_finished">Η λήψη ολοκληρώθηκε</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Ποιότητα λήψης</string>
     <string name="download_queued">Εκκρεμής…</string>
     <string name="download_rename_error">Το όνομα αρχείου χρησιμοποιείται ήδη.</string>
@@ -85,7 +85,7 @@
     <string name="empty_list_history">Το ιστορικό λήψεων είναι κενό.</string>
     <string name="empty_list_query">Δεν βρέθηκαν αποτελέσματα</string>
     <string name="empty_list_type">Δεν υπάρχει τίποτα εδώ.</string>
-    <string name="empty_media_help">Ορισμένα αρχεία πολυμέσων πρέπει να αναπαραχθούν για να μπορέσει το Firedown να τα εντοπίσει ως αρχεία με δυνατότητα λήψης.</string>
+    <string name="empty_media_help">Ορισμένα αρχεία πολυμέσων πρέπει να αναπαραχθούν για να μπορέσει το Waves να τα εντοπίσει ως αρχεία με δυνατότητα λήψης.</string>
     <string name="empty_media_help_title">Αναπαραγωγή των πολυμέσων πριν από τη λήψη</string>
     <string name="empty_media_subtitle_help">Παρακαλώ παίξτε τα πολυμέσα ως συνήθως. Στη συνέχεια, θα πρέπει να εμφανιστεί μαζί με τα άλλα αρχεία πολυμέσων, αφού πατήσετε το κουμπί πυρκαγιάς.</string>
 <string name="error_check_internet_connection">Σφάλμα σύνδεσης στο Διαδίκτυο.</string>
@@ -145,7 +145,7 @@
     <string name="navigation_web_history">Πλήρης Ιστορία</string>
     <string name="notifications_downloads_channel">Λήψεις</string>
     <string name="open">Άνοιγμα</string>
-    <string name="open_in_app_subtitle">Θέλετε να αποχωρήσετε από το Firedown για να δείτε αυτό το περιεχόμενο;</string>
+    <string name="open_in_app_subtitle">Θέλετε να αποχωρήσετε από το Waves για να δείτε αυτό το περιεχόμενο;</string>
     <string name="open_in_app_title">Ανοίξτε σε άλλη εφαρμογή</string>
     <string name="open_new_private_tab_2">Νέα ιδιωτική καρτέλα</string>
     <string name="open_new_tab_2">Νέα καρτέλα</string>
@@ -172,7 +172,7 @@
     <string name="rename_file">Μετονόμασε το αρχείο</string>
     <string name="request_geolocation">Κοινή χρήση της τοποθεσίας της συσκευής σας με τον χρήστη &lt;b&gt;%s&lt;/b&gt;;</string>
     <string name="request_media_key_system_access">Να επιτρέπεται στο &lt;b&gt;%s&lt;/b&gt; η αναπαραγωγή περιεχομένου που ελέγχεται με DRM;</string>
-    <string name="request_media_key_system_access_subtitle">Σημειώστε ότι τα αρχεία με προστασία DRM δεν μπορούν να ληφθούν από το Firedown</string>
+    <string name="request_media_key_system_access_subtitle">Σημειώστε ότι τα αρχεία με προστασία DRM δεν μπορούν να ληφθούν από το Waves</string>
     <string name="request_storage">Να επιτρέπεται η πρόσβαση στον αποθηκευτικό χώρο της συσκευής για το &lt;b&gt;%s&lt;/b&gt;;</string>
     <string name="request_storage_access">Να επιτρέπεται σε τρίτα μέρη να έχουν πρόσβαση στον αποθηκευτικό χώρο πρώτου μέρους για &lt;b&gt;%s&lt;/b&gt;;</string>
     <string name="restart_origin">Επανεκκίνηση</string>
@@ -300,7 +300,7 @@
     <string name="capture_help_banner_title">Δεν εμφανίζεται το βίντεο;</string>
     <string name="capture_help_banner">Ορισμένα ενσωματωμένα μέσα πρέπει να αναπαραχθούν πρώτα. Πατήστε για να μάθετε πώς.</string>
     <string name="bookmark_export">Εξαγωγή σελιδοδεικτών</string>
-    <string name="bookmark_export_done">Έγινε εξαγωγή %1$d σελιδοδεικτών στο Download/Firedown/backup</string>
+    <string name="bookmark_export_done">Έγινε εξαγωγή %1$d σελιδοδεικτών στο Download/Waves/backup</string>
     <string name="bookmark_import">Εισαγωγή σελιδοδεικτών</string>
     <string name="bookmark_import_done">Έγινε εισαγωγή %1$d σελιδοδεικτών</string>
     <string name="bookmark_io_error">Δεν ήταν δυνατή η ανάγνωση του αρχείου σελιδοδεικτών</string>
@@ -325,7 +325,7 @@
     <string name="settings_sync_export_continue">Συνέχεια</string>
     <string name="settings_sync_export_done">Ο κωδικός ανάκτησης αποθηκεύτηκε</string>
     <string name="settings_sync_export_failed">Δεν ήταν δυνατή η αποθήκευση του αρχείου</string>
-    <string name="settings_sync_export_file_body">Firedown — κωδικός ανάκτησης συγχρονισμού σελιδοδεικτών\n\n%1$s\n\nΑυτός ο κωδικός είναι το μοναδικό κλειδί για τους συγχρονισμένους σελιδοδείκτες σας — όποιος τον έχει μπορεί να τους διαβάσει, και δεν μπορεί να ανακτηθεί αν χαθεί.\n\nΑυτό το αρχείο ΔΕΝ είναι κρυπτογραφημένο. Εισαγάγετε τον κωδικό στον διαχειριστή κωδικών σας (ή σε άλλο ασφαλές μέρος), στη συνέχεια διαγράψτε αυτό το αρχείο.</string>
+    <string name="settings_sync_export_file_body">Waves — κωδικός ανάκτησης συγχρονισμού σελιδοδεικτών\n\n%1$s\n\nΑυτός ο κωδικός είναι το μοναδικό κλειδί για τους συγχρονισμένους σελιδοδείκτες σας — όποιος τον έχει μπορεί να τους διαβάσει, και δεν μπορεί να ανακτηθεί αν χαθεί.\n\nΑυτό το αρχείο ΔΕΝ είναι κρυπτογραφημένο. Εισαγάγετε τον κωδικό στον διαχειριστή κωδικών σας (ή σε άλλο ασφαλές μέρος), στη συνέχεια διαγράψτε αυτό το αρχείο.</string>
     <string name="settings_sync_export_summary">Εξαγάγετε τον κωδικό ως αρχείο κειμένου που μπορείτε να αποθηκεύσετε</string>
     <string name="settings_sync_export_title">Αποθήκευση κωδικού ανάκτησης σε αρχείο</string>
     <string name="settings_sync_faq_a1">Ναι. Κάθε σελιδοδείκτης κρυπτογραφείται σε αυτήν τη συσκευή πριν αποσταλεί. Ο διακομιστής αποθηκεύει πάντα μόνο ακατάληπτα δεδομένα που δεν μπορεί να διαβάσει.</string>
@@ -335,7 +335,7 @@
     <string name="settings_sync_faq_a5">Όχι. Δεν υπάρχει εγγραφή, email ή αριθμός τηλεφώνου — μόνο ο κωδικός ανάκτησης. Τίποτα προσωπικό δεν συνδέεται με τους σελιδοδείκτες σας.</string>
     <string name="settings_sync_faq_a6">Ο συγχρονισμός είναι προαιρετικός και απενεργοποιημένος από προεπιλογή. Μπορείτε πάντα να εξαγάγετε τους σελιδοδείκτες σας σε ένα αρχείο και να τους εισαγάγετε αργότερα, χωρίς να εμπλέκεται διακομιστής.</string>
     <string name="settings_sync_faq_q1">Είναι κρυπτογραφημένοι οι σελιδοδείκτες μου;</string>
-    <string name="settings_sync_faq_q2">Μπορεί το Firedown ή κάποιος άλλος να τους διαβάσει;</string>
+    <string name="settings_sync_faq_q2">Μπορεί το Waves ή κάποιος άλλος να τους διαβάσει;</string>
     <string name="settings_sync_faq_q3">Τι είναι ο κωδικός ανάκτησης;</string>
     <string name="settings_sync_faq_q4">Τι γίνεται αν χάσω τον κωδικό ανάκτησής μου;</string>
     <string name="settings_sync_faq_q5">Χρειάζομαι λογαριασμό ή email;</string>

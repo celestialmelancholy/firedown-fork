@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">%d selectat</string>
-    <string name="app_lock">Deblocați pentru a utiliza Firedown</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Deblocați pentru a utiliza Waves</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Deblocați</string>
     <string name="browser_bookmark_added">Marcaj salvat!</string>
     <string name="browser_cache_cleared">Datele de navigare au fost șterse</string>
@@ -26,7 +26,7 @@
     <string name="capture_empty_gifs_message">Nu există gif-uri disponibile.</string>
     <string name="capture_empty_images_message">Nu există imagini disponibile.</string>
     <string name="capture_empty_message">Nu există conținut media disponibil pentru descărcare.</string>
-    <string name="capture_empty_subtext">Reîncărcați site-ul și Firedown va detecta conținutul media disponibil.</string>
+    <string name="capture_empty_subtext">Reîncărcați site-ul și Waves va detecta conținutul media disponibil.</string>
     <string name="capture_empty_video_message">Nu există videoclipuri disponibile.</string>
     <string name="clipboard">Copiat în clipboard</string>
     <string name="clipboard_from">Din clipboard</string>
@@ -66,7 +66,7 @@
     <string name="details_url">URL</string>
     <string name="download">Descarcă</string>
     <string name="download_finished">Descărcarea s-a terminat</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Calitate descărcare</string>
     <string name="download_queued">Se așteaptă…</string>
     <string name="download_rename_error">Numele fișierului este deja utilizat.</string>
@@ -79,7 +79,7 @@
     <string name="empty_list_history">Istoricul dvs. de descărcări este gol.</string>
     <string name="empty_list_query">Niciun rezultat gasit</string>
     <string name="empty_list_type">Nu e nimic aici.</string>
-    <string name="empty_media_help">Unele fișiere media trebuie redate înainte ca Firedown să le poată detecta ca fișiere descărcabile.</string>
+    <string name="empty_media_help">Unele fișiere media trebuie redate înainte ca Waves să le poată detecta ca fișiere descărcabile.</string>
     <string name="empty_media_help_title">Redați media înainte de a descărca</string>
     <string name="empty_media_subtitle_help">Vă rugăm să redați media ca de obicei. Ar trebui să apară apoi împreună cu celelalte fișiere media, după apăsarea butonului Fire.</string>
 <string name="error_check_internet_connection">Eroare de conexiune la internet.</string>
@@ -139,7 +139,7 @@
     <string name="navigation_web_history">Istoric</string>
     <string name="notifications_downloads_channel">Descărcări</string>
     <string name="open">Deschide</string>
-    <string name="open_in_app_subtitle">Doriți să părăsiți Firedown pentru a vedea acest conținut?</string>
+    <string name="open_in_app_subtitle">Doriți să părăsiți Waves pentru a vedea acest conținut?</string>
     <string name="open_in_app_title">Deschideți într-o altă aplicație</string>
     <string name="open_new_private_tab_2">Filă privată nouă</string>
     <string name="open_new_tab_2">Filă nouă</string>
@@ -166,7 +166,7 @@
     <string name="rename_file">Redenumiți fișierul</string>
     <string name="request_geolocation">Partajați locația dispozitivului dvs. cu &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_media_key_system_access">Permiteți &lt;b&gt;%s&lt;/b&gt; să redea conținut controlat prin DRM?</string>
-    <string name="request_media_key_system_access_subtitle">Rețineți că fișierele protejate DRM nu pot fi descărcate de Firedown</string>
+    <string name="request_media_key_system_access_subtitle">Rețineți că fișierele protejate DRM nu pot fi descărcate de Waves</string>
     <string name="request_storage">Permiteți accesul la stocarea dispozitivului pentru &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_storage_access">Permiteți terților să acceseze spațiul de stocare primar pentru &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="restart_origin">Reporniți</string>
@@ -280,7 +280,7 @@
     <string name="capture_help_banner_title">Videoclipul nu apare?</string>
     <string name="capture_help_banner">Unele conținuturi încorporate trebuie redate mai întâi. Atinge pentru a afla cum.</string>
     <string name="bookmark_export">Exportă marcajele</string>
-    <string name="bookmark_export_done">%1$d marcaje exportate în Download/Firedown/backup</string>
+    <string name="bookmark_export_done">%1$d marcaje exportate în Download/Waves/backup</string>
     <string name="bookmark_import">Importă marcaje</string>
     <string name="bookmark_import_done">%1$d marcaje importate</string>
     <string name="bookmark_io_error">Nu s-a putut citi fișierul cu marcaje</string>
@@ -305,7 +305,7 @@
     <string name="settings_sync_export_continue">Continuă</string>
     <string name="settings_sync_export_done">Cod de recuperare salvat</string>
     <string name="settings_sync_export_failed">Nu s-a putut salva fișierul</string>
-    <string name="settings_sync_export_file_body">Firedown — cod de recuperare pentru sincronizarea marcajelor\n\n%1$s\n\nAcest cod este singura cheie pentru marcajele tale sincronizate — oricine îl are le poate citi, iar el nu poate fi recuperat dacă este pierdut.\n\nAcest fișier NU este criptat. Importă codul în managerul tău de parole (sau în alt loc sigur), apoi șterge acest fișier.</string>
+    <string name="settings_sync_export_file_body">Waves — cod de recuperare pentru sincronizarea marcajelor\n\n%1$s\n\nAcest cod este singura cheie pentru marcajele tale sincronizate — oricine îl are le poate citi, iar el nu poate fi recuperat dacă este pierdut.\n\nAcest fișier NU este criptat. Importă codul în managerul tău de parole (sau în alt loc sigur), apoi șterge acest fișier.</string>
     <string name="settings_sync_export_summary">Exportă codul ca fișier text pe care îl poți păstra</string>
     <string name="settings_sync_export_title">Salvează codul de recuperare într-un fișier</string>
     <string name="settings_sync_faq_a1">Da. Fiecare marcaj este criptat pe acest dispozitiv înainte de a fi încărcat. Serverul stochează doar date amestecate pe care nu le poate citi.</string>
@@ -315,7 +315,7 @@
     <string name="settings_sync_faq_a5">Nu. Nu există înregistrare, e-mail sau număr de telefon — doar codul de recuperare. Nimic personal nu este legat de marcajele tale.</string>
     <string name="settings_sync_faq_a6">Sincronizarea este opțională și dezactivată în mod implicit. Poți oricând să-ți exporți marcajele într-un fișier și să le imporți mai târziu, fără niciun server implicat.</string>
     <string name="settings_sync_faq_q1">Marcajele mele sunt criptate?</string>
-    <string name="settings_sync_faq_q2">Firedown sau altcineva le poate citi?</string>
+    <string name="settings_sync_faq_q2">Waves sau altcineva le poate citi?</string>
     <string name="settings_sync_faq_q3">Ce este codul de recuperare?</string>
     <string name="settings_sync_faq_q4">Ce se întâmplă dacă îmi pierd codul de recuperare?</string>
     <string name="settings_sync_faq_q5">Am nevoie de un cont sau de un e-mail?</string>

@@ -228,7 +228,7 @@
 
 
     <string name="bookmark_export">ବୁକମାର୍କ ରପ୍ତାନି କରନ୍ତୁ</string>
-    <string name="bookmark_export_done">%1$d ବୁକମାର୍କ Download/Firedown/backup କୁ ରପ୍ତାନି କରାଗଲା</string>
+    <string name="bookmark_export_done">%1$d ବୁକମାର୍କ Download/Waves/backup କୁ ରପ୍ତାନି କରାଗଲା</string>
     <string name="bookmark_import">ବୁକମାର୍କ ଆମଦାନି କରନ୍ତୁ</string>
     <string name="bookmark_import_done">%1$d ବୁକମାର୍କ ଆମଦାନି କରାଗଲା</string>
     <string name="bookmark_io_error">ବୁକମାର୍କ ଫାଇଲ୍ ପଢ଼ାଯାଇ ପାରିଲା ନାହିଁ</string>
@@ -254,7 +254,7 @@
     <string name="settings_sync_export_continue">ଜାରି ରଖନ୍ତୁ</string>
     <string name="settings_sync_export_done">ରିକଭରି କୋଡ୍ ସଞ୍ଚୟ କରାଗଲା</string>
     <string name="settings_sync_export_failed">ଫାଇଲ୍ ସଞ୍ଚୟ କରାଯାଇ ପାରିଲା ନାହିଁ</string>
-    <string name="settings_sync_export_file_body">Firedown — ବୁକମାର୍କ ସିଙ୍କ ରିକଭରି କୋଡ୍\n\n%1$s\n\nଏହି କୋଡ୍ ହିଁ ଆପଣଙ୍କ ସିଙ୍କ କରାଯାଇଥିବା ବୁକମାର୍କର ଏକମାତ୍ର ଚାବି — ଯାହା ପାଖରେ ଏହା ଅଛି ସେ ସେଗୁଡ଼ିକୁ ପଢ଼ିପାରେ, ଏବଂ ହଜିଗଲେ ଏହାକୁ ପୁନରୁଦ୍ଧାର କରାଯାଇ ପାରିବ ନାହିଁ।\n\nଏହି ଫାଇଲ୍ ଏନକ୍ରିପ୍ଟ କରାଯାଇ ନାହିଁ। କୋଡ୍କୁ ଆପଣଙ୍କ ପାସୱାର୍ଡ ମ୍ୟାନେଜରରେ (କିମ୍ବା ଅନ୍ୟ ସୁରକ୍ଷିତ ସ୍ଥାନରେ) ଆମଦାନି କରନ୍ତୁ, ତା ପରେ ଏହି ଫାଇଲ୍ ବିଲୋପ କରନ୍ତୁ।</string>
+    <string name="settings_sync_export_file_body">Waves — ବୁକମାର୍କ ସିଙ୍କ ରିକଭରି କୋଡ୍\n\n%1$s\n\nଏହି କୋଡ୍ ହିଁ ଆପଣଙ୍କ ସିଙ୍କ କରାଯାଇଥିବା ବୁକମାର୍କର ଏକମାତ୍ର ଚାବି — ଯାହା ପାଖରେ ଏହା ଅଛି ସେ ସେଗୁଡ଼ିକୁ ପଢ଼ିପାରେ, ଏବଂ ହଜିଗଲେ ଏହାକୁ ପୁନରୁଦ୍ଧାର କରାଯାଇ ପାରିବ ନାହିଁ।\n\nଏହି ଫାଇଲ୍ ଏନକ୍ରିପ୍ଟ କରାଯାଇ ନାହିଁ। କୋଡ୍କୁ ଆପଣଙ୍କ ପାସୱାର୍ଡ ମ୍ୟାନେଜରରେ (କିମ୍ବା ଅନ୍ୟ ସୁରକ୍ଷିତ ସ୍ଥାନରେ) ଆମଦାନି କରନ୍ତୁ, ତା ପରେ ଏହି ଫାଇଲ୍ ବିଲୋପ କରନ୍ତୁ।</string>
     <string name="settings_sync_export_summary">କୋଡ୍କୁ ଏକ ଟେକ୍ସଟ ଫାଇଲ୍ ଭାବେ ରପ୍ତାନି କରନ୍ତୁ ଯାହାକୁ ଆପଣ ସଂରକ୍ଷଣ କରିପାରିବେ</string>
     <string name="settings_sync_export_title">ରିକଭରି କୋଡ୍ ଫାଇଲରେ ସଞ୍ଚୟ କରନ୍ତୁ</string>
     <string name="settings_sync_faq_a1">ହଁ। ପ୍ରତ୍ୟେକ ବୁକମାର୍କ ଅପଲୋଡ୍ ହେବା ପୂର୍ବରୁ ଏହି ଡିଭାଇସରେ ଏନକ୍ରିପ୍ଟ କରାଯାଏ। ସର୍ଭର କେବଳ ଏପରି ଗୋଳମାଳିଆ ଡାଟା ସଞ୍ଚୟ କରେ ଯାହାକୁ ଏହା ପଢ଼ିପାରେ ନାହିଁ।</string>
@@ -264,7 +264,7 @@
     <string name="settings_sync_faq_a5">ନା। କୌଣସି ସାଇନ-ଅପ୍, ଇମେଲ୍, କିମ୍ବା ଫୋନ୍ ନମ୍ବର ନାହିଁ — କେବଳ ରିକଭରି କୋଡ୍। ଆପଣଙ୍କ ବୁକମାର୍କ ସହିତ କୌଣସି ବ୍ୟକ୍ତିଗତ ତଥ୍ୟ ଯୋଡ଼ାଯାଇ ନାହିଁ।</string>
     <string name="settings_sync_faq_a6">ସିଙ୍କ ଵୈକଳ୍ପିକ ଏବଂ ଡିଫଲ୍ଟ ଭାବେ ବନ୍ଦ। ଆପଣ ସର୍ବଦା ଆପଣଙ୍କ ବୁକମାର୍କକୁ ଏକ ଫାଇଲରେ ରପ୍ତାନି କରି ପରେ ଆମଦାନି କରିପାରିବେ, କୌଣସି ସର୍ଭର ବିନା।</string>
     <string name="settings_sync_faq_q1">ମୋ ବୁକମାର୍କ କଣ ଏନକ୍ରିପ୍ଟ କରାଯାଇଛି?</string>
-    <string name="settings_sync_faq_q2">Firedown କିମ୍ବା ଅନ୍ୟ କେହି କଣ ସେଗୁଡ଼ିକୁ ପଢ଼ିପାରିବେ?</string>
+    <string name="settings_sync_faq_q2">Waves କିମ୍ବା ଅନ୍ୟ କେହି କଣ ସେଗୁଡ଼ିକୁ ପଢ଼ିପାରିବେ?</string>
     <string name="settings_sync_faq_q3">ରିକଭରି କୋଡ୍ କଣ?</string>
     <string name="settings_sync_faq_q4">ମୁଁ ମୋ ରିକଭରି କୋଡ୍ ହଜାଇଲେ କଣ ହେବ?</string>
     <string name="settings_sync_faq_q5">ମୋତେ କଣ ଏକାଉଣ୍ଟ କିମ୍ବା ଇମେଲ୍ ଆବଶ୍ୟକ?</string>

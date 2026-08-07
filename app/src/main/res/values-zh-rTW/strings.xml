@@ -3,8 +3,8 @@
     <string name="settings_oled_theme_summary">純黑背景 — 在 OLED 螢幕上省電</string>
     <string name="archive_banner_subtitle">輕觸以檢視或重新開啟</string>
     <string name="action_mode_selected">已選擇 %d</string>
-    <string name="app_lock">解鎖以使用 Firedown</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">解鎖以使用 Waves</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">解鎖</string>
     <string name="browser_bookmark_added">書籤已儲存！</string>
     <string name="browser_cache_cleared">瀏覽資料已清除</string>
@@ -29,7 +29,7 @@
     <string name="capture_empty_gifs_message">沒有可用的 GIF。</string>
     <string name="capture_empty_images_message">沒有可用的圖像。</string>
     <string name="capture_empty_message">沒有可供下載的媒體。</string>
-    <string name="capture_empty_subtext">重新載入網站，Firedown 將偵測可用媒體。</string>
+    <string name="capture_empty_subtext">重新載入網站，Waves 將偵測可用媒體。</string>
     <string name="capture_empty_video_message">沒有可用的影片。</string>
     <string name="clipboard">已複製到剪貼簿</string>
     <string name="clipboard_from">來自剪貼簿</string>
@@ -75,7 +75,7 @@
     <string name="details_url">網址</string>
     <string name="download">下載</string>
     <string name="download_finished">下載完成</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">下載品質</string>
     <string name="download_queued">待辦中…</string>
     <string name="download_rename_error">檔案名稱已被使用。</string>
@@ -88,7 +88,7 @@
     <string name="empty_list_history">您的下載歷史記錄為空。</string>
     <string name="empty_list_query">未找到結果</string>
     <string name="empty_list_type">這裡什麼都沒有。</string>
-    <string name="empty_media_help">有些媒體檔案需要先播放，Firedown 才能偵測為可下載檔案。</string>
+    <string name="empty_media_help">有些媒體檔案需要先播放，Waves 才能偵測為可下載檔案。</string>
     <string name="empty_media_help_title">下載前播放媒體</string>
     <string name="empty_media_subtitle_help">請照常播放媒體。按下 Fire 按鈕後，它應該會與其他媒體檔案一起出現。</string>
 <string name="error_check_internet_connection">網路連線錯誤。</string>
@@ -148,7 +148,7 @@
     <string name="navigation_web_history">瀏覽紀錄</string>
     <string name="notifications_downloads_channel">下載</string>
     <string name="open">打開</string>
-    <string name="open_in_app_subtitle">您想離開 Firedown 來查看此內容嗎？</string>
+    <string name="open_in_app_subtitle">您想離開 Waves 來查看此內容嗎？</string>
     <string name="open_in_app_title">在另一個應用程式中打開</string>
     <string name="open_new_private_tab_2">開新隱私分頁</string>
     <string name="open_new_tab_2">開新分頁</string>
@@ -175,7 +175,7 @@
     <string name="rename_file">重命名文件</string>
     <string name="request_geolocation">與&lt;b&gt;%s&lt;/b&gt;分享您的裝置位置嗎？</string>
     <string name="request_media_key_system_access">允許 &lt;b&gt;%s&lt;/b&gt; 播放受 DRM 控制的內容嗎？</string>
-    <string name="request_media_key_system_access_subtitle">請注意，Firedown 無法下載受 DRM 保護的文件</string>
+    <string name="request_media_key_system_access_subtitle">請注意，Waves 無法下載受 DRM 保護的文件</string>
     <string name="request_storage">允許存取 &lt;b&gt;%s&lt;/b&gt; 的裝置儲存空間嗎？</string>
     <string name="request_storage_access">允許第三方存取 &lt;b&gt;%s&lt;/b&gt; 的第一方儲存空間嗎？</string>
     <string name="restart_origin">重新開始</string>
@@ -318,7 +318,7 @@
     <string name="capture_help_banner_title">找不到影片？</string>
     <string name="capture_help_banner">部分嵌入的媒體需先播放才能偵測。輕觸瞭解詳情。</string>
     <string name="bookmark_export">匯出書籤</string>
-    <string name="bookmark_export_done">已將 %1$d 個書籤匯出至 Download/Firedown/backup</string>
+    <string name="bookmark_export_done">已將 %1$d 個書籤匯出至 Download/Waves/backup</string>
     <string name="bookmark_import">匯入書籤</string>
     <string name="bookmark_import_done">已匯入 %1$d 個書籤</string>
     <string name="bookmark_io_error">無法讀取書籤檔案</string>
@@ -343,7 +343,7 @@
     <string name="settings_sync_export_continue">繼續</string>
     <string name="settings_sync_export_done">已儲存復原碼</string>
     <string name="settings_sync_export_failed">無法儲存檔案</string>
-    <string name="settings_sync_export_file_body">Firedown — 書籤同步復原碼\n\n%1$s\n\n此復原碼是您同步書籤的唯一金鑰 — 任何擁有它的人都能讀取，而且一旦遺失將無法復原。\n\n此檔案並未加密。請將復原碼匯入密碼管理器（或其他安全的地方），然後刪除此檔案。</string>
+    <string name="settings_sync_export_file_body">Waves — 書籤同步復原碼\n\n%1$s\n\n此復原碼是您同步書籤的唯一金鑰 — 任何擁有它的人都能讀取，而且一旦遺失將無法復原。\n\n此檔案並未加密。請將復原碼匯入密碼管理器（或其他安全的地方），然後刪除此檔案。</string>
     <string name="settings_sync_export_summary">將復原碼匯出為可儲存的文字檔案</string>
     <string name="settings_sync_export_title">將復原碼儲存至檔案</string>
     <string name="settings_sync_faq_a1">是。每個書籤在上傳前都會於此裝置上加密。伺服器只會儲存它無法讀取的加密資料。</string>
@@ -353,7 +353,7 @@
     <string name="settings_sync_faq_a5">不需要。沒有註冊、電郵或電話號碼 — 只有復原碼。沒有任何個人資料與您的書籤連結。</string>
     <string name="settings_sync_faq_a6">同步是選用功能，且預設為關閉。您隨時可以將書籤匯出為檔案，稍後再匯入，完全不需要伺服器。</string>
     <string name="settings_sync_faq_q1">我的書籤有加密嗎？</string>
-    <string name="settings_sync_faq_q2">Firedown 或其他人能讀取嗎？</string>
+    <string name="settings_sync_faq_q2">Waves 或其他人能讀取嗎？</string>
     <string name="settings_sync_faq_q3">復原碼是什麼？</string>
     <string name="settings_sync_faq_q4">如果我遺失了復原碼怎麼辦？</string>
     <string name="settings_sync_faq_q5">我需要帳戶或電郵嗎？</string>

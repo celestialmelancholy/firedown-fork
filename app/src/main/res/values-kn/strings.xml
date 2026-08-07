@@ -126,7 +126,7 @@
     <string name="navigation_web_history">ಇತಿಹಾಸ</string>
     <string name="notifications_downloads_channel">ಡೌನ್‌ಲೋಡ್‌ಗಳು</string>
     <string name="open">ತೆರೆಯಿರಿ</string>
-    <string name="open_in_app_subtitle">ಈ ವಿಷಯವನ್ನು ವೀಕ್ಷಿಸಲು ನೀವು Firedown ತೊರೆಯಲು ಬಯಸುವಿರಾ?</string>
+    <string name="open_in_app_subtitle">ಈ ವಿಷಯವನ್ನು ವೀಕ್ಷಿಸಲು ನೀವು Waves ತೊರೆಯಲು ಬಯಸುವಿರಾ?</string>
     <string name="open_in_app_title">ಇನ್ನೊಂದು ಅಪ್ಲಿಕೇಶನ್‌ನಲ್ಲಿ ತೆರೆಯಿರಿ</string>
     <string name="open_new_private_tab_2">ಹೊಸ ಖಾಸಗಿ ಟ್ಯಾಬ್</string>
     <string name="open_new_tab_2">ಹೊಸ ಟ್ಯಾಬ್</string>
@@ -249,7 +249,7 @@
 
 
     <string name="bookmark_export">ಬುಕ್‌ಮಾರ್ಕ್‌ಗಳನ್ನು ರಫ್ತು ಮಾಡಿ</string>
-    <string name="bookmark_export_done">%1$d ಬುಕ್‌ಮಾರ್ಕ್‌ಗಳನ್ನು Download/Firedown/backup ಗೆ ರಫ್ತು ಮಾಡಲಾಗಿದೆ</string>
+    <string name="bookmark_export_done">%1$d ಬುಕ್‌ಮಾರ್ಕ್‌ಗಳನ್ನು Download/Waves/backup ಗೆ ರಫ್ತು ಮಾಡಲಾಗಿದೆ</string>
     <string name="bookmark_import">ಬುಕ್‌ಮಾರ್ಕ್‌ಗಳನ್ನು ಆಮದು ಮಾಡಿ</string>
     <string name="bookmark_import_done">%1$d ಬುಕ್‌ಮಾರ್ಕ್‌ಗಳನ್ನು ಆಮದು ಮಾಡಲಾಗಿದೆ</string>
     <string name="bookmark_io_error">ಬುಕ್‌ಮಾರ್ಕ್ ಫೈಲ್ ಅನ್ನು ಓದಲಾಗಲಿಲ್ಲ</string>
@@ -275,7 +275,7 @@
     <string name="settings_sync_export_continue">ಮುಂದುವರಿಸಿ</string>
     <string name="settings_sync_export_done">ಮರುಪಡೆಯುವ ಕೋಡ್ ಉಳಿಸಲಾಗಿದೆ</string>
     <string name="settings_sync_export_failed">ಫೈಲ್ ಅನ್ನು ಉಳಿಸಲಾಗಲಿಲ್ಲ</string>
-    <string name="settings_sync_export_file_body">Firedown — ಬುಕ್‌ಮಾರ್ಕ್ ಸಿಂಕ್ ಮರುಪಡೆಯುವ ಕೋಡ್\n\n%1$s\n\nಈ ಕೋಡ್ ನಿಮ್ಮ ಸಿಂಕ್ ಮಾಡಿದ ಬುಕ್‌ಮಾರ್ಕ್‌ಗಳಿಗೆ ಏಕೈಕ ಕೀ — ಇದನ್ನು ಹೊಂದಿರುವ ಯಾರಾದರೂ ಅವುಗಳನ್ನು ಓದಬಹುದು, ಮತ್ತು ಕಳೆದುಹೋದರೆ ಅದನ್ನು ಮರುಪಡೆಯಲಾಗುವುದಿಲ್ಲ.\n\nಈ ಫೈಲ್ ಎನ್‌ಕ್ರಿಪ್ಟ್ ಮಾಡಲಾಗಿಲ್ಲ. ಕೋಡ್ ಅನ್ನು ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ಮ್ಯಾನೇಜರ್‌ಗೆ (ಅಥವಾ ಬೇರೆ ಸುರಕ್ಷಿತ ಸ್ಥಳಕ್ಕೆ) ಆಮದು ಮಾಡಿ, ನಂತರ ಈ ಫೈಲ್ ಅನ್ನು ಅಳಿಸಿ.</string>
+    <string name="settings_sync_export_file_body">Waves — ಬುಕ್‌ಮಾರ್ಕ್ ಸಿಂಕ್ ಮರುಪಡೆಯುವ ಕೋಡ್\n\n%1$s\n\nಈ ಕೋಡ್ ನಿಮ್ಮ ಸಿಂಕ್ ಮಾಡಿದ ಬುಕ್‌ಮಾರ್ಕ್‌ಗಳಿಗೆ ಏಕೈಕ ಕೀ — ಇದನ್ನು ಹೊಂದಿರುವ ಯಾರಾದರೂ ಅವುಗಳನ್ನು ಓದಬಹುದು, ಮತ್ತು ಕಳೆದುಹೋದರೆ ಅದನ್ನು ಮರುಪಡೆಯಲಾಗುವುದಿಲ್ಲ.\n\nಈ ಫೈಲ್ ಎನ್‌ಕ್ರಿಪ್ಟ್ ಮಾಡಲಾಗಿಲ್ಲ. ಕೋಡ್ ಅನ್ನು ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ಮ್ಯಾನೇಜರ್‌ಗೆ (ಅಥವಾ ಬೇರೆ ಸುರಕ್ಷಿತ ಸ್ಥಳಕ್ಕೆ) ಆಮದು ಮಾಡಿ, ನಂತರ ಈ ಫೈಲ್ ಅನ್ನು ಅಳಿಸಿ.</string>
     <string name="settings_sync_export_summary">ಕೋಡ್ ಅನ್ನು ನೀವು ಸಂಗ್ರಹಿಸಬಹುದಾದ ಪಠ್ಯ ಫೈಲ್ ಆಗಿ ರಫ್ತು ಮಾಡಿ</string>
     <string name="settings_sync_export_title">ಮರುಪಡೆಯುವ ಕೋಡ್ ಅನ್ನು ಫೈಲ್‌ಗೆ ಉಳಿಸಿ</string>
     <string name="settings_sync_faq_a1">ಹೌದು. ಪ್ರತಿ ಬುಕ್‌ಮಾರ್ಕ್ ಅನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡುವ ಮೊದಲು ಈ ಸಾಧನದಲ್ಲಿ ಎನ್‌ಕ್ರಿಪ್ಟ್ ಮಾಡಲಾಗುತ್ತದೆ. ಸರ್ವರ್ ತಾನು ಓದಲಾಗದ, ಗೊಂದಲಗೊಳಿಸಿದ ಡೇಟಾವನ್ನು ಮಾತ್ರ ಸಂಗ್ರಹಿಸುತ್ತದೆ.</string>
@@ -285,7 +285,7 @@
     <string name="settings_sync_faq_a5">ಇಲ್ಲ. ಸೈನ್-ಅಪ್, ಇಮೇಲ್ ಅಥವಾ ಫೋನ್ ಸಂಖ್ಯೆ ಯಾವುದೂ ಇಲ್ಲ — ಕೇವಲ ಮರುಪಡೆಯುವ ಕೋಡ್. ನಿಮ್ಮ ಬುಕ್‌ಮಾರ್ಕ್‌ಗಳಿಗೆ ವೈಯಕ್ತಿಕವಾದ ಏನೂ ಸಂಬಂಧಿಸಿಲ್ಲ.</string>
     <string name="settings_sync_faq_a6">ಸಿಂಕ್ ಐಚ್ಛಿಕ ಮತ್ತು ಡೀಫಾಲ್ಟ್ ಆಗಿ ಆಫ್ ಆಗಿರುತ್ತದೆ. ನೀವು ಯಾವಾಗ ಬೇಕಾದರೂ ನಿಮ್ಮ ಬುಕ್‌ಮಾರ್ಕ್‌ಗಳನ್ನು ಫೈಲ್‌ಗೆ ರಫ್ತು ಮಾಡಿ ನಂತರ ಆಮದು ಮಾಡಬಹುದು, ಯಾವುದೇ ಸರ್ವರ್‌ನ ಪಾತ್ರವಿಲ್ಲದೆ.</string>
     <string name="settings_sync_faq_q1">ನನ್ನ ಬುಕ್‌ಮಾರ್ಕ್‌ಗಳು ಎನ್‌ಕ್ರಿಪ್ಟ್ ಆಗಿವೆಯೇ?</string>
-    <string name="settings_sync_faq_q2">Firedown ಅಥವಾ ಬೇರೆ ಯಾರಾದರೂ ಅವುಗಳನ್ನು ಓದಬಹುದೇ?</string>
+    <string name="settings_sync_faq_q2">Waves ಅಥವಾ ಬೇರೆ ಯಾರಾದರೂ ಅವುಗಳನ್ನು ಓದಬಹುದೇ?</string>
     <string name="settings_sync_faq_q3">ಮರುಪಡೆಯುವ ಕೋಡ್ ಎಂದರೇನು?</string>
     <string name="settings_sync_faq_q4">ನನ್ನ ಮರುಪಡೆಯುವ ಕೋಡ್ ಅನ್ನು ಕಳೆದುಕೊಂಡರೆ ಏನಾಗುತ್ತದೆ?</string>
     <string name="settings_sync_faq_q5">ನನಗೆ ಖಾತೆ ಅಥವಾ ಇಮೇಲ್ ಬೇಕೇ?</string>

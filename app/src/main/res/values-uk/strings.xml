@@ -10,8 +10,8 @@
     <string name="popup_group_this_page">Ця сторінка</string>
     <string name="popup_group_library">Бібліотека</string>
     <string name="action_mode_selected">Вибрано %d</string>
-    <string name="app_lock">Розблокуйте, щоб використовувати Firedown</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Розблокуйте, щоб використовувати Waves</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Розблокувати</string>
     <string name="browser_bookmark_added">Закладку збережено!</string>
     <string name="browser_cache_cleared">Дані веб-перегляду видалено</string>
@@ -36,7 +36,7 @@
     <string name="capture_empty_gifs_message">Немає доступних GIF-файлів.</string>
     <string name="capture_empty_images_message">Зображення відсутні.</string>
     <string name="capture_empty_message">Немає медіафайлів, доступних для завантаження.</string>
-    <string name="capture_empty_subtext">Перезавантажте веб-сайт, і Firedown виявить доступні носії.</string>
+    <string name="capture_empty_subtext">Перезавантажте веб-сайт, і Waves виявить доступні носії.</string>
     <string name="capture_empty_video_message">Немає доступних відео.</string>
     <string name="clipboard">Скопійовано в буфер обміну</string>
     <string name="clipboard_from">З буфера обміну</string>
@@ -82,7 +82,7 @@
     <string name="details_url">URL-адреса</string>
     <string name="download">Завантажити</string>
     <string name="download_finished">Завантаження завершено</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Якість завантаження</string>
     <string name="download_queued">Очікує…</string>
     <string name="download_rename_error">Назва файлу вже використовується.</string>
@@ -91,7 +91,7 @@
     <string name="empty_learn_more">Докладніше</string>
     <string name="restore_downloads_button">Відновити попередні завантаження</string>
     <string name="restore_downloads_settings_summary">Відновіть список завантажень після перевстановлення застосунку</string>
-    <string name="restore_downloads_message">Якщо ви перевстановили Firedown, ваші завантаження можуть досі бути в папці Download/Firedown. Виберіть цю папку, і Firedown відновить список завантажень.</string>
+    <string name="restore_downloads_message">Якщо ви перевстановили Waves, ваші завантаження можуть досі бути в папці Download/Waves. Виберіть цю папку, і Waves відновить список завантажень.</string>
     <string name="restore_downloads_choose">Вибрати папку</string>
     <string name="restore_downloads_progress">Відновлення завантажень…</string>
     <string name="restore_downloads_done">Відновлено завантажень: %1$d</string>
@@ -106,7 +106,7 @@
     <string name="empty_list_query">Нічого не знайдено</string>
     <string name="empty_list_type">Тут нічого немає.</string>
     <string name="empty_list_vault">У захищеній папці поки нічого немає.\n\nУ будь-якому завантаженні виберіть «Перемістити в захищену папку» в меню ⋮, щоб зберегти його тут.</string>
-    <string name="empty_media_help">Деякі мультимедійні файли потрібно відтворити, перш ніж Firedown зможе визначити їх як файли для завантаження.</string>
+    <string name="empty_media_help">Деякі мультимедійні файли потрібно відтворити, перш ніж Waves зможе визначити їх як файли для завантаження.</string>
     <string name="empty_media_help_title">Перед завантаженням відтворіть мультимедійний файл</string>
     <string name="empty_media_subtitle_help">Будь ласка, відтворюйте медіа як зазвичай. Потім він має з’явитися разом з іншими мультимедійними файлами після натискання кнопки Fire.</string>
 <string name="error_check_internet_connection">Помилка підключення до Інтернету.</string>
@@ -167,7 +167,7 @@
     <string name="navigation_web_history">Історія</string>
     <string name="notifications_downloads_channel">Завантаження</string>
     <string name="open">ВІДЧИНЕНО</string>
-    <string name="open_in_app_subtitle">Ви хочете вийти з Firedown, щоб переглянути цей контент?</string>
+    <string name="open_in_app_subtitle">Ви хочете вийти з Waves, щоб переглянути цей контент?</string>
     <string name="open_in_app_title">Відкрити в іншій програмі</string>
     <string name="open_new_private_tab_2">Приватна вкладка</string>
     <string name="open_new_tab_2">Нова вкладка</string>
@@ -197,7 +197,7 @@
     <string name="rename_file">Перейменувати файл</string>
     <string name="request_geolocation">Поділитися геоданими свого пристрою з &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_media_key_system_access">Дозволити &lt;b&gt;%s&lt;/b&gt; відтворювати вміст, керований DRM?</string>
-    <string name="request_media_key_system_access_subtitle">Зверніть увагу, що Firedown не може завантажити файли, захищені DRM</string>
+    <string name="request_media_key_system_access_subtitle">Зверніть увагу, що Waves не може завантажити файли, захищені DRM</string>
     <string name="request_storage">Надати доступ до пам’яті пристрою для &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_storage_access">Дозволити третім сторонам отримувати доступ до основного сховища для &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="restart_origin">Перезапустити</string>
@@ -326,7 +326,7 @@
     <string name="crash_sheet_send">Надіслати звіт</string>
     <string name="crash_sheet_sent">Звіт надіслано — дякуємо</string>
     <string name="crash_sheet_send_failed">Не вдалося надіслати. Перевірте з\'єднання — або скористайтеся Копіювати / Повідомити.</string>
-    <string name="crash_sheet_send_note">Надсилається анонімно на сервер Firedown — лише звіт вище, без ідентифікаторів.</string>
+    <string name="crash_sheet_send_note">Надсилається анонімно на сервер Waves — лише звіт вище, без ідентифікаторів.</string>
     <string name="home_trackers_title">Трекери та реклама заблоковані</string>
     <string name="home_trackers_subtitle_idle">Захист увімкнено</string>
     <string name="trackers_info_count_label">трекерів та реклами заблоковано</string>
@@ -379,7 +379,7 @@
     <string name="settings_sync_help_close">Зрозуміло</string>
     <string name="settings_sync_faq_q1">Чи зашифровані мої закладки та файли з резервної копії?</string>
     <string name="settings_sync_faq_a1">Так. Усе шифрується на цьому пристрої, перш ніж його залишити, — кожна закладка й кожен файл, який ви резервуєте. Сервер зберігає лише дані, які не може прочитати.</string>
-    <string name="settings_sync_faq_q2">Чи можуть Firedown або хтось інший прочитати мої файли?</string>
+    <string name="settings_sync_faq_q2">Чи можуть Waves або хтось інший прочитати мої файли?</string>
     <string name="settings_sync_faq_a2">Ні. Відкрити їх може лише ваш код відновлення, і він ніколи не залишає ваш пристрій. Ані ми, ані ті, хто обслуговує сервери, ані той, хто вкраде їхню копію: усі мають зашифровані дані й жодного ключа.</string>
     <string name="settings_sync_faq_q3">Що таке код відновлення?</string>
     <string name="settings_sync_faq_a3">Ключ, який створюється на вашому пристрої. Це єдине, чим можна розшифрувати ваші закладки та файли з резервної копії — на цьому пристрої або на новому.</string>
@@ -396,7 +396,7 @@
     <string name="settings_sync_export_summary">Експортувати код як текстовий файл, який можна зберегти</string>
     <string name="settings_sync_export_caveat_message">Цей файл зберігається незашифрованим — будь-хто, хто може його прочитати, може прочитати ваші закладки. Імпортуйте код у свій менеджер паролів (або інше безпечне місце), а потім видаліть файл. Менеджер паролів зберігає його зашифрованим; окремий файл — ні.</string>
     <string name="settings_sync_export_continue">Продовжити</string>
-    <string name="settings_sync_export_file_body">Firedown — код відновлення\n\n%1$s\n\nЦей код — єдиний ключ до ваших закладок, резервної копії завантажень і кредиту сховища — будь-хто, хто його має, може їх прочитати, і його не можна відновити в разі втрати.\n\nЦей файл НЕ зашифровано. Імпортуйте код у менеджер паролів (або інше безпечне місце), а потім видаліть цей файл.</string>
+    <string name="settings_sync_export_file_body">Waves — код відновлення\n\n%1$s\n\nЦей код — єдиний ключ до ваших закладок, резервної копії завантажень і кредиту сховища — будь-хто, хто його має, може їх прочитати, і його не можна відновити в разі втрати.\n\nЦей файл НЕ зашифровано. Імпортуйте код у менеджер паролів (або інше безпечне місце), а потім видаліть цей файл.</string>
     <string name="settings_sync_export_done">Код відновлення збережено</string>
     <string name="settings_sync_export_failed">Не вдалося зберегти файл</string>
     <string name="settings_sync_code_warning">Цей код відновлення — єдиний ключ до ваших закладок, резервної копії завантажень і кредиту сховища. Збережіть його в менеджері паролів — або в іншому безпечному місці. Його не можна відновити в разі втрати.</string>
@@ -405,7 +405,7 @@
     <string name="browser_snapshot_saving">Збереження знімка сторінки…</string>
     <string name="browser_snapshot_saved">Знімок збережено</string>
     <string name="bookmark_export">Експортувати закладки</string>
-    <string name="bookmark_export_done">Експортовано закладок: %1$d до Download/Firedown/backup</string>
+    <string name="bookmark_export_done">Експортовано закладок: %1$d до Download/Waves/backup</string>
     <string name="bookmark_import">Імпортувати закладки</string>
     <string name="bookmark_import_done">Імпортовано закладок: %1$d</string>
     <string name="bookmark_io_error">Не вдалося прочитати файл закладок</string>
@@ -569,7 +569,7 @@
     <string name="buy_credit_wallet_connect_link">Під\'єднайте гаманець, щоб платити одним дотиком</string>
     <string name="buy_credit_wallet_manage_link">Змінити або від\'єднати гаманець</string>
     <string name="buy_credit_wallet_dialog_title">Під\'єднати гаманець Lightning</string>
-    <string name="buy_credit_wallet_dialog_body">Вставте рядок Nostr Wallet Connect або відскануйте його з гаманця. Після цього Firedown зможе оплачувати рахунки з нього в межах заданого там бюджету.</string>
+    <string name="buy_credit_wallet_dialog_body">Вставте рядок Nostr Wallet Connect або відскануйте його з гаманця. Після цього Waves зможе оплачувати рахунки з нього в межах заданого там бюджету.</string>
     <string name="buy_credit_wallet_dialog_connected">Під\'єднано до %1$s. Щоб замінити, вставте або відскануйте новий рядок.</string>
     <string name="buy_credit_wallet_hint">nostr+walletconnect://…</string>
     <string name="buy_credit_wallet_connect_action">Під\'єднати</string>
@@ -695,9 +695,9 @@
     <string name="p2p_send">Надіслати</string>
     <string name="p2p_send_title">Надіслати напряму</string>
     <string name="p2p_receive_title">Отримати файл</string>
-    <string name="p2p_send_lead">Надішліть цей файл прямо на інший пристрій із Firedown — із шифруванням, з пристрою на пристрій, без сервера-посередника.</string>
-    <string name="p2p_receive_lead">Отримайте файл прямо з іншого пристрою з Firedown.</string>
-    <string name="p2p_code_hint_send">Відскануйте цей код іншим пристроєм — у Firedown у розділі Завантаження → Отримати файл або просто його камерою. В одній мережі передавання продовжиться саме собою; якщо з\'явиться код-відповідь, відскануйте його у відповідь.</string>
+    <string name="p2p_send_lead">Надішліть цей файл прямо на інший пристрій із Waves — із шифруванням, з пристрою на пристрій, без сервера-посередника.</string>
+    <string name="p2p_receive_lead">Отримайте файл прямо з іншого пристрою з Waves.</string>
+    <string name="p2p_code_hint_send">Відскануйте цей код іншим пристроєм — у Waves у розділі Завантаження → Отримати файл або просто його камерою. В одній мережі передавання продовжиться саме собою; якщо з\'явиться код-відповідь, відскануйте його у відповідь.</string>
     <string name="p2p_code_hint_reply">Покажіть цю відповідь відправнику або надішліть її тим самим способом, яким надійшов його код.</string>
     <string name="p2p_share_code">Надіслати код іншим способом</string>
     <string name="p2p_scan_reply">Сканувати відповідь</string>
@@ -715,13 +715,13 @@
     <string name="p2p_done_received">Збережено в «Завантаження»</string>
     <string name="p2p_done">Готово</string>
     <string name="p2p_error_no_path">Не вдалося зв\'язатися з іншим пристроєм напряму. Це трапляється на мобільному інтернеті або за VPN — спробуйте одну й ту саму мережу Wi-Fi, вимкнувши VPN.</string>
-    <string name="p2p_error_no_path_vpn">VPN на цьому пристрої блокує пряме з\'єднання. Виключіть Firedown із VPN — або призупиніть його — і спробуйте ще раз.</string>
+    <string name="p2p_error_no_path_vpn">VPN на цьому пристрої блокує пряме з\'єднання. Виключіть Waves із VPN — або призупиніть його — і спробуйте ще раз.</string>
     <string name="p2p_error_generic">Передавання не вдалося.</string>
     <string name="p2p_error_bad_code">Цей код недійсний — спробуйте ще раз.</string>
     <string name="p2p_clipboard_empty">У буфері обміну немає коду.</string>
     <string name="p2p_footer">Передавання з шифруванням напряму між пристроями. Файл ніколи не потрапляє на сервер.</string>
     <string name="p2p_footer_relayed">Наскрізне шифрування. Ретранслюється через firedown.app (немає прямого шляху), який не може його прочитати.</string>
-    <string name="p2p_hint_vpn">Порада: виключення Firedown із VPN дає змогу з\'єднуватися напряму.</string>
+    <string name="p2p_hint_vpn">Порада: виключення Waves із VPN дає змогу з\'єднуватися напряму.</string>
     <string name="p2p_scan_hint">Наведіть камеру на код відправника</string>
     <string name="p2p_camera_denied">Щоб сканувати, потрібен доступ до камери. Натомість можна вставити код.</string>
     <string name="p2p_send_link">Надіслати посилання</string>
@@ -782,13 +782,13 @@
     <string name="cloud_backup_state_low_credit">Недостатньо коштів</string>
     <string name="cloud_backup_state_too_many">Забагато файлів</string>
     <string name="cloud_backup_state_no_space">Недостатньо місця</string>
-    <string name="share_app_title">Поділитися Firedown</string>
+    <string name="share_app_title">Поділитися Waves</string>
     <string name="share_app_blurb">Приватний браузер і завантажувач. Зберігайте відео, аудіо та зображення з будь-якої сторінки, блокуйте рекламу й трекери — усе лишається на вашому пристрої.</string>
-    <string name="share_app_get_at">Завантажити Firedown можна на</string>
+    <string name="share_app_get_at">Завантажити Waves можна на</string>
     <string name="share_app_scan">Або наведіть камеру іншого телефона на код вище, щоб встановити</string>
     <string name="share_app_share">Поділитися посиланням</string>
-    <string name="share_app_qr_desc">QR-код на сторінку завантаження Firedown</string>
-    <string name="share_app_message">Firedown — приватний браузер і завантажувач для Android. %1$s</string>
+    <string name="share_app_qr_desc">QR-код на сторінку завантаження Waves</string>
+    <string name="share_app_message">Waves — приватний браузер і завантажувач для Android. %1$s</string>
     <string name="settings_sync_faq_q8">Що насправді бачить сервер?</string>
     <string name="settings_sync_faq_a8">Зашифровані частини ваших файлів, їхній розмір і час надходження — плюс випадковий номер облікового запису, який ваш пристрій виводить із коду відновлення, але не ім\'я і не пошту. Назви файлів, їхні типи та мініатюри теж зашифровані — усередині запечатаного списку, який може відкрити лише ваш пристрій. Сервер не дізнається навіть назви файлу, не кажучи вже про його вміст.</string>
     <string name="settings_update_check_title">Перевірити оновлення</string>

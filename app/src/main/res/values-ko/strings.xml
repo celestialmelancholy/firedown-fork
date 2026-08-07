@@ -3,8 +3,8 @@
     <string name="settings_oled_theme_summary">순수 검정 배경 — OLED 화면에서 배터리 절약</string>
     <string name="archive_banner_subtitle">탭하여 보거나 다시 열기</string>
     <string name="action_mode_selected">%d개 선택됨</string>
-    <string name="app_lock">Firedown을 사용하려면 잠금 해제하세요</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Waves을 사용하려면 잠금 해제하세요</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">잠금 해제</string>
     <string name="browser_bookmark_added">북마크가 저장되었습니다!</string>
     <string name="browser_cache_cleared">인터넷 사용정보가 삭제되었습니다</string>
@@ -29,7 +29,7 @@
     <string name="capture_empty_gifs_message">사용 가능한 GIF가 없습니다.</string>
     <string name="capture_empty_images_message">사용 가능한 이미지가 없습니다.</string>
     <string name="capture_empty_message">다운로드에 사용할 수 있는 미디어가 없습니다.</string>
-    <string name="capture_empty_subtext">웹사이트를 다시 로드하면 Firedown이 사용 가능한 미디어를 감지합니다.</string>
+    <string name="capture_empty_subtext">웹사이트를 다시 로드하면 Waves이 사용 가능한 미디어를 감지합니다.</string>
     <string name="capture_empty_video_message">사용 가능한 동영상이 없습니다.</string>
     <string name="clipboard">클립보드에 복사됨</string>
     <string name="clipboard_from">클립보드에서</string>
@@ -75,7 +75,7 @@
     <string name="details_url">URL</string>
     <string name="download">다운로드</string>
     <string name="download_finished">다운로드 완료</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">다운로드 품질</string>
     <string name="download_queued">보류 중…</string>
     <string name="download_rename_error">파일 이름이 이미 사용 중입니다.</string>
@@ -89,7 +89,7 @@
     <string name="empty_list_history">다운로드 기록이 비어 있습니다.</string>
     <string name="empty_list_query">검색 결과가 없습니다</string>
     <string name="empty_list_type">여기에는 아무 것도 없습니다.</string>
-    <string name="empty_media_help">Firedown이 해당 미디어 파일을 다운로드 가능한 파일로 감지하려면 먼저 일부 미디어 파일을 재생해야 합니다.</string>
+    <string name="empty_media_help">Waves이 해당 미디어 파일을 다운로드 가능한 파일로 감지하려면 먼저 일부 미디어 파일을 재생해야 합니다.</string>
     <string name="empty_media_help_title">다운로드하기 전에 미디어를 재생하세요</string>
     <string name="empty_media_subtitle_help">평소처럼 미디어를 재생해 주세요. 그러면 Fire 버튼을 누른 후 다른 미디어 파일과 함께 나타날 것입니다.</string>
 <string name="error_check_internet_connection">인터넷 연결 오류입니다.</string>
@@ -160,7 +160,7 @@
     <string name="navigation_web_history">기록</string>
     <string name="notifications_downloads_channel">다운로드</string>
     <string name="open">열기</string>
-    <string name="open_in_app_subtitle">이 콘텐츠를 보기 위해 Firedown을 종료하시겠습니까?</string>
+    <string name="open_in_app_subtitle">이 콘텐츠를 보기 위해 Waves을 종료하시겠습니까?</string>
     <string name="open_in_app_title">다른 앱에서 열기</string>
     <string name="open_new_private_tab_2">새 사생활 보호 탭</string>
     <string name="open_new_tab_2">새 탭</string>
@@ -196,7 +196,7 @@
     <string name="rename_file">파일 이름 바꾸기</string>
     <string name="request_geolocation">장치 위치를 공유하시겠습니까&lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_media_key_system_access">&lt;b&gt;%s&lt;/b&gt;이(가) DRM으로 제어되는 콘텐츠를 재생하도록 허용하시겠습니까?</string>
-    <string name="request_media_key_system_access_subtitle">DRM으로 보호된 파일은 Firedown으로 다운로드할 수 없습니다.</string>
+    <string name="request_media_key_system_access_subtitle">DRM으로 보호된 파일은 Waves으로 다운로드할 수 없습니다.</string>
     <string name="request_storage">&lt;b&gt;%s&lt;/b&gt; 의 장치 저장소에 대한 액세스를 허용하시겠습니까?</string>
     <string name="request_storage_access">제3자가 &lt;b&gt;%s&lt;/b&gt;의 첫 번째 당사자 저장소에 액세스하도록 허용하시겠습니까?</string>
     <string name="restart_origin">다시 시작</string>
@@ -380,7 +380,7 @@
     <string name="capture_help_banner_title">동영상이 목록에 없나요?</string>
     <string name="capture_help_banner">일부 삽입된 미디어는 먼저 재생해야 합니다. 방법을 보려면 탭하세요.</string>
     <string name="bookmark_export">북마크 내보내기</string>
-    <string name="bookmark_export_done">북마크 %1$d개를 Download/Firedown/backup에 내보냈습니다</string>
+    <string name="bookmark_export_done">북마크 %1$d개를 Download/Waves/backup에 내보냈습니다</string>
     <string name="bookmark_import">북마크 가져오기</string>
     <string name="bookmark_import_done">북마크 %1$d개를 가져왔습니다</string>
     <string name="bookmark_io_error">북마크 파일을 읽을 수 없습니다</string>
@@ -405,7 +405,7 @@
     <string name="settings_sync_export_continue">계속</string>
     <string name="settings_sync_export_done">복구 코드를 저장했습니다</string>
     <string name="settings_sync_export_failed">파일을 저장할 수 없습니다</string>
-    <string name="settings_sync_export_file_body">Firedown — 북마크 동기화 복구 코드\n\n%1$s\n\n이 코드는 동기화된 북마크의 유일한 키입니다 — 코드를 가진 사람은 누구나 읽을 수 있으며, 분실하면 복구할 수 없습니다.\n\n이 파일은 암호화되어 있지 않습니다. 코드를 비밀번호 관리자(또는 다른 안전한 곳)에 가져온 후 이 파일을 삭제하세요.</string>
+    <string name="settings_sync_export_file_body">Waves — 북마크 동기화 복구 코드\n\n%1$s\n\n이 코드는 동기화된 북마크의 유일한 키입니다 — 코드를 가진 사람은 누구나 읽을 수 있으며, 분실하면 복구할 수 없습니다.\n\n이 파일은 암호화되어 있지 않습니다. 코드를 비밀번호 관리자(또는 다른 안전한 곳)에 가져온 후 이 파일을 삭제하세요.</string>
     <string name="settings_sync_export_summary">코드를 저장할 수 있는 텍스트 파일로 내보냅니다</string>
     <string name="settings_sync_export_title">복구 코드를 파일로 저장</string>
     <string name="settings_sync_faq_a1">예. 각 북마크는 업로드되기 전에 이 기기에서 암호화됩니다. 서버에는 읽을 수 없는 뒤섞인 데이터만 저장됩니다.</string>
@@ -415,7 +415,7 @@
     <string name="settings_sync_faq_a5">아니요. 가입, 이메일, 전화번호가 없으며 복구 코드만 있습니다. 개인 정보는 북마크에 연결되지 않습니다.</string>
     <string name="settings_sync_faq_a6">동기화는 선택 사항이며 기본적으로 꺼져 있습니다. 언제든지 북마크를 파일로 내보내고 나중에 서버 없이 가져올 수 있습니다.</string>
     <string name="settings_sync_faq_q1">내 북마크가 암호화되나요?</string>
-    <string name="settings_sync_faq_q2">Firedown이나 다른 누군가가 읽을 수 있나요?</string>
+    <string name="settings_sync_faq_q2">Waves이나 다른 누군가가 읽을 수 있나요?</string>
     <string name="settings_sync_faq_q3">복구 코드란 무엇인가요?</string>
     <string name="settings_sync_faq_q4">복구 코드를 잃어버리면 어떻게 되나요?</string>
     <string name="settings_sync_faq_q5">계정이나 이메일이 필요한가요?</string>

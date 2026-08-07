@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">%d izbrano</string>
-    <string name="app_lock">Odklenite za uporabo Firedown</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Odklenite za uporabo Waves</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Odkleni</string>
     <string name="browser_bookmark_added">Zaznamek shranjen!</string>
     <string name="browser_cache_cleared">Podatki brskanja so izbrisani</string>
@@ -26,7 +26,7 @@
     <string name="capture_empty_gifs_message">GIF-i niso na voljo.</string>
     <string name="capture_empty_images_message">Ni slik na voljo.</string>
     <string name="capture_empty_message">Noben medij ni na voljo za prenos.</string>
-    <string name="capture_empty_subtext">Ponovno naložite spletno mesto in Firedown bo zaznal razpoložljive medije.</string>
+    <string name="capture_empty_subtext">Ponovno naložite spletno mesto in Waves bo zaznal razpoložljive medije.</string>
     <string name="capture_empty_video_message">Videoposnetki niso na voljo.</string>
     <string name="clipboard">Kopirano v odložišče</string>
     <string name="close_tab">Zapri zavihek</string>
@@ -71,7 +71,7 @@
     <string name="details_url">URL</string>
     <string name="download">Prenesi</string>
     <string name="download_finished">Prenos končan</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Kakovost prenosa</string>
     <string name="download_queued">V teku…</string>
     <string name="download_rename_error">Ime datoteke je že v uporabi.</string>
@@ -84,7 +84,7 @@
     <string name="empty_list_history">Vaša zgodovina prenosov je prazna.</string>
     <string name="empty_list_query">Ni zadetkov</string>
     <string name="empty_list_type">Tukaj ni ničesar.</string>
-    <string name="empty_media_help">Nekatere predstavnostne datoteke je treba predvajati, preden jih lahko Firedown zazna kot datoteke za prenos.</string>
+    <string name="empty_media_help">Nekatere predstavnostne datoteke je treba predvajati, preden jih lahko Waves zazna kot datoteke za prenos.</string>
     <string name="empty_media_help_title">Pred prenosom predvajajte predstavnost</string>
     <string name="empty_media_subtitle_help">Predvajajte predstavnost kot običajno. Potem bi se moral prikazati z drugimi predstavnostnimi datotekami, potem ko pritisnete gumb Fire.</string>
 <string name="error_check_internet_connection">Napaka internetne povezave.</string>
@@ -144,7 +144,7 @@
     <string name="navigation_web_history">Zgodovina</string>
     <string name="notifications_downloads_channel">Prenosi</string>
     <string name="open">Odprto</string>
-    <string name="open_in_app_subtitle">Ali želite zapustiti Firedown in si ogledati to vsebino?</string>
+    <string name="open_in_app_subtitle">Ali želite zapustiti Waves in si ogledati to vsebino?</string>
     <string name="open_in_app_title">Odprite v drugi aplikaciji</string>
     <string name="open_new_private_tab_2">Nov zasebni zavihek</string>
     <string name="open_new_tab_2">Nov zavihek</string>
@@ -171,7 +171,7 @@
     <string name="rename_file">Preimenuj datoteko</string>
     <string name="request_geolocation">Želite deliti lokacijo svoje naprave z aplikacijo &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_media_key_system_access">Ali dovolite aplikaciji &lt;b&gt;%s&lt;/b&gt; predvajanje vsebine, nadzorovane s tehnologijo DRM?</string>
-    <string name="request_media_key_system_access_subtitle">Upoštevajte, da Firedown ne more prenesti datotek, zaščitenih z DRM</string>
+    <string name="request_media_key_system_access_subtitle">Upoštevajte, da Waves ne more prenesti datotek, zaščitenih z DRM</string>
     <string name="request_storage">Ali dovolite dostop do pomnilnika naprave za &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_storage_access">Želite tretjim osebam dovoliti dostop do lastne shrambe za &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="restart_origin">Ponovni zagon</string>
@@ -285,7 +285,7 @@
     <string name="trackers_info_action">Upravljanje zaščite</string>
     <string name="trackers_info_today">%1$s blokiranih danes</string>
     <string name="bookmark_export">Izvozi zaznamke</string>
-    <string name="bookmark_export_done">Izvoženih %1$d zaznamkov v Download/Firedown/backup</string>
+    <string name="bookmark_export_done">Izvoženih %1$d zaznamkov v Download/Waves/backup</string>
     <string name="bookmark_import">Uvozi zaznamke</string>
     <string name="bookmark_import_done">Uvoženih %1$d zaznamkov</string>
     <string name="bookmark_io_error">Datoteke zaznamkov ni bilo mogoče prebrati</string>
@@ -310,7 +310,7 @@
     <string name="settings_sync_export_continue">Nadaljuj</string>
     <string name="settings_sync_export_done">Obnovitvena koda shranjena</string>
     <string name="settings_sync_export_failed">Datoteke ni bilo mogoče shraniti</string>
-    <string name="settings_sync_export_file_body">Firedown — obnovitvena koda za sinhronizacijo zaznamkov\n\n%1$s\n\nTa koda je edini ključ do vaših sinhroniziranih zaznamkov — kdorkoli jo ima, jih lahko prebere, in če jo izgubite, je ni mogoče obnoviti.\n\nTa datoteka NI šifrirana. Uvozite kodo v upravitelja gesel (ali na drugo varno mesto), nato pa to datoteko izbrišite.</string>
+    <string name="settings_sync_export_file_body">Waves — obnovitvena koda za sinhronizacijo zaznamkov\n\n%1$s\n\nTa koda je edini ključ do vaših sinhroniziranih zaznamkov — kdorkoli jo ima, jih lahko prebere, in če jo izgubite, je ni mogoče obnoviti.\n\nTa datoteka NI šifrirana. Uvozite kodo v upravitelja gesel (ali na drugo varno mesto), nato pa to datoteko izbrišite.</string>
     <string name="settings_sync_export_summary">Izvozite kodo kot besedilno datoteko, ki jo lahko shranite</string>
     <string name="settings_sync_export_title">Shrani obnovitveno kodo v datoteko</string>
     <string name="settings_sync_faq_a1">Da. Vsak zaznamek je na tej napravi šifriran, preden je naložen. Strežnik vedno shranjuje le premešane podatke, ki jih ne more prebrati.</string>
@@ -320,7 +320,7 @@
     <string name="settings_sync_faq_a5">Ne. Ni registracije, e-pošte ali telefonske številke — samo obnovitvena koda. Z vašimi zaznamki niso povezani nobeni osebni podatki.</string>
     <string name="settings_sync_faq_a6">Sinhronizacija je izbirna in privzeto izklopljena. Svoje zaznamke lahko vedno izvozite v datoteko in jih uvozite pozneje, brez vključenega strežnika.</string>
     <string name="settings_sync_faq_q1">Ali so moji zaznamki šifrirani?</string>
-    <string name="settings_sync_faq_q2">Ali jih Firedown ali kdorkoli drug lahko prebere?</string>
+    <string name="settings_sync_faq_q2">Ali jih Waves ali kdorkoli drug lahko prebere?</string>
     <string name="settings_sync_faq_q3">Kaj je obnovitvena koda?</string>
     <string name="settings_sync_faq_q4">Kaj če izgubim svojo obnovitveno kodo?</string>
     <string name="settings_sync_faq_q5">Ali potrebujem račun ali e-pošto?</string>

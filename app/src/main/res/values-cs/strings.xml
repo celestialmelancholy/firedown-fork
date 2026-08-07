@@ -10,8 +10,8 @@
     <string name="popup_group_this_page">Tato stránka</string>
     <string name="popup_group_library">Knihovna</string>
     <string name="action_mode_selected">Vybráno: %d</string>
-    <string name="app_lock">Chcete-li použít Firedown, odemkněte</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Chcete-li použít Waves, odemkněte</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Odemknout</string>
     <string name="browser_bookmark_added">Záložka uložena!</string>
     <string name="browser_cache_cleared">Údaje o prohlížení byly vymazány</string>
@@ -36,7 +36,7 @@
     <string name="capture_empty_gifs_message">Nejsou k dispozici žádné Gify.</string>
     <string name="capture_empty_images_message">Nejsou k dispozici žádné obrázky.</string>
     <string name="capture_empty_message">Nejsou k dispozici žádná média ke stažení.</string>
-    <string name="capture_empty_subtext">Znovu načtěte web a Firedown zjistí dostupná média.</string>
+    <string name="capture_empty_subtext">Znovu načtěte web a Waves zjistí dostupná média.</string>
     <string name="capture_empty_video_message">Nejsou k dispozici žádná videa.</string>
     <string name="clipboard">Zkopírováno do schránky</string>
     <string name="clipboard_from">Ze schránky</string>
@@ -82,7 +82,7 @@
     <string name="details_url">URL</string>
     <string name="download">Stažení</string>
     <string name="download_finished">Stahování dokončeno</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Kvalita stahování</string>
     <string name="download_queued">Čekající…</string>
     <string name="download_rename_error">Název souboru se již používá.</string>
@@ -92,7 +92,7 @@
     <string name="empty_learn_more">Další informace</string>
     <string name="restore_downloads_button">Obnovit předchozí stahování</string>
     <string name="restore_downloads_settings_summary">Obnovte seznam stahování po přeinstalaci aplikace</string>
-    <string name="restore_downloads_message">Pokud jste Firedown přeinstalovali, vaše stažené soubory mohou stále být ve složce Download/Firedown. Vyberte tuto složku a Firedown obnoví seznam stahování.</string>
+    <string name="restore_downloads_message">Pokud jste Waves přeinstalovali, vaše stažené soubory mohou stále být ve složce Download/Waves. Vyberte tuto složku a Waves obnoví seznam stahování.</string>
     <string name="restore_downloads_choose">Vybrat složku</string>
     <string name="restore_downloads_progress">Obnovování stažených souborů…</string>
     <string name="restore_downloads_done">Obnovená stahování: %1$d</string>
@@ -107,7 +107,7 @@
     <string name="empty_list_query">Nebyly nalezeny žádné výsledky</string>
     <string name="empty_list_type">Tady nic není.</string>
     <string name="empty_list_vault">V bezpečné složce zatím nic není.\n\nU libovolného stahování zvolte „Přesunout do bezpečné složky“ z nabídky ⋮ a uložte ho sem.</string>
-    <string name="empty_media_help">Některé mediální soubory je třeba přehrát, než je Firedown rozpozná jako soubory ke stažení.</string>
+    <string name="empty_media_help">Některé mediální soubory je třeba přehrát, než je Waves rozpozná jako soubory ke stažení.</string>
     <string name="empty_media_help_title">Před stažením média přehrajte</string>
     <string name="empty_media_subtitle_help">Přehrávejte média jako obvykle. Poté by se měl objevit s ostatními mediálními soubory po stisknutí tlačítka Fire.</string>
 <string name="error_check_internet_connection">Chyba připojení k internetu.</string>
@@ -179,7 +179,7 @@
     <string name="navigation_web_history">Historie</string>
     <string name="notifications_downloads_channel">Stahování</string>
     <string name="open">OTEVŘENO</string>
-    <string name="open_in_app_subtitle">Chcete opustit Firedown a zobrazit tento obsah?</string>
+    <string name="open_in_app_subtitle">Chcete opustit Waves a zobrazit tento obsah?</string>
     <string name="open_in_app_title">Otevřít v jiné aplikaci</string>
     <string name="open_new_private_tab_2">Nový anonymní panel</string>
     <string name="open_new_tab_2">Nový panel</string>
@@ -209,7 +209,7 @@
     <string name="rename_file">Přejmenuj soubor</string>
     <string name="request_geolocation">Sdílet polohu svého zařízení s uživatelem &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_media_key_system_access">Povolit aplikaci &lt;b&gt;%s&lt;/b&gt; přehrávat obsah řízený DRM?</string>
-    <string name="request_media_key_system_access_subtitle">Upozorňujeme, že pomocí Firedown nelze stahovat soubory chráněné DRM</string>
+    <string name="request_media_key_system_access_subtitle">Upozorňujeme, že pomocí Waves nelze stahovat soubory chráněné DRM</string>
     <string name="request_storage">Povolit aplikaci &lt;b&gt;%s&lt;/b&gt; přístup k úložišti zařízení?</string>
     <string name="request_storage_access">Povolit třetím stranám přístup k úložišti první strany pro doménu &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="restart_origin">Restartujte</string>
@@ -341,7 +341,7 @@
     <string name="crash_sheet_send">Odeslat hlášení</string>
     <string name="crash_sheet_sent">Hlášení odesláno — děkujeme</string>
     <string name="crash_sheet_send_failed">Odeslání se nezdařilo. Zkontrolujte připojení — nebo použijte Kopírovat / Nahlásit.</string>
-    <string name="crash_sheet_send_note">Odesílá se anonymně na server Firedown — pouze hlášení výše, žádné identifikátory.</string>
+    <string name="crash_sheet_send_note">Odesílá se anonymně na server Waves — pouze hlášení výše, žádné identifikátory.</string>
     <string name="home_trackers_title">Sledovače a reklamy zablokovány</string>
     <string name="home_trackers_subtitle_idle">Ochrana aktivní</string>
     <string name="trackers_info_count_label">sledovačů a reklam zablokováno</string>
@@ -417,7 +417,7 @@
     <string name="settings_sync_help_close">Rozumím</string>
     <string name="settings_sync_faq_q1">Jsou mé záložky a zálohované soubory šifrované?</string>
     <string name="settings_sync_faq_a1">Ano. Všechno se zašifruje v tomto zařízení ještě předtím, než ho opustí — každá záložka i každý soubor, který zálohujete. Server ukládá jen data, která nedokáže přečíst.</string>
-    <string name="settings_sync_faq_q2">Může Firedown nebo někdo jiný číst mé soubory?</string>
+    <string name="settings_sync_faq_q2">Může Waves nebo někdo jiný číst mé soubory?</string>
     <string name="settings_sync_faq_a2">Ne. Odemknout je dokáže jen váš kód pro obnovení a ten nikdy neopustí vaše zařízení. Ani my, ani lidé provozující servery, ani nikdo, kdo by z nich ukradl kopii: všichni mají zašifrovaná data a žádný klíč.</string>
     <string name="settings_sync_faq_q3">Co je kód pro obnovení?</string>
     <string name="settings_sync_faq_a3">Klíč vygenerovaný ve vašem zařízení. Je to jediné, čím lze dešifrovat vaše záložky a zálohované soubory — v tomto zařízení i v novém.</string>
@@ -434,7 +434,7 @@
     <string name="settings_sync_export_summary">Exportovat kód jako textový soubor, který si můžete uložit</string>
     <string name="settings_sync_export_caveat_message">Tento soubor se ukládá nešifrovaný — kdokoli, kdo jej dokáže přečíst, dokáže přečíst vaše záložky. Naimportujte kód do svého správce hesel (nebo na jiné bezpečné místo) a poté soubor smažte. Správce hesel jej udržuje zašifrovaný; volný soubor nikoli.</string>
     <string name="settings_sync_export_continue">Pokračovat</string>
-    <string name="settings_sync_export_file_body">Firedown — kód pro obnovení\n\n%1$s\n\nTento kód je jediným klíčem k vašim záložkám, záloze stažených souborů a kreditu úložiště — kdokoli, kdo jej má, si je může přečíst, a pokud jej ztratíte, nelze jej obnovit.\n\nTento soubor NENÍ šifrovaný. Naimportujte kód do svého správce hesel (nebo na jiné bezpečné místo) a poté tento soubor smažte.</string>
+    <string name="settings_sync_export_file_body">Waves — kód pro obnovení\n\n%1$s\n\nTento kód je jediným klíčem k vašim záložkám, záloze stažených souborů a kreditu úložiště — kdokoli, kdo jej má, si je může přečíst, a pokud jej ztratíte, nelze jej obnovit.\n\nTento soubor NENÍ šifrovaný. Naimportujte kód do svého správce hesel (nebo na jiné bezpečné místo) a poté tento soubor smažte.</string>
     <string name="settings_sync_export_done">Kód pro obnovení uložen</string>
     <string name="settings_sync_export_failed">Soubor se nepodařilo uložit</string>
     <string name="settings_sync_code_warning">Tento kód pro obnovení je jediným klíčem k vašim záložkám, záloze stažených souborů a kreditu úložiště. Uložte jej do svého správce hesel — nebo na jiné bezpečné místo. Pokud jej ztratíte, nelze jej obnovit.</string>
@@ -443,7 +443,7 @@
     <string name="browser_snapshot_saving">Ukládání snímku stránky…</string>
     <string name="browser_snapshot_saved">Snímek uložen</string>
     <string name="bookmark_export">Exportovat záložky</string>
-    <string name="bookmark_export_done">Exportováno %1$d záložek do Download/Firedown/backup</string>
+    <string name="bookmark_export_done">Exportováno %1$d záložek do Download/Waves/backup</string>
     <string name="bookmark_import">Importovat záložky</string>
     <string name="bookmark_import_done">Importováno %1$d záložek</string>
     <string name="bookmark_io_error">Soubor záložek se nepodařilo načíst</string>
@@ -607,7 +607,7 @@
     <string name="buy_credit_wallet_connect_link">Připojte peněženku a plaťte jedním klepnutím</string>
     <string name="buy_credit_wallet_manage_link">Změnit nebo odpojit peněženku</string>
     <string name="buy_credit_wallet_dialog_title">Připojit Lightning peněženku</string>
-    <string name="buy_credit_wallet_dialog_body">Vložte řetězec Nostr Wallet Connect nebo jej naskenujte z peněženky. Firedown pak může platit faktury z této peněženky, v rámci rozpočtu, který tam nastavíte.</string>
+    <string name="buy_credit_wallet_dialog_body">Vložte řetězec Nostr Wallet Connect nebo jej naskenujte z peněženky. Waves pak může platit faktury z této peněženky, v rámci rozpočtu, který tam nastavíte.</string>
     <string name="buy_credit_wallet_dialog_connected">Připojeno k %1$s. Vložte nebo naskenujte nový řetězec, chcete-li jej nahradit.</string>
     <string name="buy_credit_wallet_hint">nostr+walletconnect://…</string>
     <string name="buy_credit_wallet_connect_action">Připojit</string>
@@ -731,9 +731,9 @@
     <string name="p2p_send">Odeslat</string>
     <string name="p2p_send_title">Odeslat přímo</string>
     <string name="p2p_receive_title">Přijmout soubor</string>
-    <string name="p2p_send_lead">Odešlete tento soubor přímo do jiného zařízení s aplikací Firedown — šifrovaně, ze zařízení do zařízení, bez serveru mezi nimi.</string>
-    <string name="p2p_receive_lead">Přijměte soubor přímo z jiného zařízení s aplikací Firedown.</string>
-    <string name="p2p_code_hint_send">Naskenujte tento kód druhým zařízením — ve Firedownu v části Stahování → Přijmout soubor, nebo prostě jeho fotoaparátem. Ve stejné síti přenos pokračuje sám; pokud se zobrazí kód odpovědi, naskenujte jej zpět.</string>
+    <string name="p2p_send_lead">Odešlete tento soubor přímo do jiného zařízení s aplikací Waves — šifrovaně, ze zařízení do zařízení, bez serveru mezi nimi.</string>
+    <string name="p2p_receive_lead">Přijměte soubor přímo z jiného zařízení s aplikací Waves.</string>
+    <string name="p2p_code_hint_send">Naskenujte tento kód druhým zařízením — ve Wavesu v části Stahování → Přijmout soubor, nebo prostě jeho fotoaparátem. Ve stejné síti přenos pokračuje sám; pokud se zobrazí kód odpovědi, naskenujte jej zpět.</string>
     <string name="p2p_code_hint_reply">Ukažte tuto odpověď odesílateli, nebo ji pošlete zpět stejnou cestou, jakou dorazil jeho kód.</string>
     <string name="p2p_share_code">Poslat kód jinak</string>
     <string name="p2p_scan_reply">Naskenovat odpověď</string>
@@ -751,13 +751,13 @@
     <string name="p2p_done_received">Uloženo do Stahování</string>
     <string name="p2p_done">Hotovo</string>
     <string name="p2p_error_no_path">Druhé zařízení se nepodařilo přímo kontaktovat. To se stává na mobilních datech nebo za VPN — zkuste stejnou Wi-Fi síť s vypnutou VPN.</string>
-    <string name="p2p_error_no_path_vpn">VPN v tomto zařízení blokuje přímé spojení. Vyjměte Firedown z VPN — nebo ji pozastavte — a zkuste to znovu.</string>
+    <string name="p2p_error_no_path_vpn">VPN v tomto zařízení blokuje přímé spojení. Vyjměte Waves z VPN — nebo ji pozastavte — a zkuste to znovu.</string>
     <string name="p2p_error_generic">Přenos se nezdařil.</string>
     <string name="p2p_error_bad_code">Tento kód není platný — zkuste to znovu.</string>
     <string name="p2p_clipboard_empty">Ve schránce není žádný kód.</string>
     <string name="p2p_footer">Šifrovaný přenos ze zařízení do zařízení. Soubor nikdy neprochází přes server.</string>
     <string name="p2p_footer_relayed">Šifrováno end-to-end. Přenášeno přes firedown.app (bez přímého spojení), který jej nemůže číst.</string>
-    <string name="p2p_hint_vpn">Tip: vyjmutí Firedownu z VPN umožní přímé spojení.</string>
+    <string name="p2p_hint_vpn">Tip: vyjmutí Wavesu z VPN umožní přímé spojení.</string>
     <string name="p2p_scan_hint">Namiřte fotoaparát na kód odesílatele</string>
     <string name="p2p_camera_denied">Ke skenování je potřeba přístup k fotoaparátu. Místo toho můžete kód vložit.</string>
     <string name="p2p_send_link">Poslat odkaz</string>
@@ -818,13 +818,13 @@
     <string name="cloud_backup_state_low_credit">Nedostatek kreditu</string>
     <string name="cloud_backup_state_too_many">Příliš mnoho souborů</string>
     <string name="cloud_backup_state_no_space">Nedostatek místa</string>
-    <string name="share_app_title">Sdílet Firedown</string>
+    <string name="share_app_title">Sdílet Waves</string>
     <string name="share_app_blurb">Soukromý prohlížeč a správce stahování. Ukládejte video, zvuk i obrázky z libovolné stránky, blokujte reklamy a sledovací prvky – všechno zůstane ve vašem zařízení.</string>
-    <string name="share_app_get_at">Firedown stáhnete na</string>
+    <string name="share_app_get_at">Waves stáhnete na</string>
     <string name="share_app_scan">Nebo namiřte na kód výše fotoaparát jiného telefonu a nainstalujte jej</string>
     <string name="share_app_share">Sdílet odkaz</string>
-    <string name="share_app_qr_desc">QR kód odkazující na stránku stahování Firedownu</string>
-    <string name="share_app_message">Firedown — soukromý prohlížeč a správce stahování pro Android. %1$s</string>
+    <string name="share_app_qr_desc">QR kód odkazující na stránku stahování Wavesu</string>
+    <string name="share_app_message">Waves — soukromý prohlížeč a správce stahování pro Android. %1$s</string>
     <string name="settings_sync_faq_q8">Co server vlastně vidí?</string>
     <string name="settings_sync_faq_a8">Zašifrované části vašich souborů, jak jsou velké a kdy dorazily — a k tomu náhodné číslo účtu, které si vaše zařízení odvodí z kódu pro obnovení, nikdy jméno nebo e-mail. Názvy souborů, typy i náhledy jsou zašifrované také, v zapečetěném seznamu, který otevře jen vaše zařízení. Server se nedozví ani to, jak se soubor jmenuje, natož co je v něm.</string>
     <string name="settings_update_check_title">Zkontrolovat aktualizace</string>

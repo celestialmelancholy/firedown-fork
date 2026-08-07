@@ -1,20 +1,27 @@
 package com.solarized.firedown.phone.fragments;
 
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.view.KeyEvent;
 import android.view.PointerIcon;
 import android.view.View;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.solarized.firedown.AppLock;
 import com.solarized.firedown.Preferences;
+import com.solarized.firedown.R;
 import com.solarized.firedown.autocomplete.AutoCompleteViewModel;
 import com.solarized.firedown.data.models.GeckoStateViewModel;
 import com.solarized.firedown.data.models.WebHistoryViewModel;
@@ -38,6 +45,8 @@ import org.mozilla.geckoview.MediaSession;
 import org.mozilla.geckoview.StorageController;
 import org.mozilla.geckoview.WebResponse;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -59,7 +68,10 @@ public class BaseBrowserFragment extends BaseFocusFragment implements AutoComple
 
     protected AutoCompleteViewModel mAutoCompleteViewModel;
 
-    protected FloatingActionButton mDownloadButton;
+    // Compact flame download button in the single top bar (Item 2 — was the
+    // browser's floating FAB). Typed as View: the toolbar hosts a MaterialButton
+    // now, and only show()/hide()/setOnClickListener (all View) are used.
+    protected View mDownloadButton;
 
     @Inject
     protected GeckoObserverRegistry mGeckoObserverRegistry;
@@ -96,6 +108,83 @@ public class BaseBrowserFragment extends BaseFocusFragment implements AutoComple
         mWebHistoryViewModel = new ViewModelProvider(this).get(WebHistoryViewModel.class);
         mAutoCompleteViewModel = new ViewModelProvider(this).get(AutoCompleteViewModel.class);
         mGeckoStateViewModel = new ViewModelProvider(mActivity).get(GeckoStateViewModel.class);
+    }
+
+
+    // ── Voice search (address-bar mic) ──────────────────────────────────────
+    // Chrome-parity: the system voice-recognition dialog (Google's service on
+    // most devices) returns text, which lands in the address bar and runs the
+    // same commit/search path as typing + enter. The recognized text is handed
+    // to onVoiceSearchResult(), which each fragment implements with its own
+    // toolbar/commit path.
+
+    private final ActivityResultLauncher<Intent> mVoiceSearchLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                    result -> {
+                        if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                            ArrayList<String> matches = result.getData()
+                                    .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                            if (matches != null && !matches.isEmpty()) {
+                                onVoiceSearchResult(matches.get(0));
+                            }
+                        }
+                    });
+
+    /** Launches the system voice-recognition dialog (no-op if unavailable). */
+    protected void launchVoiceSearch() {
+        if (mActivity == null) return;
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
+                getString(R.string.voice_search_prompt));
+        try {
+            mVoiceSearchLauncher.launch(intent);
+        } catch (ActivityNotFoundException e) {
+            // No speech service on the device — tell the user quietly.
+            makeSnackbar(mActivity.getSnackAnchorView(),
+                    R.string.voice_search_unavailable, isVoiceSearchIncognito()).show();
+        }
+    }
+
+    /** Handles recognized speech — each fragment fills its own toolbar and
+     *  commits (default no-op; override in fragments that have an address bar). */
+    protected void onVoiceSearchResult(String text) {
+    }
+
+    /** The incognito flag for the voice-unavailable snackbar's theme. */
+    protected boolean isVoiceSearchIncognito() {
+        return false;
+    }
+
+
+    // ── Image search (address-bar Google Lens icon) ─────────────────────────
+    // Chrome-parity v1: the system photo picker chooses an image, which opens
+    // Google Lens in the current tab so the user can search by that image.
+
+    private final ActivityResultLauncher<String> mImageSearchLauncher =
+            registerForActivityResult(new ActivityResultContracts.GetContent(),
+                    uri -> {
+                        if (uri == null || mActivity == null) return;
+                        // Lens accepts an image via its upload-by-URL surface;
+                        // for a local pick we open Lens and prefill with the
+                        // content URI where supported.
+                        String lensUrl = "https://lens.google.com/uploadbyurl?url="
+                                + Uri.encode(uri.toString());
+                        openUriInCurrentTab(lensUrl);
+                    });
+
+    /** Opens the system photo picker; the picked image opens Google Lens. */
+    protected void launchImageSearch() {
+        if (mActivity == null) return;
+        mImageSearchLauncher.launch("image/*");
+    }
+
+    /**
+     * Opens a URL in the CURRENT tab (used by the focus icons). Fragments
+     * override with their own tab/session semantics; base default is a no-op.
+     */
+    protected void openUriInCurrentTab(String url) {
     }
 
 

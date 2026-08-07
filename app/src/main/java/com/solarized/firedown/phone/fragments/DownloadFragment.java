@@ -541,7 +541,7 @@ public class DownloadFragment extends BaseDownloadFragment implements
         // initial URI just open at their default root; the scan also accepts
         // the backup/ subfolder if that's what gets picked.
         Uri initial = DocumentsContract.buildDocumentUri(
-                "com.android.externalstorage.documents", "primary:Download/Firedown");
+                "com.android.externalstorage.documents", "primary:Download/Waves");
         try {
             mRestoreFolderPicker.launch(initial);
         } catch (ActivityNotFoundException e) {
@@ -571,7 +571,7 @@ public class DownloadFragment extends BaseDownloadFragment implements
     private void launchDeleteGrantPicker() {
         // Same Download/Firedown tree the restore flow uses — one confirm.
         Uri initial = DocumentsContract.buildDocumentUri(
-                "com.android.externalstorage.documents", "primary:Download/Firedown");
+                "com.android.externalstorage.documents", "primary:Download/Waves");
         try {
             mDeleteGrantPicker.launch(initial);
         } catch (ActivityNotFoundException e) {

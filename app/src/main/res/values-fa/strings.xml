@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">%d انتخاب شد</string>
-    <string name="app_lock">برای استفاده از Firedown قفل را باز کنید</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">برای استفاده از Waves قفل را باز کنید</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">باز کردن قفل</string>
     <string name="browser_bookmark_added">نشانک ذخیره شد!</string>
     <string name="browser_cache_cleared">داده‌های مرور پاک شد</string>
@@ -26,7 +26,7 @@
     <string name="capture_empty_gifs_message">هیچ گیف موجود نیست.</string>
     <string name="capture_empty_images_message">هیچ تصویری در دسترس نیست</string>
     <string name="capture_empty_message">هیچ رسانه ای برای دانلود در دسترس نیست.</string>
-    <string name="capture_empty_subtext">وب سایت را دوباره بارگیری کنید و Firedown رسانه های موجود را شناسایی می کند.</string>
+    <string name="capture_empty_subtext">وب سایت را دوباره بارگیری کنید و Waves رسانه های موجود را شناسایی می کند.</string>
     <string name="capture_empty_video_message">هیچ ویدیویی در دسترس نیست.</string>
     <string name="clipboard">در کلیپ بورد کپی شد</string>
     <string name="close_tab">بستن زبانه</string>
@@ -84,7 +84,7 @@
     <string name="empty_list_history">سابقه دانلودهای شما خالی است.</string>
     <string name="empty_list_query">نتیجه ای پیدا نشد</string>
     <string name="empty_list_type">اینجا چیزی نیست</string>
-    <string name="empty_media_help">برخی از فایل‌های رسانه قبل از اینکه Firedown بتواند آنها را به‌عنوان فایل قابل دانلود شناسایی کند، باید پخش شوند.</string>
+    <string name="empty_media_help">برخی از فایل‌های رسانه قبل از اینکه Waves بتواند آنها را به‌عنوان فایل قابل دانلود شناسایی کند، باید پخش شوند.</string>
     <string name="empty_media_help_title">قبل از دانلود، رسانه را پخش کنید</string>
     <string name="empty_media_subtitle_help">لطفا رسانه را طبق معمول پخش کنید. پس از فشار دادن Fire-Button، باید با سایر فایل‌های رسانه‌ای ظاهر شود.</string>
 <string name="error_check_internet_connection">خطای اتصال به اینترنت</string>
@@ -144,7 +144,7 @@
     <string name="navigation_web_history">تاریخچه</string>
     <string name="notifications_downloads_channel">دانلودها</string>
     <string name="open">باز کن</string>
-    <string name="open_in_app_subtitle">آیا می خواهید برای مشاهده این محتوا از Firedown خارج شوید؟</string>
+    <string name="open_in_app_subtitle">آیا می خواهید برای مشاهده این محتوا از Waves خارج شوید؟</string>
     <string name="open_in_app_title">در برنامه دیگری باز کنید</string>
     <string name="open_new_private_tab_2">زبانهٔ خصوصی جدید</string>
     <string name="open_new_tab_2">زبانهٔ جدید</string>
@@ -169,7 +169,7 @@
     <string name="rename_file">تغییر نام فایل</string>
     <string name="request_geolocation">آیا مکان دستگاهتان را با &lt;b&gt;%s&lt;/b&gt; به اشتراک می‌گذارید؟</string>
     <string name="request_media_key_system_access">آیا به &lt;b&gt;%s&lt;/b&gt; اجازه می‌دهید محتوای کنترل‌شده با DRM را پخش کند؟</string>
-    <string name="request_media_key_system_access_subtitle">توجه داشته باشید که فایل‌های محافظت شده DRM توسط Firedown قابل دانلود نیستند</string>
+    <string name="request_media_key_system_access_subtitle">توجه داشته باشید که فایل‌های محافظت شده DRM توسط Waves قابل دانلود نیستند</string>
     <string name="request_storage">آیا اجازه دسترسی به فضای ذخیره‌سازی دستگاه برای &lt;b&gt;%s&lt;/b&gt; را می‌دهید؟</string>
     <string name="request_storage_access">آیا به اشخاص ثالث اجازه می‌دهید به فضای ذخیره‌سازی شخص اول برای &lt;b&gt;%s&lt;/b&gt; دسترسی داشته باشند؟</string>
     <string name="restart_origin">راه اندازی مجدد</string>
@@ -289,7 +289,7 @@
     <string name="capture_help_banner_title">ویدیو در فهرست نیست؟</string>
     <string name="capture_help_banner">برخی رسانه‌های جاسازی‌شده باید ابتدا پخش شوند. برای آموزش ضربه بزنید.</string>
     <string name="bookmark_export">برون‌بری نشانک‌ها</string>
-    <string name="bookmark_export_done">%1$d نشانک به Download/Firedown/backup برون‌بری شد</string>
+    <string name="bookmark_export_done">%1$d نشانک به Download/Waves/backup برون‌بری شد</string>
     <string name="bookmark_import">درون‌ریزی نشانک‌ها</string>
     <string name="bookmark_import_done">%1$d نشانک درون‌ریزی شد</string>
     <string name="bookmark_io_error">خواندن پروندهٔ نشانک‌ها ممکن نشد</string>
@@ -314,7 +314,7 @@
     <string name="settings_sync_export_continue">ادامه</string>
     <string name="settings_sync_export_done">کد بازیابی ذخیره شد</string>
     <string name="settings_sync_export_failed">ذخیرهٔ پرونده ممکن نشد</string>
-    <string name="settings_sync_export_file_body">Firedown — کد بازیابی همگام‌سازی نشانک\n\n%1$s\n\nاین کد تنها کلید نشانک‌های همگام‌شدهٔ شماست — هر کسی آن را داشته باشد می‌تواند آن‌ها را بخواند، و در صورت گم شدن قابل بازیابی نیست.\n\nاین پرونده رمزگذاری نشده است. کد را به مدیر گذرواژه (یا جای امن دیگری) درون‌ریزی کنید، سپس این پرونده را حذف کنید.</string>
+    <string name="settings_sync_export_file_body">Waves — کد بازیابی همگام‌سازی نشانک\n\n%1$s\n\nاین کد تنها کلید نشانک‌های همگام‌شدهٔ شماست — هر کسی آن را داشته باشد می‌تواند آن‌ها را بخواند، و در صورت گم شدن قابل بازیابی نیست.\n\nاین پرونده رمزگذاری نشده است. کد را به مدیر گذرواژه (یا جای امن دیگری) درون‌ریزی کنید، سپس این پرونده را حذف کنید.</string>
     <string name="settings_sync_export_summary">کد را به‌صورت یک پروندهٔ متنی برون‌بری کنید تا بتوانید آن را نگه دارید</string>
     <string name="settings_sync_export_title">ذخیرهٔ کد بازیابی در پرونده</string>
     <string name="settings_sync_faq_a1">بله. هر نشانک پیش از بارگذاری روی این دستگاه رمزگذاری می‌شود. سرور تنها داده‌های درهم‌ریخته‌ای را ذخیره می‌کند که نمی‌تواند بخواند.</string>
@@ -324,7 +324,7 @@
     <string name="settings_sync_faq_a5">خیر. هیچ ثبت‌نام، رایانامه یا شماره تلفنی نیست — فقط کد بازیابی. چیز شخصی‌ای به نشانک‌های شما گره نخورده است.</string>
     <string name="settings_sync_faq_a6">همگام‌سازی اختیاری است و به‌طور پیش‌فرض خاموش است. همیشه می‌توانید نشانک‌های خود را به یک پرونده برون‌بری کرده و بعداً بدون دخالت هیچ سروری درون‌ریزی کنید.</string>
     <string name="settings_sync_faq_q1">آیا نشانک‌های من رمزگذاری شده‌اند؟</string>
-    <string name="settings_sync_faq_q2">آیا Firedown یا هر کس دیگری می‌تواند آن‌ها را بخواند؟</string>
+    <string name="settings_sync_faq_q2">آیا Waves یا هر کس دیگری می‌تواند آن‌ها را بخواند؟</string>
     <string name="settings_sync_faq_q3">کد بازیابی چیست؟</string>
     <string name="settings_sync_faq_q4">اگر کد بازیابی‌ام را گم کنم چه می‌شود؟</string>
     <string name="settings_sync_faq_q5">آیا به حساب یا رایانامه نیاز دارم؟</string>

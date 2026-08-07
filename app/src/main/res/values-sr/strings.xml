@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">Изабрано је %d</string>
-    <string name="app_lock">Откључајте да бисте користили Firedown</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Откључајте да бисте користили Waves</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Откључај</string>
     <string name="browser_bookmark_added">Обележивач сачуван!</string>
     <string name="browser_cache_cleared">Подаци прегледања су обрисани</string>
@@ -25,7 +25,7 @@
     <string name="capture_empty_gifs_message">Нема доступних GIF-ова.</string>
     <string name="capture_empty_images_message">Нема доступних слика.</string>
     <string name="capture_empty_message">Нема доступних медија за преузимање.</string>
-    <string name="capture_empty_subtext">Поново учитајте веб локацију и Firedown ће открити доступне медије.</string>
+    <string name="capture_empty_subtext">Поново учитајте веб локацију и Waves ће открити доступне медије.</string>
     <string name="capture_empty_video_message">Нема доступних видео снимака.</string>
     <string name="clipboard">Копирано у међуспремник</string>
     <string name="close_tab">Затвори језичак</string>
@@ -70,7 +70,7 @@
     <string name="details_url">URL</string>
     <string name="download">Преузимање</string>
     <string name="download_finished">Преузимање је завршено</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Квалитет преузимања</string>
     <string name="download_queued">На чекању…</string>
     <string name="download_rename_error">Име датотеке је већ у употреби.</string>
@@ -83,7 +83,7 @@
     <string name="empty_list_history">Ваша историја преузимања је празна.</string>
     <string name="empty_list_query">Нема резултата</string>
     <string name="empty_list_type">Овде нема ничега.</string>
-    <string name="empty_media_help">Неке медијске датотеке треба да се репродукују пре него што их Firedown региструје као датотеке за преузимање.</string>
+    <string name="empty_media_help">Неке медијске датотеке треба да се репродукују пре него што их Waves региструје као датотеке за преузимање.</string>
     <string name="empty_media_help_title">Пустите медије пре преузимања</string>
     <string name="empty_media_subtitle_help">Пустите медије као и обично. Затим би требало да се појави са другим медијским датотекама, након притиска на дугме Fire.</string>
 <string name="error_check_internet_connection">Грешка интернет везе.</string>
@@ -143,7 +143,7 @@
     <string name="navigation_web_history">Историја</string>
     <string name="notifications_downloads_channel">Преузимања</string>
     <string name="open">Отвори</string>
-    <string name="open_in_app_subtitle">Да ли желите да напустите Firedown да бисте видели овај садржај?</string>
+    <string name="open_in_app_subtitle">Да ли желите да напустите Waves да бисте видели овај садржај?</string>
     <string name="open_in_app_title">Отворите у другој апликацији</string>
     <string name="open_new_private_tab_2">Нови приватни језичак</string>
     <string name="open_new_tab_2">Нови језичак</string>
@@ -166,7 +166,7 @@
     <string name="rename_file">Преименуј датотеку</string>
     <string name="request_geolocation">Желите да делите локацију уређаја са &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_media_key_system_access">Дозволити &lt;b&gt;%s&lt;/b&gt; да репродукује садржај који контролише DRM?</string>
-    <string name="request_media_key_system_access_subtitle">Имајте на уму да Firedown не може преузети датотеке заштићене DRM-ом</string>
+    <string name="request_media_key_system_access_subtitle">Имајте на уму да Waves не може преузети датотеке заштићене DRM-ом</string>
     <string name="request_storage">Желите ли да дозволите приступ складишту уређаја за &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_storage_access">Желите ли да дозволите трећим странама да приступе меморијском простору прве стране за &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="restart_origin">Покрени поново</string>
@@ -285,7 +285,7 @@
 
 
     <string name="bookmark_export">Извези обележиваче</string>
-    <string name="bookmark_export_done">Извезено %1$d обележивача у Download/Firedown/backup</string>
+    <string name="bookmark_export_done">Извезено %1$d обележивача у Download/Waves/backup</string>
     <string name="bookmark_import">Увези обележиваче</string>
     <string name="bookmark_import_done">Увезено %1$d обележивача</string>
     <string name="bookmark_io_error">Није могуће прочитати датотеку обележивача</string>
@@ -310,7 +310,7 @@
     <string name="settings_sync_export_continue">Настави</string>
     <string name="settings_sync_export_done">Код за опоравак је сачуван</string>
     <string name="settings_sync_export_failed">Чување датотеке није успело</string>
-    <string name="settings_sync_export_file_body">Firedown — код за опоравак синхронизације обележивача\n\n%1$s\n\nОвај код је једини кључ за ваше синхронизоване обележиваче — свако ко га има може да их прочита, и не може се повратити ако се изгуби.\n\nОва датотека НИЈЕ шифрована. Увезите код у свој менаџер лозинки (или на друго безбедно место), а затим избришите ову датотеку.</string>
+    <string name="settings_sync_export_file_body">Waves — код за опоравак синхронизације обележивача\n\n%1$s\n\nОвај код је једини кључ за ваше синхронизоване обележиваче — свако ко га има може да их прочита, и не може се повратити ако се изгуби.\n\nОва датотека НИЈЕ шифрована. Увезите код у свој менаџер лозинки (или на друго безбедно место), а затим избришите ову датотеку.</string>
     <string name="settings_sync_export_summary">Извезите код као текстуалну датотеку коју можете да сачувате</string>
     <string name="settings_sync_export_title">Сачувај код за опоравак у датотеку</string>
     <string name="settings_sync_faq_a1">Да. Сваки обележивач се шифрује на овом уређају пре него што се отпреми. Сервер увек чува само измешане податке које не може да прочита.</string>
@@ -320,7 +320,7 @@
     <string name="settings_sync_faq_a5">Не. Нема регистрације, имејла нити броја телефона — само код за опоравак. Ништа лично није везано за ваше обележиваче.</string>
     <string name="settings_sync_faq_a6">Синхронизација је опциона и подразумевано искључена. Увек можете да извезете своје обележиваче у датотеку и касније их увезете, без укључивања сервера.</string>
     <string name="settings_sync_faq_q1">Да ли су моји обележивачи шифровани?</string>
-    <string name="settings_sync_faq_q2">Да ли Firedown или било ко други може да их прочита?</string>
+    <string name="settings_sync_faq_q2">Да ли Waves или било ко други може да их прочита?</string>
     <string name="settings_sync_faq_q3">Шта је код за опоравак?</string>
     <string name="settings_sync_faq_q4">Шта ако изгубим свој код за опоравак?</string>
     <string name="settings_sync_faq_q5">Да ли ми је потребан налог или имејл?</string>

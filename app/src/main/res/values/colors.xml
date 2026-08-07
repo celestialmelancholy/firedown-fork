@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <color name="ic_launcher_background">@color/md_theme_background</color>
+    <color name="ic_launcher_background">@color/waves_launcher_bg</color>
+    <!-- Rebrand: the Waves logo sits on the exact dark homepage surface
+         (#131315 = md_theme_surface in values-night), so the launcher icon
+         matches the in-app home background. Fixed across themes on purpose. -->
+    <color name="waves_launcher_bg">#131315</color>
     <color name="brand_orange">#f0716c</color>
     <!-- Ground of the app-icon tile in the middle of the share screen's QR.
          A LITERAL, and there is no values-night twin ON PURPOSE: the QR is
@@ -280,4 +284,13 @@
          BOTH tracks — the meter's surfaceVariant track is the tighter one, and
          it is the easy one to forget. -->
     <color name="progress_indicator">#CC524A</color>
+
+    <!-- Custom Firefox-style homepage (Item 1). Dark charcoal surfaces matching
+         Firedown's dark theme (Firefox home uses #2B2B30-family surfaces). -->
+    <color name="home_shortcut_circle">#3A3A40</color>
+    <color name="home_capsule_bg">#3A3A40</color>
+    <color name="home_card_bg">#2B2B30</color>
+    <color name="home_divider">#2B2B30</color>
+    <color name="home_header_text">#FFFFFF</color>
+    <color name="home_subheader_text">#9AA0A6</color>
 </resources>

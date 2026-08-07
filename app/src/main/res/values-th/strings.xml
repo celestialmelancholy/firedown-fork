@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">เลือกแล้ว %d</string>
-    <string name="app_lock">ปลดล็อคเพื่อใช้ Firedown</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">ปลดล็อคเพื่อใช้ Waves</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">ปลดล็อค</string>
     <string name="browser_bookmark_added">บันทึกบุ๊คมาร์คแล้ว!</string>
     <string name="browser_cache_cleared">ล้างข้อมูลการท่องเว็บแล้ว</string>
@@ -26,7 +26,7 @@
     <string name="capture_empty_gifs_message">ไม่มี Gif ให้ใช้</string>
     <string name="capture_empty_images_message">ไม่มีรูปภาพที่ใช้ได้</string>
     <string name="capture_empty_message">ไม่มีสื่อให้ดาวน์โหลด</string>
-    <string name="capture_empty_subtext">โหลดเว็บไซต์ซ้ำแล้ว Firedown จะตรวจจับสื่อที่มีอยู่</string>
+    <string name="capture_empty_subtext">โหลดเว็บไซต์ซ้ำแล้ว Waves จะตรวจจับสื่อที่มีอยู่</string>
     <string name="capture_empty_video_message">ไม่มีวิดีโอที่ใช้ได้</string>
     <string name="clipboard">คัดลอกไปยังคลิปบอร์ดแล้ว</string>
     <string name="close_tab">ปิดแท็บ</string>
@@ -84,7 +84,7 @@
     <string name="empty_list_history">ประวัติการดาวน์โหลดของคุณว่างเปล่า</string>
     <string name="empty_list_query">ไม่พบผลลัพธ์</string>
     <string name="empty_list_type">ไม่มีอะไรที่นี่</string>
-    <string name="empty_media_help">จำเป็นต้องเล่นไฟล์มีเดียบางไฟล์ก่อนที่ Firedown จะสามารถตรวจพบว่าเป็นไฟล์ที่ดาวน์โหลดได้</string>
+    <string name="empty_media_help">จำเป็นต้องเล่นไฟล์มีเดียบางไฟล์ก่อนที่ Waves จะสามารถตรวจพบว่าเป็นไฟล์ที่ดาวน์โหลดได้</string>
     <string name="empty_media_help_title">เล่นสื่อก่อนดาวน์โหลด</string>
     <string name="empty_media_subtitle_help">กรุณาเล่นสื่อตามปกติ. จากนั้นควรปรากฏขึ้นพร้อมกับไฟล์มีเดียอื่น ๆ หลังจากกดปุ่มไฟ</string>
 <string name="error_check_internet_connection">ข้อผิดพลาดในการเชื่อมต่ออินเทอร์เน็ต</string>
@@ -144,7 +144,7 @@
     <string name="navigation_web_history">ประวัติ</string>
     <string name="notifications_downloads_channel">ดาวน์โหลด</string>
     <string name="open">เปิด</string>
-    <string name="open_in_app_subtitle">คุณต้องการออกจาก Firedown เพื่อดูเนื้อหานี้หรือไม่?</string>
+    <string name="open_in_app_subtitle">คุณต้องการออกจาก Waves เพื่อดูเนื้อหานี้หรือไม่?</string>
     <string name="open_in_app_title">เปิดในแอปอื่น</string>
     <string name="open_new_private_tab_2">แท็บส่วนตัวใหม่</string>
     <string name="open_new_tab_2">แท็บใหม่</string>
@@ -171,7 +171,7 @@
     <string name="rename_file">เปลี่ยนชื่อไฟล์</string>
     <string name="request_geolocation">แบ่งปันตำแหน่งอุปกรณ์ของคุณด้วย&lt;b&gt;%s&lt;/b&gt; ?</string>
     <string name="request_media_key_system_access">อนุญาต&lt;b&gt;%s&lt;/b&gt; ที่จะเล่นเนื้อหาที่ควบคุมโดย DRM ได้อย่างไร?</string>
-    <string name="request_media_key_system_access_subtitle">โปรดทราบว่าไฟล์ที่ได้รับการป้องกันด้วย DRM ไม่สามารถดาวน์โหลดได้จาก Firedown</string>
+    <string name="request_media_key_system_access_subtitle">โปรดทราบว่าไฟล์ที่ได้รับการป้องกันด้วย DRM ไม่สามารถดาวน์โหลดได้จาก Waves</string>
     <string name="request_storage">อนุญาตการเข้าถึงพื้นที่เก็บข้อมูลอุปกรณ์สำหรับ&lt;b&gt;%s&lt;/b&gt; ?</string>
     <string name="request_storage_access">อนุญาตให้บุคคลที่สามเข้าถึงที่จัดเก็บข้อมูลของบุคคลที่หนึ่งสำหรับ&lt;b&gt;%s&lt;/b&gt; ?</string>
     <string name="restart_origin">เริ่มต้นใหม่</string>
@@ -294,7 +294,7 @@
     <string name="capture_help_banner_title">ไม่พบวิดีโอใช่ไหม</string>
     <string name="capture_help_banner">สื่อที่ฝังไว้บางรายการต้องเล่นก่อน แตะเพื่อดูวิธี</string>
     <string name="bookmark_export">ส่งออกบุ๊กมาร์ก</string>
-    <string name="bookmark_export_done">ส่งออกบุ๊กมาร์ก %1$d รายการไปยัง Download/Firedown/backup แล้ว</string>
+    <string name="bookmark_export_done">ส่งออกบุ๊กมาร์ก %1$d รายการไปยัง Download/Waves/backup แล้ว</string>
     <string name="bookmark_import">นำเข้าบุ๊กมาร์ก</string>
     <string name="bookmark_import_done">นำเข้าบุ๊กมาร์ก %1$d รายการแล้ว</string>
     <string name="bookmark_io_error">ไม่สามารถอ่านไฟล์บุ๊กมาร์กได้</string>
@@ -319,7 +319,7 @@
     <string name="settings_sync_export_continue">ดำเนินการต่อ</string>
     <string name="settings_sync_export_done">บันทึกรหัสกู้คืนแล้ว</string>
     <string name="settings_sync_export_failed">ไม่สามารถบันทึกไฟล์ได้</string>
-    <string name="settings_sync_export_file_body">Firedown — รหัสกู้คืนการซิงค์บุ๊กมาร์ก\n\n%1$s\n\nรหัสนี้เป็นกุญแจเดียวสำหรับบุ๊กมาร์กที่ซิงค์ของคุณ — ใครก็ตามที่มีรหัสนี้สามารถอ่านได้ และไม่สามารถกู้คืนได้หากสูญหาย\n\nไฟล์นี้ไม่ได้เข้ารหัส นำเข้ารหัสไปยังตัวจัดการรหัสผ่าน (หรือที่ปลอดภัยอื่น) แล้วลบไฟล์นี้</string>
+    <string name="settings_sync_export_file_body">Waves — รหัสกู้คืนการซิงค์บุ๊กมาร์ก\n\n%1$s\n\nรหัสนี้เป็นกุญแจเดียวสำหรับบุ๊กมาร์กที่ซิงค์ของคุณ — ใครก็ตามที่มีรหัสนี้สามารถอ่านได้ และไม่สามารถกู้คืนได้หากสูญหาย\n\nไฟล์นี้ไม่ได้เข้ารหัส นำเข้ารหัสไปยังตัวจัดการรหัสผ่าน (หรือที่ปลอดภัยอื่น) แล้วลบไฟล์นี้</string>
     <string name="settings_sync_export_summary">ส่งออกรหัสเป็นไฟล์ข้อความที่คุณสามารถจัดเก็บได้</string>
     <string name="settings_sync_export_title">บันทึกรหัสกู้คืนลงไฟล์</string>
     <string name="settings_sync_faq_a1">ใช่ บุ๊กมาร์กแต่ละรายการถูกเข้ารหัสบนอุปกรณ์นี้ก่อนอัปโหลด เซิร์ฟเวอร์จัดเก็บเฉพาะข้อมูลที่ถูกสับเปลี่ยนซึ่งอ่านไม่ได้</string>
@@ -329,7 +329,7 @@
     <string name="settings_sync_faq_a5">ไม่ ไม่มีการลงทะเบียน อีเมล หรือหมายเลขโทรศัพท์ — มีเพียงรหัสกู้คืน ไม่มีข้อมูลส่วนตัวผูกกับบุ๊กมาร์กของคุณ</string>
     <string name="settings_sync_faq_a6">การซิงค์เป็นทางเลือกและปิดอยู่โดยค่าเริ่มต้น คุณสามารถส่งออกบุ๊กมาร์กไปยังไฟล์และนำเข้าภายหลังได้เสมอ โดยไม่ต้องใช้เซิร์ฟเวอร์</string>
     <string name="settings_sync_faq_q1">บุ๊กมาร์กของฉันถูกเข้ารหัสหรือไม่</string>
-    <string name="settings_sync_faq_q2">Firedown หรือคนอื่นอ่านบุ๊กมาร์กได้หรือไม่</string>
+    <string name="settings_sync_faq_q2">Waves หรือคนอื่นอ่านบุ๊กมาร์กได้หรือไม่</string>
     <string name="settings_sync_faq_q3">รหัสกู้คืนคืออะไร</string>
     <string name="settings_sync_faq_q4">ถ้าฉันทำรหัสกู้คืนหายจะเป็นอย่างไร</string>
     <string name="settings_sync_faq_q5">ฉันต้องมีบัญชีหรืออีเมลหรือไม่</string>

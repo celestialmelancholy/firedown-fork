@@ -13,8 +13,8 @@
     <string name="settings_oled_theme_summary">Czysto czarne powierzchnie — oszczędza baterię na ekranach OLED</string>
     <string name="archive_banner_subtitle">Stuknij, aby wyświetlić lub otworzyć ponownie</string>
     <string name="action_mode_selected">Wybrano %d</string>
-    <string name="app_lock">Odblokuj, aby używać Firedown</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Odblokuj, aby używać Waves</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Odblokuj</string>
     <string name="browser_bookmark_added">Zakładka zapisana!</string>
     <string name="browser_cache_cleared">Dane przeglądania zostały usunięte</string>
@@ -39,7 +39,7 @@
     <string name="capture_empty_gifs_message">Brak dostępnych GIF-ów.</string>
     <string name="capture_empty_images_message">Brak dostępnych obrazów.</string>
     <string name="capture_empty_message">Brak multimediów do pobrania.</string>
-    <string name="capture_empty_subtext">Załaduj ponownie witrynę, a Firedown wykryje dostępne multimedia.</string>
+    <string name="capture_empty_subtext">Załaduj ponownie witrynę, a Waves wykryje dostępne multimedia.</string>
     <string name="capture_empty_video_message">Brak dostępnych filmów.</string>
     <string name="clipboard">Skopiowane do schowka</string>
     <string name="clipboard_from">Ze schowka</string>
@@ -95,7 +95,7 @@
     <string name="empty_learn_more">Więcej informacji</string>
     <string name="restore_downloads_button">Przywróć poprzednie pobrania</string>
     <string name="restore_downloads_settings_summary">Odzyskaj listę pobrań po ponownej instalacji aplikacji</string>
-    <string name="restore_downloads_message">Jeśli ponownie zainstalowano Firedown, pobrane pliki mogą nadal znajdować się w folderze Download/Firedown. Wybierz ten folder, a Firedown przywróci listę pobrań.</string>
+    <string name="restore_downloads_message">Jeśli ponownie zainstalowano Waves, pobrane pliki mogą nadal znajdować się w folderze Download/Waves. Wybierz ten folder, a Waves przywróci listę pobrań.</string>
     <string name="restore_downloads_choose">Wybierz folder</string>
     <string name="restore_downloads_progress">Przywracanie pobranych plików…</string>
     <string name="restore_downloads_done">Przywrócone pobrania: %1$d</string>
@@ -110,7 +110,7 @@
     <string name="empty_list_query">Nie znaleziono wyników</string>
     <string name="empty_list_type">Tu nic nie ma.</string>
     <string name="empty_list_vault">W bezpiecznym folderze nie ma jeszcze nic.\n\nW dowolnym pobieraniu wybierz „Przenieś do bezpiecznego folderu“ z menu ⋮, aby zachować je tutaj.</string>
-    <string name="empty_media_help">Niektóre pliki multimedialne muszą zostać odtworzone, zanim Firedown wykryje je jako pliki do pobrania.</string>
+    <string name="empty_media_help">Niektóre pliki multimedialne muszą zostać odtworzone, zanim Waves wykryje je jako pliki do pobrania.</string>
     <string name="empty_media_help_title">Przed pobraniem odtwórz multimedia</string>
     <string name="empty_media_subtitle_help">Proszę odtwarzać multimedia jak zwykle. Powinno pojawić się wraz z innymi plikami multimedialnymi po naciśnięciu przycisku Fire.</string>
 <string name="error_check_internet_connection">Błąd połączenia internetowego.</string>
@@ -182,7 +182,7 @@
     <string name="navigation_web_history">Historia</string>
     <string name="notifications_downloads_channel">Pliki do pobrania</string>
     <string name="open">otwarty</string>
-    <string name="open_in_app_subtitle">Czy chcesz opuścić Firedown, aby obejrzeć tę zawartość?</string>
+    <string name="open_in_app_subtitle">Czy chcesz opuścić Waves, aby obejrzeć tę zawartość?</string>
     <string name="open_in_app_title">Otwórz w innej aplikacji</string>
     <string name="open_new_private_tab_2">Nowa karta prywatna</string>
     <string name="open_new_tab_2">Nowa karta</string>
@@ -203,7 +203,7 @@
     <string name="settings_jit_disabled">Wyłącz kompilację JIT JavaScriptu</string>
     <string name="settings_jit_disabled_summary">JIT przyspiesza witryny intensywnie korzystające z JavaScriptu, ale zwiększa powierzchnię ataku. Jest domyślnie włączony; włącz tę opcję, aby wzmocnić przeglądarkę kosztem wydajności. Ta zmiana spowoduje ponowne uruchomienie przeglądarki</string>
     <string name="settings_drm_enabled">Włącz odtwarzanie DRM</string>
-    <string name="settings_drm_enabled_summary">Zezwala Widevine w witrynach wymagających DRM (Netflix, Spotify, …). Firedown nadal nie może pobierać treści chronionych DRM.</string>
+    <string name="settings_drm_enabled_summary">Zezwala Widevine w witrynach wymagających DRM (Netflix, Spotify, …). Waves nadal nie może pobierać treści chronionych DRM.</string>
     <string name="settings_wasm_disabled">Wyłącz WebAssembly</string>
     <string name="settings_wasm_disabled_summary">Uniemożliwia witrynom uruchamianie skompilowanych modułów WASM. Zmniejsza powierzchnię ataku, ale psuje niektóre aplikacje — dozwolone witryny poniżej pozostają włączone</string>
 <string name="protection_panel_etp_toggle_disabled_description_2">Zalecane jest włączenie ochrony przed śledzeniem.</string>
@@ -230,7 +230,7 @@
     <string name="rename_file">Zmień nazwę pliku</string>
     <string name="request_geolocation">Udostępnić lokalizację swojego urządzenia&lt;b&gt;%s&lt;/b&gt; ?</string>
     <string name="request_media_key_system_access">Umożliwić&lt;b&gt;%s&lt;/b&gt; odtwarzanie treści chronionych DRM?</string>
-    <string name="request_media_key_system_access_subtitle">Należy pamiętać, że pliki chronione DRM nie mogą być pobierane przez Firedown</string>
+    <string name="request_media_key_system_access_subtitle">Należy pamiętać, że pliki chronione DRM nie mogą być pobierane przez Waves</string>
     <string name="request_storage">Zezwolić na dostęp do pamięci urządzenia dla&lt;b&gt;%s&lt;/b&gt; ?</string>
     <string name="request_storage_access">Zezwolić stronom trzecim na dostęp do pamięci masowej pierwszej strony&lt;b&gt;%s&lt;/b&gt; ?</string>
     <string name="restart_origin">Uruchom ponownie</string>
@@ -384,7 +384,7 @@
     <string name="crash_sheet_send">Wyślij raport</string>
     <string name="crash_sheet_sent">Raport wysłany — dziękujemy</string>
     <string name="crash_sheet_send_failed">Nie udało się wysłać. Sprawdź połączenie — lub użyj Kopiuj / Zgłoś.</string>
-    <string name="crash_sheet_send_note">Wysyłany anonimowo na serwer Firedown — tylko powyższy raport, bez identyfikatorów.</string>
+    <string name="crash_sheet_send_note">Wysyłany anonimowo na serwer Waves — tylko powyższy raport, bez identyfikatorów.</string>
     <string name="home_trackers_title">Trackery i reklamy zablokowane</string>
     <string name="home_trackers_subtitle_idle">Ochrona aktywna</string>
     <string name="trackers_info_count_label">trackerów i reklam zablokowanych</string>
@@ -461,7 +461,7 @@
     <string name="settings_sync_help_close">Rozumiem</string>
     <string name="settings_sync_faq_q1">Czy moje zakładki i pliki z kopii zapasowej są zaszyfrowane?</string>
     <string name="settings_sync_faq_a1">Tak. Wszystko jest szyfrowane na tym urządzeniu, zanim je opuści — każda zakładka i każdy plik, którego kopię tworzysz. Serwer przechowuje wyłącznie dane, których nie może odczytać.</string>
-    <string name="settings_sync_faq_q2">Czy Firedown lub ktokolwiek inny może odczytać moje pliki?</string>
+    <string name="settings_sync_faq_q2">Czy Waves lub ktokolwiek inny może odczytać moje pliki?</string>
     <string name="settings_sync_faq_a2">Nie. Odblokować je może tylko Twój kod odzyskiwania, a ten nigdy nie opuszcza Twojego urządzenia. Ani my, ani osoby prowadzące serwery, ani nikt, kto wykradnie ich kopię: wszyscy mają zaszyfrowane dane i żadnego klucza.</string>
     <string name="settings_sync_faq_q3">Czym jest kod odzyskiwania?</string>
     <string name="settings_sync_faq_a3">Klucz wygenerowany na Twoim urządzeniu. To jedyna rzecz, która może odszyfrować Twoje zakładki i pliki z kopii zapasowej — na tym urządzeniu lub na nowym.</string>
@@ -478,7 +478,7 @@
     <string name="settings_sync_export_summary">Wyeksportuj kod jako plik tekstowy, który możesz przechować</string>
     <string name="settings_sync_export_caveat_message">Ten plik jest zapisywany bez szyfrowania — każdy, kto może go odczytać, może odczytać Twoje zakładki. Zaimportuj kod do menedżera haseł (lub innego bezpiecznego miejsca), a następnie usuń plik. Menedżer haseł przechowuje go w postaci zaszyfrowanej; luźny plik nie.</string>
     <string name="settings_sync_export_continue">Kontynuuj</string>
-    <string name="settings_sync_export_file_body">Firedown — kod odzyskiwania\n\n%1$s\n\nTen kod jest jedynym kluczem do Twoich zakładek, kopii zapasowej pobrań i środków na przechowywanie — każdy, kto go ma, może je odczytać, a w razie utraty nie można go odzyskać.\n\nTen plik NIE jest zaszyfrowany. Zaimportuj kod do menedżera haseł (lub innego bezpiecznego miejsca), a następnie usuń ten plik.</string>
+    <string name="settings_sync_export_file_body">Waves — kod odzyskiwania\n\n%1$s\n\nTen kod jest jedynym kluczem do Twoich zakładek, kopii zapasowej pobrań i środków na przechowywanie — każdy, kto go ma, może je odczytać, a w razie utraty nie można go odzyskać.\n\nTen plik NIE jest zaszyfrowany. Zaimportuj kod do menedżera haseł (lub innego bezpiecznego miejsca), a następnie usuń ten plik.</string>
     <string name="settings_sync_export_done">Kod odzyskiwania zapisany</string>
     <string name="settings_sync_export_failed">Nie udało się zapisać pliku</string>
     <string name="settings_sync_code_warning">Ten kod odzyskiwania jest jedynym kluczem do Twoich zakładek, kopii zapasowej pobrań i środków na przechowywanie. Zapisz go w menedżerze haseł — lub w innym bezpiecznym miejscu. W razie utraty nie można go odzyskać.</string>
@@ -487,7 +487,7 @@
     <string name="browser_snapshot_saving">Zapisywanie migawki strony…</string>
     <string name="browser_snapshot_saved">Zapisano migawkę</string>
     <string name="bookmark_export">Eksportuj zakładki</string>
-    <string name="bookmark_export_done">Wyeksportowano zakładki: %1$d do Download/Firedown/backup</string>
+    <string name="bookmark_export_done">Wyeksportowano zakładki: %1$d do Download/Waves/backup</string>
     <string name="bookmark_import">Importuj zakładki</string>
     <string name="bookmark_import_done">Zaimportowano zakładki: %1$d</string>
     <string name="bookmark_io_error">Nie można odczytać pliku zakładek</string>
@@ -651,7 +651,7 @@
     <string name="buy_credit_wallet_connect_link">Połącz portfel, aby płacić jednym dotknięciem</string>
     <string name="buy_credit_wallet_manage_link">Zmień lub odłącz portfel</string>
     <string name="buy_credit_wallet_dialog_title">Połącz portfel Lightning</string>
-    <string name="buy_credit_wallet_dialog_body">Wklej ciąg Nostr Wallet Connect lub zeskanuj go z portfela. Firedown będzie mógł opłacać faktury z tego portfela, w ramach ustawionego tam budżetu.</string>
+    <string name="buy_credit_wallet_dialog_body">Wklej ciąg Nostr Wallet Connect lub zeskanuj go z portfela. Waves będzie mógł opłacać faktury z tego portfela, w ramach ustawionego tam budżetu.</string>
     <string name="buy_credit_wallet_dialog_connected">Połączono z %1$s. Wklej lub zeskanuj nowy ciąg, aby go zastąpić.</string>
     <string name="buy_credit_wallet_hint">nostr+walletconnect://…</string>
     <string name="buy_credit_wallet_connect_action">Połącz</string>
@@ -777,9 +777,9 @@
     <string name="p2p_send">Wyślij</string>
     <string name="p2p_send_title">Wyślij bezpośrednio</string>
     <string name="p2p_receive_title">Odbierz plik</string>
-    <string name="p2p_send_lead">Wyślij ten plik prosto na inne urządzenie z Firedown — z szyfrowaniem, z urządzenia na urządzenie, bez pośredniczącego serwera.</string>
-    <string name="p2p_receive_lead">Odbierz plik prosto z innego urządzenia z Firedown.</string>
-    <string name="p2p_code_hint_send">Zeskanuj ten kod drugim urządzeniem — w Firedown w sekcji Pliki do pobrania → Odbierz plik albo po prostu jego aparatem. W tej samej sieci przesyłanie jest kontynuowane samo; jeśli pojawi się kod odpowiedzi, zeskanuj go z powrotem.</string>
+    <string name="p2p_send_lead">Wyślij ten plik prosto na inne urządzenie z Waves — z szyfrowaniem, z urządzenia na urządzenie, bez pośredniczącego serwera.</string>
+    <string name="p2p_receive_lead">Odbierz plik prosto z innego urządzenia z Waves.</string>
+    <string name="p2p_code_hint_send">Zeskanuj ten kod drugim urządzeniem — w Waves w sekcji Pliki do pobrania → Odbierz plik albo po prostu jego aparatem. W tej samej sieci przesyłanie jest kontynuowane samo; jeśli pojawi się kod odpowiedzi, zeskanuj go z powrotem.</string>
     <string name="p2p_code_hint_reply">Pokaż tę odpowiedź nadawcy albo odeślij ją tą samą drogą, którą dotarł jego kod.</string>
     <string name="p2p_share_code">Wyślij kod w inny sposób</string>
     <string name="p2p_scan_reply">Skanuj odpowiedź</string>
@@ -797,13 +797,13 @@
     <string name="p2p_done_received">Zapisano w Plikach do pobrania</string>
     <string name="p2p_done">Gotowe</string>
     <string name="p2p_error_no_path">Nie udało się połączyć bezpośrednio z drugim urządzeniem. Zdarza się to na danych mobilnych lub za VPN — spróbuj tej samej sieci Wi-Fi, z wyłączonym VPN.</string>
-    <string name="p2p_error_no_path_vpn">VPN na tym urządzeniu blokuje bezpośrednie połączenie. Wyklucz Firedown z VPN — lub wstrzymaj VPN — i spróbuj ponownie.</string>
+    <string name="p2p_error_no_path_vpn">VPN na tym urządzeniu blokuje bezpośrednie połączenie. Wyklucz Waves z VPN — lub wstrzymaj VPN — i spróbuj ponownie.</string>
     <string name="p2p_error_generic">Przesyłanie nie powiodło się.</string>
     <string name="p2p_error_bad_code">Ten kod jest nieprawidłowy — spróbuj ponownie.</string>
     <string name="p2p_clipboard_empty">Brak kodu w schowku.</string>
     <string name="p2p_footer">Szyfrowany transfer z urządzenia na urządzenie. Plik nigdy nie trafia na serwer.</string>
     <string name="p2p_footer_relayed">Szyfrowane end-to-end. Przekazywane przez firedown.app (brak bezpośredniej trasy), który nie może tego odczytać.</string>
-    <string name="p2p_hint_vpn">Wskazówka: wykluczenie Firedown z VPN umożliwia bezpośrednie połączenie.</string>
+    <string name="p2p_hint_vpn">Wskazówka: wykluczenie Waves z VPN umożliwia bezpośrednie połączenie.</string>
     <string name="p2p_scan_hint">Skieruj aparat na kod nadawcy</string>
     <string name="p2p_camera_denied">Do skanowania potrzebny jest dostęp do aparatu. Zamiast tego możesz wkleić kod.</string>
     <string name="p2p_send_link">Wyślij link</string>
@@ -864,13 +864,13 @@
     <string name="cloud_backup_state_low_credit">Za mało środków</string>
     <string name="cloud_backup_state_too_many">Za dużo plików</string>
     <string name="cloud_backup_state_no_space">Za mało miejsca</string>
-    <string name="share_app_title">Udostępnij Firedown</string>
+    <string name="share_app_title">Udostępnij Waves</string>
     <string name="share_app_blurb">Prywatna przeglądarka i menedżer pobierania. Zapisuj wideo, audio i obrazy z dowolnej strony, blokuj reklamy i moduły śledzące — wszystko zostaje na Twoim urządzeniu.</string>
-    <string name="share_app_get_at">Pobierz Firedown ze strony</string>
+    <string name="share_app_get_at">Pobierz Waves ze strony</string>
     <string name="share_app_scan">Albo skieruj aparat innego telefonu na powyższy kod, aby zainstalować</string>
     <string name="share_app_share">Udostępnij link</string>
-    <string name="share_app_qr_desc">Kod QR do strony pobierania Firedown</string>
-    <string name="share_app_message">Firedown — prywatna przeglądarka i menedżer pobierania na Androida. %1$s</string>
+    <string name="share_app_qr_desc">Kod QR do strony pobierania Waves</string>
+    <string name="share_app_message">Waves — prywatna przeglądarka i menedżer pobierania na Androida. %1$s</string>
     <string name="settings_sync_faq_q8">Co serwer właściwie widzi?</string>
     <string name="settings_sync_faq_a8">Zaszyfrowane fragmenty Twoich plików, ich rozmiar i czas nadejścia — oraz losowy numer konta, który Twoje urządzenie wylicza z kodu odzyskiwania, nigdy imię ani e-mail. Nazwy plików, ich typy i miniatury również są zaszyfrowane, w zapieczętowanej liście, którą otworzy tylko Twoje urządzenie. Serwer nie dowiaduje się nawet, jak plik się nazywa, a tym bardziej co w nim jest.</string>
     <string name="settings_update_check_title">Sprawdź aktualizacje</string>

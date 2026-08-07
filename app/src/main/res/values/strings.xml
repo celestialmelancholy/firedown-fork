@@ -1,7 +1,10 @@
 <resources>
     <string name="action_mode_selected">%d selected</string>
-    <string name="app_lock">Unlock to use Firedown</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Unlock to use Waves</string>
+    <string name="app_name">Waves</string>
+    <!-- Address-bar voice search (mic icon). -->
+    <string name="voice_search_prompt">Speak your search</string>
+    <string name="voice_search_unavailable">Voice search isn\'t available on this device</string>
     <string name="app_unlock">Unlock</string>
     <string name="archive_banner_subtitle">Tap to view or reopen</string>
     <string name="browser_bookmark_added">Bookmark Saved!</string>
@@ -51,7 +54,7 @@
     <string name="capture_empty_gifs_message">No Gifs available.</string>
     <string name="capture_empty_images_message">No Images available.</string>
     <string name="capture_empty_message">No media available for downloading.</string>
-    <string name="capture_empty_subtext">Reload the website and Firedown will detect available media.</string>
+    <string name="capture_empty_subtext">Reload the website and Waves will detect available media.</string>
     <string name="capture_scanning">Checking for media…</string>
     <string name="capture_help_menu">Capture help</string>
     <string name="capture_help_banner_title">Video not listed?</string>
@@ -148,7 +151,7 @@
     <!-- Shown on a download row during the post-download mux/finishing pass
          (e.g. YouTube/SABR), in place of a frozen progress percent. -->
     <string name="download_finishing">Finishing…</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Download quality</string>
     <string name="download_queued">Pending…</string>
     <string name="download_rename_error">The file name is already in use.</string>
@@ -166,7 +169,7 @@
     <string name="empty_learn_more">Learn more</string>
     <string name="restore_downloads_button">Restore previous downloads</string>
     <string name="restore_downloads_settings_summary">Recover your download list after reinstalling the app</string>
-    <string name="restore_downloads_message">If you reinstalled Firedown, your downloads may still be in the Download/Firedown folder. Choose that folder and Firedown will restore your download list.</string>
+    <string name="restore_downloads_message">If you reinstalled Waves, your downloads may still be in the Download/Waves folder. Choose that folder and Waves will restore your download list.</string>
     <string name="restore_downloads_choose">Choose folder</string>
     <string name="restore_downloads_progress">Restoring downloads…</string>
     <string name="restore_downloads_done">Restored downloads: %1$d</string>
@@ -242,12 +245,12 @@
          UI text. Keeping it ASCII keeps the file recognisable across
          devices and safe on any filesystem the user exports to. A
          translation audit finding this "missing" should leave it alone. -->
-    <string name="settings_sync_export_file_name">firedown-recovery-code.txt</string>
+    <string name="settings_sync_export_file_name">waves-recovery-code.txt</string>
     <!-- Point-of-action caveat shown before the file picker. -->
     <string name="settings_sync_export_caveat_message">This file is saved unencrypted — anyone who can read it can read your bookmarks. Import the code into your password manager (or another safe place), then delete the file. A password manager keeps it encrypted; a loose file does not.</string>
     <string name="settings_sync_export_continue">Continue</string>
     <!-- %1$s is the grouped recovery code. -->
-    <string name="settings_sync_export_file_body">Firedown — recovery code\n\n%1$s\n\nThis code is the only key to your bookmarks, downloads backup, and storage credit — anyone who has it can read them, and it can\'t be recovered if lost.\n\nThis file is NOT encrypted. Import the code into your password manager (or another safe place), then delete this file.</string>
+    <string name="settings_sync_export_file_body">Waves — recovery code\n\n%1$s\n\nThis code is the only key to your bookmarks, downloads backup, and storage credit — anyone who has it can read them, and it can\'t be recovered if lost.\n\nThis file is NOT encrypted. Import the code into your password manager (or another safe place), then delete this file.</string>
     <string name="settings_sync_export_done">Recovery code saved</string>
     <string name="settings_sync_export_failed">Couldn\'t save the file</string>
     <string name="settings_sync_code_copied">Recovery code copied</string>
@@ -268,7 +271,7 @@
     <string name="settings_sync_help_close">Got it</string>
     <string name="settings_sync_faq_q1">Are my bookmarks and backed-up files encrypted?</string>
     <string name="settings_sync_faq_a1">Yes. Everything is scrambled on this device before it leaves — every bookmark, and every file you back up. The server only ever stores data it can\'t read.</string>
-    <string name="settings_sync_faq_q2">Can Firedown or anyone else read my files?</string>
+    <string name="settings_sync_faq_q2">Can Waves or anyone else read my files?</string>
     <string name="settings_sync_faq_a2">No. Only your recovery code can unlock them, and it never leaves your device. Not us, not the people who run the servers, not anyone who steals a copy of them: they hold scrambled data and no key.</string>
     <!-- Numbered 8 but shown THIRD (see settings_sync_help.xml) — the XML sets
          the order, so a new question can slot anywhere without renumbering the
@@ -404,7 +407,7 @@
     <string name="buy_credit_wallet_connect_link">Connect a wallet to pay in one tap</string>
     <string name="buy_credit_wallet_manage_link">Change or disconnect wallet</string>
     <string name="buy_credit_wallet_dialog_title">Connect a Lightning wallet</string>
-    <string name="buy_credit_wallet_dialog_body">Paste a Nostr Wallet Connect string, or scan it from your wallet. Firedown can then pay invoices from that wallet, within whatever budget you set there.</string>
+    <string name="buy_credit_wallet_dialog_body">Paste a Nostr Wallet Connect string, or scan it from your wallet. Waves can then pay invoices from that wallet, within whatever budget you set there.</string>
     <string name="buy_credit_wallet_dialog_connected">Connected to %1$s. Paste or scan a new string to replace it.</string>
     <string name="buy_credit_wallet_hint">nostr+walletconnect://…</string>
     <string name="buy_credit_wallet_connect_action">Connect</string>
@@ -555,7 +558,7 @@
     <string name="empty_list_query">No results found</string>
     <string name="empty_list_type">There\'s nothing here.</string>
     <string name="empty_list_vault">Nothing in your Safe Folder yet.\n\nOn any download, choose “Move to Safe Folder” from the ⋮ menu to keep it here.</string>
-    <string name="empty_media_help">Some media files need to be played before Firedown can detect them as a downloadable files.</string>
+    <string name="empty_media_help">Some media files need to be played before Waves can detect them as a downloadable files.</string>
     <string name="empty_media_help_title">Play the media before downloading</string>
     <string name="empty_media_subtitle_help">Please play the media as usual. It should then appear with the other media files, after pressing the Fire-Button.</string>
 <string name="error_check_internet_connection">Internet connection error.</string>
@@ -646,7 +649,7 @@
     <string name="navigation_web_bookmarks_edit">Edit Bookmark</string>
     <string name="bookmark_import">Import bookmarks</string>
     <string name="bookmark_export">Export bookmarks</string>
-    <string name="bookmark_export_done">Exported %1$d bookmarks to Download/Firedown/backup</string>
+    <string name="bookmark_export_done">Exported %1$d bookmarks to Download/Waves/backup</string>
     <string name="most_visited">Most visited</string>
     <string name="most_visited_remove_title">Remove from most visited?</string>
     <string name="most_visited_remove">Remove</string>
@@ -657,7 +660,7 @@
     <string name="notifications_media_channel">Media</string>
     <string name="notifications_udpate_channel">Updates</string>
     <string name="open">Open</string>
-    <string name="open_in_app_subtitle">Would you like to leave Firedown to view this content?</string>
+    <string name="open_in_app_subtitle">Would you like to leave Waves to view this content?</string>
     <string name="open_in_app_title">Open in another app</string>
     <string name="open_new_private_tab_2">New private tab</string>
     <string name="open_new_tab_2">New tab</string>
@@ -706,14 +709,14 @@
     <string name="rename_file">Rename file</string>
     <string name="request_geolocation">Share your device location with &lt;b&gt;&lt;font color=#ffffff&gt;%s&lt;/font&gt;&lt;/b&gt;?</string>
     <string name="request_media_key_system_access">Allow &lt;b&gt;&lt;font color=#ffffff&gt;%s&lt;/font&gt;&lt;/b&gt; to play DRM-controlled content?</string>
-    <string name="request_media_key_system_access_subtitle">Note, that DRM protected files can not be downloaded by Firedown</string>
+    <string name="request_media_key_system_access_subtitle">Note, that DRM protected files can not be downloaded by Waves</string>
     <string name="request_storage">Allow access to device storage for &lt;b&gt;&lt;font color=#ffffff&gt;%s&lt;/font&gt;&lt;/b&gt;?</string>
     <string name="request_storage_access">Allow third parties to access first party storage for &lt;b&gt;&lt;font color=#ffffff&gt;%s&lt;/font&gt;&lt;/b&gt;?</string>
     <string name="restart_origin">Restart</string>
     <string name="save_file">Save file as</string>
     <string name="save_file_name">File name</string>
     <string name="save_dest_vault">Private vault · %s</string>
-    <string name="save_dest_downloads">Downloads/Firedown · %s</string>
+    <string name="save_dest_downloads">Downloads/Waves · %s</string>
     <string name="save_dest_size_format">%1$s · %2$s</string>
 <string name="search">Search</string>
     <string name="search_clip">Fill link from clipboard</string>
@@ -745,7 +748,7 @@
     <string name="settings_autofill_active">System autofill is active. Tap to change.</string>
     <string name="settings_autofill_none_configured">No autofill service configured. Tap to set one up.</string>
     <string name="settings_autofill_not_supported">Autofill is not available on this device.</string>
-    <string name="settings_autofill_service_summary">Firedown uses your system autofill service (Bitwarden, 1Password, Proton Pass, etc). Tap to configure.</string>
+    <string name="settings_autofill_service_summary">Waves uses your system autofill service (Bitwarden, 1Password, Proton Pass, etc). Tap to configure.</string>
     <string name="settings_autofill_service_title">Passwords &amp; autofill</string>
     <string name="settings_block_cookie_notices_summary">Hide cookie consent banners and pop-ups on websites</string>
     <string name="settings_block_cookie_notices_title">Block cookie notices</string>
@@ -769,7 +772,7 @@
     <string name="crash_sheet_send">Send report</string>
     <string name="crash_sheet_sent">Report sent — thank you</string>
     <string name="crash_sheet_send_failed">Couldn\'t send. Check your connection — or use Copy / Report.</string>
-    <string name="crash_sheet_send_note">Sent anonymously to the Firedown server — only the report above, no identifiers.</string>
+    <string name="crash_sheet_send_note">Sent anonymously to the Waves server — only the report above, no identifiers.</string>
     <string name="wasm_snackbar_message">%s needs WebAssembly to work</string>
     <string name="wasm_snackbar_action_enable">Enable</string>
     <string name="settings_wasm" translatable="false">WebAssembly </string>
@@ -883,19 +886,19 @@
     <string name="settings_donate">Donate</string>
     <string name="settings_donate_url" translatable="false">https://firedown.app/donate</string>
 
-    <!-- Share Firedown (ShareAppFragment): the QR is the in-person handover,
+    <!-- Share Waves (ShareAppFragment): the QR is the in-person handover,
          the button shares the link for a messenger. share_app_url is what the
          QR encodes and what rides in the shared text; _display is the same
          address without the scheme, shown on screen. -->
-    <string name="share_app_title">Share Firedown</string>
+    <string name="share_app_title">Share Waves</string>
     <string name="share_app_url" translatable="false">https://firedown.app</string>
     <string name="share_app_url_display" translatable="false">firedown.app</string>
     <string name="share_app_blurb">A private browser and downloader. Save video, audio and images from any page, block ads and trackers, and keep it all on your device.</string>
-    <string name="share_app_get_at">Get Firedown at</string>
+    <string name="share_app_get_at">Get Waves at</string>
     <string name="share_app_scan">Or point another phone\'s camera at the code above to install</string>
     <string name="share_app_share">Share link</string>
-    <string name="share_app_qr_desc">QR code linking to the Firedown download page</string>
-    <string name="share_app_message">Firedown — a private browser and downloader for Android. %1$s</string>
+    <string name="share_app_qr_desc">QR code linking to the Waves download page</string>
+    <string name="share_app_message">Waves — a private browser and downloader for Android. %1$s</string>
     <string name="settings_security_screen_summary">Harden the browser at the cost of some site compatibility</string>
     <string name="settings_direct_share_summary">Network settings for sending files between devices</string>
     <string name="settings_storage_manager_button_decline">NOT NOW</string>
@@ -915,7 +918,7 @@
     <string name="settings_webgl_disabled">Disable WebGL</string>
     <string name="settings_webgl_disabled_summary">Blocks GPU fingerprinting, may break 3D content</string>
     <string name="settings_drm_enabled">Enable DRM playback</string>
-    <string name="settings_drm_enabled_summary">Allows Widevine on sites that require DRM (Netflix, Spotify, …). Firedown still cannot download DRM-protected content.</string>
+    <string name="settings_drm_enabled_summary">Allows Widevine on sites that require DRM (Netflix, Spotify, …). Waves still cannot download DRM-protected content.</string>
     <string name="settings_wasm_disabled">Disable WebAssembly</string>
     <string name="settings_wasm_disabled_summary">Blocks sites from running compiled WASM modules. Reduces attack surface but breaks some apps — allowed sites below stay enabled</string>
     <string name="settings_https_only_title">HTTPS-only mode</string>
@@ -973,15 +976,15 @@
     <string name="task_stop">Stop</string>
     <string name="update_auto_update_success_body">You were automatically updated to version %1$s.</string>
     <string name="update_auto_update_success_default_body">You were automatically updated to latest version.</string>
-    <string name="update_auto_update_success_title">Firedown successfully updated</string>
+    <string name="update_auto_update_success_title">Waves successfully updated</string>
     <string name="update_failed_general_body">We will try again later.</string>
-    <string name="update_failed_general_title">Firedown failed to update</string>
-    <string name="update_prompt_install_body">A new version of Firedown is available. Tap to update.</string>
+    <string name="update_failed_general_title">Waves failed to update</string>
+    <string name="update_prompt_install_body">A new version of Waves is available. Tap to update.</string>
     <!-- Versioned notification body; %1$s is the new version name. -->
     <string name="update_prompt_install_body_versioned">%1$s is ready to install. Tap to update.</string>
-    <string name="update_prompt_install_title">Firedown update</string>
+    <string name="update_prompt_install_title">Waves update</string>
     <!-- In-app update-available bottom sheet (UpdateAvailableSheet). %1$s is the
-         new version name, e.g. "Firedown 1.1.81". -->
+         new version name, e.g. "Waves 1.1.81". -->
     <string name="update_available_sheet_title">Update available</string>
     <!-- %1$s is the currently-installed version name. -->
     <string name="update_available_sheet_current">Current version %1$s</string>
@@ -1121,9 +1124,9 @@
     <string name="p2p_send">Send</string>
     <string name="p2p_send_title">Send directly</string>
     <string name="p2p_receive_title">Receive a file</string>
-    <string name="p2p_send_lead">Send this file straight to another device running Firedown — encrypted, device to device, with no server in between.</string>
-    <string name="p2p_receive_lead">Receive a file straight from another device running Firedown.</string>
-    <string name="p2p_code_hint_send">Scan this code with the other device — in Firedown under Downloads → Receive a file, or just with its camera. On the same network the transfer continues by itself; if a reply code appears, scan it back.</string>
+    <string name="p2p_send_lead">Send this file straight to another device running Waves — encrypted, device to device, with no server in between.</string>
+    <string name="p2p_receive_lead">Receive a file straight from another device running Waves.</string>
+    <string name="p2p_code_hint_send">Scan this code with the other device — in Waves under Downloads → Receive a file, or just with its camera. On the same network the transfer continues by itself; if a reply code appears, scan it back.</string>
     <string name="p2p_code_hint_reply">Show this reply to the sender, or send it back the way their code arrived.</string>
     <string name="p2p_share_code">Send code another way</string>
     <string name="p2p_share_reply">Send reply another way</string>
@@ -1147,7 +1150,7 @@
     <string name="p2p_abandon_message">Stop this transfer? It isn\'t finished yet.</string>
     <string name="p2p_abandon_confirm">Stop</string>
     <string name="p2p_error_no_path">Couldn\'t reach the other device directly. This happens on mobile data or behind a VPN — try the same Wi-Fi network, with any VPN turned off.</string>
-    <string name="p2p_error_no_path_vpn">A VPN on this device is blocking the direct connection. Exclude Firedown from the VPN — or pause it — and try again.</string>
+    <string name="p2p_error_no_path_vpn">A VPN on this device is blocking the direct connection. Exclude Waves from the VPN — or pause it — and try again.</string>
     <string name="p2p_error_generic">The transfer failed.</string>
     <string name="p2p_error_bad_code">That code isn\'t valid — try again.</string>
     <string name="p2p_clipboard_empty">No code in the clipboard.</string>
@@ -1155,7 +1158,7 @@
     <string name="p2p_qr_content_desc">Your share code, as a QR</string>
     <string name="p2p_footer">Encrypted device-to-device transfer. The file never touches a server.</string>
     <string name="p2p_footer_relayed">Encrypted end-to-end. Relayed through firedown.app (no direct path), which can\'t read it.</string>
-    <string name="p2p_hint_vpn">Tip: excluding Firedown from your VPN lets it connect directly.</string>
+    <string name="p2p_hint_vpn">Tip: excluding Waves from your VPN lets it connect directly.</string>
     <string name="p2p_scan_hint">Point the camera at the sender\'s code</string>
     <string name="p2p_camera_denied">Camera access is needed to scan. You can paste the code instead.</string>
     <string name="p2p_send_link">Send link</string>
@@ -1212,4 +1215,13 @@
     <string name="cloud_backup_state_low_credit">Not enough credit</string>
     <string name="cloud_backup_state_too_many">Too many files</string>
     <string name="cloud_backup_state_no_space">Not enough storage</string>
+
+    <!-- Custom Firefox-style homepage (Item 1) -->
+    <string name="home_shortcuts_header">Shortcuts</string>
+    <string name="home_shortcuts_show_all">Show all &gt;</string>
+    <string name="home_trackers_blocked">%1$d trackers blocked</string>
+    <string name="home_jump_back_in">Jump back in</string>
+    <string name="home_private_mode">Private mode</string>
+    <string name="home_shortcut_open_new_tab">Open in new tab</string>
+    <string name="home_shortcut_remove">Remove from Shortcuts</string>
 </resources>

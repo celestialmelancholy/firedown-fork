@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">%d imechaguliwa</string>
-    <string name="app_lock">Fungua ili utumie Firedown</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Fungua ili utumie Waves</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Fungua</string>
     <string name="browser_bookmark_added">Alamisho Imehifadhiwa!</string>
     <string name="browser_cache_cleared">Data ya kuvinjari imefutwa</string>
@@ -16,7 +16,7 @@
     <string name="capture_empty_gifs_message">Hakuna Gif zinazopatikana.</string>
     <string name="capture_empty_images_message">Hakuna Picha zinazopatikana.</string>
     <string name="capture_empty_message">Hakuna midia inayopatikana ya kupakua.</string>
-    <string name="capture_empty_subtext">Pakia upya tovuti na Firedown itatambua maudhui yanayopatikana.</string>
+    <string name="capture_empty_subtext">Pakia upya tovuti na Waves itatambua maudhui yanayopatikana.</string>
     <string name="capture_empty_video_message">Hakuna video zinazopatikana.</string>
     <string name="clipboard">Imenakiliwa kwenye ubao wa kunakili</string>
 <string name="connection_secure">Muunganisho ni salama</string>
@@ -43,7 +43,7 @@
     <string name="details_url">URL</string>
     <string name="download">Pakua</string>
     <string name="download_finished">Upakuaji umekamilika</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Ubora wa kupakua</string>
     <string name="download_queued">Inasubiri...</string>
     <string name="download_rename_error">Jina la faili tayari linatumika.</string>
@@ -56,7 +56,7 @@
     <string name="empty_list_history">Historia yako ya vipakuliwa ni tupu.</string>
     <string name="empty_list_query">Hakuna matokeo yaliyopatikana</string>
     <string name="empty_list_type">Hakuna kitu hapa.</string>
-    <string name="empty_media_help">Baadhi ya faili za midia zinahitaji kuchezwa kabla ya Firedown kuzitambua kama faili zinazoweza kupakuliwa.</string>
+    <string name="empty_media_help">Baadhi ya faili za midia zinahitaji kuchezwa kabla ya Waves kuzitambua kama faili zinazoweza kupakuliwa.</string>
     <string name="empty_media_help_title">Cheza media kabla ya kupakua</string>
     <string name="empty_media_subtitle_help">Tafadhali cheza media kama kawaida. Kisha inapaswa kuonekana na faili zingine za media, baada ya kubonyeza Kitufe cha Moto.</string>
 <string name="error_check_internet_connection">Hitilafu ya muunganisho wa mtandao.</string>
@@ -113,7 +113,7 @@
     <string name="navigation_web_history">Historia Kamili</string>
     <string name="notifications_downloads_channel">Vipakuliwa</string>
     <string name="open">Fungua</string>
-    <string name="open_in_app_subtitle">Je, ungependa kuondoka kwenye Firedown ili kutazama maudhui haya?</string>
+    <string name="open_in_app_subtitle">Je, ungependa kuondoka kwenye Waves ili kutazama maudhui haya?</string>
     <string name="open_in_app_title">Fungua katika programu nyingine</string>
     <string name="open_origin">Fungua katika Kichupo Kipya</string>
     <string name="open_with">Fungua na</string>
@@ -131,7 +131,7 @@
     <string name="rename_file">Badilisha jina la faili</string>
     <string name="request_geolocation">Je, ungependa kushiriki eneo la kifaa chako na &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_media_key_system_access">Ungependa kuruhusu &lt;b&gt;%s&lt;/b&gt; icheze maudhui yanayodhibitiwa na DRM?</string>
-    <string name="request_media_key_system_access_subtitle">Kumbuka, faili zilizolindwa na DRM haziwezi kupakuliwa na Firedown</string>
+    <string name="request_media_key_system_access_subtitle">Kumbuka, faili zilizolindwa na DRM haziwezi kupakuliwa na Waves</string>
     <string name="request_storage">Ungependa kuruhusu ufikiaji wa hifadhi ya kifaa kwa &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_storage_access">Ungependa kuruhusu wahusika wengine kufikia hifadhi ya mtu wa kwanza kwa &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="restart_origin">Anzisha tena</string>
@@ -219,7 +219,7 @@
     <string name="trackers_info_action">Simamia ulinzi</string>
     <string name="trackers_info_today">%1$s zimezuiwa leo</string>
     <string name="bookmark_export">Hamisha alamisho</string>
-    <string name="bookmark_export_done">Imehamisha alamisho %1$d hadi Download/Firedown/backup</string>
+    <string name="bookmark_export_done">Imehamisha alamisho %1$d hadi Download/Waves/backup</string>
     <string name="bookmark_import">Leta alamisho</string>
     <string name="bookmark_import_done">Imeleta alamisho %1$d</string>
     <string name="bookmark_io_error">Haikuweza kusoma faili la alamisho</string>
@@ -245,7 +245,7 @@
     <string name="settings_sync_export_continue">Endelea</string>
     <string name="settings_sync_export_done">Msimbo wa kurejesha umehifadhiwa</string>
     <string name="settings_sync_export_failed">Haikuweza kuhifadhi faili</string>
-    <string name="settings_sync_export_file_body">Firedown — msimbo wa kurejesha usawazishaji wa alamisho\n\n%1$s\n\nMsimbo huu ndio ufunguo pekee wa alamisho zako zilizosawazishwa — yeyote aliye nao anaweza kuzisoma, na hauwezi kurejeshwa ukipotea.\n\nFaili hili HALIJASIMBWA. Leta msimbo kwenye kidhibiti chako cha nenosiri (au mahali pengine salama), kisha ufute faili hili.</string>
+    <string name="settings_sync_export_file_body">Waves — msimbo wa kurejesha usawazishaji wa alamisho\n\n%1$s\n\nMsimbo huu ndio ufunguo pekee wa alamisho zako zilizosawazishwa — yeyote aliye nao anaweza kuzisoma, na hauwezi kurejeshwa ukipotea.\n\nFaili hili HALIJASIMBWA. Leta msimbo kwenye kidhibiti chako cha nenosiri (au mahali pengine salama), kisha ufute faili hili.</string>
     <string name="settings_sync_export_summary">Hamisha msimbo kama faili la maandishi unaloweza kuhifadhi</string>
     <string name="settings_sync_export_title">Hifadhi msimbo wa kurejesha kwenye faili</string>
     <string name="settings_sync_faq_a1">Ndiyo. Kila alamisho husimbwa kwenye kifaa hiki kabla ya kupakiwa. Seva huhifadhi tu data iliyovurugwa ambayo haiwezi kuisoma.</string>
@@ -255,7 +255,7 @@
     <string name="settings_sync_faq_a5">Hapana. Hakuna usajili, barua pepe, au nambari ya simu — msimbo wa kurejesha tu. Hakuna jambo la kibinafsi lililofungamana na alamisho zako.</string>
     <string name="settings_sync_faq_a6">Usawazishaji ni hiari na umezimwa kwa chaguo-msingi. Unaweza kila wakati kuhamisha alamisho zako kwenye faili na kuzileta baadaye, bila seva kuhusika.</string>
     <string name="settings_sync_faq_q1">Je, alamisho zangu zimesimbwa?</string>
-    <string name="settings_sync_faq_q2">Je, Firedown au mtu mwingine yeyote anaweza kuzisoma?</string>
+    <string name="settings_sync_faq_q2">Je, Waves au mtu mwingine yeyote anaweza kuzisoma?</string>
     <string name="settings_sync_faq_q3">Msimbo wa kurejesha ni nini?</string>
     <string name="settings_sync_faq_q4">Je, nikipoteza msimbo wangu wa kurejesha?</string>
     <string name="settings_sync_faq_q5">Je, nahitaji akaunti au barua pepe?</string>

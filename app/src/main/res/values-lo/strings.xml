@@ -1,6 +1,6 @@
 <resources>
     <string name="action_mode_selected">ເລືອກ %d ແລ້ວ</string>
-    <string name="app_lock">ປົດລັອກເພື່ອໃຊ້ Firedown</string>
+    <string name="app_lock">ປົດລັອກເພື່ອໃຊ້ Waves</string>
     <string name="app_unlock">ປົດລັອກ</string>
     <string name="browser_bookmark_added">ບັນທຶກບຸກມາກແລ້ວ!</string>
     <string name="browser_cache_cleared">ລຶບລ້າງຂໍ້ມູນການທ່ອງເວັບແລ້ວ</string>
@@ -25,7 +25,7 @@
     <string name="capture_empty_gifs_message">ບໍ່ມີ Gifs.</string>
     <string name="capture_empty_images_message">ບໍ່ມີຮູບພາບ.</string>
     <string name="capture_empty_message">ບໍ່ມີສື່ໃຫ້ດາວໂຫຼດ.</string>
-    <string name="capture_empty_subtext">ໂຫຼດເວັບໄຊທ໌ຄືນໃໝ່ ແລະ Firedown ຈະກວດພົບສື່ທີ່ມີຢູ່.</string>
+    <string name="capture_empty_subtext">ໂຫຼດເວັບໄຊທ໌ຄືນໃໝ່ ແລະ Waves ຈະກວດພົບສື່ທີ່ມີຢູ່.</string>
     <string name="capture_empty_video_message">ບໍ່ມີວິດີໂອ.</string>
     <string name="clipboard">ສຳເນົາໃສ່ຄລິບບອດແລ້ວ</string>
     <string name="close_tab">ປິດແທັບ</string>
@@ -83,7 +83,7 @@
     <string name="empty_list_history">ປະຫວັດການດາວໂຫຼດຂອງທ່ານຫວ່າງເປົ່າ.</string>
     <string name="empty_list_query">ບໍ່ພົບຜົນການຊອກຫາ</string>
     <string name="empty_list_type">ບໍ່ມີຫຍັງຢູ່ທີ່ນີ້.</string>
-    <string name="empty_media_help">ບາງໄຟລ໌ມີເດຍຈະຕ້ອງຖືກຫຼິ້ນກ່ອນທີ່ Firedown ສາມາດກວດພົບວ່າເປັນໄຟລ໌ທີ່ສາມາດດາວໂຫຼດໄດ້.</string>
+    <string name="empty_media_help">ບາງໄຟລ໌ມີເດຍຈະຕ້ອງຖືກຫຼິ້ນກ່ອນທີ່ Waves ສາມາດກວດພົບວ່າເປັນໄຟລ໌ທີ່ສາມາດດາວໂຫຼດໄດ້.</string>
     <string name="empty_media_help_title">ຫຼິ້ນສື່ກ່ອນດາວໂຫຼດ</string>
     <string name="empty_media_subtitle_help">ກະລຸນາເປີດສື່ຕາມປົກກະຕິ. ຫຼັງຈາກນັ້ນ, ມັນຄວນຈະປາກົດກັບໄຟລ໌ສື່ມວນຊົນອື່ນໆ, ຫຼັງຈາກກົດປຸ່ມໄຟ.</string>
 <string name="error_check_internet_connection">ການເຊື່ອມຕໍ່ອິນເຕີເນັດຜິດພາດ.</string>
@@ -140,7 +140,7 @@
     <string name="navigation_web_history">ປະຫວັດການໃຊ້ງານ</string>
     <string name="notifications_downloads_channel">ດາວໂຫຼດ</string>
     <string name="open">ເປີດ</string>
-    <string name="open_in_app_subtitle">ທ່ານຕ້ອງການອອກຈາກ Firedown ເພື່ອເບິ່ງເນື້ອຫານີ້ບໍ?</string>
+    <string name="open_in_app_subtitle">ທ່ານຕ້ອງການອອກຈາກ Waves ເພື່ອເບິ່ງເນື້ອຫານີ້ບໍ?</string>
     <string name="open_in_app_title">ເປີດໃນແອັບອື່ນ</string>
     <string name="open_new_private_tab_2">ແທັບສ່ວນຕົວໃຫມ່</string>
     <string name="open_new_tab_2">ແທັບໃຫມ່</string>
@@ -272,7 +272,7 @@
     <string name="trackers_info_action">ຈັດການການປ້ອງກັນ</string>
     <string name="trackers_info_today">ບລັອກ %1$s ມື້ນີ້</string>
     <string name="bookmark_export">ສົ່ງອອກບຸກມາກ</string>
-    <string name="bookmark_export_done">ສົ່ງອອກບຸກມາກ %1$d ລາຍການໄປຍັງ Download/Firedown/backup ແລ້ວ</string>
+    <string name="bookmark_export_done">ສົ່ງອອກບຸກມາກ %1$d ລາຍການໄປຍັງ Download/Waves/backup ແລ້ວ</string>
     <string name="bookmark_import">ນຳເຂົ້າບຸກມາກ</string>
     <string name="bookmark_import_done">ນຳເຂົ້າບຸກມາກ %1$d ລາຍການແລ້ວ</string>
     <string name="bookmark_io_error">ບໍ່ສາມາດອ່ານໄຟລ໌ບຸກມາກໄດ້</string>
@@ -297,7 +297,7 @@
     <string name="settings_sync_export_continue">ສືບຕໍ່</string>
     <string name="settings_sync_export_done">ບັນທຶກລະຫັດກູ້ຄືນແລ້ວ</string>
     <string name="settings_sync_export_failed">ບໍ່ສາມາດບັນທຶກໄຟລ໌ໄດ້</string>
-    <string name="settings_sync_export_file_body">Firedown — ລະຫັດກູ້ຄືນການຊິງຄ໌ບຸກມາກ\n\n%1$s\n\nລະຫັດນີ້ແມ່ນກະແຈດຽວສຳລັບບຸກມາກທີ່ຊິງຄ໌ຂອງທ່ານ — ໃຜກໍຕາມທີ່ມີລະຫັດນີ້ສາມາດອ່ານໄດ້ ແລະບໍ່ສາມາດກູ້ຄືນໄດ້ຫາກສູນເສຍ\n\nໄຟລ໌ນີ້ບໍ່ໄດ້ເຂົ້າລະຫັດ ນຳເຂົ້າລະຫັດໄປຍັງຕົວຈັດການລະຫັດຜ່ານ (ຫຼືບ່ອນປອດໄພອື່ນ) ແລ້ວລຶບໄຟລ໌ນີ້</string>
+    <string name="settings_sync_export_file_body">Waves — ລະຫັດກູ້ຄືນການຊິງຄ໌ບຸກມາກ\n\n%1$s\n\nລະຫັດນີ້ແມ່ນກະແຈດຽວສຳລັບບຸກມາກທີ່ຊິງຄ໌ຂອງທ່ານ — ໃຜກໍຕາມທີ່ມີລະຫັດນີ້ສາມາດອ່ານໄດ້ ແລະບໍ່ສາມາດກູ້ຄືນໄດ້ຫາກສູນເສຍ\n\nໄຟລ໌ນີ້ບໍ່ໄດ້ເຂົ້າລະຫັດ ນຳເຂົ້າລະຫັດໄປຍັງຕົວຈັດການລະຫັດຜ່ານ (ຫຼືບ່ອນປອດໄພອື່ນ) ແລ້ວລຶບໄຟລ໌ນີ້</string>
     <string name="settings_sync_export_summary">ສົ່ງອອກລະຫັດເປັນໄຟລ໌ຂໍ້ຄວາມທີ່ທ່ານສາມາດເກັບໄວ້</string>
     <string name="settings_sync_export_title">ບັນທຶກລະຫັດກູ້ຄືນລົງໄຟລ໌</string>
     <string name="settings_sync_faq_a1">ແມ່ນແລ້ວ ບຸກມາກແຕ່ລະລາຍການຖືກເຂົ້າລະຫັດໃນອຸປະກອນນີ້ກ່ອນອັບໂຫຼດ ເຊີບເວີເກັບແຕ່ຂໍ້ມູນທີ່ຖືກປ່ຽນແປງເຊິ່ງອ່ານບໍ່ໄດ້</string>
@@ -307,7 +307,7 @@
     <string name="settings_sync_faq_a5">ບໍ່ ບໍ່ມີການລົງທະບຽນ ອີເມວ ຫຼືເບີໂທລະສັບ — ມີພຽງລະຫັດກູ້ຄືນ ບໍ່ມີຂໍ້ມູນສ່ວນຕົວຜູກກັບບຸກມາກຂອງທ່ານ</string>
     <string name="settings_sync_faq_a6">ການຊິງຄ໌ເປັນທາງເລືອກ ແລະປິດໄວ້ໂດຍຄ່າເລີ່ມຕົ້ນ ທ່ານສາມາດສົ່ງອອກບຸກມາກໄປຍັງໄຟລ໌ ແລະນຳເຂົ້າພາຍຫຼັງໄດ້ສະເໝີ ໂດຍບໍ່ຕ້ອງໃຊ້ເຊີບເວີ</string>
     <string name="settings_sync_faq_q1">ບຸກມາກຂອງຂ້ອຍຖືກເຂົ້າລະຫັດບໍ່</string>
-    <string name="settings_sync_faq_q2">Firedown ຫຼືຄົນອື່ນອ່ານພວກມັນໄດ້ບໍ່</string>
+    <string name="settings_sync_faq_q2">Waves ຫຼືຄົນອື່ນອ່ານພວກມັນໄດ້ບໍ່</string>
     <string name="settings_sync_faq_q3">ລະຫັດກູ້ຄືນແມ່ນຫຍັງ</string>
     <string name="settings_sync_faq_q4">ຖ້າຂ້ອຍເຮັດລະຫັດກູ້ຄືນເສຍຈະເປັນແນວໃດ</string>
     <string name="settings_sync_faq_q5">ຂ້ອຍຕ້ອງມີບັນຊີ ຫຼືອີເມວບໍ່</string>

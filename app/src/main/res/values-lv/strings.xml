@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">Atlasīts: %d</string>
-    <string name="app_lock">Atbloķējiet, lai izmantotu Firedown</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Atbloķējiet, lai izmantotu Waves</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Atbloķēt</string>
     <string name="browser_bookmark_added">Grāmatzīme ir saglabāta!</string>
     <string name="browser_cache_cleared">Pārlūkošanas dati ir notīrīti</string>
@@ -16,7 +16,7 @@
     <string name="capture_empty_gifs_message">GIF faili nav pieejami.</string>
     <string name="capture_empty_images_message">Nav pieejami attēli.</string>
     <string name="capture_empty_message">Lejupielādei nav pieejams neviens plašsaziņas līdzeklis.</string>
-    <string name="capture_empty_subtext">Atkārtoti ielādējiet tīmekļa vietni, un Firedown noteiks pieejamos plašsaziņas līdzekļus.</string>
+    <string name="capture_empty_subtext">Atkārtoti ielādējiet tīmekļa vietni, un Waves noteiks pieejamos plašsaziņas līdzekļus.</string>
     <string name="capture_empty_video_message">Nav pieejams neviens video.</string>
     <string name="clipboard">Kopēts starpliktuvē</string>
 <string name="connection_secure">Savienojums ir drošs</string>
@@ -43,7 +43,7 @@
     <string name="details_url">Vietrādis URL</string>
     <string name="download">Lejupielādēt</string>
     <string name="download_finished">Lejupielāde ir pabeigta</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Lejupielādes kvalitāte</string>
     <string name="download_queued">Notiek gaidīšana…</string>
     <string name="download_rename_error">Faila nosaukums jau tiek izmantots.</string>
@@ -56,7 +56,7 @@
     <string name="empty_list_history">Jūsu lejupielāžu vēsture ir tukša.</string>
     <string name="empty_list_query">Nekas nav atrasts</string>
     <string name="empty_list_type">Šeit nekā nav.</string>
-    <string name="empty_media_help">Daži plašsaziņas līdzekļu faili ir jāatskaņo, lai Firedown varētu noteikt tos kā lejupielādējamus failus.</string>
+    <string name="empty_media_help">Daži plašsaziņas līdzekļu faili ir jāatskaņo, lai Waves varētu noteikt tos kā lejupielādējamus failus.</string>
     <string name="empty_media_help_title">Pirms lejupielādes atskaņojiet multividi</string>
     <string name="empty_media_subtitle_help">Atskaņojiet multividi kā parasti. Pēc ugunsdzēsības pogas nospiešanas tam vajadzētu parādīties kopā ar citiem plašsaziņas līdzekļu failiem.</string>
 <string name="error_check_internet_connection">Interneta savienojuma kļūda.</string>
@@ -113,7 +113,7 @@
     <string name="navigation_web_history">Pilna vēsture</string>
     <string name="notifications_downloads_channel">Lejupielādes</string>
     <string name="open">Atvērt</string>
-    <string name="open_in_app_subtitle">Vai vēlaties atstāt Firedown, lai skatītu šo saturu?</string>
+    <string name="open_in_app_subtitle">Vai vēlaties atstāt Waves, lai skatītu šo saturu?</string>
     <string name="open_in_app_title">Atvērt citā lietotnē</string>
     <string name="open_origin">Atvērt jaunā cilnē</string>
     <string name="open_with">Atvērt ar</string>
@@ -131,7 +131,7 @@
     <string name="rename_file">Pārdēvēt failu</string>
     <string name="request_geolocation">Vai kopīgot savas ierīces atrašanās vietu ar &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_media_key_system_access">Vai atļaut lietotnei &lt;b&gt;%s&lt;/b&gt; atskaņot DRM kontrolētu saturu?</string>
-    <string name="request_media_key_system_access_subtitle">Ņemiet vērā, ka Firedown nevar lejupielādēt DRM aizsargātus failus</string>
+    <string name="request_media_key_system_access_subtitle">Ņemiet vērā, ka Waves nevar lejupielādēt DRM aizsargātus failus</string>
     <string name="request_storage">Vai atļaut piekļuvi ierīces krātuvei &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_storage_access">Vai atļaut trešajām pusēm piekļūt pirmās puses krātuvei &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="restart_origin">Restartēt</string>
@@ -219,7 +219,7 @@
     <string name="trackers_info_action">Pārvaldīt aizsardzību</string>
     <string name="trackers_info_today">%1$s šodien bloķēts</string>
     <string name="bookmark_export">Eksportēt grāmatzīmes</string>
-    <string name="bookmark_export_done">Eksportētas %1$d grāmatzīmes uz Download/Firedown/backup</string>
+    <string name="bookmark_export_done">Eksportētas %1$d grāmatzīmes uz Download/Waves/backup</string>
     <string name="bookmark_import">Importēt grāmatzīmes</string>
     <string name="bookmark_import_done">Importētas %1$d grāmatzīmes</string>
     <string name="bookmark_io_error">Neizdevās nolasīt grāmatzīmju failu</string>
@@ -245,7 +245,7 @@
     <string name="settings_sync_export_continue">Turpināt</string>
     <string name="settings_sync_export_done">Atkopšanas kods saglabāts</string>
     <string name="settings_sync_export_failed">Neizdevās saglabāt failu</string>
-    <string name="settings_sync_export_file_body">Firedown — grāmatzīmju sinhronizācijas atkopšanas kods\n\n%1$s\n\nŠis kods ir vienīgā atslēga jūsu sinhronizētajām grāmatzīmēm — ikviens, kuram tas ir, var tās izlasīt, un, ja to pazaudēsiet, to nevar atjaunot.\n\nŠis fails NAV šifrēts. Importējiet kodu paroļu pārvaldniekā (vai citā drošā vietā), pēc tam izdzēsiet šo failu.</string>
+    <string name="settings_sync_export_file_body">Waves — grāmatzīmju sinhronizācijas atkopšanas kods\n\n%1$s\n\nŠis kods ir vienīgā atslēga jūsu sinhronizētajām grāmatzīmēm — ikviens, kuram tas ir, var tās izlasīt, un, ja to pazaudēsiet, to nevar atjaunot.\n\nŠis fails NAV šifrēts. Importējiet kodu paroļu pārvaldniekā (vai citā drošā vietā), pēc tam izdzēsiet šo failu.</string>
     <string name="settings_sync_export_summary">Eksportēt kodu kā teksta failu, ko varat glabāt</string>
     <string name="settings_sync_export_title">Saglabāt atkopšanas kodu failā</string>
     <string name="settings_sync_faq_a1">Jā. Katra grāmatzīme tiek šifrēta šajā ierīcē, pirms tā tiek augšupielādēta. Serveris vienmēr glabā tikai sajauktus datus, kurus nevar izlasīt.</string>
@@ -255,7 +255,7 @@
     <string name="settings_sync_faq_a5">Nē. Nav reģistrācijas, e-pasta vai tālruņa numura — tikai atkopšanas kods. Pie jūsu grāmatzīmēm nav piesaistīts nekas personisks.</string>
     <string name="settings_sync_faq_a6">Sinhronizācija ir izvēles iespēja un pēc noklusējuma izslēgta. Jūs vienmēr varat eksportēt savas grāmatzīmes failā un vēlāk tās importēt bez jebkāda servera.</string>
     <string name="settings_sync_faq_q1">Vai manas grāmatzīmes ir šifrētas?</string>
-    <string name="settings_sync_faq_q2">Vai Firedown vai kāds cits var tās izlasīt?</string>
+    <string name="settings_sync_faq_q2">Vai Waves vai kāds cits var tās izlasīt?</string>
     <string name="settings_sync_faq_q3">Kas ir atkopšanas kods?</string>
     <string name="settings_sync_faq_q4">Kas notiek, ja pazaudēju savu atkopšanas kodu?</string>
     <string name="settings_sync_faq_q5">Vai man ir nepieciešams konts vai e-pasts?</string>

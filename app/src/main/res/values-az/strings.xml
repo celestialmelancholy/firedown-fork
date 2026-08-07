@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">%d seçildi</string>
-    <string name="app_lock">Firedown istifadə etmək üçün kilidi açın</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Waves istifadə etmək üçün kilidi açın</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Kilidi aç</string>
     <string name="browser_bookmark_added">Əlfəcin Saxlandı!</string>
     <string name="browser_cache_cleared">Baxış datası silindi</string>
@@ -24,7 +24,7 @@
     <string name="capture_empty_gifs_message">Gif yoxdur.</string>
     <string name="capture_empty_images_message">Şəkillər yoxdur.</string>
     <string name="capture_empty_message">Yükləmək üçün heç bir media yoxdur.</string>
-    <string name="capture_empty_subtext">Veb saytı yenidən yükləyin və Firedown mövcud medianı aşkar edəcək.</string>
+    <string name="capture_empty_subtext">Veb saytı yenidən yükləyin və Waves mövcud medianı aşkar edəcək.</string>
     <string name="capture_empty_video_message">Video yoxdur.</string>
     <string name="clipboard">Buferə kopyalandı</string>
     <string name="close_tab">Vərəqi qapat</string>
@@ -68,7 +68,7 @@
     <string name="empty_list_history">Endirmə tarixçəniz boşdur.</string>
     <string name="empty_list_query">Heç bir nəticə tapılmadı</string>
     <string name="empty_list_type">Burada heç nə yoxdur.</string>
-    <string name="empty_media_help">Firedown onları endirilə bilən fayllar kimi aşkar etməzdən əvvəl bəzi media faylları oxudulmalıdır.</string>
+    <string name="empty_media_help">Waves onları endirilə bilən fayllar kimi aşkar etməzdən əvvəl bəzi media faylları oxudulmalıdır.</string>
     <string name="empty_media_help_title">Yükləməzdən əvvəl medianı çalın</string>
     <string name="empty_media_subtitle_help">Zəhmət olmasa medianı həmişəki kimi oynayın. Yanğın düyməsini basdıqdan sonra digər media faylları ilə birlikdə görünməlidir.</string>
 <string name="error_check_internet_connection">İnternet bağlantısı xətası.</string>
@@ -127,7 +127,7 @@
     <string name="navigation_web_history">Tarixçə</string>
     <string name="notifications_downloads_channel">Yükləmələr</string>
     <string name="open">Açıq</string>
-    <string name="open_in_app_subtitle">Bu məzmuna baxmaq üçün Firedown proqramını tərk etmək istərdinizmi?</string>
+    <string name="open_in_app_subtitle">Bu məzmuna baxmaq üçün Waves proqramını tərk etmək istərdinizmi?</string>
     <string name="open_in_app_title">Başqa proqramda açın</string>
     <string name="open_new_private_tab_2">Yeni məxfi vərəq</string>
     <string name="open_new_tab_2">Yeni vərəq</string>
@@ -147,7 +147,7 @@
     <string name="rename_file">Faylın adını dəyişdirin</string>
     <string name="request_geolocation">Cihazınızın məkanı &lt;b&gt; %s &lt;/b&gt; ilə paylaşılsın?</string>
     <string name="request_media_key_system_access">&lt;b&gt; %s &lt;/b&gt;-a DRM ilə idarə olunan məzmunu oxutmağa icazə verilsin?</string>
-    <string name="request_media_key_system_access_subtitle">Qeyd edək ki, DRM ilə qorunan fayllar Firedown tərəfindən endirilə bilməz</string>
+    <string name="request_media_key_system_access_subtitle">Qeyd edək ki, DRM ilə qorunan fayllar Waves tərəfindən endirilə bilməz</string>
     <string name="request_storage">&lt;b&gt; %s &lt;/b&gt; üçün cihaz yaddaşına giriş icazəsi verilsin?</string>
     <string name="request_storage_access">Üçüncü tərəflərə &lt;b&gt; %s &lt;/b&gt; üçün birinci tərəf yaddaşına daxil olmağa icazə verilsin?</string>
     <string name="restart_origin">Yenidən başlamaq</string>
@@ -247,7 +247,7 @@
 
 
     <string name="bookmark_export">Əlfəcinləri ixrac et</string>
-    <string name="bookmark_export_done">%1$d əlfəcin Download/Firedown/backup qovluğuna ixrac edildi</string>
+    <string name="bookmark_export_done">%1$d əlfəcin Download/Waves/backup qovluğuna ixrac edildi</string>
     <string name="bookmark_import">Əlfəcinləri idxal et</string>
     <string name="bookmark_import_done">%1$d əlfəcin idxal edildi</string>
     <string name="bookmark_io_error">Əlfəcin faylı oxuna bilmədi</string>
@@ -273,7 +273,7 @@
     <string name="settings_sync_export_continue">Davam et</string>
     <string name="settings_sync_export_done">Bərpa kodu saxlanıldı</string>
     <string name="settings_sync_export_failed">Fayl saxlanıla bilmədi</string>
-    <string name="settings_sync_export_file_body">Firedown — əlfəcin sinxronizasiyası bərpa kodu\n\n%1$s\n\nBu kod sinxronlaşdırılmış əlfəcinlərinizə yeganə açardır — ona sahib olan hər kəs onları oxuya bilər və itirilərsə, bərpa edilə bilməz.\n\nBu fayl şifrələnməyib. Kodu parol menecerinizə (və ya başqa təhlükəsiz yerə) idxal edin, sonra bu faylı silin.</string>
+    <string name="settings_sync_export_file_body">Waves — əlfəcin sinxronizasiyası bərpa kodu\n\n%1$s\n\nBu kod sinxronlaşdırılmış əlfəcinlərinizə yeganə açardır — ona sahib olan hər kəs onları oxuya bilər və itirilərsə, bərpa edilə bilməz.\n\nBu fayl şifrələnməyib. Kodu parol menecerinizə (və ya başqa təhlükəsiz yerə) idxal edin, sonra bu faylı silin.</string>
     <string name="settings_sync_export_summary">Kodu saxlaya biləcəyiniz mətn faylı kimi ixrac edin</string>
     <string name="settings_sync_export_title">Bərpa kodunu fayla saxla</string>
     <string name="settings_sync_faq_a1">Bəli. Hər əlfəcin yüklənmədən əvvəl bu cihazda şifrələnir. Server yalnız oxuya bilmədiyi qarışdırılmış məlumatları saxlayır.</string>
@@ -283,7 +283,7 @@
     <string name="settings_sync_faq_a5">Xeyr. Qeydiyyat, e-poçt və ya telefon nömrəsi yoxdur — sadəcə bərpa kodu. Əlfəcinlərinizə heç bir şəxsi məlumat bağlanmır.</string>
     <string name="settings_sync_faq_a6">Sinxronizasiya istəyə bağlıdır və standart olaraq söndürülüb. Əlfəcinlərinizi istənilən vaxt fayla ixrac edə və sonra serversiz idxal edə bilərsiniz.</string>
     <string name="settings_sync_faq_q1">Əlfəcinlərim şifrələnir?</string>
-    <string name="settings_sync_faq_q2">Firedown və ya başqası onları oxuya bilərmi?</string>
+    <string name="settings_sync_faq_q2">Waves və ya başqası onları oxuya bilərmi?</string>
     <string name="settings_sync_faq_q3">Bərpa kodu nədir?</string>
     <string name="settings_sync_faq_q4">Bərpa kodumu itirsəm nə olar?</string>
     <string name="settings_sync_faq_q5">Hesab və ya e-poçt lazımdırmı?</string>

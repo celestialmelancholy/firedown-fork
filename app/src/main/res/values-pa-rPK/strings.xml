@@ -54,7 +54,7 @@
 
 
     <string name="bookmark_export">بُک مارک برآمد کرو</string>
-    <string name="bookmark_export_done">%1$d بُک مارک Download/Firedown/backup چ برآمد کیتے</string>
+    <string name="bookmark_export_done">%1$d بُک مارک Download/Waves/backup چ برآمد کیتے</string>
     <string name="bookmark_import">بُک مارک درآمد کرو</string>
     <string name="bookmark_import_done">%1$d بُک مارک درآمد کیتے</string>
     <string name="bookmark_io_error">بُک مارک فائل پڑھی نہ جا سکی</string>
@@ -80,7 +80,7 @@
     <string name="settings_sync_export_continue">جاری رکھو</string>
     <string name="settings_sync_export_done">ریکوری کوڈ سانبھیا</string>
     <string name="settings_sync_export_failed">فائل سانبھی نہ جا سکی</string>
-    <string name="settings_sync_export_file_body">Firedown — بُک مارک سِنک ریکوری کوڈ\n\n%1$s\n\nایہہ کوڈ ای تہاڈے سِنک کیتے بُک مارکاں دی اکو اک کنجی اے — جیہدے کول ایہہ اے اوہ ایہناں نوں پڑھ سکدا اے، تے گواچ جان تے ایہہ واپس نئیں مل سکدا۔\n\nایہہ فائل اینکرپٹ نئیں اے۔ کوڈ نوں اپنے پاس ورڈ مینیجر چ (یا کسے ہور محفوظ تھاں) درآمد کرو، فیر ایہہ فائل مٹا دیو۔</string>
+    <string name="settings_sync_export_file_body">Waves — بُک مارک سِنک ریکوری کوڈ\n\n%1$s\n\nایہہ کوڈ ای تہاڈے سِنک کیتے بُک مارکاں دی اکو اک کنجی اے — جیہدے کول ایہہ اے اوہ ایہناں نوں پڑھ سکدا اے، تے گواچ جان تے ایہہ واپس نئیں مل سکدا۔\n\nایہہ فائل اینکرپٹ نئیں اے۔ کوڈ نوں اپنے پاس ورڈ مینیجر چ (یا کسے ہور محفوظ تھاں) درآمد کرو، فیر ایہہ فائل مٹا دیو۔</string>
     <string name="settings_sync_export_summary">کوڈ نوں اک ٹیکسٹ فائل وجوں برآمد کرو جیہنوں تُسیں سانبھ سکدے او</string>
     <string name="settings_sync_export_title">ریکوری کوڈ فائل چ سانبھو</string>
     <string name="settings_sync_faq_a1">ہاں۔ ہر بُک مارک اپ لوڈ ہون توں پہلاں ایس ڈیوائس تے اینکرپٹ کیتا جاندا اے۔ سرور صرف اوہو الجھیا ڈیٹا سانبھدا اے جیہنوں اوہ پڑھ نئیں سکدا۔</string>
@@ -90,7 +90,7 @@
     <string name="settings_sync_faq_a5">نئیں۔ کوئی سائن اپ، ای میل، یا فون نمبر نئیں — صرف ریکوری کوڈ۔ تہاڈے بُک مارکاں نال کوئی ذاتی معلومات نئیں جُڑی۔</string>
     <string name="settings_sync_faq_a6">سِنک اختیاری اے تے ڈیفالٹ توں بند اے۔ تُسیں ہمیشہ اپنے بُک مارک فائل چ برآمد کر کے بعد چ درآمد کر سکدے او، بغیر کسے سرور دے۔</string>
     <string name="settings_sync_faq_q1">کیہ میرے بُک مارک اینکرپٹ کیتے نیں؟</string>
-    <string name="settings_sync_faq_q2">کیہ Firedown یا کوئی ہور ایہناں نوں پڑھ سکدا اے؟</string>
+    <string name="settings_sync_faq_q2">کیہ Waves یا کوئی ہور ایہناں نوں پڑھ سکدا اے؟</string>
     <string name="settings_sync_faq_q3">ریکوری کوڈ کیہ اے؟</string>
     <string name="settings_sync_faq_q4">جے میں اپنا ریکوری کوڈ گوا بہاں تے کیہ؟</string>
     <string name="settings_sync_faq_q5">کیہ مینوں کھاتے یا ای میل دی لوڑ اے؟</string>

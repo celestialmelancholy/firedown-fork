@@ -77,6 +77,7 @@ public class PopupHomeSheetDialogFragment extends BaseBottomSheetDialogFragment
         mView.findViewById(R.id.popup_history).setOnClickListener(this);
         mView.findViewById(R.id.popup_vault).setOnClickListener(this);
         mView.findViewById(R.id.popup_downloads).setOnClickListener(this);
+        mView.findViewById(R.id.popup_bookmarks).setOnClickListener(this);
 
         // Fixed-meaning new-tab rows: New tab always opens a regular tab, New
         // private tab always incognito — in both modes. Their view ids differ

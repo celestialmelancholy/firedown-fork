@@ -186,6 +186,36 @@
     </LinearLayout>
 
 
+    <!-- Bookmarks — both modes (same as the Browser popup's Library group:
+         the bookmarks list is just URLs the user explicitly saved, so it
+         doesn't leak any incognito-session browsing state). -->
+    <LinearLayout
+        android:id="@+id/popup_bookmarks"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp">
+
+        <TextView
+            style="@style/TextAppearance.Material3.TitleMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="16dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/library_bookmarks"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="16sp"
+            app:drawableStartCompat="@drawable/ic_bookmarks_24"
+            app:drawableTint="?attr/colorOnSurfaceVariant" />
+
+    </LinearLayout>
+
+
     <!-- Sync — bookmarks + encrypted download backup (one account). -->
     <LinearLayout
         android:id="@+id/popup_sync"

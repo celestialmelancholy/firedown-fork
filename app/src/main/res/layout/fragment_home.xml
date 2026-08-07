@@ -21,6 +21,13 @@
             android:layout_gravity="top"
             app:enableHome="true" />
 
+        <!-- Thin edge-to-edge divider under the search box (Firefox home: the
+             app bar's bottom border, ~0.5dp, matching the card surface grey). -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/home_divider" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
 
@@ -38,7 +45,6 @@
         android:id="@+id/home_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/app_bar_size"
         android:clipToPadding="false"
         android:fillViewport="true"
         android:overScrollMode="never"
@@ -50,6 +56,10 @@
              bottom bar, the vault in the menu. The FrameLayout (stretched to the
              viewport by the NestedScrollView's fillViewport) centres the mark via
              layout_gravity. -->
+        <!-- Firefox-style home (Item 1): branding header → shortcuts grid →
+             tracker capsule → "Jump back in" recents card. The middle content
+             is replaced; the URL bar (above) and bottom bar (below) are
+             untouched and will be restyled in Item 2. -->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -57,443 +67,198 @@
             android:clipToPadding="false"
             android:paddingBottom="8dp">
 
-
-            <!-- match_parent (centred by gravity, not width) so the subtitle
-                 line below knows the real available width and can WRAP its
-                 counters on narrow screens / large font scale instead of
-                 clipping. -->
             <LinearLayout
                 android:id="@+id/home_brand_mark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="top"
                 android:clipChildren="false"
                 android:clipToPadding="false"
-                android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:paddingHorizontal="32dp">
+                android:paddingHorizontal="20dp">
 
-                <!-- Flame + the breathing ember glow behind it. The wrapper is
-                     sized to the 40dp flame (no layout change vs the bare
-                     ImageView); the glow is also 40dp and only becomes a halo
-                     via the animator's SCALE transform, drawn beyond the box
-                     because this and the ancestors set clipChildren="false".
-                     The glow is GONE/alpha 0 at rest — HomeFragment shows it
-                     and runs the breath only while a download is active. -->
-                <FrameLayout
-                    android:layout_width="wrap_content"
+                <!-- Branding header: logo + name left, incognito icon right.
+                     Gap below the divider. Now that home_brand_mark is top-
+                     aligned (layout_gravity=top, not center_vertical — the
+                     centering used to override ALL padding), this paddingTop
+                     actually controls the gap. ~20dp per the original spec. -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clipChildren="false"
-                    android:clipToPadding="false">
-
-                    <View
-                        android:id="@+id/home_brand_glow"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:alpha="0"
-                        android:background="@drawable/home_ember_glow"
-                        android:visibility="gone" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="8dp">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
                         android:contentDescription="@string/app_name"
-                        android:src="@drawable/ic_firedown_logo" />
-
-                </FrameLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:letterSpacing="-0.02"
-                    android:text="@string/app_name"
-                    android:textColor="?attr/colorOnSurface"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-                <!-- ONE quiet subtitle line: two independently-tappable live
-                     counters in a single shared grammar (figure + short
-                     predicate) — trackers blocked (→ trackers info sheet) and
-                     total downloaded (→ Downloads). Both are LOCAL facts, correct
-                     instantly and offline.
-
-                     A third counter for cloud bytes was built here and REVERTED:
-                     three chips plus two dots overran the 360dp line at real
-                     values, the Flow wrapped, and the separator dot was left
-                     stranded at the end of row one. The deeper reason it doesn't
-                     belong is below — the cloud figure is NETWORK-backed, so it
-                     arrives late, and a fixed one-line hero can't host a value
-                     that arrives late (every arrival is a reflow directly under
-                     the wordmark). It lives on the backup pill instead, which is
-                     built to appear. Don't re-add it here.
-
-                     Each counter hides at 0 (a fresh
-                     install reads just the wordmark) and the middle dot shows
-                     only between visible neighbours — all bound in HomeFragment.
-                     Deliberately ONE line, never a second row: two stacked grey
-                     rows read as a dashboard, and a state-dependent extra row
-                     shifted the flame's resting position. A ConstraintLayout
-                     Flow (wrapMode=chain) hosts the segments so a narrow screen
-                     / large font scale WRAPS into a second centred row instead
-                     of the old LinearLayout's silent clipping; and each chip's
-                     text is width-capped at runtime (HomeFragment) so even a
-                     SINGLE over-wide translated segment wraps inside its chip
-                     rather than clipping at the screen edge. -->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/home_subtitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:visibility="gone">
-
-                    <androidx.constraintlayout.helper.widget.Flow
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        app:constraint_referenced_ids="home_subtitle_blocked,home_subtitle_sep,home_subtitle_saved"
-                        app:flow_horizontalGap="0dp"
-                        app:flow_horizontalStyle="packed"
-                        app:flow_verticalGap="0dp"
-                        app:flow_wrapMode="chain"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/home_subtitle_blocked"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:visibility="gone"
-                        app:cardBackgroundColor="@color/transparent"
-                        app:strokeWidth="0dp"
-                        app:cardCornerRadius="14dp"
-                        app:cardElevation="0dp">
-
-                        <TextView
-                            android:id="@+id/home_subtitle_blocked_text"
-                            android:layout_width="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:layout_height="wrap_content"
-                            android:paddingHorizontal="12dp"
-                            android:paddingVertical="8dp"
-                            android:textColor="?attr/colorOnSurfaceVariant"
-                            android:textSize="13sp"
-                            tools:text="10.5K blocked" />
-
-                    </com.google.android.material.card.MaterialCardView>
+                        android:src="@drawable/ic_waves_logo" />
 
                     <TextView
-                        android:id="@+id/home_subtitle_sep"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingHorizontal="5dp"
-                        android:text="·"
-                        android:textColor="?attr/colorOnSurfaceVariant"
-                        android:textSize="13sp"
-                        android:visibility="gone"
-                        tools:ignore="HardcodedText" />
+                        android:layout_marginStart="10dp"
+                        android:letterSpacing="-0.02"
+                        android:text="@string/app_name"
+                        android:textColor="@color/home_header_text"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/home_subtitle_saved"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/home_private_infinity"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
                         android:clickable="true"
+                        android:contentDescription="@string/home_private_mode"
                         android:focusable="true"
-                        android:visibility="gone"
-                        app:cardBackgroundColor="@color/transparent"
-                        app:strokeWidth="0dp"
-                        app:cardCornerRadius="14dp"
-                        app:cardElevation="0dp">
+                        android:src="@drawable/ic_incognito_24"
+                        app:tint="@color/home_header_text" />
+                </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/home_subtitle_saved_text"
-                            android:layout_width="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:layout_height="wrap_content"
-                            android:paddingHorizontal="12dp"
-                            android:paddingVertical="8dp"
-                            android:textColor="?attr/colorOnSurfaceVariant"
-                            android:textSize="13sp"
-                            tools:text="9.5 GB saved" />
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <!-- Cloud Backup CALM slot (home v4): a FIXED-HEIGHT frame under
-                     the subtitle hosting BOTH calm presentations — the transfer
-                     CHIP and the resting quiet LINE — flipped by visibility, so
-                     the slot's height never changes with state. The height
-                     reservation is load-bearing: home_brand_mark is centred by
-                     gravity, so a GONE→VISIBLE arrival here GREW the block and
-                     SHIFTED the flame's resting position by ~half this slot —
-                     the exact defect the subtitle's own "ONE line, never a
-                     second row" comment names, one slot lower — and the resting
-                     figure is a LATE NETWORK value (the manifest pull), so the
-                     shift fired on ~every resume of a set-up account. The slot
-                     therefore stays VISIBLE (children INVISIBLE) whenever a
-                     calm state COULD appear (isSetUp(), read in
-                     applyBackupPill) and content arrives as a pure alpha fade
-                     with zero reflow. A fresh install keeps the slot GONE — the
-                     bare home is exactly as bare as before. The DEADLINE card
-                     below stays OUTSIDE the slot and may still move the block
-                     when it mounts; an alarm is allowed to move things.
-
-                     TWO sibling views, not one restyled view: the two
-                     presentations differ in ground, corner radius, padding,
-                     icon size, text size and ink — restyling one view per state
-                     would be that many programmatic mutations per render, the
-                     same "one-sided set leaves the previous state on screen"
-                     class the pill/card flip already documents. Each
-                     presentation is complete in XML; applyBackupPill only flips
-                     visibility. At most ONE of chip / line / card is ever
-                     VISIBLE. -->
-                <FrameLayout
-                    android:id="@+id/home_backup_slot"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="4dp"
-                    android:visibility="gone"
-                    tools:visibility="visible">
-
-                    <!-- The transfer CHIP — "Backing up…" / "Waiting to back
-                         up" ONLY. The resting total no longer renders here (see
-                         the quiet line below): a fill is earned by WORK —
-                         transient, self-clearing — never by a standing state,
-                         which as a filled chip outranked the whole bare home.
-
-                         NO action label. It read "VIEW" on every state, so it
-                         said only "tappable" — which the chip shape, the
-                         ripple, and the two subtitle counters directly above
-                         (both tap targets, neither with a verb or a chevron)
-                         already say. It also cost ~50dp on a wrap_content pill
-                         that must fit "Waiting to back up" and its
-                         translations, and it had already been trimmed once: its
-                         hardcoded ?attr/colorPrimary measured 1.68:1 light /
-                         3.76:1 dark, and the fix note read "bold + allCaps
-                         already say action" — if the shape says it and the
-                         weight says it, the word is the third copy. The CARD
-                         keeps "TOP UP": a real verb for a real decision (spend
-                         money, against a deadline) and the only state whose tap
-                         goes somewhere other than the Backups list. Don't
-                         re-add one here.
-
-                         Ground, ink and the upload glyph are all STATIC now —
-                         an earlier comment claimed applyBackupPill repaints the
-                         ground per state, which stopped being true when the
-                         attention state moved to the card (and the resting
-                         cloud_done_24 swap left with the resting state). -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/home_backup_pill"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:visibility="invisible"
-                        app:cardBackgroundColor="?attr/colorSurfaceContainerHigh"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="0dp"
-                        app:strokeWidth="0dp"
-                        tools:visibility="visible">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:paddingStart="14dp"
-                            android:paddingTop="10dp"
-                            android:paddingEnd="16dp"
-                            android:paddingBottom="10dp">
-
-                            <ImageView
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                android:importantForAccessibility="no"
-                                android:src="@drawable/ic_cloud_upload_24"
-                                app:tint="?attr/colorOnSurface" />
-
-                            <TextView
-                                android:id="@+id/home_backup_pill_text"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:textColor="?attr/colorOnSurface"
-                                android:textSize="13sp"
-                                tools:text="Backing up…" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- The RESTING line — "6.6 GB backed up", a quiet status
-                         line in the counters' own grammar (the same
-                         transparent-card chip construction the two subtitle
-                         counters use): onSurfaceVariant ink, 12sp (one notch
-                         under the counters' 13sp, still the M3 floor), a 14dp
-                         PLAIN cloud tinted the same. Deliberately NO fill and
-                         NO onSurface ink: as a filled chip the standing total
-                         carried the only fill, the only icon and the only
-                         bounded shape in the brand stack, sitting in the
-                         lockup's CTA position (flame → wordmark → tagline →
-                         filled rounded shape reads as a hero with a button
-                         under it), so it looked like the screen's primary
-                         action (maintainer, on two devices). Tappable naked
-                         text is already this screen's contract — the two
-                         counters directly above. The glyph is cloud_24, NOT
-                         cloud_done_24: the check asserts "all backed up", a
-                         coverage claim a byte total cannot make; the plain
-                         cloud only names the domain. The inner minHeight keeps
-                         the touch target at 48dp even though the visible line
-                         is shorter. There is no rung below this one — if the
-                         line still reads loud on-device, the next move is
-                         removing the resting state, not a smaller chip. -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/home_backup_rest"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:visibility="invisible"
-                        app:cardBackgroundColor="@color/transparent"
-                        app:cardCornerRadius="14dp"
-                        app:cardElevation="0dp"
-                        app:strokeWidth="0dp">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:minHeight="48dp"
-                            android:orientation="horizontal"
-                            android:paddingHorizontal="12dp">
-
-                            <ImageView
-                                android:layout_width="14dp"
-                                android:layout_height="14dp"
-                                android:importantForAccessibility="no"
-                                android:src="@drawable/cloud_24"
-                                app:tint="?attr/colorOnSurfaceVariant" />
-
-                            <TextView
-                                android:id="@+id/home_backup_rest_text"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="6dp"
-                                android:textColor="?attr/colorOnSurfaceVariant"
-                                android:textSize="12sp"
-                                tools:text="6.6 GB backed up" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                </FrameLayout>
-
-                <!-- Backup DEADLINE card. A different SILHOUETTE from the pill
-                     above, on purpose: the pill reports ambient progress that
-                     resolves itself, this reports a 30-day deadline that ends in
-                     deleted files. Wide, two lines, a verb — the SHAPE is what
-                     says "this one matters", not a colour. It carries no
-                     semantic hue at all; see the note in values/colors.xml.
-
-                     match_parent + address_bar_inset both sides, so the card
-                     lines up with the address bar at the top of the screen
-                     instead of sitting on its own arbitrary inset. The pill is
-                     wrap_content and centred, so the two never share a width —
-                     that difference is load-bearing, not incidental.
-
-                     The detail line WRAPS to 2 lines (no singleLine): the
-                     countdown is a full sentence and grows in translation, so it
-                     must not ellipsize the deadline away. The action is
-                     wrap_content beside a weighted text column, so a long
-                     message shrinks the text rather than squeezing the verb out.
-                     Only ONE of pill/card is ever VISIBLE. -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/home_backup_card"
+                <!-- Shortcuts section header — shown only when there are
+                     most-visited sites; "Show all >" only with multiple. -->
+                <LinearLayout
+                    android:id="@+id/home_shortcuts_header"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/address_bar_inset"
-                    android:layout_marginEnd="@dimen/address_bar_inset"
-                    android:layout_marginTop="12dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingTop="40dp"
+                    android:paddingBottom="4dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/home_shortcuts_header"
+                        android:textColor="@color/home_header_text"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/home_shortcuts_show_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_home_show_all_ripple"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="4dp"
+                        android:visibility="gone"
+                        android:text="@string/home_shortcuts_show_all"
+                        android:textColor="@color/home_subheader_text"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <!-- Shortcuts grid: 4 columns × 2 rows of most-visited sites.
+                     Populated from the same most-visited data source as the
+                     autocomplete strip (real usage, no hardcoded sites). -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/home_shortcuts_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
+                    android:paddingVertical="8dp"
+                    android:visibility="gone" />
+
+                <!-- Privacy tracker capsule -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/home_tracker_capsule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="24dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:visibility="gone"
-                    app:cardBackgroundColor="?attr/colorSurfaceContainerHigh"
-                    app:cardCornerRadius="16dp"
+                    app:cardBackgroundColor="@color/home_capsule_bg"
+                    app:cardCornerRadius="20dp"
                     app:cardElevation="0dp"
-                    app:strokeWidth="0dp"
-                    tools:visibility="visible">
+                    app:strokeWidth="0dp">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:paddingStart="14dp"
-                        android:paddingTop="12dp"
-                        android:paddingEnd="12dp"
-                        android:paddingBottom="12dp">
+                        android:paddingTop="8dp"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="8dp">
 
-                        <ImageView
-                            android:id="@+id/home_backup_card_icon"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
                             android:importantForAccessibility="no"
-                            android:src="@drawable/cloud_off_24"
-                            app:tint="?attr/colorOnSurface" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="12dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/home_backup_card_title"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:ellipsize="end"
-                                android:singleLine="true"
-                                android:textColor="?attr/colorOnSurface"
-                                android:textSize="13sp"
-                                android:textStyle="bold"
-                                tools:text="Backup paused" />
-
-                            <TextView
-                                android:id="@+id/home_backup_card_detail"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:maxLines="2"
-                                android:textColor="?attr/colorOnSurfaceVariant"
-                                android:textSize="12sp"
-                                tools:text="27 days left before your files are removed" />
-
-                        </LinearLayout>
+                            android:src="@drawable/ic_home_shield_check" />
 
                         <TextView
-                            android:id="@+id/home_backup_card_action"
+                            android:id="@+id/home_tracker_capsule_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/home_cloud_top_up"
-                            android:textAllCaps="true"
-                            android:textColor="?attr/colorOnSurface"
+                            android:layout_marginStart="8dp"
+                            android:textColor="@color/home_header_text"
                             android:textSize="13sp"
-                            android:textStyle="bold" />
-
+                            tools:text="4 trackers blocked" />
                     </LinearLayout>
-
                 </com.google.android.material.card.MaterialCardView>
 
+                <!-- Jump back in section header — shown only when there is at
+                     least one recent tab; "Show all >" only with multiple. -->
+                <LinearLayout
+                    android:id="@+id/home_jump_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingTop="60dp"
+                    android:paddingBottom="4dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/home_jump_back_in"
+                        android:textColor="@color/home_header_text"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/home_jump_show_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_home_show_all_ripple"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="4dp"
+                        android:visibility="gone"
+                        android:text="@string/home_shortcuts_show_all"
+                        android:textColor="@color/home_subheader_text"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <!-- Jump back in: horizontally scrolling recent-tab cards -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/home_jump_back_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
+                    android:paddingVertical="8dp"
+                    android:visibility="gone" />
+
             </LinearLayout>
-
-
 
         </FrameLayout>
 
@@ -515,7 +280,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
         android:layout_marginTop="@dimen/app_bar_size"
-        android:layout_marginBottom="@dimen/app_bar_size"
         android:background="?attr/colorSurfaceContainerLow"
         android:visibility="gone" />
 
@@ -526,11 +290,19 @@
         Bookmarks FAB was removed.)
     -->
 
+    <!--
+        Single top bar (Item 2): the toolbar hosts shield → address pill →
+        flame download → + → tab counter → menu. This view remains as a
+        zero-height, GONE controller so the fragments' onBadgeCount /
+        onTabsCount / updateTheme calls keep a target (the buttons they
+        control now live in the toolbar's top_bar_actions cluster).
+    -->
     <com.solarized.firedown.geckoview.toolbar.BottomNavigationBar
         android:id="@+id/bottom_app_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom" />
+        android:layout_height="0dp"
+        android:layout_gravity="bottom"
+        android:visibility="gone" />
 
     <View
         android:id="@+id/navigation_scrim"

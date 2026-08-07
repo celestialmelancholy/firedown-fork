@@ -275,7 +275,7 @@ public class CrashReportSheet extends BaseBottomSheetDialogFragment {
         ClipboardManager cm = (ClipboardManager) requireContext()
                 .getSystemService(Context.CLIPBOARD_SERVICE);
         if (cm != null) {
-            cm.setPrimaryClip(ClipData.newPlainText("Firedown crash", text));
+            cm.setPrimaryClip(ClipData.newPlainText("Waves crash", text));
         }
     }
 }

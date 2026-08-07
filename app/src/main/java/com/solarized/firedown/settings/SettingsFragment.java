@@ -567,7 +567,7 @@ public class SettingsFragment extends BasePreferenceFragment
 
     private void launchRestoreFolderPicker() {
         Uri initial = DocumentsContract.buildDocumentUri(
-                "com.android.externalstorage.documents", "primary:Download/Firedown");
+                "com.android.externalstorage.documents", "primary:Download/Waves");
         try {
             mRestoreFolderPicker.launch(initial);
         } catch (ActivityNotFoundException e) {

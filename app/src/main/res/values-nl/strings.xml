@@ -13,8 +13,8 @@
     <string name="settings_oled_theme_summary">Zuiver zwarte oppervlakken — bespaart batterij op OLED-schermen</string>
     <string name="archive_banner_subtitle">Tik om te bekijken of opnieuw te openen</string>
     <string name="action_mode_selected">%d geselecteerd</string>
-    <string name="app_lock">Ontgrendelen om Firedown te gebruiken</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Ontgrendelen om Waves te gebruiken</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Ontgrendelen</string>
     <string name="browser_bookmark_added">Bladwijzer opgeslagen!</string>
     <string name="browser_cache_cleared">Browsegegevens gewist</string>
@@ -39,7 +39,7 @@
     <string name="capture_empty_gifs_message">Geen GIF\'s beschikbaar.</string>
     <string name="capture_empty_images_message">Geen afbeeldingen beschikbaar.</string>
     <string name="capture_empty_message">Er zijn geen media beschikbaar om te downloaden.</string>
-    <string name="capture_empty_subtext">Laad de website opnieuw en Firedown zal de beschikbare media detecteren.</string>
+    <string name="capture_empty_subtext">Laad de website opnieuw en Waves zal de beschikbare media detecteren.</string>
     <string name="capture_empty_video_message">Geen video\'s beschikbaar.</string>
     <string name="clipboard">Gekopieerd naar het klembord</string>
     <string name="clipboard_from">Van klembord</string>
@@ -85,7 +85,7 @@
     <string name="details_url">URL</string>
     <string name="download">Downloaden</string>
     <string name="download_finished">Downloaden voltooid</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Downloadkwaliteit</string>
     <string name="download_queued">In behandeling…</string>
     <string name="download_rename_error">De bestandsnaam is al in gebruik.</string>
@@ -95,7 +95,7 @@
     <string name="empty_learn_more">Meer informatie</string>
     <string name="restore_downloads_button">Eerdere downloads herstellen</string>
     <string name="restore_downloads_settings_summary">Herstel je downloadlijst na het opnieuw installeren van de app</string>
-    <string name="restore_downloads_message">Als je Firedown opnieuw hebt geïnstalleerd, staan je downloads mogelijk nog in de map Download/Firedown. Kies die map en Firedown herstelt je downloadlijst.</string>
+    <string name="restore_downloads_message">Als je Waves opnieuw hebt geïnstalleerd, staan je downloads mogelijk nog in de map Download/Waves. Kies die map en Waves herstelt je downloadlijst.</string>
     <string name="restore_downloads_choose">Map kiezen</string>
     <string name="restore_downloads_progress">Downloads worden hersteld…</string>
     <string name="restore_downloads_done">Herstelde downloads: %1$d</string>
@@ -110,7 +110,7 @@
     <string name="empty_list_query">geen resultaten gevonden</string>
     <string name="empty_list_type">Er is hier niets.</string>
     <string name="empty_list_vault">Nog niets in de beveiligde map.\n\nKies bij een download „Naar beveiligde map verplaatsen“ in het ⋮-menu om het hier te bewaren.</string>
-    <string name="empty_media_help">Sommige mediabestanden moeten worden afgespeeld voordat Firedown ze kan detecteren als downloadbare bestanden.</string>
+    <string name="empty_media_help">Sommige mediabestanden moeten worden afgespeeld voordat Waves ze kan detecteren als downloadbare bestanden.</string>
     <string name="empty_media_help_title">Speel de media af voordat u gaat downloaden</string>
     <string name="empty_media_subtitle_help">Speel de media af zoals gewoonlijk. Het zou dan moeten verschijnen bij de andere mediabestanden, nadat u op de vuurknop hebt gedrukt.</string>
 <string name="error_check_internet_connection">Fout met internetverbinding.</string>
@@ -182,7 +182,7 @@
     <string name="navigation_web_history">Geschiedenis</string>
     <string name="notifications_downloads_channel">Downloads</string>
     <string name="open">Openen</string>
-    <string name="open_in_app_subtitle">Wilt u Firedown verlaten om deze inhoud te bekijken?</string>
+    <string name="open_in_app_subtitle">Wilt u Waves verlaten om deze inhoud te bekijken?</string>
     <string name="open_in_app_title">Openen in een andere app</string>
     <string name="open_new_private_tab_2">Nieuw privétabblad</string>
     <string name="open_new_tab_2">Nieuw tabblad</string>
@@ -204,7 +204,7 @@
     <string name="settings_jit_disabled_summary">JIT versnelt JavaScript-intensieve sites maar vergroot het aanvalsoppervlak. Het staat standaard aan; schakel dit in om de browser te verstevigen ten koste van wat prestaties. Deze wijziging herstart uw browser</string>
     <string name="settings_webgl_disabled">WebGL uitschakelen</string>
     <string name="settings_drm_enabled">DRM-weergave inschakelen</string>
-    <string name="settings_drm_enabled_summary">Staat Widevine toe op sites die DRM vereisen (Netflix, Spotify, …). Firedown kan DRM-beveiligde inhoud nog steeds niet downloaden.</string>
+    <string name="settings_drm_enabled_summary">Staat Widevine toe op sites die DRM vereisen (Netflix, Spotify, …). Waves kan DRM-beveiligde inhoud nog steeds niet downloaden.</string>
     <string name="settings_wasm_disabled">WebAssembly uitschakelen</string>
     <string name="settings_wasm_disabled_summary">Voorkomt dat sites gecompileerde WASM-modules uitvoeren. Verkleint het aanvalsoppervlak, maar maakt sommige apps onbruikbaar — toegestane sites hieronder blijven ingeschakeld</string>
 <string name="protection_panel_etp_toggle_disabled_description_2">Inschakelen van Bescherming tegen volgen wordt aanbevolen.</string>
@@ -229,7 +229,7 @@
     <string name="rename_file">Bestand hernoemen</string>
     <string name="request_geolocation">De locatie van uw apparaat delen met &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_media_key_system_access">&lt;b&gt;%s&lt;/b&gt; toestaan DRM-gestuurde content af te spelen?</string>
-    <string name="request_media_key_system_access_subtitle">Houd er rekening mee dat DRM-beveiligde bestanden niet door Firedown kunnen worden gedownload</string>
+    <string name="request_media_key_system_access_subtitle">Houd er rekening mee dat DRM-beveiligde bestanden niet door Waves kunnen worden gedownload</string>
     <string name="request_storage">Toegang tot apparaatopslag toestaan voor &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_storage_access">Derden toegang geven tot first party-opslag voor &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="restart_origin">Herstarten</string>
@@ -389,7 +389,7 @@
     <string name="crash_sheet_send">Rapport verzenden</string>
     <string name="crash_sheet_sent">Rapport verzonden — bedankt</string>
     <string name="crash_sheet_send_failed">Verzenden mislukt. Controleer de verbinding — of gebruik Kopiëren / Rapporteren.</string>
-    <string name="crash_sheet_send_note">Wordt anoniem naar de Firedown-server gestuurd — alleen het rapport hierboven, geen identifiers.</string>
+    <string name="crash_sheet_send_note">Wordt anoniem naar de Waves-server gestuurd — alleen het rapport hierboven, geen identifiers.</string>
     <string name="home_trackers_title">Trackers en advertenties geblokkeerd</string>
     <string name="home_trackers_subtitle_idle">Bescherming actief</string>
     <string name="trackers_info_count_label">trackers en advertenties geblokkeerd</string>
@@ -464,7 +464,7 @@
     <string name="settings_sync_help_close">Begrepen</string>
     <string name="settings_sync_faq_q1">Zijn mijn bladwijzers en geback-upte bestanden versleuteld?</string>
     <string name="settings_sync_faq_a1">Ja. Alles wordt op dit apparaat versleuteld voordat het het apparaat verlaat — elke bladwijzer en elk bestand waarvan je een back-up maakt. De server bewaart alleen gegevens die hij niet kan lezen.</string>
-    <string name="settings_sync_faq_q2">Kunnen Firedown of anderen mijn bestanden lezen?</string>
+    <string name="settings_sync_faq_q2">Kunnen Waves of anderen mijn bestanden lezen?</string>
     <string name="settings_sync_faq_a2">Nee. Alleen jouw herstelcode kan ze ontsleutelen, en die verlaat je apparaat nooit. Wij niet, de mensen die de servers draaien niet, en ook niemand die er een kopie van steelt: ze hebben allemaal versleutelde gegevens en geen sleutel.</string>
     <string name="settings_sync_faq_q3">Wat is de herstelcode?</string>
     <string name="settings_sync_faq_a3">Een sleutel die op je apparaat wordt gegenereerd. Het is het enige waarmee je bladwijzers en je geback-upte bestanden kunnen worden ontsleuteld — op dit apparaat of op een nieuw apparaat.</string>
@@ -481,7 +481,7 @@
     <string name="settings_sync_export_summary">Exporteer de code als een tekstbestand dat je kunt bewaren</string>
     <string name="settings_sync_export_caveat_message">Dit bestand wordt onversleuteld opgeslagen — iedereen die het kan lezen, kan je bladwijzers lezen. Importeer de code in je wachtwoordmanager (of een andere veilige plek) en verwijder daarna het bestand. Een wachtwoordmanager houdt het versleuteld; een los bestand niet.</string>
     <string name="settings_sync_export_continue">Doorgaan</string>
-    <string name="settings_sync_export_file_body">Firedown — herstelcode\n\n%1$s\n\nDeze code is de enige sleutel tot je bladwijzers, downloadback-up en opslagtegoed — iedereen die hem heeft, kan ze lezen, en hij kan niet worden hersteld als je hem kwijtraakt.\n\nDit bestand is NIET versleuteld. Importeer de code in je wachtwoordmanager (of op een andere veilige plek) en verwijder dit bestand daarna.</string>
+    <string name="settings_sync_export_file_body">Waves — herstelcode\n\n%1$s\n\nDeze code is de enige sleutel tot je bladwijzers, downloadback-up en opslagtegoed — iedereen die hem heeft, kan ze lezen, en hij kan niet worden hersteld als je hem kwijtraakt.\n\nDit bestand is NIET versleuteld. Importeer de code in je wachtwoordmanager (of op een andere veilige plek) en verwijder dit bestand daarna.</string>
     <string name="settings_sync_export_done">Herstelcode opgeslagen</string>
     <string name="settings_sync_export_failed">Kon het bestand niet opslaan</string>
     <string name="settings_sync_code_warning">Deze herstelcode is de enige sleutel tot je bladwijzers, downloadback-up en opslagtegoed. Bewaar hem in je wachtwoordmanager — of op een andere veilige plek. Hij kan niet worden hersteld als je hem kwijtraakt.</string>
@@ -490,7 +490,7 @@
     <string name="browser_snapshot_saving">Momentopname van pagina opslaan…</string>
     <string name="browser_snapshot_saved">Momentopname opgeslagen</string>
     <string name="bookmark_export">Bladwijzers exporteren</string>
-    <string name="bookmark_export_done">%1$d bladwijzers geëxporteerd naar Download/Firedown/backup</string>
+    <string name="bookmark_export_done">%1$d bladwijzers geëxporteerd naar Download/Waves/backup</string>
     <string name="bookmark_import">Bladwijzers importeren</string>
     <string name="bookmark_import_done">%1$d bladwijzers geïmporteerd</string>
     <string name="bookmark_io_error">Kan het bladwijzerbestand niet lezen</string>
@@ -650,7 +650,7 @@
     <string name="buy_credit_wallet_connect_link">Koppel een wallet om met één tik te betalen</string>
     <string name="buy_credit_wallet_manage_link">Wallet wijzigen of ontkoppelen</string>
     <string name="buy_credit_wallet_dialog_title">Lightning-wallet koppelen</string>
-    <string name="buy_credit_wallet_dialog_body">Plak een Nostr Wallet Connect-tekenreeks of scan die uit je wallet. Firedown kan dan facturen vanuit die wallet betalen, binnen het budget dat je daar instelt.</string>
+    <string name="buy_credit_wallet_dialog_body">Plak een Nostr Wallet Connect-tekenreeks of scan die uit je wallet. Waves kan dan facturen vanuit die wallet betalen, binnen het budget dat je daar instelt.</string>
     <string name="buy_credit_wallet_dialog_connected">Gekoppeld aan %1$s. Plak of scan een nieuwe tekenreeks om die te vervangen.</string>
     <string name="buy_credit_wallet_hint">nostr+walletconnect://…</string>
     <string name="buy_credit_wallet_connect_action">Koppelen</string>
@@ -772,9 +772,9 @@
     <string name="p2p_send">Verzenden</string>
     <string name="p2p_send_title">Direct verzenden</string>
     <string name="p2p_receive_title">Een bestand ontvangen</string>
-    <string name="p2p_send_lead">Verstuur dit bestand rechtstreeks naar een ander apparaat met Firedown — versleuteld, van apparaat naar apparaat, zonder server ertussen.</string>
-    <string name="p2p_receive_lead">Ontvang een bestand rechtstreeks van een ander apparaat met Firedown.</string>
-    <string name="p2p_code_hint_send">Scan deze code met het andere apparaat — in Firedown onder Downloads → Een bestand ontvangen, of gewoon met de camera ervan. Op hetzelfde netwerk gaat de overdracht vanzelf verder; als er een antwoordcode verschijnt, scan die dan terug.</string>
+    <string name="p2p_send_lead">Verstuur dit bestand rechtstreeks naar een ander apparaat met Waves — versleuteld, van apparaat naar apparaat, zonder server ertussen.</string>
+    <string name="p2p_receive_lead">Ontvang een bestand rechtstreeks van een ander apparaat met Waves.</string>
+    <string name="p2p_code_hint_send">Scan deze code met het andere apparaat — in Waves onder Downloads → Een bestand ontvangen, of gewoon met de camera ervan. Op hetzelfde netwerk gaat de overdracht vanzelf verder; als er een antwoordcode verschijnt, scan die dan terug.</string>
     <string name="p2p_code_hint_reply">Toon dit antwoord aan de verzender, of stuur het terug op dezelfde manier waarop hun code binnenkwam.</string>
     <string name="p2p_share_code">Code op een andere manier verzenden</string>
     <string name="p2p_scan_reply">Antwoord scannen</string>
@@ -792,13 +792,13 @@
     <string name="p2p_done_received">Opgeslagen in Downloads</string>
     <string name="p2p_done">Klaar</string>
     <string name="p2p_error_no_path">Kon het andere apparaat niet rechtstreeks bereiken. Dit gebeurt op mobiele data of achter een VPN — probeer hetzelfde Wi-Fi-netwerk, met een eventuele VPN uitgeschakeld.</string>
-    <string name="p2p_error_no_path_vpn">Een VPN op dit apparaat blokkeert de directe verbinding. Sluit Firedown uit van de VPN — of pauzeer die — en probeer het opnieuw.</string>
+    <string name="p2p_error_no_path_vpn">Een VPN op dit apparaat blokkeert de directe verbinding. Sluit Waves uit van de VPN — of pauzeer die — en probeer het opnieuw.</string>
     <string name="p2p_error_generic">De overdracht is mislukt.</string>
     <string name="p2p_error_bad_code">Die code is niet geldig — probeer het opnieuw.</string>
     <string name="p2p_clipboard_empty">Geen code op het klembord.</string>
     <string name="p2p_footer">Versleutelde overdracht van apparaat naar apparaat. Het bestand komt nooit op een server.</string>
     <string name="p2p_footer_relayed">End-to-end versleuteld. Doorgestuurd via firedown.app (geen direct pad), dat het niet kan lezen.</string>
-    <string name="p2p_hint_vpn">Tip: Firedown uitsluiten van je VPN maakt een directe verbinding mogelijk.</string>
+    <string name="p2p_hint_vpn">Tip: Waves uitsluiten van je VPN maakt een directe verbinding mogelijk.</string>
     <string name="p2p_scan_hint">Richt de camera op de code van de verzender</string>
     <string name="p2p_camera_denied">Cameratoegang is nodig om te scannen. Je kunt de code ook plakken.</string>
     <string name="p2p_send_link">Link versturen</string>
@@ -859,13 +859,13 @@
     <string name="cloud_backup_state_low_credit">Te weinig tegoed</string>
     <string name="cloud_backup_state_too_many">Te veel bestanden</string>
     <string name="cloud_backup_state_no_space">Te weinig ruimte</string>
-    <string name="share_app_title">Firedown delen</string>
+    <string name="share_app_title">Waves delen</string>
     <string name="share_app_blurb">Een privébrowser en downloader. Bewaar video, audio en afbeeldingen van elke pagina, blokkeer advertenties en trackers, en alles blijft op je apparaat.</string>
-    <string name="share_app_get_at">Download Firedown op</string>
+    <string name="share_app_get_at">Download Waves op</string>
     <string name="share_app_scan">Of richt de camera van een andere telefoon op de code hierboven om te installeren</string>
     <string name="share_app_share">Link delen</string>
-    <string name="share_app_qr_desc">QR-code naar de downloadpagina van Firedown</string>
-    <string name="share_app_message">Firedown — een privébrowser en downloader voor Android. %1$s</string>
+    <string name="share_app_qr_desc">QR-code naar de downloadpagina van Waves</string>
+    <string name="share_app_message">Waves — een privébrowser en downloader voor Android. %1$s</string>
     <string name="settings_sync_faq_q8">Wat ziet de server eigenlijk?</string>
     <string name="settings_sync_faq_a8">Versleutelde stukjes van je bestanden, hoe groot ze zijn en wanneer ze binnenkwamen — plus een willekeurig accountnummer dat je apparaat afleidt uit je herstelcode, nooit een naam of e-mailadres. Bestandsnamen, types en voorbeelden zijn ook versleuteld, in een verzegelde lijst die alleen jouw apparaat kan openen. De server komt niet eens te weten hoe een bestand heet, laat staan wat erin zit.</string>
     <string name="settings_update_check_title">Controleren op updates</string>

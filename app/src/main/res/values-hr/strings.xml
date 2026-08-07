@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">%d odabrano</string>
-    <string name="app_lock">Otključajte da biste koristili Firedown</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Otključajte da biste koristili Waves</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Otključaj</string>
     <string name="browser_bookmark_added">Oznaka spremljena!</string>
     <string name="browser_cache_cleared">Podaci o pregledavanju izbrisani</string>
@@ -26,7 +26,7 @@
     <string name="capture_empty_gifs_message">Nema dostupnih GIF-ova.</string>
     <string name="capture_empty_images_message">Nema dostupnih slika.</string>
     <string name="capture_empty_message">Nema medija dostupnih za preuzimanje.</string>
-    <string name="capture_empty_subtext">Ponovno učitajte web mjesto i Firedown će otkriti dostupne medije.</string>
+    <string name="capture_empty_subtext">Ponovno učitajte web mjesto i Waves će otkriti dostupne medije.</string>
     <string name="capture_empty_video_message">Nema dostupnih videozapisa.</string>
     <string name="clipboard">Kopirano u međuspremnik</string>
     <string name="close_tab">Zatvori karticu</string>
@@ -71,7 +71,7 @@
     <string name="details_url">URL</string>
     <string name="download">Preuzimanje datoteka</string>
     <string name="download_finished">Preuzimanje završeno</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Kvaliteta preuzimanja</string>
     <string name="download_queued">U tijeku…</string>
     <string name="download_rename_error">Naziv datoteke je već u upotrebi.</string>
@@ -84,7 +84,7 @@
     <string name="empty_list_history">Vaša povijest preuzimanja je prazna.</string>
     <string name="empty_list_query">Nema rezultata</string>
     <string name="empty_list_type">Ovdje nema ničega.</string>
-    <string name="empty_media_help">Neke medijske datoteke moraju se reproducirati prije nego što ih Firedown otkrije kao datoteke za preuzimanje.</string>
+    <string name="empty_media_help">Neke medijske datoteke moraju se reproducirati prije nego što ih Waves otkrije kao datoteke za preuzimanje.</string>
     <string name="empty_media_help_title">Reproducirajte medij prije preuzimanja</string>
     <string name="empty_media_subtitle_help">Pustite medije kao i obično. Zatim bi se trebao pojaviti s drugim medijskim datotekama, nakon pritiska na gumb Fire.</string>
 <string name="error_check_internet_connection">Greška internetske veze.</string>
@@ -144,7 +144,7 @@
     <string name="navigation_web_history">Povijest</string>
     <string name="notifications_downloads_channel">Preuzimanja</string>
     <string name="open">Otvoreno</string>
-    <string name="open_in_app_subtitle">Želite li napustiti Firedown da biste vidjeli ovaj sadržaj?</string>
+    <string name="open_in_app_subtitle">Želite li napustiti Waves da biste vidjeli ovaj sadržaj?</string>
     <string name="open_in_app_title">Otvorite u drugoj aplikaciji</string>
     <string name="open_new_private_tab_2">Nova privatna kartica</string>
     <string name="open_new_tab_2">Nova kartica</string>
@@ -169,7 +169,7 @@
     <string name="rename_file">Preimenuj datoteku</string>
     <string name="request_geolocation">Podijeliti lokaciju svog uređaja s &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_media_key_system_access">Dopustiti aplikaciji &lt;b&gt;%s&lt;/b&gt; reprodukciju sadržaja kontroliranog DRM-om?</string>
-    <string name="request_media_key_system_access_subtitle">Imajte na umu da Firedown ne može preuzeti DRM zaštićene datoteke</string>
+    <string name="request_media_key_system_access_subtitle">Imajte na umu da Waves ne može preuzeti DRM zaštićene datoteke</string>
     <string name="request_storage">Dopustiti pristup pohrani uređaja za &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_storage_access">Dopustiti trećim stranama pristup prvoj pohrani za &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="restart_origin">Ponovno pokretanje</string>
@@ -284,7 +284,7 @@
     <string name="trackers_info_action">Upravljanje zaštitom</string>
     <string name="trackers_info_today">%1$s blokirano danas</string>
     <string name="bookmark_export">Izvezi knjižne oznake</string>
-    <string name="bookmark_export_done">Izvezeno %1$d knjižnih oznaka u Download/Firedown/backup</string>
+    <string name="bookmark_export_done">Izvezeno %1$d knjižnih oznaka u Download/Waves/backup</string>
     <string name="bookmark_import">Uvezi knjižne oznake</string>
     <string name="bookmark_import_done">Uvezeno %1$d knjižnih oznaka</string>
     <string name="bookmark_io_error">Nije moguće pročitati datoteku knjižnih oznaka</string>
@@ -309,7 +309,7 @@
     <string name="settings_sync_export_continue">Nastavi</string>
     <string name="settings_sync_export_done">Kôd za oporavak spremljen</string>
     <string name="settings_sync_export_failed">Datoteku nije moguće spremiti</string>
-    <string name="settings_sync_export_file_body">Firedown — kôd za oporavak sinkronizacije knjižnih oznaka\n\n%1$s\n\nOvaj je kôd jedini ključ za vaše sinkronizirane knjižne oznake — svatko tko ga ima može ih pročitati, a ako ga izgubite, ne može se oporaviti.\n\nOva datoteka NIJE šifrirana. Uvezite kôd u upravitelj lozinki (ili na drugo sigurno mjesto), zatim izbrišite ovu datoteku.</string>
+    <string name="settings_sync_export_file_body">Waves — kôd za oporavak sinkronizacije knjižnih oznaka\n\n%1$s\n\nOvaj je kôd jedini ključ za vaše sinkronizirane knjižne oznake — svatko tko ga ima može ih pročitati, a ako ga izgubite, ne može se oporaviti.\n\nOva datoteka NIJE šifrirana. Uvezite kôd u upravitelj lozinki (ili na drugo sigurno mjesto), zatim izbrišite ovu datoteku.</string>
     <string name="settings_sync_export_summary">Izvezite kôd kao tekstualnu datoteku koju možete pohraniti</string>
     <string name="settings_sync_export_title">Spremi kôd za oporavak u datoteku</string>
     <string name="settings_sync_faq_a1">Da. Svaka je knjižna oznaka šifrirana na ovom uređaju prije nego što se prenese. Poslužitelj uvijek pohranjuje samo neraspoznatljive podatke koje ne može pročitati.</string>
@@ -319,7 +319,7 @@
     <string name="settings_sync_faq_a5">Ne. Nema registracije, e-pošte ni telefonskog broja — samo kôd za oporavak. Uz vaše knjižne oznake nije vezano ništa osobno.</string>
     <string name="settings_sync_faq_a6">Sinkronizacija je neobavezna i zadano isključena. Svoje knjižne oznake uvijek možete izvesti u datoteku i kasnije ih uvesti, bez ikakvog poslužitelja.</string>
     <string name="settings_sync_faq_q1">Jesu li moje knjižne oznake šifrirane?</string>
-    <string name="settings_sync_faq_q2">Mogu li ih Firedown ili netko drugi pročitati?</string>
+    <string name="settings_sync_faq_q2">Mogu li ih Waves ili netko drugi pročitati?</string>
     <string name="settings_sync_faq_q3">Što je kôd za oporavak?</string>
     <string name="settings_sync_faq_q4">Što ako izgubim svoj kôd za oporavak?</string>
     <string name="settings_sync_faq_q5">Trebam li račun ili e-poštu?</string>

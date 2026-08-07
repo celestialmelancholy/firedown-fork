@@ -76,6 +76,9 @@ fabric.properties
 /external/ffmpeg/*
 !/external/ffmpeg/.gitkeep
 
+# Command Code local config (skill, taste, settings)
+/.commandcode/
+
 # Python bytecode (from running the scripts/ diagnostics)
 __pycache__/
 *.pyc

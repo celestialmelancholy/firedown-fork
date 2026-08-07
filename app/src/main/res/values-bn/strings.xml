@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">%d নির্বাচিত</string>
     <string name="app_lock">ফায়ারডাউন ব্যবহার করতে আনলক করুন</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">আনলক করুন</string>
     <string name="browser_bookmark_added">বুকমার্ক সংরক্ষিত!</string>
     <string name="browser_cache_cleared">ব্রাউজিং ডেটা সাফ করা হয়েছে</string>
@@ -135,7 +135,7 @@
     <string name="navigation_web_history">ইতিহাস</string>
     <string name="notifications_downloads_channel">ডাউনলোড</string>
     <string name="open">খোলা</string>
-    <string name="open_in_app_subtitle">আপনি এই বিষয়বস্তু দেখতে Firedown ছেড়ে যেতে চান?</string>
+    <string name="open_in_app_subtitle">আপনি এই বিষয়বস্তু দেখতে Waves ছেড়ে যেতে চান?</string>
     <string name="open_in_app_title">অন্য অ্যাপে খুলুন</string>
     <string name="open_new_private_tab_2">নতুন ব্যক্তিগত ট্যাব</string>
     <string name="open_new_tab_2">নতুন ট্যাব</string>
@@ -257,7 +257,7 @@
 
 
     <string name="bookmark_export">বুকমার্ক রপ্তানি করুন</string>
-    <string name="bookmark_export_done">%1$d টি বুকমার্ক Download/Firedown/backup-এ রপ্তানি করা হয়েছে</string>
+    <string name="bookmark_export_done">%1$d টি বুকমার্ক Download/Waves/backup-এ রপ্তানি করা হয়েছে</string>
     <string name="bookmark_import">বুকমার্ক আমদানি করুন</string>
     <string name="bookmark_import_done">%1$d টি বুকমার্ক আমদানি করা হয়েছে</string>
     <string name="bookmark_io_error">বুকমার্ক ফাইলটি পড়া যায়নি</string>
@@ -283,7 +283,7 @@
     <string name="settings_sync_export_continue">চালিয়ে যান</string>
     <string name="settings_sync_export_done">পুনরুদ্ধার কোড সংরক্ষণ করা হয়েছে</string>
     <string name="settings_sync_export_failed">ফাইলটি সংরক্ষণ করা যায়নি</string>
-    <string name="settings_sync_export_file_body">Firedown — বুকমার্ক সিঙ্ক পুনরুদ্ধার কোড\n\n%1$s\n\nএই কোডটিই আপনার সিঙ্ক করা বুকমার্কের একমাত্র চাবি — যার কাছে এটি আছে সে এগুলি পড়তে পারে, এবং হারিয়ে গেলে এটি পুনরুদ্ধার করা যায় না।\n\nএই ফাইলটি এনক্রিপ্ট করা নয়। কোডটি আপনার পাসওয়ার্ড ম্যানেজারে (অথবা অন্য কোনো নিরাপদ স্থানে) আমদানি করুন, তারপর এই ফাইলটি মুছে ফেলুন।</string>
+    <string name="settings_sync_export_file_body">Waves — বুকমার্ক সিঙ্ক পুনরুদ্ধার কোড\n\n%1$s\n\nএই কোডটিই আপনার সিঙ্ক করা বুকমার্কের একমাত্র চাবি — যার কাছে এটি আছে সে এগুলি পড়তে পারে, এবং হারিয়ে গেলে এটি পুনরুদ্ধার করা যায় না।\n\nএই ফাইলটি এনক্রিপ্ট করা নয়। কোডটি আপনার পাসওয়ার্ড ম্যানেজারে (অথবা অন্য কোনো নিরাপদ স্থানে) আমদানি করুন, তারপর এই ফাইলটি মুছে ফেলুন।</string>
     <string name="settings_sync_export_summary">কোডটি একটি টেক্সট ফাইল হিসেবে রপ্তানি করুন যা আপনি সংরক্ষণ করতে পারেন</string>
     <string name="settings_sync_export_title">পুনরুদ্ধার কোড ফাইলে সংরক্ষণ করুন</string>
     <string name="settings_sync_faq_a1">হ্যাঁ। প্রতিটি বুকমার্ক আপলোড হওয়ার আগে এই ডিভাইসে এনক্রিপ্ট করা হয়। সার্ভার কেবল এমন বিকৃত ডেটা সংরক্ষণ করে যা এটি পড়তে পারে না।</string>
@@ -293,7 +293,7 @@
     <string name="settings_sync_faq_a5">না। কোনো সাইন-আপ, ইমেল বা ফোন নম্বর নেই — শুধু পুনরুদ্ধার কোড। আপনার বুকমার্কের সাথে কোনো ব্যক্তিগত তথ্য যুক্ত নেই।</string>
     <string name="settings_sync_faq_a6">সিঙ্ক ঐচ্ছিক এবং ডিফল্টভাবে বন্ধ। আপনি সবসময় আপনার বুকমার্ক একটি ফাইলে রপ্তানি করে পরে আমদানি করতে পারেন, কোনো সার্ভার ছাড়াই।</string>
     <string name="settings_sync_faq_q1">আমার বুকমার্ক কি এনক্রিপ্ট করা?</string>
-    <string name="settings_sync_faq_q2">Firedown বা অন্য কেউ কি এগুলি পড়তে পারে?</string>
+    <string name="settings_sync_faq_q2">Waves বা অন্য কেউ কি এগুলি পড়তে পারে?</string>
     <string name="settings_sync_faq_q3">পুনরুদ্ধার কোড কী?</string>
     <string name="settings_sync_faq_q4">আমি যদি আমার পুনরুদ্ধার কোড হারিয়ে ফেলি তবে কী হবে?</string>
     <string name="settings_sync_faq_q5">আমার কি কোনো অ্যাকাউন্ট বা ইমেল দরকার?</string>

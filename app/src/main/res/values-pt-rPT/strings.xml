@@ -23,7 +23,7 @@
     <string name="capture_empty_gifs_message">Nenhum Gif disponível.</string>
     <string name="capture_empty_images_message">Nenhuma imagem disponível.</string>
     <string name="capture_empty_message">Nenhuma mídia disponível para download.</string>
-    <string name="capture_empty_subtext">Recarregue o site e o Firedown detetará a mídia disponível.</string>
+    <string name="capture_empty_subtext">Recarregue o site e o Waves detetará a mídia disponível.</string>
     <string name="capture_empty_video_message">Nenhum vídeo disponível.</string>
     <string name="clipboard">Copiado para a área de transferência</string>
     <string name="clipboard_from">Da área de transferência</string>
@@ -74,7 +74,7 @@
     <string name="empty_list_history">Seu histórico de downloads está vazio.</string>
     <string name="empty_list_query">Nenhum resultado encontrado</string>
     <string name="empty_list_type">Não há nada aqui.</string>
-    <string name="empty_media_help">Alguns arquivos de mídia precisam ser reproduzidos antes que o Firedown possa detectá-los como arquivos para download.</string>
+    <string name="empty_media_help">Alguns arquivos de mídia precisam ser reproduzidos antes que o Waves possa detectá-los como arquivos para download.</string>
     <string name="empty_media_help_title">Jogue antes de baixar</string>
     <string name="empty_media_subtitle_help">Por favor, inicie a mídia normalmente. Ele deverá então aparecer com os outros arquivos de mídia, após pressionar o botão Fire.</string>
     <string name="error_check_internet_connection">Erro de conexão com a Internet.</string>
@@ -123,7 +123,7 @@
     <string name="navigation_web_history">Histórico</string>
     <string name="notifications_downloads_channel">Transferências</string>
     <string name="open">Abrir</string>
-    <string name="open_in_app_subtitle">Gostaria de sair do Firedown para visualizar este conteúdo?</string>
+    <string name="open_in_app_subtitle">Gostaria de sair do Waves para visualizar este conteúdo?</string>
     <string name="open_in_app_title">Abra em outro aplicativo</string>
     <string name="open_new_private_tab_2">Novo separador privado</string>
     <string name="open_new_tab_2">Novo separador</string>
@@ -258,7 +258,7 @@
     <string name="tabs_incognito_empty">Sem separadores privados</string>
     <string name="security_stat_blocked_scope">bloqueado nesta página</string>
     <string name="bookmark_export">Exportar marcadores</string>
-    <string name="bookmark_export_done">%1$d marcadores exportados para Download/Firedown/backup</string>
+    <string name="bookmark_export_done">%1$d marcadores exportados para Download/Waves/backup</string>
     <string name="bookmark_import">Importar marcadores</string>
     <string name="bookmark_import_done">%1$d marcadores importados</string>
     <string name="bookmark_io_error">Não foi possível ler o ficheiro de marcadores</string>
@@ -283,7 +283,7 @@
     <string name="settings_sync_export_continue">Continuar</string>
     <string name="settings_sync_export_done">Código de recuperação guardado</string>
     <string name="settings_sync_export_failed">Não foi possível guardar o ficheiro</string>
-    <string name="settings_sync_export_file_body">Firedown — código de recuperação da sincronização de marcadores\n\n%1$s\n\nEste código é a única chave dos seus marcadores sincronizados — quem o tiver pode lê-los, e não pode ser recuperado se for perdido.\n\nEste ficheiro NÃO está encriptado. Importe o código para o seu gestor de palavras-passe (ou outro local seguro) e depois elimine este ficheiro.</string>
+    <string name="settings_sync_export_file_body">Waves — código de recuperação da sincronização de marcadores\n\n%1$s\n\nEste código é a única chave dos seus marcadores sincronizados — quem o tiver pode lê-los, e não pode ser recuperado se for perdido.\n\nEste ficheiro NÃO está encriptado. Importe o código para o seu gestor de palavras-passe (ou outro local seguro) e depois elimine este ficheiro.</string>
     <string name="settings_sync_export_summary">Exporte o código como um ficheiro de texto que pode guardar</string>
     <string name="settings_sync_export_title">Guardar código de recuperação num ficheiro</string>
     <string name="settings_sync_faq_a1">Sim. Cada marcador é encriptado neste dispositivo antes de ser carregado. O servidor apenas armazena dados cifrados que não consegue ler.</string>
@@ -293,7 +293,7 @@
     <string name="settings_sync_faq_a5">Não. Não há registo, e-mail nem número de telefone — apenas o código de recuperação. Nada de pessoal está associado aos seus marcadores.</string>
     <string name="settings_sync_faq_a6">A sincronização é opcional e está desativada por predefinição. Pode sempre exportar os seus marcadores para um ficheiro e importá-los mais tarde, sem qualquer servidor envolvido.</string>
     <string name="settings_sync_faq_q1">Os meus marcadores estão encriptados?</string>
-    <string name="settings_sync_faq_q2">O Firedown ou outra pessoa consegue lê-los?</string>
+    <string name="settings_sync_faq_q2">O Waves ou outra pessoa consegue lê-los?</string>
     <string name="settings_sync_faq_q3">O que é o código de recuperação?</string>
     <string name="settings_sync_faq_q4">E se eu perder o meu código de recuperação?</string>
     <string name="settings_sync_faq_q5">Preciso de uma conta ou de um e-mail?</string>

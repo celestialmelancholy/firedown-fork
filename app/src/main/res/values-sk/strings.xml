@@ -1,7 +1,7 @@
 <resources>
     <string name="action_mode_selected">Vybraté: %d</string>
-    <string name="app_lock">Ak chcete použiť Firedown, odomknite</string>
-    <string name="app_name">Firedown</string>
+    <string name="app_lock">Ak chcete použiť Waves, odomknite</string>
+    <string name="app_name">Waves</string>
     <string name="app_unlock">Odomknúť</string>
     <string name="browser_bookmark_added">Záložka bola uložená!</string>
     <string name="browser_cache_cleared">Údaje prehliadania boli vymazané</string>
@@ -26,7 +26,7 @@
     <string name="capture_empty_gifs_message">Nie sú k dispozícii žiadne gify.</string>
     <string name="capture_empty_images_message">Nie sú k dispozícii žiadne obrázky.</string>
     <string name="capture_empty_message">Nie sú dostupné žiadne médiá na stiahnutie.</string>
-    <string name="capture_empty_subtext">Znova načítajte webovú stránku a Firedown zistí dostupné médiá.</string>
+    <string name="capture_empty_subtext">Znova načítajte webovú stránku a Waves zistí dostupné médiá.</string>
     <string name="capture_empty_video_message">Nie sú k dispozícii žiadne videá.</string>
     <string name="clipboard">Skopírované do schránky</string>
     <string name="close_tab">Zavrieť kartu</string>
@@ -71,7 +71,7 @@
     <string name="details_url">URL</string>
     <string name="download">Stiahnuť ▼</string>
     <string name="download_finished">Sťahovanie dokončené</string>
-    <string name="download_ongoing_notification">Firedown</string>
+    <string name="download_ongoing_notification">Waves</string>
     <string name="download_quality">Kvalita sťahovania</string>
     <string name="download_queued">Čaká sa…</string>
     <string name="download_rename_error">Názov súboru sa už používa.</string>
@@ -84,7 +84,7 @@
     <string name="empty_list_history">Vaša história sťahovania je prázdna.</string>
     <string name="empty_list_query">Neboli nájdené žiadne výsledky</string>
     <string name="empty_list_type">Nič tu nie je.</string>
-    <string name="empty_media_help">Niektoré mediálne súbory je potrebné prehrať, kým ich Firedown dokáže rozpoznať ako súbory na stiahnutie.</string>
+    <string name="empty_media_help">Niektoré mediálne súbory je potrebné prehrať, kým ich Waves dokáže rozpoznať ako súbory na stiahnutie.</string>
     <string name="empty_media_help_title">Pred stiahnutím prehrajte médium</string>
     <string name="empty_media_subtitle_help">Prehrávajte médiá ako zvyčajne. Potom by sa mal objaviť s ostatnými mediálnymi súbormi po stlačení tlačidla Fire.</string>
 <string name="error_check_internet_connection">Chyba internetového pripojenia.</string>
@@ -144,7 +144,7 @@
     <string name="navigation_web_history">História</string>
     <string name="notifications_downloads_channel">K stiahnutiu</string>
     <string name="open">OTVORENÉ</string>
-    <string name="open_in_app_subtitle">Chcete opustiť Firedown a zobraziť tento obsah?</string>
+    <string name="open_in_app_subtitle">Chcete opustiť Waves a zobraziť tento obsah?</string>
     <string name="open_in_app_title">Otvoriť v inej aplikácii</string>
     <string name="open_new_private_tab_2">Nová súkromná karta</string>
     <string name="open_new_tab_2">Nová karta</string>
@@ -171,7 +171,7 @@
     <string name="rename_file">Premenovať súbor</string>
     <string name="request_geolocation">Chcete zdieľať polohu svojho zariadenia s používateľom &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="request_media_key_system_access">Povoliť aplikácii &lt;b&gt;%s&lt;/b&gt; prehrávať obsah riadený DRM?</string>
-    <string name="request_media_key_system_access_subtitle">Upozorňujeme, že pomocou Firedown nie je možné sťahovať súbory chránené DRM</string>
+    <string name="request_media_key_system_access_subtitle">Upozorňujeme, že pomocou Waves nie je možné sťahovať súbory chránené DRM</string>
     <string name="request_storage">Chcete povoliť aplikácii &lt;b&gt;%s&lt;/b&gt; prístup k úložisku zariadenia?</string>
     <string name="request_storage_access">Povoliť tretím stranám prístup k úložisku prvej strany pre &lt;b&gt;%s&lt;/b&gt;?</string>
     <string name="restart_origin">Reštart</string>
@@ -286,7 +286,7 @@
     <string name="trackers_info_action">Spravovať ochranu</string>
     <string name="trackers_info_today">%1$s zablokovaných dnes</string>
     <string name="bookmark_export">Exportovať záložky</string>
-    <string name="bookmark_export_done">Exportovaných %1$d záložiek do Download/Firedown/backup</string>
+    <string name="bookmark_export_done">Exportovaných %1$d záložiek do Download/Waves/backup</string>
     <string name="bookmark_import">Importovať záložky</string>
     <string name="bookmark_import_done">Importovaných %1$d záložiek</string>
     <string name="bookmark_io_error">Súbor záložiek sa nepodarilo načítať</string>
@@ -311,7 +311,7 @@
     <string name="settings_sync_export_continue">Pokračovať</string>
     <string name="settings_sync_export_done">Kód na obnovenie uložený</string>
     <string name="settings_sync_export_failed">Súbor sa nepodarilo uložiť</string>
-    <string name="settings_sync_export_file_body">Firedown — kód na obnovenie synchronizácie záložiek\n\n%1$s\n\nTento kód je jediným kľúčom k vašim synchronizovaným záložkám — ktokoľvek, kto ho má, si ich môže prečítať, a pri strate sa nedá obnoviť.\n\nTento súbor NIE JE šifrovaný. Importujte kód do správcu hesiel (alebo na iné bezpečné miesto) a potom tento súbor odstráňte.</string>
+    <string name="settings_sync_export_file_body">Waves — kód na obnovenie synchronizácie záložiek\n\n%1$s\n\nTento kód je jediným kľúčom k vašim synchronizovaným záložkám — ktokoľvek, kto ho má, si ich môže prečítať, a pri strate sa nedá obnoviť.\n\nTento súbor NIE JE šifrovaný. Importujte kód do správcu hesiel (alebo na iné bezpečné miesto) a potom tento súbor odstráňte.</string>
     <string name="settings_sync_export_summary">Exportovať kód ako textový súbor, ktorý môžete uložiť</string>
     <string name="settings_sync_export_title">Uložiť kód na obnovenie do súboru</string>
     <string name="settings_sync_faq_a1">Áno. Každá záložka je na tomto zariadení zašifrovaná pred odoslaním. Server vždy ukladá len zašifrované dáta, ktoré nedokáže prečítať.</string>
@@ -321,7 +321,7 @@
     <string name="settings_sync_faq_a5">Nie. Žiadna registrácia, e-mail ani telefónne číslo — len kód na obnovenie. K vašim záložkám nie sú viazané žiadne osobné údaje.</string>
     <string name="settings_sync_faq_a6">Synchronizácia je voliteľná a predvolene vypnutá. Svoje záložky môžete vždy exportovať do súboru a neskôr ich importovať bez akéhokoľvek servera.</string>
     <string name="settings_sync_faq_q1">Sú moje záložky šifrované?</string>
-    <string name="settings_sync_faq_q2">Môže ich Firedown alebo niekto iný prečítať?</string>
+    <string name="settings_sync_faq_q2">Môže ich Waves alebo niekto iný prečítať?</string>
     <string name="settings_sync_faq_q3">Čo je kód na obnovenie?</string>
     <string name="settings_sync_faq_q4">Čo ak stratím svoj kód na obnovenie?</string>
     <string name="settings_sync_faq_q5">Potrebujem účet alebo e-mail?</string>

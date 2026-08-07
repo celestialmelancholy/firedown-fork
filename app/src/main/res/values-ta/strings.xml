@@ -23,7 +23,7 @@
     <string name="capture_empty_gifs_message">Gifகள் இல்லை.</string>
     <string name="capture_empty_images_message">படங்கள் எதுவும் கிடைக்கவில்லை.</string>
     <string name="capture_empty_message">பதிவிறக்குவதற்கு எந்த மீடியாவும் இல்லை.</string>
-    <string name="capture_empty_subtext">இணையதளத்தை மீண்டும் ஏற்றவும், கிடைக்கக்கூடிய மீடியாவை Firedown கண்டறியும்.</string>
+    <string name="capture_empty_subtext">இணையதளத்தை மீண்டும் ஏற்றவும், கிடைக்கக்கூடிய மீடியாவை Waves கண்டறியும்.</string>
     <string name="capture_empty_video_message">வீடியோக்கள் இல்லை.</string>
     <string name="clipboard">கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது</string>
     <string name="close_tab">கீற்றை மூடு</string>
@@ -71,7 +71,7 @@
     <string name="empty_list_history">உங்கள் பதிவிறக்கங்கள் வரலாறு காலியாக உள்ளது.</string>
     <string name="empty_list_query">முடிவுகள் எதுவும் இல்லை</string>
     <string name="empty_list_type">இங்கே எதுவும் இல்லை.</string>
-    <string name="empty_media_help">சில மீடியா கோப்புகளை பதிவிறக்கம் செய்யக்கூடிய கோப்புகளாக Firedown கண்டறியும் முன் அவற்றை இயக்க வேண்டும்.</string>
+    <string name="empty_media_help">சில மீடியா கோப்புகளை பதிவிறக்கம் செய்யக்கூடிய கோப்புகளாக Waves கண்டறியும் முன் அவற்றை இயக்க வேண்டும்.</string>
     <string name="empty_media_help_title">பதிவிறக்குவதற்கு முன் மீடியாவை இயக்கவும்</string>
     <string name="empty_media_subtitle_help">வழக்கம் போல் மீடியாவை இயக்கவும். ஃபயர்-பட்டனை அழுத்திய பிறகு, அது மற்ற மீடியா கோப்புகளுடன் தோன்றும்.</string>
 <string name="error_check_internet_connection">இணைய இணைப்பு பிழை.</string>
@@ -130,7 +130,7 @@
     <string name="navigation_web_history">வரலாறு</string>
     <string name="notifications_downloads_channel">பதிவிறக்கங்கள்</string>
     <string name="open">திற</string>
-    <string name="open_in_app_subtitle">இந்த உள்ளடக்கத்தைப் பார்க்க Firedown ஐ விட்டு வெளியேற விரும்புகிறீர்களா?</string>
+    <string name="open_in_app_subtitle">இந்த உள்ளடக்கத்தைப் பார்க்க Waves ஐ விட்டு வெளியேற விரும்புகிறீர்களா?</string>
     <string name="open_in_app_title">மற்றொரு பயன்பாட்டில் திறக்கவும்</string>
     <string name="open_new_private_tab_2">புதிய கமுக்கக் கீற்று</string>
     <string name="open_new_tab_2">புதிய கீற்று</string>
@@ -252,7 +252,7 @@
 
 
     <string name="bookmark_export">புக்மார்க்குகளை ஏற்றுமதி செய்</string>
-    <string name="bookmark_export_done">%1$d புக்மார்க்குகள் Download/Firedown/backup இல் ஏற்றுமதி செய்யப்பட்டன</string>
+    <string name="bookmark_export_done">%1$d புக்மார்க்குகள் Download/Waves/backup இல் ஏற்றுமதி செய்யப்பட்டன</string>
     <string name="bookmark_import">புக்மார்க்குகளை இறக்குமதி செய்</string>
     <string name="bookmark_import_done">%1$d புக்மார்க்குகள் இறக்குமதி செய்யப்பட்டன</string>
     <string name="bookmark_io_error">புக்மார்க் கோப்பைப் படிக்க முடியவில்லை</string>
@@ -278,7 +278,7 @@
     <string name="settings_sync_export_continue">தொடர்</string>
     <string name="settings_sync_export_done">மீட்பு குறியீடு சேமிக்கப்பட்டது</string>
     <string name="settings_sync_export_failed">கோப்பைச் சேமிக்க முடியவில்லை</string>
-    <string name="settings_sync_export_file_body">Firedown — புக்மார்க் ஒத்திசைவு மீட்பு குறியீடு\n\n%1$s\n\nஇந்தக் குறியீடு உங்கள் ஒத்திசைக்கப்பட்ட புக்மார்க்குகளுக்கான ஒரே சாவி — இதை வைத்திருக்கும் எவரும் அவற்றைப் படிக்க முடியும், தொலைந்தால் மீட்க முடியாது.\n\nஇந்தக் கோப்பு குறியாக்கம் செய்யப்படவில்லை. குறியீட்டை உங்கள் கடவுச்சொல் மேலாளரில் (அல்லது வேறு பாதுகாப்பான இடத்தில்) இறக்குமதி செய்து, பிறகு இந்தக் கோப்பை நீக்குங்கள்.</string>
+    <string name="settings_sync_export_file_body">Waves — புக்மார்க் ஒத்திசைவு மீட்பு குறியீடு\n\n%1$s\n\nஇந்தக் குறியீடு உங்கள் ஒத்திசைக்கப்பட்ட புக்மார்க்குகளுக்கான ஒரே சாவி — இதை வைத்திருக்கும் எவரும் அவற்றைப் படிக்க முடியும், தொலைந்தால் மீட்க முடியாது.\n\nஇந்தக் கோப்பு குறியாக்கம் செய்யப்படவில்லை. குறியீட்டை உங்கள் கடவுச்சொல் மேலாளரில் (அல்லது வேறு பாதுகாப்பான இடத்தில்) இறக்குமதி செய்து, பிறகு இந்தக் கோப்பை நீக்குங்கள்.</string>
     <string name="settings_sync_export_summary">குறியீட்டை நீங்கள் சேமிக்கக்கூடிய உரைக் கோப்பாக ஏற்றுமதி செய்</string>
     <string name="settings_sync_export_title">மீட்பு குறியீட்டைக் கோப்பில் சேமி</string>
     <string name="settings_sync_faq_a1">ஆம். ஒவ்வொரு புக்மார்க்கும் பதிவேற்றப்படுவதற்கு முன் இந்த சாதனத்தில் குறியாக்கம் செய்யப்படுகிறது. சேவையகம் அதனால் படிக்க முடியாத, கலைக்கப்பட்ட தரவை மட்டுமே சேமிக்கிறது.</string>
@@ -288,7 +288,7 @@
     <string name="settings_sync_faq_a5">இல்லை. பதிவு, மின்னஞ்சல் அல்லது தொலைபேசி எண் ஏதும் இல்லை — மீட்பு குறியீடு மட்டுமே. உங்கள் புக்மார்க்குகளுடன் தனிப்பட்ட எதுவும் இணைக்கப்படவில்லை.</string>
     <string name="settings_sync_faq_a6">ஒத்திசைவு விருப்பத்திற்குரியது மற்றும் இயல்பாக அணைக்கப்பட்டுள்ளது. நீங்கள் எப்போதும் உங்கள் புக்மார்க்குகளை ஒரு கோப்பிற்கு ஏற்றுமதி செய்து பிறகு இறக்குமதி செய்யலாம், எந்த சேவையகமும் சம்பந்தப்படாமல்.</string>
     <string name="settings_sync_faq_q1">எனது புக்மார்க்குகள் குறியாக்கம் செய்யப்படுகின்றனவா?</string>
-    <string name="settings_sync_faq_q2">Firedown அல்லது வேறு யாராவது அவற்றைப் படிக்க முடியுமா?</string>
+    <string name="settings_sync_faq_q2">Waves அல்லது வேறு யாராவது அவற்றைப் படிக்க முடியுமா?</string>
     <string name="settings_sync_faq_q3">மீட்பு குறியீடு என்றால் என்ன?</string>
     <string name="settings_sync_faq_q4">எனது மீட்பு குறியீட்டை இழந்தால் என்ன ஆகும்?</string>
     <string name="settings_sync_faq_q5">எனக்கு கணக்கு அல்லது மின்னஞ்சல் தேவையா?</string>
