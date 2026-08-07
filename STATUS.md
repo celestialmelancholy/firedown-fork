@@ -1,20 +1,24 @@
-# FIREDOWN FORK — STATUS
+# WAVES (Firedown Fork) — STATUS
 
-**Updated:** 2026-08-06 (session handoff — ready for new session)
+**Updated:** 2026-08-07 (session handoff — ready for new session)
 
 ## Current state
 
 - **Base:** Firedown (solarizeddev) — GeckoView Android browser + uBlock Origin + media downloader.
   - Version: **1.1.87** (versionCode 1187, upstream `main` @ clone time).
   - Upstream repo: https://github.com/solarizeddev/firedown.git
-- **Working branch:** `custom-ui` (long-lived; NEVER work on `main`).
+- **Rebranded:** Firedown → **Waves** (display name, strings, logo, download folder). User is now
+  CONSIDERING renaming again to **"Eunoia"** (see PENDING DECISIONS) — not started.
+- **Working branch:** `custom-ui` (long-lived; NEVER work on `main`). Pushed to fork.
 - **Remotes:**
   - `origin` → https://github.com/celestialmelancholy/firedown-fork.git (our GitHub fork — cloud backup + push target)
   - `upstream` → https://github.com/solarizeddev/firedown.git (original dev — source of updates)
+- **GitHub:** `origin/custom-ui` = `a741f3a8` (all work pushed). `origin/main` = upstream base, untouched.
+  - Pushing is authenticated via `gh` CLI as `celestialmelancholy` (device login — token stays on device).
 - **Update flow (when upstream pushes):** `git fetch upstream` → `git merge upstream/main` on `custom-ui`.
   - `custom-ui` tracks `origin/main` (clean merges from upstream).
 - **License:** MIT (Firedown core) + GPL-3.0 (bundled uBlock Origin). Attribution line stays in README/LICENSE — never remove.
-- **Working tree changes (intentional):** `app/build.gradle` + `settings.gradle` (GeckoView → official AAR), `gradle.properties` (aapt2 override), `.gitignore` (/.commandcode/), `STATUS.md` (this file), plus all homepage work below.
+- **Working tree changes (intentional):** `app/build.gradle` + `settings.gradle` (GeckoView → official AAR), `gradle.properties` (aapt2 override), `.gitignore` (/.commandcode/), `STATUS.md` (this file), `HURDLES.md`, plus all customization work below.
 
 ## Environment (phone build machine) — ALL SET UP, WORKS
 
@@ -61,59 +65,48 @@
 | # | Item | Status |
 |---|------|--------|
 | 1 | Firefox-style homepage | ✅ Implemented (v2) — both known issues FIXED |
-| 2 | Single top bar (remove bottom toolbar; shield → address bar → + → tab counter → menu; flame download button compact in top bar) | ✅ Implemented + UX-fix rounds (dead buttons, jump-back-in, bookmark move, focused full-width bar, back-button, focus icons, ripples, conditional flame) — build passes; on-device verification pending |
+| 2 | Single top bar (remove bottom toolbar; shield → address bar → + → tab counter → menu; download button compact in top bar) | ✅ Implemented + UX-fix rounds (dead buttons, jump-back-in, bookmark move, focused full-width bar, back-button, focus icons w/ functionality, ripples, conditional coral) — build passes; on-device verification pending |
 | 3 | Fix background media playback (auto-pause active media on tab switch / minimize / exit) | ⏳ Pending |
-| 4 | App rename (keep flame logo) + upstream git strategy | ✅ Git strategy done; **rename → REBRAND to "Waves" (new name + logo + strip Firedown from UI; attribution stays in README/LICENSE/NOTICE + GitHub)** — planned, not started |
-| 5 | Firefox extension support (GeckoView WebExtension API + add-on UI) | ⏳ Discussed — planned as separate milestone AFTER rebrand |
+| 4 | Rebrand Firedown → Waves (name, logo, strip Firedown; attribution stays) | ✅ DONE + icon safe-zone fix. **User CONSIDERING rename again → "Eunoia"** (pending decision) |
+| 5 | Firefox extension support | 🔎 Feasibility CHECKED — engine already runs 5 built-in WebExtensions (uBlock etc.) via WebExtensionController. AMO direct install NOT possible; an in-app ".xpi installer + manager" screen IS feasible. Not started. |
 
-## ITEM 2 — UX-fix round 2 (back button, focus icons, ripples, flame) — build passes
-1. **Back button — page history first, always.** BrowserFragment's back handler
-   routes through `GeckoState.canGoBackNow()` (reads the entity flag kept
-   current by `NavigationDelegate.onHistoryStateChange` — GeckoView's public API
-   has NO live `canGoBack()` on GeckoSession, verified at build time). Chain
-   order unchanged: fullscreen → search mode → page history → previous tab →
-   external → home.
-2. **Back with the address bar open no longer exits the app.** HomeFragment +
-   HomeIncognitoFragment back callbacks now check the edit field's focus state:
-   if the field is focused (overlay not visible), back just clears focus/editing
-   (closes keyboard) instead of falling through to default (which finished the
-   activity on the root destination).
-3. **Chrome-style focus icons.** New `ic_image_search_24` + `ic_mic_24` Material
-   vectors (matching the app's drawable conventions). They sit on the right of
-   the address pill, GONE at rest, VISIBLE while the field is focused (wired in
-   `GeckoToolbar.updateViewVisibility`, tinted in `updateTheme`). Actions NOT
-   wired yet (image search / voice search need a defined backend) — icons are
-   visual affordances for now.
-4. **Tap ripples.** `home_private_infinity` (incognito icon) got
-   `selectableItemBackgroundBorderless`; both "Show all >" TextViews got
-   `selectableItemBackground` + touch padding — they now show the touch
-   indicator like every other icon.
-5. **Download flame — conditional color.** Neutral (onSurfaceVariant) at rest;
-   turns brand-primary (coral) ONLY while media is being caught
-   (`onBadgeCount > 0`, same signal as the badge dot). Reverts to neutral when
-   the count clears. Incognito resolves its own primary. XML default also
-   neutral.
+## ITEM 4 — Rebrand to Waves — ✅ DONE (+ icon fix)
+- All user-facing strings → "Waves" (base + 75 locales); app name; download folder
+  `Download/Waves` (StoragePaths.FOLDERNAME); file-name prefix `[Waves]`;
+  notification icon; splash; new-tab glyphs; download icon → standard
+  `download_24` (functionality unchanged: click → Captured sheet/Downloads/Vault,
+  coral-on-media tint preserved).
+- Waves Ukiyo-e logo on the exact dark homepage surface `#131315` (launcher
+  adaptive + mipmaps + home brand mark + splash). Icon reworked per Android
+  adaptive-icon standards: 432px transparent foreground, emblem at 66% safe
+  zone, 1:1 legacy tiles — fixes the over-zoom/blur/tiny-dot critique.
+- Settings: removed the "Firedown" section title + Share/Donate/Help; kept About.
+- Functional URLs (firedown.app, github) + style-name identifiers kept.
+- **Rebranding to another name (e.g. "Eunoia") later is CHEAP now**: the same
+  string/drawable sweep that did Firedown→Waves does Waves→Eunoia.
 
-### Files changed (round 2, all on `custom-ui`)
-- `app/src/main/java/com/solarized/firedown/geckoview/GeckoState.java` — `canGoBackNow()` (live query)
-- `app/src/main/java/com/solarized/firedown/phone/fragments/BrowserFragment.java` — back uses live query
-- `app/src/main/java/com/solarized/firedown/phone/fragments/HomeFragment.java` + `HomeIncognitoFragment.java` — focused-field back guard
-- `app/src/main/java/com/solarized/firedown/geckoview/GeckoToolbar.java` — focus-icon visibility + theme + clicks
-- `app/src/main/res/layout/browser_address_bar.xml` — mic + image-search buttons; flame neutral default
-- `app/src/main/res/drawable/ic_mic_24.xml`, `ic_image_search_24.xml` — NEW vectors
-- `app/src/main/res/layout/fragment_home.xml` — ripples on incognito + Show-all
-- `app/src/main/java/com/solarized/firedown/geckoview/toolbar/BottomNavigationBar.java` — flame tint driven by badge count
+## ITEM 5 — Extensions — feasibility CHECKED (not started)
+- **Engine support proven:** GeckoView 153.0; `GeckoRuntimeHelper` already uses
+  `WebExtensionController` (ensureBuiltIn/list/uninstall) + full delegate wiring
+  for 5 built-ins: uBlock, youtube, webrequests/downloader, icons, nostr, p2pshare.
+- **AMO (addons.mozilla.org) direct install: NOT possible** — Firefox's store
+  requires a browser-specific install handshake GeckoView's public API lacks.
+- **Feasible v1:** in-app "Extensions" screen — install from `.xpi` via system
+  file picker (`WebExtensionController.install`), list installed, enable/disable/
+  remove. Real gallery experience without AMO.
+- **Feasible v2:** bundle curated extensions as built-ins (like uBlock) e.g. Dark
+  Reader. Ship-in-APK model.
 
-## PENDING DECISIONS (from whatnow.md — discussed, user chose: fix bugs first, rebrand later)
-- **Rebrand to "Waves"** — new app name + logo; strip "Firedown" from all UI
-  strings/labels; keep flame logo? (user said new logo); attribution stays in
-  README/LICENSE/NOTICE + GitHub. Planned as its own milestone.
-- **Download icon after rebrand** — the flame IS Firedown's logo; after rebrand,
-  switch the download affordance to a standard download icon (or a custom one).
-- **Firefox extension support** — GeckoView WebExtension API + add-on management
-  UI (install/enable/disable). Substantial; planned AFTER rebrand as Item 5.
-- Remaining roadmap: Item 3 (background media pause), Item 4 rename→rebrand,
-  Item 5 extensions.
+## PENDING DECISIONS (user's open questions)
+- **Rename "Waves" → "Eunoia"?** User is unsure ("kinda don't feel the wave
+  name"). NOT stupid — it's the CHEAPEST time to rename (brand is 1 day old, not
+  shipped publicly, no user base). Cost = the same string sweep already done once
+  (app_name + ~30 strings + folder name + logo swap). New name needs a logo
+  decision (reuse wave logo? new?). Decide BEFORE more on-device verification so
+  one APK covers it.
+- **Extensions screen** (Item 5) — scope v1 (.xpi installer) vs v2 (bundled).
+- **Download icon** — currently standard Material download_24; keep or custom.
+- Remaining roadmap: Item 3 (background media pause), Item 5 extensions.
 
 
 ## ITEM 1 — Homepage (implemented v2, both known issues FIXED)

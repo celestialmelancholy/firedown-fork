@@ -221,14 +221,18 @@ cp app-release-signed.apk /storage/emulated/0/Download/firedown-custom-ui.apk
 
 ## 9. What we have NOT solved yet (open items)
 
-- **Firefox extension support** (WebExtension API + add-on manager UI) —
-  feasibility spike pending. Firedown bundles uBlock via its own internal
-  integration, not the public WebExtension API; whether AMO installs work
-  on this GeckoView build is unverified.
+- **Firefox AMO gallery install** — NOT possible via GeckoView's public API
+  (AMO requires a Firefox-specific install handshake). BUT the engine already
+  runs 5 built-in WebExtensions (uBlock, youtube, webrequests, icons, nostr,
+  p2pshare) via `WebExtensionController.ensureBuiltIn`, and `install()` from a
+  file URI is available — so an in-app ".xpi installer + manager" screen is
+  the realistic "gallery" path.
 - **Background media auto-pause** on tab switch / minimize / exit — planned
   (Item 3), not started.
 - **App package rename** `com.solarized.firedown` → new — deferred (risky,
   touches every file). The user-visible name is Waves without it.
+- **Potential SECOND rename Waves → Eunoia** — user is considering it. It is
+  cheap NOW (same string sweep already done once); needs a logo decision.
 - **Voice-search / image-search edge cases** — the mic uses the system
   `RecognizerIntent`; image search opens Google Lens via the photo picker.
   Both are v1.
