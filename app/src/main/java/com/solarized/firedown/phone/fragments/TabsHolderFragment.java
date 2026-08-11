@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageButton;
-
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,6 +44,7 @@ import com.solarized.firedown.phone.SettingsActivity;
 import com.solarized.firedown.ui.IncognitoColors;
 import com.solarized.firedown.ui.browser.TabCountDrawable;
 import com.solarized.firedown.utils.NavigationUtils;
+import com.solarized.firedown.utils.NewTabReveal;
 
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -678,6 +678,7 @@ public class TabsHolderFragment extends BaseFocusFragment {
     private void addNewTab() {
         boolean incognito = mViewPager.getCurrentItem() == PAGE_INCOGNITO;
 
+        // Create the tab state FIRST (unchanged).
         GeckoStateEntity entity = new GeckoStateEntity(true);
 
         GeckoState geckoState;
@@ -690,13 +691,11 @@ public class TabsHolderFragment extends BaseFocusFragment {
             mGeckoStateViewModel.setGeckoState(geckoState, true);
         }
 
-        // A new tab is a HOME tab — open the native home UI directly (no
-        // browser push, no Gecko session, no search-engine homepage load).
-        // This matches Chrome's "+" → NTP and keeps the nav stack clean.
-        // Navigate home the same way the top-bar + and 3-dot New tab do
-        // (pop to the existing home — no crossfade), so there is no
-        // mid-fade layout snap from the home fragment's async sections.
-        NavigationUtils.navigateToHome(mNavController, incognito);
+        // Chrome-style reveal: the overlay expands over the LIVE tray first;
+        // only when it FULLY covers the screen do we navigate to Home (which
+        // then happens invisibly underneath). No homepage flash, no snap.
+        NewTabReveal.play(mActivity, incognito, () ->
+                NavigationUtils.navigateToHome(mNavController, incognito));
     }
 
     // ── ViewPager Adapter ───────────────────────────────────────────

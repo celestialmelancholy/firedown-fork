@@ -58,6 +58,7 @@ import com.solarized.firedown.ui.adapters.SearchAutocompleteAdapter;
 import com.solarized.firedown.ui.diffs.SearchDiffCallback;
 import com.solarized.firedown.IntentActions;
 import com.solarized.firedown.utils.NavigationUtils;
+import com.solarized.firedown.utils.NewTabReveal;
 import com.solarized.firedown.utils.Utils;
 
 import java.util.List;
@@ -303,7 +304,9 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
         // home popup's "New private tab" action).
         mPrivateInfinity = v.findViewById(R.id.home_private_infinity);
         if (mPrivateInfinity != null) {
-            mPrivateInfinity.setOnClickListener(view -> openIncognitoTab());
+            mPrivateInfinity.setOnClickListener(view -> {
+                NewTabReveal.play(mActivity, true, this::openIncognitoTab);
+            });
         }
         // "Show all" under Shortcuts → the history screen (all visited sites).
         mShortcutsShowAll = v.findViewById(R.id.home_shortcuts_show_all);
@@ -490,10 +493,12 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
             } else if(id == R.id.action_delete_clipboard){
                 mAutoCompleteView.hideClipboard();
             } else if(id == R.id.new_tab){
-                flashNewTab(mNewTabView);
-                addNewTab();
+                NewTabReveal.play(mActivity, false, () -> {
+                    flashNewTab(mNewTabView);
+                    addNewTab();
+                });
             } else if(id == R.id.new_incognito_tab){
-                openIncognitoTab();
+                NewTabReveal.play(mActivity, true, this::openIncognitoTab);
             } else if (id == R.id.popup_history) {
                 NavigationUtils.navigateSafe(mNavController, R.id.action_home_to_history);
             } else if (id == R.id.popup_bookmarks) {
@@ -649,8 +654,10 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
             Intent downloadsIntent = new Intent(mActivity, DownloadsActivity.class);
             mStartForResult.launch(downloadsIntent);
         } else if(id == R.id.new_tab_button){
-            flashNewTab(mNewTabView);
-            addNewTab();
+            NewTabReveal.play(mActivity, false, () -> {
+                flashNewTab(mNewTabView);
+                addNewTab();
+            });
         }
     }
 

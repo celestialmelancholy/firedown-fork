@@ -83,6 +83,7 @@ import com.solarized.firedown.utils.AppLinkUseCases;
 import com.solarized.firedown.utils.FileUriHelper;
 import com.solarized.firedown.Keys;
 import com.solarized.firedown.utils.NavigationUtils;
+import com.solarized.firedown.utils.NewTabReveal;
 import com.solarized.firedown.utils.UrlStringUtils;
 import com.solarized.firedown.utils.WebUtils;
 
@@ -824,19 +825,23 @@ public class BrowserFragment extends BaseBrowserFragment
                 // regular-web icon alongside the incognito one.
                 GeckoStateEntity geckoStateEntity = new GeckoStateEntity(true);
                 geckoStateEntity.setIncognito(false);
-                // Route through setActiveSession so creation and repo-insert
-                // stay consistent across the codebase and repo lookup-first
-                // semantics are preserved.
-                setActiveSession(geckoStateEntity, true);
-                popToCorrectHome(false);
+                NewTabReveal.play(mActivity, false, () -> {
+                    // Route through setActiveSession so creation and repo-insert
+                    // stay consistent across the codebase and repo lookup-first
+                    // semantics are preserved.
+                    setActiveSession(geckoStateEntity, true);
+                    popToCorrectHome(false);
+                });
             } else if(id == R.id.new_incognito_tab){
                 GeckoStateEntity geckoStateEntity = new GeckoStateEntity(true);
                 geckoStateEntity.setIncognito(true);
-                // Route through setActiveSession so creation and repo-insert
-                // stay consistent across the codebase and repo lookup-first
-                // semantics are preserved.
-                setActiveSession(geckoStateEntity, true);
-                popToCorrectHome(true);
+                NewTabReveal.play(mActivity, true, () -> {
+                    // Route through setActiveSession so creation and repo-insert
+                    // stay consistent across the codebase and repo lookup-first
+                    // semantics are preserved.
+                    setActiveSession(geckoStateEntity, true);
+                    popToCorrectHome(true);
+                });
             } else if (id == R.id.popup_quit) {
                 quitApp();
             }
@@ -1447,11 +1452,15 @@ public class BrowserFragment extends BaseBrowserFragment
             boolean isIncognito = mIsIncognitoThemed;
             GeckoStateEntity geckoStateEntity = new GeckoStateEntity(true);
             geckoStateEntity.setIncognito(isIncognito);
-            // Route through setActiveSession so creation and repo-insert
-            // stay consistent across the codebase and repo lookup-first
-            // semantics are preserved.
-            setActiveSession(geckoStateEntity, true);
-            popToCorrectHome(isIncognito);
+            // Chrome-style reveal: expands over the LIVE browser screen;
+            // navigate to Home only once fully covered (invisible underneath).
+            NewTabReveal.play(mActivity, isIncognito, () -> {
+                // Route through setActiveSession so creation and repo-insert
+                // stay consistent across the codebase and repo lookup-first
+                // semantics are preserved.
+                setActiveSession(geckoStateEntity, true);
+                popToCorrectHome(isIncognito);
+            });
         } else if (id == R.id.download_button) {
             // Compact flame in the top bar (Item 2 — the old FAB's action):
             // the Captured sheet (downloads bottom-sheet with video/audio/
