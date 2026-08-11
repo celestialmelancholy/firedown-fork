@@ -63,17 +63,22 @@ public class JumpBackInAdapter extends RecyclerView.Adapter<JumpBackInAdapter.Re
             List<GeckoStateEntity> sorted = new ArrayList<>(tabs);
             sorted.sort((a, b) -> Long.compare(b.getLastAccess(), a.getLastAccess()));
             HashSet<Integer> seen = new HashSet<>();
+            int skippedHome = 0, skippedIncognito = 0, skippedNoUri = 0, skippedDup = 0;
             for (GeckoStateEntity t : sorted) {
-                if (t.isHome() || t.isIncognito() || TextUtils.isEmpty(t.getUri())) {
-                    continue;
-                }
+                if (t.isHome()) { skippedHome++; continue; }
+                if (t.isIncognito()) { skippedIncognito++; continue; }
+                if (TextUtils.isEmpty(t.getUri())) { skippedNoUri++; continue; }
                 int id = t.getId();
-                if (id <= 0 || !seen.add(id)) {
-                    continue; // duplicate/stale copy of a tab we already have
-                }
+                if (id <= 0 || !seen.add(id)) { skippedDup++; continue; }
                 mItems.add(t);
                 if (mItems.size() >= 8) break;
             }
+            android.util.Log.d("JumpBackIn", "setTabs total=" + tabs.size()
+                    + " shown=" + mItems.size()
+                    + " skippedHome=" + skippedHome
+                    + " skippedIncognito=" + skippedIncognito
+                    + " skippedNoUri=" + skippedNoUri
+                    + " skippedDup=" + skippedDup);
         }
         notifyDataSetChanged();
     }

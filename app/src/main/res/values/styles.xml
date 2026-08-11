@@ -296,6 +296,17 @@
         <item name="cornerSize">6dp</item>
     </style>
 
+    <!-- Firefox-exact tab-tray thumbnail shape (SharedTabItemUi.thumbnailShape):
+         top extraSmall (4dp) / bottom medium (12dp) — the card is 16dp, so the
+         thumbnail hugs the card's top corners and relaxes toward the bottom. -->
+    <style name="FirefoxTabThumbnail" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">4dp</item>
+        <item name="cornerSizeTopRight">4dp</item>
+        <item name="cornerSizeBottomLeft">12dp</item>
+        <item name="cornerSizeBottomRight">12dp</item>
+    </style>
+
     <!-- Home "Jump back in" thumbnail: corners slightly INSIDE the card's 14dp
          radius (10dp) so the two curves read as one. The thumbnail is much
          smaller than the card, so an equal 14dp radius looks proportionally
@@ -531,6 +542,16 @@
         <item name="android:paddingHorizontal">16dp</item>
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingBottom">4dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+    </style>
+
+    <!-- Preference-category section label (Extensions screen "Built-in" /
+         "Installed"): a muted group eyebrow like the popup section labels —
+         small, letter-spaced, onSurfaceVariant — NOT an option-sized title.
+         Applied via android:titleTextAppearance on the PreferenceCategory. -->
+    <style name="Firedown.PreferenceCategoryLabel" parent="TextAppearance.Material3.LabelMedium">
         <item name="android:textAllCaps">true</item>
         <item name="android:letterSpacing">0.08</item>
         <item name="android:textColor">?attr/colorOnSurfaceVariant</item>

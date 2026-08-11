@@ -265,6 +265,20 @@ public class BrowserFragment extends BaseBrowserFragment
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
+                // Address bar focused (keyboard up) — the FIRST back must blur
+                // the field + hide the keyboard, never fall through to history/
+                // home/exit. This is the intermittent "second back exits the
+                // app" bug: when the autocomplete overlay isn't VISIBLE (empty
+                // field → most-visited strip), dismissAutocompleteOverlayIfVisible
+                // returns false and the press fell through; if the tab had no
+                // history it disabled the callback and the next back exited.
+                if (mAutoCompleteEditText != null && mAutoCompleteEditText.hasFocus()) {
+                    mGeckoToolbar.clearFocus();
+                    hideKeyboard(mAutoCompleteEditText);
+                    dismissAutocompleteOverlayIfVisible();
+                    return;
+                }
+
                 if (dismissAutocompleteOverlayIfVisible()) return;
 
                 GeckoState geckoState = peekCurrentGeckoState();
@@ -643,6 +657,13 @@ public class BrowserFragment extends BaseBrowserFragment
                     Log.d(TAG, "BrowserURIViewModel → openSession for id=" + geckoState.getEntityId()
                             + " uri=" + geckoState.getEntityUri()
                             + " hasGeckoSession=" + (geckoState.getGeckoSession() != null));
+                    // HOME tabs are the native HomeFragment, not a Gecko page —
+                    // route to the home destination instead of attaching a
+                    // (blank/engine-loading) Gecko session in the browser.
+                    if (geckoState.isHome()) {
+                        popToCorrectHome(geckoState.getGeckoStateEntity().isIncognito());
+                        return;
+                    }
                     openSession(geckoState);
                 }
                 case IntentActions.OPEN_URI -> {
@@ -704,10 +725,10 @@ public class BrowserFragment extends BaseBrowserFragment
                 Bundle args = new Bundle();
                 args.putBoolean(Keys.IS_INCOGNITO, mIsIncognitoThemed);
                 NavigationUtils.navigateSafe(mNavController, R.id.action_browser_to_history, args);
-            } else if (id == R.id.popup_sync) {
-                Intent syncIntent = new Intent(mActivity, SettingsActivity.class);
-                syncIntent.putExtra(SettingsActivity.EXTRA_OPEN_SYNC, true);
-                mStartForResult.launch(syncIntent);
+            } else if (id == R.id.popup_extensions) {
+                Intent extensionsIntent = new Intent(mActivity, SettingsActivity.class);
+                extensionsIntent.putExtra(SettingsActivity.EXTRA_OPEN_EXTENSIONS, true);
+                mStartForResult.launch(extensionsIntent);
             } else if (id == R.id.popup_settings) {
                 mStartForResult.launch(new Intent(mActivity, SettingsActivity.class));
             } else if (id == R.id.popup_share) {
@@ -1339,7 +1360,7 @@ public class BrowserFragment extends BaseBrowserFragment
         if (id == R.id.tab_button) {
             Bundle args = new Bundle();
             args.putBoolean(Keys.OPEN_INCOGNITO, mIsIncognitoThemed);
-            NavigationUtils.navigateSafe(mNavController, R.id.tabs, R.id.browser, args);
+            navigateToTabsWithFade(args);
         } else if (id == R.id.clear_button) {
             // Field empty again → most-visited strip (its observer fills the
             // strip; showEmpty reveals it when it has tiles).
@@ -2490,29 +2511,39 @@ public class BrowserFragment extends BaseBrowserFragment
             Log.d(TAG, "setGeckoViewSession: session not open, opening + loading URI");
             newSession.open(mGeckoRuntimeHelper.getGeckoRuntime());
             newSession.setActive(true);
-            String uri = mSearchRepository.parseUri(geckoState.getEntityUri());
-            geckoState.setEntityUri(uri);
-            // When the GeckoState has serialized SessionState, getOrCreateGeckoSession
-            // already called restoreState(), which navigates to the last history entry
-            // on its own. A second loadUri here races the restore: restore completes
-            // (progress 100), the queued loadUri then restarts the load (progress 15)
-            // and stalls — visible from TabsFragment as a tab that never finishes
-            // loading. Apply only the UI side of openUri in that case.
-            boolean hasRestoredState = !geckoState.getGeckoStateEntity().isIncognito()
-                    && !TextUtils.isEmpty(geckoState.getEntityState());
-            if (hasRestoredState) {
-                applyOpenUriUi(geckoState, uri);
+            // HOME tabs render the native HomeFragment, NOT Gecko web content —
+            // never parse/load a URI for them. parseUri("") would format the
+            // empty string into the selected search engine's homepage URL
+            // (e.g. duckduckgo.com/?q=) and load that as a web page, which is
+            // why a new tab opened from the switcher showed the engine's
+            // homepage instead of our home UI.
+            if (geckoState.isHome()) {
+                mGeckoView.setSession(newSession);
             } else {
-                // Load directly instead of routing through openUri: the session
-                // is freshly opened but not yet attached (the setSession below
-                // runs after this branch), so openUri's attached-session guard
-                // would RE-ENTER this method and double-run the whole
-                // deactivate/setTabActive/viewmodel tail. Inline exactly what
-                // openUri would do for an open session: arm the stale-commit
-                // guard, load, apply the UI half. Activation was done above.
-                geckoState.setPendingUserLoadUri(uri);
-                newSession.loadUri(uri);
-                applyOpenUriUi(geckoState, uri);
+                String uri = mSearchRepository.parseUri(geckoState.getEntityUri());
+                geckoState.setEntityUri(uri);
+                // When the GeckoState has serialized SessionState, getOrCreateGeckoSession
+                // already called restoreState(), which navigates to the last history entry
+                // on its own. A second loadUri here races the restore: restore completes
+                // (progress 100), the queued loadUri then restarts the load (progress 15)
+                // and stalls — visible from TabsFragment as a tab that never finishes
+                // loading. Apply only the UI side of openUri in that case.
+                boolean hasRestoredState = !geckoState.getGeckoStateEntity().isIncognito()
+                        && !TextUtils.isEmpty(geckoState.getEntityState());
+                if (hasRestoredState) {
+                    applyOpenUriUi(geckoState, uri);
+                } else {
+                    // Load directly instead of routing through openUri: the session
+                    // is freshly opened but not yet attached (the setSession below
+                    // runs after this branch), so openUri's attached-session guard
+                    // would RE-ENTER this method and double-run the whole
+                    // deactivate/setTabActive/viewmodel tail. Inline exactly what
+                    // openUri would do for an open session: arm the stale-commit
+                    // guard, load, apply the UI half. Activation was done above.
+                    geckoState.setPendingUserLoadUri(uri);
+                    newSession.loadUri(uri);
+                    applyOpenUriUi(geckoState, uri);
+                }
             }
         }
 
@@ -3057,15 +3088,15 @@ public class BrowserFragment extends BaseBrowserFragment
     }
 
     /**
-     * Captures the current tab's thumbnail and navigates to TabsFragment.
+     * Navigates to the tab switcher. Firefox's behavior: the tray opens
+     * IMMEDIATELY (no blocking thumbnail capture), and the active tab's
+     * thumbnail is refreshed asynchronously — the tray shows the cached
+     * thumb (or a surface placeholder) in frame 1, then the fresh capture
+     * lands via the PAYLOAD_THUMB diff.
      *
-     * <h3>P1 Migration</h3>
-     * <p>Previously this launched {@code TabsActivity} via {@code mStartForResult}.
-     * Now TabsFragment is a destination in BrowserActivity's nav graph, so we
-     * navigate directly.  No Binder, no activity result, no parceling.</p>
-     *
-     * <p>The thumbnail capture via {@code GeckoView.capturePixels()} is preserved
-     * so the tab grid shows an up-to-date screenshot.</p>
+     * <p>The old code awaited {@code capturePixels()} before navigating,
+     * which froze the browser for ~300-500ms after tapping the tab icon —
+     * the "page sits there, then the tray snaps in" bug.</p>
      */
     private void navigateToTabs() {
         boolean isIncognito = mIsIncognitoThemed;
@@ -3080,28 +3111,44 @@ public class BrowserFragment extends BaseBrowserFragment
         Bundle args = new Bundle();
         args.putBoolean(Keys.OPEN_INCOGNITO, isIncognito);
 
-        if (!canCapture) {
-            NavigationUtils.navigateSafe(mNavController, R.id.tabs, R.id.browser, args);
-            return;
-        }
+        // Open the tray now. The capture below runs in the background and
+        // updates the thumbnail through the existing diff path.
+        navigateToTabsWithFade(args);
 
-        // Capture thumbnail from the correct ViewModel
+        if (!canCapture) return;
+
+        // Only refresh the thumbnail if there's no cached one. A live tab
+        // keeps its cached thumb from the last tray open, so minimizing
+        // again shows the SAME stable thumbnail — no late capture popping
+        // in mid-animation (the "page tries to fit into the little tab
+        // space at the end of the animation" snap). Firefox behaves the
+        // same: the card shows the tab's existing thumbnail, never a fresh
+        // capture racing the open.
+        boolean hasCachedThumb = currentState.getCachedThumb() != null;
+        if (hasCachedThumb) return;
+
+        // Async thumbnail refresh — never blocks the tray open.
         mGeckoView.capturePixels().then(bitmap -> {
             if (bitmap != null) {
                 if (!isIncognito) {
                     mGeckoStateViewModel.updateThumb(currentState, bitmap);
-                }else{
+                } else {
                     Bitmap scaled = GeckoState.scaleThumbnail(bitmap);
                     currentState.setCachedThumb(scaled);
                     mIncognitoStateViewModel.notifyTabs();
                 }
             }
-            NavigationUtils.navigateSafe(mNavController, R.id.tabs, R.id.browser, args);
             return GeckoResult.fromValue(null);
-        }, error -> {
-            NavigationUtils.navigateSafe(mNavController, R.id.tabs, R.id.browser, args);
-            return GeckoResult.fromValue(null);
-        });
+        }, error -> GeckoResult.fromValue(null));
+    }
+
+    /**
+     * Navigates to the tab switcher with Firefox's tab-tray fade (250ms,
+     * alpha 1→0, accelerate_quad) applied to the exiting browser fragment.
+     */
+    private void navigateToTabsWithFade(Bundle args) {
+        NavigationUtils.navigateSafe(mNavController, R.id.tabs, R.id.browser, args,
+                NavigationUtils.OPEN_TABS_FADE);
     }
 
     // ─────────────────────────────────────────────────────────────────────────────────────────────

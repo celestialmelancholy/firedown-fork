@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Focus-icon pill ripple (mic + image search): a compact vertical squircle
+     (rounded-rectangle pill) centered behind the icon, slightly taller than
+     wide (4:5), filling ~75-80% of the address-bar height with a tight
+     margin around the 22dp icon.
+
+     The pill uses the theme's highest surface container tone so it reads
+     against the address bar on BOTH light and dark themes (a fixed
+     translucent-white was invisible on the dark surface). The pressed ripple
+     uses the standard control highlight, which now contrasts against the
+     lighter pill instead of blending into the search-box surface. -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?attr/colorControlHighlight">
+    <!-- Pill content: a theme-aware surface-contrast squircle so the shape
+         reads against the search box even before a press. -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="12dp" />
+            <solid android:color="?attr/colorSurfaceContainerHighest" />
+        </shape>
+    </item>
+    <!-- Mask clips the pressed ripple to the same pill. -->
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <corners android:radius="12dp" />
+            <solid android:color="@android:color/white" />
+        </shape>
+    </item>
+</ripple>

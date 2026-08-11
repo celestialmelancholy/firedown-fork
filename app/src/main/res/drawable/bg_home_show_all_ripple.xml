@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Rounded-corner ripple for the home "Show all >" text buttons — the ripple
-     follows the button's rounded pill instead of a hard rectangle. -->
+<!-- Rounded-corner ripple for the home "Show all >" text buttons. Uses an
+     explicit @android:id/mask so the ripple is clipped to the rounded pill
+     (8dp corners) on every API level — a transparent content shape alone can
+     render a hard rectangle or nothing on some versions. -->
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="?attr/colorControlHighlight">
-    <item>
+    <item android:id="@android:id/mask">
         <shape android:shape="rectangle">
             <corners android:radius="8dp" />
-            <solid android:color="@android:color/transparent" />
+            <solid android:color="@android:color/white" />
         </shape>
     </item>
 </ripple>

@@ -470,6 +470,8 @@ public class SettingsFragment extends BasePreferenceFragment
                     NavigationUtils.navigateSafe(mNavController, R.id.action_settings_to_lock);
             case Preferences.SETTINGS_SEARCH_ENGINE ->
                     NavigationUtils.navigateSafe(mNavController, R.id.action_settings_to_search);
+            case Preferences.SETTINGS_EXTENSIONS ->
+                    NavigationUtils.navigateSafe(mNavController, R.id.action_settings_to_extensions);
             case Preferences.SETTINGS_QUIT ->
                     NavigationUtils.navigateSafe(mNavController, R.id.action_settings_to_quit);
             case Preferences.SETTINGS_TABS ->

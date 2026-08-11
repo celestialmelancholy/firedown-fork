@@ -223,6 +223,8 @@ public class Preferences {
 
     public static final String SETTINGS_AUTOFILL = "com.solarized.firedown.preferences.browser.password";
 
+    public static final String SETTINGS_EXTENSIONS = "com.solarized.firedown.preferences.extensions";
+
     public static final String SETTINGS_BLOCK_LOCATION = "com.solarized.firedown.preferences.browser.block.location";
 
     public static final boolean DEFAULT_BLOCK_LOCATION = true;

@@ -50,6 +50,13 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
+            android:id="@+id/action_settings_to_extensions"
+            app:destination="@id/settings_extensions"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
             android:id="@+id/action_settings_to_quit"
             app:destination="@id/settings_quit"
             app:enterAnim="@anim/slide_in_right"
@@ -143,6 +150,9 @@
     <fragment
         android:id="@+id/settings_search"
         android:name="com.solarized.firedown.settings.SearchFragment" />
+    <fragment
+        android:id="@+id/settings_extensions"
+        android:name="com.solarized.firedown.settings.ExtensionsFragment" />
     <fragment
         android:id="@+id/settings_lock"
         android:name="com.solarized.firedown.settings.LockFragment" />

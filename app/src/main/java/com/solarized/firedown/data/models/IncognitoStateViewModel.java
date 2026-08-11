@@ -58,6 +58,11 @@ public class IncognitoStateViewModel extends ViewModel {
         return mRepository.getTabsLiveData();
     }
 
+    /** Snapshot of the raw {@link GeckoState} list (with in-memory thumbs). */
+    public List<GeckoState> getStates() {
+        return mRepository.getStates();
+    }
+
     public LiveData<Integer> getTabsCount() {
         return mRepository.getTabsLiveCount();
     }

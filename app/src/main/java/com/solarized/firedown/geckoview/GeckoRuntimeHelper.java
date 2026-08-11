@@ -40,6 +40,7 @@ import org.mozilla.geckoview.GeckoRuntimeSettings;
 import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.StorageController;
 import org.mozilla.geckoview.WebExtension;
+import org.mozilla.geckoview.WebExtensionController;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -301,6 +302,37 @@ public class GeckoRuntimeHelper {
     }
 
     private void setupWebExtensions() {
+        // Auto-grant extension install/update/optional permission prompts so the
+        // in-app Extensions screen (Settings → Extensions) can install .xpi files
+        // without a prompt delegate (without one, install() may stall waiting for
+        // a response that never comes). The user explicitly chose to install the
+        // file, so granting its requested permissions mirrors the AMO install
+        // flow. Set once here — the controller's prompt delegate is process-wide.
+        sGeckoRuntime.getWebExtensionController().setPromptDelegate(
+                new WebExtensionController.PromptDelegate() {
+                    @Override
+                    public GeckoResult<WebExtension.PermissionPromptResponse> onInstallPromptRequest(
+                            WebExtension extension, String[] permissions, String[] origins,
+                            String[] dataCollectionPermissions) {
+                        return GeckoResult.fromValue(
+                                new WebExtension.PermissionPromptResponse(true, true, true));
+                    }
+
+                    @Override
+                    public GeckoResult<AllowOrDeny> onUpdatePrompt(
+                            WebExtension extension, String[] permissions, String[] origins,
+                            String[] dataCollectionPermissions) {
+                        return GeckoResult.fromValue(AllowOrDeny.ALLOW);
+                    }
+
+                    @Override
+                    public GeckoResult<AllowOrDeny> onOptionalPrompt(
+                            WebExtension extension, String[] permissions, String[] origins,
+                            String[] dataCollectionPermissions) {
+                        return GeckoResult.fromValue(AllowOrDeny.ALLOW);
+                    }
+                });
+
         // The former parser@ extension was merged into downloader@ and its assets
         // removed. GeckoView PERSISTS a built-in's registration across an in-place
         // app update, so simply dropping its registerBuiltIn() call below is not
@@ -1670,6 +1702,15 @@ public class GeckoRuntimeHelper {
 
     public GeckoRuntime getGeckoRuntime() {
         return sGeckoRuntime;
+    }
+
+    /**
+     * The runtime's WebExtension controller — the entry point for listing,
+     * installing, enabling, disabling and uninstalling extensions (used by the
+     * in-app Extensions screen).
+     */
+    public WebExtensionController getWebExtensionController() {
+        return sGeckoRuntime.getWebExtensionController();
     }
 
     /**

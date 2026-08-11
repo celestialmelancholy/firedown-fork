@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Firefox-exact inactive tab-tray card: container = surfaceBright (Acorn
+     MaterialTheme.colorScheme.surfaceBright), 16dp corners, no border. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="@dimen/tab_card_radius" />
+    <solid android:color="@color/nova_gray65" />
+</shape>

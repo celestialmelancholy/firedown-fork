@@ -87,6 +87,17 @@ public class IncognitoStateRepository {
         return mGeckoStatesLiveData;
     }
 
+    /**
+     * Returns a snapshot copy of the raw {@link GeckoState} list (the live
+     * objects with their in-memory cached thumbnails). Used to stamp a home
+     * preview onto every incognito home state that lacks one.
+     */
+    public List<GeckoState> getStates() {
+        synchronized (mGeckoStates) {
+            return new ArrayList<>(mGeckoStates);
+        }
+    }
+
     public LiveData<Integer> getTabsLiveCount() {
         return mCountLiveData;
     }
@@ -202,6 +213,14 @@ public class IncognitoStateRepository {
                 long now = System.currentTimeMillis();
                 for (GeckoState state : mGeckoStates) {
                     boolean isActive = state.getEntityId() == mCurrentId;
+                    if (!isActive && state.isActive()) {
+                        // Background-media auto-pause (Item 3): pause the tab
+                        // being switched away from. Check BEFORE setActive(false)
+                        // (the entity flag flips inside). The controller's map
+                        // only holds regular tabs, so incognito pause is a
+                        // harmless no-op — kept for parity with the regular repo.
+                        mGeckoMediaController.pauseSession(state.getEntityId());
+                    }
                     state.setActive(isActive);
                     if (isActive) {
                         // Stamp "most recently used" (parity with the regular

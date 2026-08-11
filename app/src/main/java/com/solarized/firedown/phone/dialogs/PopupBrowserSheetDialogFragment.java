@@ -184,7 +184,24 @@ public class PopupBrowserSheetDialogFragment extends BaseBottomSheetDialogFragme
         // values-land variant of the dimen would silently go stale here.
         int actionBarSize = getResources().getDimensionPixelSize(R.dimen.app_bar_size);
         int cap = visibleRect.height() - actionBarSize;
+        // The sheet sits at the screen bottom; subtract the navigation-bar /
+        // gesture inset so the clamped content never ends flush against the
+        // gesture pill (the Settings row was getting cut off on-device after
+        // the Extensions row made the menu taller).
+        int navInset = getNavigationBarInsetPx();
+        cap -= navInset;
         return cap > 0 ? cap : super.resolveMaxHeightPx();
+    }
+
+    /** Height of the system navigation bar / gesture area at the screen bottom. */
+    private int getNavigationBarInsetPx() {
+        if (mActivity == null || mActivity.getWindow() == null) return 0;
+        android.view.WindowInsets insets =
+                mActivity.getWindow().getDecorView().getRootWindowInsets();
+        if (insets == null) return 0;
+        android.graphics.Insets nav =
+                insets.getInsets(android.view.WindowInsets.Type.navigationBars());
+        return nav.bottom;
     }
 
 
@@ -451,7 +468,7 @@ public class PopupBrowserSheetDialogFragment extends BaseBottomSheetDialogFragme
     private void bindRows() {
         mView.findViewById(R.id.popup_bookmarks).setOnClickListener(this);
         mView.findViewById(R.id.popup_history).setOnClickListener(this);
-        mView.findViewById(R.id.popup_sync).setOnClickListener(this);
+        mView.findViewById(R.id.popup_extensions).setOnClickListener(this);
         mView.findViewById(R.id.popup_settings).setOnClickListener(this);
         mView.findViewById(R.id.popup_quit).setOnClickListener(this);
 

@@ -40,6 +40,14 @@
             app:icon="@drawable/ic_key_24">
         </Preference>
 
+        <!-- Extensions door (Item 5): lists/installs WebExtensions. Also
+             reachable from the 3-dot browser menu (deep-link extra). -->
+        <Preference
+            android:key="com.solarized.firedown.preferences.extensions"
+            android:title="@string/settings_extensions_title"
+            android:summary="@string/settings_extensions_summary"
+            app:icon="@drawable/ic_extensions_24" />
+
         <Preference
             android:key="com.solarized.firedown.preferences.lock.main"
             android:summary="@string/settings_lock_summary"

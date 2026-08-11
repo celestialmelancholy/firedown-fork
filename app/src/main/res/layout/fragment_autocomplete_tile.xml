@@ -20,7 +20,7 @@
         android:layout_height="52dp"
         android:background="@drawable/bg_incognito_chip"
         android:backgroundTint="?attr/colorSurfaceContainerHigh"
-        android:foreground="?attr/selectableItemBackgroundBorderless">
+        android:foreground="@drawable/bg_home_shortcut_ripple">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/tile_favicon"

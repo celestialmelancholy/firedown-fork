@@ -192,7 +192,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="8dp">
+            android:paddingBottom="24dp">
 
 
             <!-- Row 1: transient chrome controls (Back · Forward ·
@@ -430,9 +430,9 @@
                 android:layout_marginBottom="8dp" />
 
 
-            <!-- Sync — bookmarks + encrypted download backup (one account). -->
+            <!-- Extensions (Item 5) — manage add-ons / install .xpi. -->
             <LinearLayout
-                android:id="@+id/popup_sync"
+                android:id="@+id/popup_extensions"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="?attr/selectableItemBackground"
@@ -449,10 +449,10 @@
                     android:drawablePadding="16dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="@string/settings_account_title"
+                    android:text="@string/settings_extensions_title"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:textSize="16sp"
-                    app:drawableStartCompat="@drawable/cloud_outline_24"
+                    app:drawableStartCompat="@drawable/ic_extensions_24"
                     app:drawableTint="?attr/colorOnSurfaceVariant" />
 
             </LinearLayout>

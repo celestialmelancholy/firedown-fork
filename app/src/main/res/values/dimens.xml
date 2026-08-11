@@ -25,6 +25,23 @@
     <dimen name="background_rounded_radius">8dp</dimen>
     <dimen name="button_icons_padding">8dp</dimen>
     <dimen name="card_radius">8dp</dimen>
+    <!-- Firefox tab-tray (Acorn design tokens, copied 1:1):
+         tabContentCardShape = shapes.large = 16dp card corners;
+         thumbnail top = extraSmall (4dp), bottom = medium (12dp);
+         grid aspect 4:5 portrait (0.8) / 1:1 landscape (1f);
+         header icon 12dp; close touch target 40dp; spacers static100/static50. -->
+    <dimen name="tab_card_radius">16dp</dimen>
+    <dimen name="tab_thumb_radius_top">4dp</dimen>
+    <dimen name="tab_thumb_radius_bottom">12dp</dimen>
+    <dimen name="tab_thumb_margin">5dp</dimen>
+    <dimen name="tab_header_favicon">12dp</dimen>
+    <dimen name="tab_header_close_touch">40dp</dimen>
+    <dimen name="tab_header_spacer">10dp</dimen>
+    <dimen name="tab_header_spacer_small">5dp</dimen>
+    <!-- Extra breathing room under the last tab-tray grid row, on top of the
+         bottom-bar + FAB clearance (waiting-list #6: last card was half-cut
+         flush against the bar). -->
+    <dimen name="tab_grid_bottom_breathing">16dp</dimen>
     <dimen name="dialog_width">500dp</dimen>
     <dimen name="dialog_padding_standard">20dp</dimen>
     <dimen name="divider_height">4dp</dimen>

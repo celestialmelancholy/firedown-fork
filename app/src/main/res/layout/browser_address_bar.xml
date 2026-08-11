@@ -187,45 +187,39 @@
              appear on the far-right INSIDE the pill ONLY while the field is
              focused. Order left→right: mic, then image-search. ~8dp gap
              between them; ~16dp from the pill's inner right edge. GONE at
-             rest — toggled in GeckoToolbar.updateViewVisibility. -->
-        <com.google.android.material.button.MaterialButton
+             rest — toggled in GeckoToolbar.updateViewVisibility.
+             Each icon sits on a visible vertical squircle pill (32x40dp,
+             4:5, 12dp corners) — fills ~75-80% of the 64dp bar, ~8-10px
+             margin around the 22dp icon. Both buttons share the exact same
+             pill (identical touch targets). -->
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/mic_button"
-            style="@style/Widget.Material3.Button.IconButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="32dp"
+            android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="4dp"
+            android:background="@drawable/bg_focus_icon_pill"
             android:importantForAccessibility="no"
-            android:insetLeft="0dp"
-            android:insetRight="0dp"
-            android:padding="@dimen/button_icons_padding"
-            android:stateListAnimator="@null"
-            android:visibility="gone"
-            app:elevation="0dp"
-            app:icon="@drawable/ic_mic_24"
-            app:iconSize="22dp"
-            app:iconTint="?attr/colorOnSurfaceVariant"
-            app:shapeAppearance="@style/ShapeAppearanceOverlay.Button.Circle" />
+            android:padding="0dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_mic_24"
+            android:tint="?attr/colorOnSurfaceVariant"
+            android:visibility="gone" />
 
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/image_search_button"
-            style="@style/Widget.Material3.Button.IconButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="32dp"
+            android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_focus_icon_pill"
             android:importantForAccessibility="no"
-            android:insetLeft="0dp"
-            android:insetRight="0dp"
-            android:padding="@dimen/button_icons_padding"
-            android:stateListAnimator="@null"
-            android:visibility="gone"
-            app:elevation="0dp"
-            app:icon="@drawable/ic_image_search_24"
-            app:iconSize="22dp"
-            app:iconTint="?attr/colorOnSurfaceVariant"
-            app:shapeAppearance="@style/ShapeAppearanceOverlay.Button.Circle" />
+            android:padding="0dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_image_search_24"
+            android:tint="?attr/colorOnSurfaceVariant"
+            android:visibility="gone" />
 
     </LinearLayout>
 

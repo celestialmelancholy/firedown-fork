@@ -200,6 +200,12 @@ public class ApplicationLifeCycleHandler implements Application.ActivityLifecycl
         if (level == ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN) {
             Log.d(TAG, "App went to background - Securing session");
 
+            // Background-media auto-pause (Item 3): the app is no longer
+            // visible, so pause ALL playing media. Keep on the main thread —
+            // GeckoMediaController dispatches session calls internally and
+            // must not race the session from a worker thread.
+            mGeckoMediaController.pauseAll();
+
             // Both run on the HEAVY executor, not @DiskIO: a recursive cache
             // sweep (and the full mirror rewrite + encrypt) can take a long
             // time, and the @DiskIO thread is the single serial lane every

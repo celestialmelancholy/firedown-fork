@@ -1,6 +1,8 @@
 package com.solarized.firedown.phone.fragments;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -57,6 +59,8 @@ import com.solarized.firedown.ui.diffs.SearchDiffCallback;
 import com.solarized.firedown.IntentActions;
 import com.solarized.firedown.utils.NavigationUtils;
 import com.solarized.firedown.utils.Utils;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -160,6 +164,72 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
         if (mAutoCompleteViewModel != null) {
             mAutoCompleteViewModel.loadMostVisited();
         }
+        // Capture the native home UI as the home tab's thumbnail so the tab
+        // switcher shows a live homepage preview (like Chrome) instead of a
+        // static glyph. The home page is a NATIVE fragment (not a Gecko page),
+        // so GeckoView.capturePixels can't capture it — draw the view instead.
+        captureHomeThumbnail();
+    }
+
+    /** Draws the laid-out home view into a bitmap and stores it as the home
+     *  tab's cached thumbnail. Runs one frame after resume so the view has its
+     *  final size. Scrolls the home NestedScrollView to the TOP before
+     *  capturing so the preview always shows the search bar + shortcuts, never
+     *  a scrolled-down "Jump back in" crop; the scroll position is restored
+     *  afterwards. */
+    private void captureHomeThumbnail() {
+        View root = getView();
+        if (root == null || mGeckoStateViewModel == null) return;
+        root.post(() -> {
+            if (!isAdded() || getView() == null) return;
+            View v = getView();
+            if (v.getWidth() <= 0 || v.getHeight() <= 0) return;
+            try {
+                androidx.core.widget.NestedScrollView scroll =
+                        v.findViewById(R.id.home_scroll);
+                int savedScrollY = scroll != null ? scroll.getScrollY() : 0;
+                if (scroll != null) scroll.scrollTo(0, 0);
+
+                Bitmap bitmap = Bitmap.createBitmap(v.getWidth(), v.getHeight(),
+                        Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmap);
+                v.draw(canvas);
+
+                if (scroll != null) scroll.scrollTo(0, savedScrollY);
+
+                Bitmap scaled = GeckoState.scaleThumbnail(bitmap);
+                // Stamp the captured homepage snapshot onto EVERY home tab in
+                // the repo that doesn't already have one — not just the current
+                // state. New home tabs are created with no thumbnail (and Gecko
+                // never captures the native home view), so without this every
+                // freshly-created new-tab card would fall back to the logo.
+                // Chrome shows the same NTP snapshot on every new-tab card; this
+                // converges all home tabs to the identical homepage preview.
+                GeckoState currentHome = mGeckoStateViewModel.getCurrentGeckoState();
+                boolean stamped = false;
+                if (currentHome != null && currentHome.isHome()
+                        && currentHome.getCachedThumb() == null) {
+                    currentHome.setCachedThumb(scaled);
+                    stamped = true;
+                }
+                List<GeckoState> allStates = mGeckoStateViewModel.getStates();
+                if (allStates != null) {
+                    for (GeckoState s : allStates) {
+                        if (s.isHome() && s.getCachedThumb() == null) {
+                            s.setCachedThumb(scaled);
+                            stamped = true;
+                        }
+                    }
+                }
+                if (stamped) {
+                    mGeckoStateViewModel.notifyTabs();
+                } else if (scaled != null && scaled != bitmap) {
+                    scaled.recycle();
+                }
+            } catch (Throwable e) {
+                Log.d(TAG, "captureHomeThumbnail", e);
+            }
+        });
     }
 
     /**
@@ -247,7 +317,8 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
             mJumpShowAll.setOnClickListener(view -> {
                 Bundle args = new Bundle();
                 args.putBoolean(Keys.OPEN_INCOGNITO, false);
-                NavigationUtils.navigateSafe(mNavController, R.id.tabs, R.id.home, args);
+                NavigationUtils.navigateSafe(mNavController, R.id.tabs, R.id.home, args,
+                        NavigationUtils.OPEN_TABS_FADE);
             });
         }
 
@@ -365,6 +436,8 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
             if (mJumpBackInAdapter == null || mJumpBackIn == null) return;
             mJumpBackInAdapter.setTabs(tabs);
             int n = mJumpBackInAdapter.size();
+            android.util.Log.d("HomeJumpBackIn", "tabs=" + (tabs == null ? "null" : tabs.size())
+                    + " shown=" + n);
             mJumpBackIn.setVisibility(n > 0 ? View.VISIBLE : View.GONE);
             if (mJumpHeader != null) {
                 mJumpHeader.setVisibility(n > 0 ? View.VISIBLE : View.GONE);
@@ -427,10 +500,6 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
                 NavigationUtils.navigateSafe(mNavController, R.id.action_home_to_bookmarks);
             } else if (id == R.id.popup_vault) {
                 mStartForResult.launch(new Intent(mActivity, VaultActivity.class));
-            } else if (id == R.id.popup_sync) {
-                Intent syncIntent = new Intent(mActivity, SettingsActivity.class);
-                syncIntent.putExtra(SettingsActivity.EXTRA_OPEN_SYNC, true);
-                mStartForResult.launch(syncIntent);
             } else if (id == R.id.popup_settings) {
                 Intent settingsIntent = new Intent(mActivity, SettingsActivity.class);
                 mStartForResult.launch(settingsIntent);
@@ -572,7 +641,8 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
         } else if(id == R.id.tab_button){
             Bundle args = new Bundle();
             args.putBoolean(Keys.OPEN_INCOGNITO, false);
-            NavigationUtils.navigateSafe(mNavController, R.id.tabs, R.id.home, args);
+            NavigationUtils.navigateSafe(mNavController, R.id.tabs, R.id.home, args,
+                    NavigationUtils.OPEN_TABS_FADE);
         } else if(id == R.id.download_button){
             // Compact flame in the top bar (Item 2) — same action as the old
             // bottom-bar downloads button.
@@ -695,6 +765,9 @@ public class HomeFragment extends BaseBrowserFragment implements BottomNavigatio
         GeckoState geckoState = new GeckoState(new GeckoStateEntity(true));
         Log.d(TAG, "addNewTab: created home tab id=" + geckoState.getEntityId());
         mGeckoStateViewModel.setGeckoState(geckoState, true);
+        // Stamp the new home tab with the homepage snapshot immediately (the
+        // capture now seeds every home state that lacks a thumb).
+        captureHomeThumbnail();
     }
 
 

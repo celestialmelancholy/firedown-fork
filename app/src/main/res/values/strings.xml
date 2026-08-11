@@ -5,6 +5,25 @@
     <!-- Address-bar voice search (mic icon). -->
     <string name="voice_search_prompt">Speak your search</string>
     <string name="voice_search_unavailable">Voice search isn\'t available on this device</string>
+    <!-- Address-bar image search (Lens icon). -->
+    <string name="image_search_failed">Image search failed — try again</string>
+    <string name="image_search_working">Searching image…</string>
+    <!-- Extensions screen (Item 5). -->
+    <string name="settings_extensions_title">Extensions</string>
+    <string name="settings_extensions_summary">Manage add-ons and install .xpi files</string>
+    <string name="extensions_install">Install .xpi file</string>
+    <string name="extensions_install_summary">Choose an add-on package from your device</string>
+    <string name="extensions_builtin_category">Built-in</string>
+    <string name="extensions_user_category">Installed</string>
+    <string name="extensions_remove_hint">Tap to remove</string>
+    <string name="extensions_remove_title">Remove extension?</string>
+    <string name="extensions_remove_message">Remove "%1$s" from Waves?</string>
+    <string name="extensions_remove_confirm">Remove</string>
+    <string name="extensions_installed">Installed %1$s</string>
+    <string name="extensions_removed">Removed %1$s</string>
+    <string name="extensions_install_failed">Couldn\'t install the extension</string>
+    <string name="extensions_remove_failed">Couldn\'t remove the extension</string>
+    <string name="extensions_toggle_failed">Couldn\'t change the extension</string>
     <string name="app_unlock">Unlock</string>
     <string name="archive_banner_subtitle">Tap to view or reopen</string>
     <string name="browser_bookmark_added">Bookmark Saved!</string>

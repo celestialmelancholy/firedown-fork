@@ -1,0 +1,12 @@
+name = "waves-image-relay"
+main = "src/index.js"
+compatibility_date = "2026-08-11"
+
+# The dedicated R2 bucket holding only this relay's images.
+[[r2_buckets]]
+binding = "IMAGES"
+bucket_name = "waves-image-relay"
+
+# Delete expired images every minute (fastest supported interval).
+[triggers]
+crons = ["* * * * *"]

@@ -221,18 +221,24 @@ public class TabsHolderFragment extends BaseFocusFragment {
                     mFab.setLayoutParams(params);
                 }
             }
+            // The FAB's bottomMargin change above may not re-lay-out the
+            // bottom bar (its own bounds don't move), so update the pager
+            // padding here too — the bar's layout-change listener alone
+            // could miss the final FAB geometry on first pass.
+            updateTabGridBottomPadding();
             return windowInsets;
         });
         mBottomBar.addOnLayoutChangeListener(
-                (v, l, t, r, b, ol, ot, or, ob) -> {
-                    int height = b - t;
-                    if (mViewPager != null && mViewPager.getPaddingBottom() != height) {
-                        mViewPager.setPadding(0, 0, 0, height);
-                    }
-                });
+                (v, l, t, r, b, ol, ot, or, ob) -> updateTabGridBottomPadding());
 
         mFab.setOnClickListener(v -> addNewTab());
-
+        // Compute the tab-grid bottom clearance BEFORE the page fragments are
+        // created (setupViewPager → setAdapter). Their RecyclerViews' first
+        // layout pass then already knows the padding, so the initial anchor
+        // (active tab, frame 1) sits fully above the bar + FAB — no visible
+        // scroll, no post-layout cut. The insets + layout listeners refine
+        // the value as the bar's real height / nav inset arrive.
+        updateTabGridBottomPadding();
         setupViewPager();
         setupToggle();
         setupFragmentResultListener();
@@ -250,6 +256,68 @@ public class TabsHolderFragment extends BaseFocusFragment {
         updateToggle(initialPage);
 
         return view;
+    }
+
+    /**
+     * Reserves bottom clearance on each page's RecyclerView so the last card
+     * row clears the bottom bar AND the hero FAB, plus breathing room
+     * (waiting-list #6: the last card was half-cut flush against the bar).
+     *
+     * The FAB (56dp normal) sits centered over the bar's middle slot with
+     * bottomMargin = navInset + app_bar_fab_margin, so its top edge rises
+     * above the bar's top. Clearance = bar height + that overhang +
+     * {@link R.dimen#tab_grid_bottom_breathing}.
+     *
+     * The padding goes on the inner RecyclerViews (not the ViewPager) so
+     * their scroll math accounts for it natively — no race where the pager
+     * padding lands after the first layout and hides the active card.
+     */
+    private void updateTabGridBottomPadding() {
+        if (mBottomBar == null) return;
+        // Bar height: use the design height (app_bar_size + 1dp divider)
+        // until the bar is actually measured — right after inflate the
+        // measured height is still 0, and the RV's first layout must see
+        // the FULL clearance, not a partial one.
+        int height = mBottomBar.getHeight();
+        if (height <= 0) {
+            // Design height: app_bar_size row + 1dp divider (the layout uses
+            // a hardcoded 1dp hairline, NOT dimens.divider_height).
+            height = getResources().getDimensionPixelOffset(R.dimen.app_bar_size)
+                    + Math.round(getResources().getDisplayMetrics().density);
+        }
+        int fabOverhang = 0;
+        if (mFab != null) {
+            ViewGroup.MarginLayoutParams fabLp =
+                    (ViewGroup.MarginLayoutParams) mFab.getLayoutParams();
+            int fabSize = mFab.getMeasuredHeight();
+            if (fabSize <= 0) {
+                // Not measured yet — FAB size "normal" = 56dp.
+                fabSize = Math.round(56f * getResources().getDisplayMetrics().density);
+            }
+            int lift = getResources().getDimensionPixelOffset(R.dimen.app_bar_fab_margin);
+            // FAB top relative to the bar's top: (navInset + lift + fabSize) - height.
+            // bottomMargin is 0 pre-insets, so navInset = -lift → overhang 0;
+            // the FAB sits fully within the bar row in that case, and the
+            // insets listener corrects the value once the real margin lands.
+            int navInset = fabLp.bottomMargin - lift;
+            fabOverhang = Math.max(0, navInset + lift + fabSize - height);
+        }
+        int breathing = getResources().getDimensionPixelOffset(R.dimen.tab_grid_bottom_breathing);
+        int bottomPad = height + fabOverhang + breathing;
+        applyBottomPaddingToPages(bottomPad);
+    }
+
+    /** Pushes the computed bottom clearance to both tab pages' RecyclerViews. */
+    private void applyBottomPaddingToPages(int bottomPad) {
+        FragmentManager fm = getChildFragmentManager();
+        Fragment regularPage = fm.findFragmentByTag("f" + PAGE_REGULAR);
+        Fragment incognitoPage = fm.findFragmentByTag("f" + PAGE_INCOGNITO);
+        if (regularPage instanceof BaseTabsFragment) {
+            ((BaseTabsFragment) regularPage).setRecyclerViewBottomPadding(bottomPad);
+        }
+        if (incognitoPage instanceof BaseTabsFragment) {
+            ((BaseTabsFragment) incognitoPage).setRecyclerViewBottomPadding(bottomPad);
+        }
     }
 
     @Override
@@ -415,7 +483,10 @@ public class TabsHolderFragment extends BaseFocusFragment {
                     if (mIsIncognitoThemed && !targetIsIncognito) {
                         applyIncognitoTheme(false);
                     }
-                    NavigationUtils.navigateToBrowser(mNavController, targetIsIncognito);
+                    // Firefox-style return: tab tray fades out while the
+                    // browser fades back in (250ms).
+                    NavigationUtils.navigateToBrowser(mNavController, targetIsIncognito,
+                            R.anim.fade_in, 0, 0, R.anim.fade_out);
                 });
     }
 
@@ -595,7 +666,10 @@ public class TabsHolderFragment extends BaseFocusFragment {
         } else {
             mBrowserURIViewModel.onEventSelected(
                     targetState.getGeckoStateEntity(), IntentActions.OPEN_SESSION);
-            NavigationUtils.navigateToBrowser(mNavController, targetIsIncognito);
+            // Firefox-style return: tab tray fades out while the browser
+            // fades back in (250ms).
+            NavigationUtils.navigateToBrowser(mNavController, targetIsIncognito,
+                    R.anim.fade_in, 0, 0, R.anim.fade_out);
         }
     }
 
@@ -606,14 +680,23 @@ public class TabsHolderFragment extends BaseFocusFragment {
 
         GeckoStateEntity entity = new GeckoStateEntity(true);
 
+        GeckoState geckoState;
         if (incognito) {
             entity.setIncognito(true);
-            GeckoState geckoState = new GeckoState(entity);
+            geckoState = new GeckoState(entity);
             mIncognitoStateViewModel.setGeckoState(geckoState, true);
         } else {
-            GeckoState geckoState = new GeckoState(entity);
+            geckoState = new GeckoState(entity);
             mGeckoStateViewModel.setGeckoState(geckoState, true);
         }
+
+        // A new tab is a HOME tab — open the native home UI directly (no
+        // browser push, no Gecko session, no search-engine homepage load).
+        // This matches Chrome's "+" → NTP and keeps the nav stack clean.
+        // Navigate home the same way the top-bar + and 3-dot New tab do
+        // (pop to the existing home — no crossfade), so there is no
+        // mid-fade layout snap from the home fragment's async sections.
+        NavigationUtils.navigateToHome(mNavController, incognito);
     }
 
     // ── ViewPager Adapter ───────────────────────────────────────────

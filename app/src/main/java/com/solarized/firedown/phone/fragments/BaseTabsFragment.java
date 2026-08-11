@@ -67,6 +67,22 @@ public abstract class BaseTabsFragment extends BaseFocusFragment implements OnIt
      *  re-submission (title updates, thumb loads). */
     protected int mLastTabActive;
 
+    /** Bottom padding (px) the fragment reserves on the RecyclerView so the
+     *  last card row (and the anchored active row) clears the bottom action
+     *  bar + FAB. Computed in the insets listener BEFORE the RV's first
+     *  layout pass, so the initial anchor (tryApplyFirstSnapshot's
+     *  scrollToPositionWithOffset) and every max-scroll already account for
+     *  it — the tab you minimized is fully visible in frame 1, no scroll. */
+    private int mRecyclerViewBottomPadding;
+
+    /** Raw active-tab position pending the exact scroll adjustment (set in the
+     *  snapshot; consumed by the one-shot layout listener in step 5). */
+    private int mPendingActiveRow = -1;
+
+    /** One-shot layout listener that applies positionActiveRowExactly() once
+     *  the active row is laid out + the bottom clearance is known. */
+    private View.OnLayoutChangeListener mPendingScrollLayoutListener;
+
     // ── First-snapshot machinery (Chromium tab-switcher pattern) ─────
     // Architecture (see PR following #158): the recycler's adapter is
     // NOT attached in setupRecyclerView. Both LiveData sources (tab
@@ -203,10 +219,7 @@ public abstract class BaseTabsFragment extends BaseFocusFragment implements OnIt
                 mRecyclerView.getScrollState() != RecyclerView.SCROLL_STATE_IDLE;
         if (activeId != -1) mLastTabActive = activeId;
         if (activeChanged && !userTouching) {
-            int spanCount = mGridLayoutManager.getSpanCount();
-            int adapterTarget = activePosition + getLeadingAdapterCount();
-            int scrollTarget = Math.max(0, adapterTarget - spanCount);
-            mGridLayoutManager.scrollToPositionWithOffset(scrollTarget, 0);
+            scrollToActiveRow(activePosition);
         }
     }
 
@@ -305,15 +318,75 @@ public abstract class BaseTabsFragment extends BaseFocusFragment implements OnIt
         }
         if (activeId != -1) mLastTabActive = activeId;
         if (activePosition >= 0) {
-            int spanCount = mGridLayoutManager.getSpanCount();
+            // Bring the active row to the TOP so it gets laid out (rows
+            // deep in the list need a pending anchor to be visible), then
+            // post() the exact bottom-anchored scrollBy. The RV is still
+            // hidden behind LCEE loading when the post fires, so the
+            // scrollBy runs before the first draw — no visible scroll.
             int adapterTarget = activePosition + getLeadingAdapterCount();
-            int scrollTarget = Math.max(0, adapterTarget - spanCount);
-            mGridLayoutManager.scrollToPositionWithOffset(scrollTarget, 0);
+            int row = adapterTarget / mGridLayoutManager.getSpanCount();
+            mGridLayoutManager.scrollToPositionWithOffset(
+                    row * mGridLayoutManager.getSpanCount(), 0);
+            int targetAdapterPos = adapterTarget;
+            mRecyclerView.post(() -> {
+                if (mRecyclerView == null || mGridLayoutManager == null) return;
+                View rowView = mGridLayoutManager.findViewByPosition(
+                        targetAdapterPos);
+                if (rowView != null) {
+                    positionActiveRowExactly(targetAdapterPos, rowView);
+                }
+            });
         }
 
         // 4. Reveal LCEE state. hideAll if there's content (tab rows
         //    or just a banner row); showEmpty if both are absent.
         updateEmptyVisibility(tabs);
+    }
+
+    /**
+     * Pixel-exact positioning of the active row: scrolls by the delta between
+     * the row's current bottom and the target, so the active row's bottom sits
+     * {@code mRecyclerViewBottomPadding + oneRowHeight} above the RV's bottom.
+     * The extra row-height of space below the active card is the desired
+     * "breathing room" look (the active row reads as the last row, with a full
+     * card-row of empty space before the toolbar — exactly the after-scroll
+     * screenshot). Runs in the same frame as the first layout, before draw —
+     * no visible scroll.
+     *
+     * @param adapterPos the row's adapter position (already offset by the
+     *                   leading banner row)
+     * @param rowView    the laid-out row view
+     */
+    private void positionActiveRowExactly(int adapterPos, View rowView) {
+        if (mRecyclerView == null || rowView == null) return;
+        int viewportHeight = mRecyclerView.getHeight();
+        int rowHeight = rowView.getHeight();
+        int targetBottom = viewportHeight - mRecyclerViewBottomPadding - rowHeight;
+        int delta = rowView.getBottom() - targetBottom;
+        if (delta > 0) {
+            mRecyclerView.scrollBy(0, delta);
+        }
+    }
+
+    /**
+     * Positions the active tab exactly (active-tab identity change path):
+     * brings the row to the top so it's laid out, then adjusts by the
+     * exact pixel delta.
+     */
+    private void scrollToActiveRow(int activePosition) {
+        if (mRecyclerView == null || mGridLayoutManager == null) return;
+        int adapterTarget = activePosition + getLeadingAdapterCount();
+        int row = adapterTarget / mGridLayoutManager.getSpanCount();
+        mGridLayoutManager.scrollToPositionWithOffset(
+                row * mGridLayoutManager.getSpanCount(), 0);
+        int targetAdapterPos = adapterTarget;
+        mRecyclerView.post(() -> {
+            if (mRecyclerView == null || mGridLayoutManager == null) return;
+            View rowView = mGridLayoutManager.findViewByPosition(targetAdapterPos);
+            if (rowView != null) {
+                positionActiveRowExactly(targetAdapterPos, rowView);
+            }
+        });
     }
 
 
@@ -343,6 +416,10 @@ public abstract class BaseTabsFragment extends BaseFocusFragment implements OnIt
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        if (mPendingScrollLayoutListener != null && mRecyclerView != null) {
+            mRecyclerView.removeOnLayoutChangeListener(mPendingScrollLayoutListener);
+            mPendingScrollLayoutListener = null;
+        }
         mLCEERecyclerView = null;
         mRecyclerView = null;
         mGridLayoutManager = null;
@@ -353,6 +430,7 @@ public abstract class BaseTabsFragment extends BaseFocusFragment implements OnIt
         mFirstSnapshotApplied = false;
         mPendingTabs = null;
         mPendingBannerSignalled = false;
+        mPendingActiveRow = -1;
     }
 
     @Nullable
@@ -465,7 +543,7 @@ public abstract class BaseTabsFragment extends BaseFocusFragment implements OnIt
             ViewCompat.setOnApplyWindowInsetsListener(mRecyclerView, (v, windowInsets) -> {
                 Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()
                         | WindowInsetsCompat.Type.displayCutout());
-                v.setPadding(insets.left, 0, insets.right, 0);
+                v.setPadding(insets.left, 0, insets.right, mRecyclerViewBottomPadding);
                 return WindowInsetsCompat.CONSUMED;
             });
         }
@@ -505,6 +583,21 @@ public abstract class BaseTabsFragment extends BaseFocusFragment implements OnIt
     @Nullable
     public RecyclerView getRecyclerView() {
         return mRecyclerView;
+    }
+
+    /**
+     * Reserves bottom padding on the RecyclerView so the last card row clears
+     * the bottom action bar + FAB. Called by the holder once the bar's final
+     * height (including the FAB overhang) is known; the RV's scroll math then
+     * accounts for the padding natively.
+     */
+    public void setRecyclerViewBottomPadding(int bottomPadding) {
+        if (mRecyclerViewBottomPadding == bottomPadding) return;
+        mRecyclerViewBottomPadding = bottomPadding;
+        if (mRecyclerView != null) {
+            mRecyclerView.setPadding(mRecyclerView.getPaddingLeft(), 0,
+                    mRecyclerView.getPaddingRight(), bottomPadding);
+        }
     }
 
 

@@ -366,6 +366,30 @@ public class GeckoMediaController {
         executeOnCurrent(s -> s.getMediaSession().pause());
     }
 
+    /**
+     * Pauses media for a SPECIFIC session (not necessarily the current one).
+     * Used by the background-media auto-pause: when a tab is switched away,
+     * its own media pauses without touching other tabs.
+     */
+    public void pauseSession(int sessionId) {
+        GeckoMediaSession session = mSessionMap.get(sessionId);
+        if (session != null) {
+            session.getMediaSession().pause();
+        }
+    }
+
+    /**
+     * Pauses ALL currently-playing sessions. Used when the app is minimized.
+     * Does NOT touch {@link #mPlayingSessionIds} — GeckoView's
+     * {@code MediaSession.Delegate.onPause} fires back and
+     * {@link #onMediaPauseOrStop(MediaSession, GeckoState)} updates the set.
+     */
+    public void pauseAll() {
+        for (int sessionId : new HashSet<>(mPlayingSessionIds)) {
+            pauseSession(sessionId);
+        }
+    }
+
     public void stop()  {
         executeOnCurrent(s -> s.getMediaSession().stop());
     }

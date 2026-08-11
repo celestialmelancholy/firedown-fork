@@ -82,26 +82,34 @@
             app:argType="boolean"
             android:defaultValue="false" />
 
-        <!-- Back to regular home, clearing entire back stack -->
+        <!-- Back to regular home, clearing entire back stack. Firefox-style:
+             tab tray fades out while home fades in (250ms). -->
         <action
             android:id="@+id/action_tabs_to_home"
             app:destination="@id/home"
             app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
 
-        <!-- Back to incognito home, clearing entire back stack -->
+        <!-- Back to incognito home, clearing entire back stack. Same fade
+             as the regular home action. -->
         <action
             android:id="@+id/action_tabs_to_home_incognito"
             app:destination="@id/home_incognito"
             app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
 
-        <!-- Back to browser, just pop tabs -->
+        <!-- Back to browser, just pop tabs. Same fade. -->
         <action
             android:id="@+id/action_tabs_to_browser"
             app:destination="@id/browser"
             app:popUpTo="@id/tabs"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
 
     </fragment>
     <fragment

@@ -20,6 +20,34 @@ public abstract class NavigationUtils {
     private static final String TAG = NavigationUtils.class.getName();
 
     /**
+     * Shared NavOptions for opening the tab tray. ONLY the tray fades in
+     * (250ms, Firefox-style); the exiting screen (browser/home) is removed
+     * INSTANTLY with no exit anim.
+     *
+     * <p>Why no exit fade: the old OPEN_TABS_FADE also applied
+     * {@code fade_out} to the browser, which kept the page visible and
+     * fading BEHIND the semi-transparent tray for ~250ms, then snapped
+     * away when the tray's opaque background landed — the "page stays
+     * under the UI then disappears with a snap" bug. The original
+     * firedown had no exit anim (browser replaced instantly, no snap);
+     * we keep the tray's fade-in and drop the browser's fade-out.</p>
+     */
+    public static final NavOptions OPEN_TABS_FADE = new NavOptions.Builder()
+            .setEnterAnim(R.anim.fade_in)
+            .build();
+
+    /**
+     * Shared NavOptions for returning from the tab tray to home: the tray
+     * fades out while the home screen fades in (Firefox's reverse fade).
+     * Used by the nav-graph actions (see nav_graph.xml) and by any
+     * programmatic tabs→home navigation.
+     */
+    public static final NavOptions CLOSE_TABS_FADE_HOME = new NavOptions.Builder()
+            .setEnterAnim(R.anim.fade_in)
+            .setPopExitAnim(R.anim.fade_out)
+            .build();
+
+    /**
      * This function will check navigation safety before starting navigation using direction
      *
      * @param navController NavController instance
@@ -236,6 +264,42 @@ public abstract class NavigationUtils {
         }
     }
 
+    /**
+     * Like {@link #navigateSafe(NavController, int, int, Bundle)} but forwards
+     * a {@link NavOptions} bundle (for navigation transitions) instead of
+     * navigating without options.
+     */
+    public static void navigateSafe(NavController navController, @IdRes int resId,
+                                    int currentId, Bundle args, NavOptions navOptions) {
+
+        if (navController == null)
+            return;
+
+        NavDestination currentDestination = navController.getCurrentDestination();
+
+        if (currentDestination != null) {
+            int id = currentDestination.getId();
+
+            if (id != currentId)
+                return;
+
+            NavAction navAction = currentDestination.getAction(resId);
+
+            NavGraph currentNode = currentDestination instanceof NavGraph
+                    ? (NavGraph) currentDestination
+                    : currentDestination.getParent();
+
+            if (navAction != null) {
+                int destinationId = navAction.getDestinationId();
+                if (destinationId != 0 && currentNode != null && currentNode.findNode(destinationId) != null) {
+                    navController.navigate(resId, args, navOptions);
+                }
+            } else if (currentNode != null && currentNode.findNode(resId) != null) {
+                navController.navigate(resId, args, navOptions);
+            }
+        }
+    }
+
 
     public static void navigateSafe(NavController navController, @IdRes int resId, Bundle args, FragmentNavigator.Extras extras) {
 
@@ -318,6 +382,18 @@ public abstract class NavigationUtils {
      * regular and incognito stacks each stay {@code [home*, browser]}.</p>
      */
     public static void navigateToBrowser(NavController navController, boolean incognito) {
+        navigateToBrowser(navController, incognito, 0, 0, 0, 0);
+    }
+
+    /**
+     * Like {@link #navigateToBrowser(NavController, boolean)} but with
+     * explicit enter/exit/pop-enter/pop-exit animation resources (0 = none).
+     * Used by the tab-switcher "+" so a brand-new tab opens into the browser
+     * with a visible transition instead of an instant snap.
+     */
+    public static void navigateToBrowser(NavController navController, boolean incognito,
+                                         int enterAnim, int exitAnim,
+                                         int popEnterAnim, int popExitAnim) {
         if (navController == null) return;
         NavDestination dest = navController.getCurrentDestination();
         if (dest == null || dest.getId() == R.id.browser) return;
@@ -331,6 +407,10 @@ public abstract class NavigationUtils {
                 : (onBackStack(navController, other) ? other : 0);
         NavOptions.Builder opts = new NavOptions.Builder().setLaunchSingleTop(true);
         if (popTarget != 0) opts.setPopUpTo(popTarget, false);
+        if (enterAnim != 0) opts.setEnterAnim(enterAnim);
+        if (exitAnim != 0) opts.setExitAnim(exitAnim);
+        if (popEnterAnim != 0) opts.setPopEnterAnim(popEnterAnim);
+        if (popExitAnim != 0) opts.setPopExitAnim(popExitAnim);
         navController.navigate(R.id.browser, null, opts.build());
     }
 

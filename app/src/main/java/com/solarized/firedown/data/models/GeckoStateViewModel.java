@@ -160,6 +160,15 @@ public class GeckoStateViewModel extends ViewModel {
     }
 
     /**
+     * Returns the raw {@link GeckoState} list (the live objects with their
+     * in-memory cached thumbnails), for stamping home-tab previews across all
+     * home states. The LiveData exposes entity copies; this exposes the states.
+     */
+    public List<GeckoState> getStates() {
+        return mRepository.getStates();
+    }
+
+    /**
      * Helper to get the current active state
      */
     public GeckoState getCurrentState() {

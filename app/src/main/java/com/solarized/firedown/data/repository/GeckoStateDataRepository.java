@@ -416,13 +416,26 @@ public class GeckoStateDataRepository {
                 long now = System.currentTimeMillis();
                 for (GeckoState state : mGeckoStates) {
                     boolean isActive = state.getEntityId() == mCurrentId;
+                    if (!isActive && state.isActive()) {
+                        // Background-media auto-pause (Item 3): a tab that was
+                        // just switched away from pauses its own media. Check
+                        // BEFORE setActive(false) — the entity flag flips in
+                        // there, so the pre-switch value is what tells us it
+                        // was actually foregrounded.
+                        mGeckoMediaController.pauseSession(state.getEntityId());
+                    }
                     state.setActive(isActive);
                     if (isActive) {
                         // Stamp "most recently used" so the Continue-browsing
                         // card and auto-archive can rank by real usage rather
                         // than creation order.
                         state.getGeckoStateEntity().setLastAccess(now);
-                    } else {
+                    } else if (!state.isHome()) {
+                        // Clear non-active tabs' thumbs EXCEPT the home tab:
+                        // the home tab's preview is the same homepage for every
+                        // home instance and re-capturing it on each switch is
+                        // wasteful; keeping it means the tab switcher always
+                        // shows the homepage preview for inactive New tabs.
                         state.clearCachedThumb();
                     }
                 }
@@ -1045,6 +1058,17 @@ public class GeckoStateDataRepository {
 
     public LiveData<List<GeckoStateEntity>> getTabsLiveData() {
         return mGeckoStatesLiveData;
+    }
+
+    /**
+     * Returns a snapshot copy of the raw {@link GeckoState} list (the live
+     * objects with their in-memory cached thumbnails). Used to stamp a home
+     * preview onto every home state that lacks one.
+     */
+    public List<GeckoState> getStates() {
+        synchronized (mGeckoStates) {
+            return new ArrayList<>(mGeckoStates);
+        }
     }
 
     public LiveData<Integer> getTabsLiveCount() {

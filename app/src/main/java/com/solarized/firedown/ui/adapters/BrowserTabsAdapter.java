@@ -65,8 +65,6 @@ public class BrowserTabsAdapter extends GridListBaseAdapter<GeckoStateEntity, Re
     private final int mColorNormal;
     private final int mColorIncognitoNormal;
     private final int mColorSelected;
-    private final int mColorSelectedWash;
-    private final int mColorSelectedWashIncognito;
     private final int mSelectedStrokePx;
     private final RoundedCorners mRoundedCorners;
     private final RequestOptions mRequestOptions;
@@ -88,15 +86,11 @@ public class BrowserTabsAdapter extends GridListBaseAdapter<GeckoStateEntity, Re
         mColorNormal = MaterialColors.getColor(mContext,
                 com.google.android.material.R.attr.colorSurfaceContainer, 0);
         mColorSelected = ContextCompat.getColor(mContext, R.color.md_theme_primary);
-        // Active-tab chrome = coral STROKE + faint coral wash, NOT the old
-        // full-primaryContainer card fill. On-device review: the full wash
-        // turned the current tab into the loudest object on the screen and
-        // fought the coral FAB (worst on the purple incognito grid, where
-        // coral-on-purple vibrates). Selection should be findable, not
-        // loud — same SelectionStyling 20% wash the action-mode rows use,
-        // composed over each mode's own resting card tone.
-        mColorSelectedWash = SelectionStyling.washOver(mColorNormal, mColorSelected);
-        mColorSelectedWashIncognito = SelectionStyling.washOver(mColorIncognitoNormal, mColorSelected);
+        // Active-tab chrome = coral STROKE ONLY (Firefox-style ring around the
+        // card). The old full-card coral wash was removed on review: it turned
+        // the current tab into the loudest object on screen and fought the
+        // coral FAB (worst on the purple incognito grid). The 2dp coral border
+        // alone carries "you are here" while the card stays its resting tone.
         mSelectedStrokePx = Math.round(2f * mContext.getResources().getDisplayMetrics().density);
         int mRoundedPixels = mContext.getResources().getDimensionPixelOffset(R.dimen.icon_rounded);
         mRoundedCorners = new RoundedCorners(mRoundedPixels);
@@ -292,12 +286,26 @@ public class BrowserTabsAdapter extends GridListBaseAdapter<GeckoStateEntity, Re
         Log.d(TAG, "setEntityIcon filename: " + fileImage + " fileIcon: " + fileIcon + " fileUrl: " + url + " isHome: " + geckoStateEntity.isHome() + " isActive: " + geckoStateEntity.isActive());
 
         if (geckoStateEntity.isHome()) {
-            Glide.with(holder.itemView).clear(holder.file_image);
-            Glide.with(holder.itemView)
-                    .load(geckoStateEntity.isIncognito() ? R.drawable.new_incognito_tab : R.drawable.new_tab)
-                    .dontAnimate()
-                    .into(holder.file_image);
-            holder.file_icon.setVisibility(View.GONE);
+            // Home tab thumbnail: a LIVE capture of the native homepage when
+            // available (captured by HomeFragment.captureHomeThumbnail), else
+            // the Waves brand mark. The old generic "+" glyph is gone.
+            Bitmap cachedHome = geckoStateEntity.getCachedThumb();
+            if (cachedHome != null) {
+                holder.file_image.setImageBitmap(cachedHome);
+            } else {
+                Glide.with(holder.itemView).clear(holder.file_image);
+                Glide.with(holder.itemView)
+                        .load(geckoStateEntity.isIncognito() ? R.drawable.new_incognito_tab : R.drawable.ic_waves_logo)
+                        .dontAnimate()
+                        .into(holder.file_image);
+            }
+            // New-tab card: leading icon = a solid brand-orange tile with a
+            // white plus (ic_new_tab_tile). Keeps the grid's visual rhythm —
+            // every other card has a favicon before its title — without
+            // forcing the full Waves mark through a monochrome reduction.
+            holder.file_icon.setVisibility(View.VISIBLE);
+            holder.file_icon.setImageResource(R.drawable.ic_new_tab_tile);
+            holder.file_icon.setClipToOutline(false);
             holder.file_url.setText(mContext.getString(R.string.popup_tabs_new));
             holder.file_name.setText(mContext.getString(R.string.popup_tabs_new));
         } else {
@@ -321,21 +329,35 @@ public class BrowserTabsAdapter extends GridListBaseAdapter<GeckoStateEntity, Re
     }
 
     /**
-     * Active-tab chrome: a 2dp coral stroke + the 20% coral wash over the
-     * mode's resting card tone; inactive = resting tone, no stroke. Text
-     * and the close glyph stay onSurface in BOTH states — with the faint
-     * wash the surface is still effectively the mode's surface, and the
-     * stroke alone carries "you are here" (the old full-coral fill needed
-     * onPrimaryContainer text, which is what made it shout). Shared by the
+     * Active-tab chrome: Firefox-exact "you are here" ring. The resting card
+     * is surfaceBright; the active card swaps to the 4dp Violet30->Violet50
+     * gradient ring drawable (bg_tab_item_active, border.heaviest width at
+     * 96° — the same gradient brush Firefox's tabItemBorderFocused() paints).
+     * Text and the close glyph stay onSurface in both states. Shared by the
      * full bind and the PAYLOAD_ACTIVE partial bind so the two can't drift.
      */
     private void applySelectionChrome(TabEntityViewHolderPhone holder,
                                       boolean active, boolean incognito) {
-        int restingColor = incognito ? mColorIncognitoNormal : mColorNormal;
-        int washColor = incognito ? mColorSelectedWashIncognito : mColorSelectedWash;
-        holder.item.setCardBackgroundColor(active ? washColor : restingColor);
-        holder.item.setStrokeColor(active ? mColorSelected : Color.TRANSPARENT);
-        holder.item.setStrokeWidth(active ? mSelectedStrokePx : 0);
+        if (holder.cardSurface != null) {
+            // Grid layout: the surface drawables (bg_tab_item / active ring)
+            // carry the card's fill + border. The MaterialCardView above them
+            // stays TRANSPARENT — painting a card color here would cover the
+            // drawable and re-introduce the "card blends into the tray" bug
+            // (the old resting color #1F1F22 was almost identical to the
+            // near-black tray #131315).
+            holder.cardSurface.setBackgroundResource(active
+                    ? R.drawable.bg_tab_item_active
+                    : R.drawable.bg_tab_item);
+            holder.item.setCardBackgroundColor(Color.TRANSPARENT);
+            holder.item.setStrokeWidth(0);
+            holder.item.setStrokeColor(Color.TRANSPARENT);
+        } else {
+            // List layout: the MaterialCardView is the card itself.
+            int restingColor = incognito ? mColorIncognitoNormal : mColorNormal;
+            holder.item.setCardBackgroundColor(restingColor);
+            holder.item.setStrokeColor(active ? mColorSelected : Color.TRANSPARENT);
+            holder.item.setStrokeWidth(active ? mSelectedStrokePx : 0);
+        }
 
         int onSurfaceColor = IncognitoColors.getOnSurface(mContext, incognito);
         holder.file_name.setTextColor(onSurfaceColor);
@@ -433,6 +455,7 @@ public class BrowserTabsAdapter extends GridListBaseAdapter<GeckoStateEntity, Re
     static class TabEntityViewHolderPhone extends RecyclerView.ViewHolder implements View.OnClickListener {
         OnItemClickListener mOnItemClickListener;
         MaterialCardView item;
+        View cardSurface;
         AppCompatImageButton close;
         TextView file_name;
         TextView file_url;
@@ -444,6 +467,7 @@ public class BrowserTabsAdapter extends GridListBaseAdapter<GeckoStateEntity, Re
             super(view);
             mOnItemClickListener = onItemClickListener;
             item = view.findViewById(R.id.tab_item);
+            cardSurface = view.findViewById(R.id.tab_card_surface);
             file_name = view.findViewById(R.id.tab_title);
             close = view.findViewById(R.id.tab_close);
             file_image = view.findViewById(R.id.tab_thumbnail);
@@ -455,6 +479,23 @@ public class BrowserTabsAdapter extends GridListBaseAdapter<GeckoStateEntity, Re
             item.setOnClickListener(this);
             close.setOnClickListener(this);
             Utils.expandTouchArea(close);
+            // Firefox tab-item interaction animation (SharedTabItemUi.Scale):
+            // DRAG_ACTIVE = 0.75f, alpha 0.7f while pressed — spring back to
+            // 1f/1f on release. Applied at the graphics layer in Firefox; here
+            // the same effect via View scale/alpha on the surface wrapper
+            // (contains the gradient ring + card, so the whole item scales).
+            View surface = cardSurface != null ? cardSurface : item;
+            item.setOnTouchListener((v, event) -> {
+                if (event.getActionMasked() == android.view.MotionEvent.ACTION_DOWN) {
+                    surface.animate().scaleX(0.75f).scaleY(0.75f).alpha(0.7f)
+                            .setDuration(120).start();
+                } else if (event.getActionMasked() == android.view.MotionEvent.ACTION_UP
+                        || event.getActionMasked() == android.view.MotionEvent.ACTION_CANCEL) {
+                    surface.animate().scaleX(1f).scaleY(1f).alpha(1f)
+                            .setDuration(200).start();
+                }
+                return false;
+            });
         }
 
         @Override

@@ -20,6 +20,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
@@ -541,12 +542,12 @@ public class GeckoToolbar extends FrameLayout implements View.OnClickListener, V
         // 7b. Chrome-style focus icons (image-search + mic) — onSurfaceVariant
         // (quieter than the primary controls, like the search up/down).
         View imageSearchBtn = findViewById(R.id.image_search_button);
-        if (imageSearchBtn instanceof MaterialButton btn) {
-            btn.setIconTint(ColorStateList.valueOf(onSurfaceVariant));
+        if (imageSearchBtn instanceof AppCompatImageButton btn) {
+            btn.setImageTintList(ColorStateList.valueOf(onSurfaceVariant));
         }
         View micBtn = findViewById(R.id.mic_button);
-        if (micBtn instanceof MaterialButton btn) {
-            btn.setIconTint(ColorStateList.valueOf(onSurfaceVariant));
+        if (micBtn instanceof AppCompatImageButton btn) {
+            btn.setImageTintList(ColorStateList.valueOf(onSurfaceVariant));
         }
 
         // 8. Search text color

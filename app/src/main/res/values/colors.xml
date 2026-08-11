@@ -157,6 +157,19 @@
     <color name="md_theme_surfaceContainerLow">#F5F3F6</color>
     <color name="md_theme_surfaceContainer">#EFEDF0</color>
     <color name="md_theme_surfaceContainerHigh">#E9E7EA</color>
+    <!-- Firefox tab-tray (Acorn Nova palette, copied 1:1 from
+         mozilla-firefox/firefox android-components NovaColors.kt):
+         Violet30/50 are the active-tab border gradient stops. -->
+    <color name="nova_violet30">#FFB393FF</color>
+    <color name="nova_violet50">#FF764EDD</color>
+    <!-- Firefox tab-tray surfaces (Acorn NovaColors, dark scheme):
+         Gray65 = surfaceBright = the card fill behind the thumbnail
+         Gray75 = surface = the tray background behind the cards -->
+    <color name="nova_gray65">#FF312F33</color>
+    <color name="nova_gray75">#FF1D1B1F</color>
+    <!-- Active-tab highlight (brand orange, replacing Firefox's violet):
+         gradient end for the 4dp ring. -->
+    <color name="brand_orange_dark">#FFC94F4A</color>
     <!-- Strengthened from the spec-default #E4E2E5: High->Highest was only
          ~5 levels in light, too tight to give a lifted surface (the browser
          URL pill, the autocomplete suggestion cards) any separation. ~15

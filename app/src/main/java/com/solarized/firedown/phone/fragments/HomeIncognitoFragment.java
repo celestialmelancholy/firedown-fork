@@ -384,7 +384,8 @@ public class HomeIncognitoFragment extends BaseBrowserFragment implements
         } else if (id == R.id.tab_button) {
             Bundle bundle = new Bundle();
             bundle.putBoolean(Keys.OPEN_INCOGNITO, true);
-            NavigationUtils.navigateSafe(mNavController, R.id.tabs, R.id.home_incognito, bundle);
+            NavigationUtils.navigateSafe(mNavController, R.id.tabs, R.id.home_incognito, bundle,
+                    NavigationUtils.OPEN_TABS_FADE);
         } else if (id == R.id.new_tab_button) {
             flashNewTab(mNewTabView);
             addNewIncognitoTab();
@@ -551,5 +552,62 @@ public class HomeIncognitoFragment extends BaseBrowserFragment implements
         GeckoState geckoState = new GeckoState(entity);
         Log.d(TAG, "addNewIncognitoTab: created incognito home tab id=" + geckoState.getEntityId());
         mIncognitoStateViewModel.setGeckoState(geckoState, true);
+        // Stamp the new incognito home tab with the incognito homepage snapshot.
+        captureIncognitoHomeThumbnail();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Capture the incognito home UI as the incognito home tab thumbnail so
+        // the tab switcher shows a live preview instead of the static icon.
+        // Mirrors HomeFragment.captureHomeThumbnail (the incognito home is a
+        // native fragment — Gecko can't capture it).
+        captureIncognitoHomeThumbnail();
+    }
+
+    /** Draws the incognito home view into a bitmap and stamps it onto every
+     *  incognito home state that lacks a thumbnail. */
+    private void captureIncognitoHomeThumbnail() {
+        View root = getView();
+        if (root == null || mIncognitoStateViewModel == null) return;
+        root.post(() -> {
+            if (!isAdded() || getView() == null) return;
+            View v = getView();
+            if (v.getWidth() <= 0 || v.getHeight() <= 0) return;
+            try {
+                androidx.core.widget.NestedScrollView scroll =
+                        v.findViewById(R.id.home_scroll);
+                int savedScrollY = scroll != null ? scroll.getScrollY() : 0;
+                if (scroll != null) scroll.scrollTo(0, 0);
+
+                android.graphics.Bitmap bitmap =
+                        android.graphics.Bitmap.createBitmap(v.getWidth(), v.getHeight(),
+                                android.graphics.Bitmap.Config.ARGB_8888);
+                android.graphics.Canvas canvas = new android.graphics.Canvas(bitmap);
+                v.draw(canvas);
+
+                if (scroll != null) scroll.scrollTo(0, savedScrollY);
+
+                android.graphics.Bitmap scaled = GeckoState.scaleThumbnail(bitmap);
+                boolean stamped = false;
+                java.util.List<GeckoState> allStates = mIncognitoStateViewModel.getStates();
+                if (allStates != null) {
+                    for (GeckoState s : allStates) {
+                        if (s.isHome() && s.getCachedThumb() == null) {
+                            s.setCachedThumb(scaled);
+                            stamped = true;
+                        }
+                    }
+                }
+                if (stamped) {
+                    mIncognitoStateViewModel.notifyTabs();
+                } else if (scaled != null && scaled != bitmap) {
+                    scaled.recycle();
+                }
+            } catch (Throwable e) {
+                Log.d(TAG, "captureIncognitoHomeThumbnail", e);
+            }
+        });
     }
 }

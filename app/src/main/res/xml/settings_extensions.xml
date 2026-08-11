@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Extensions sub-screen (Item 5): static skeleton. The "Install .xpi file"
+     row is fixed; a built-in category and an installed category are always
+     present (hidden until extensions load). Individual extension rows are
+     added by ExtensionsFragment.rebuildRows() on the main thread. -->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Preference
+        android:key="extensions.install"
+        android:title="@string/extensions_install"
+        android:summary="@string/extensions_install_summary"
+        app:icon="@drawable/ic_extensions_24"
+        app:singleLineTitle="false" />
+
+    <PreferenceCategory
+        android:key="extensions.category.builtin"
+        android:title="@string/extensions_builtin_category"
+        android:titleTextAppearance="@style/Firedown.PreferenceCategoryLabel"
+        app:iconSpaceReserved="false" />
+
+    <PreferenceCategory
+        android:key="extensions.category.user"
+        android:title="@string/extensions_user_category"
+        android:titleTextAppearance="@style/Firedown.PreferenceCategoryLabel"
+        app:iconSpaceReserved="false" />
+
+</PreferenceScreen>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- New-tab card leading icon: a solid brand-orange rounded tile with a
+     white plus — reads as "new / blank page" at favicon size (the full
+     Waves mark doesn't survive monochrome reduction; this ties to the
+     brand accent instead). Sized like the other favicon tiles via
+     @dimen/tab_header_favicon in fragment_tabs_item.xml. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="12dp"
+    android:height="12dp"
+    android:viewportWidth="12"
+    android:viewportHeight="12">
+    <!-- Rounded tile -->
+    <path
+        android:fillColor="@color/brand_orange"
+        android:pathData="M2,0 L10,0 A2,2 0 0 1 12,2 L12,10 A2,2 0 0 1 10,12 L2,12 A2,2 0 0 1 0,10 L0,2 A2,2 0 0 1 2,0 Z" />
+    <!-- White plus -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M5.4,3 L6.6,3 L6.6,5.4 L9,5.4 L9,6.6 L6.6,6.6 L6.6,9 L5.4,9 L5.4,6.6 L3,6.6 L3,5.4 L5.4,5.4 Z" />
+</vector>

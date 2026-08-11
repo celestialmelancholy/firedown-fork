@@ -113,14 +113,13 @@ public class IntentHandler {
     /**
      * ACTION_MAIN — cold start only (BaseActivity filters out warm resumes).
      *
-     * <p>On cold start the nav graph inflates {@code home} as the start
-     * destination. If the last active tab was a non-home page, we navigate
-     * to BrowserFragment. If it was an incognito home, we swap to
-     * {@code home_incognito}. If regular home, we do nothing — the
-     * startDestination is already correct.</p>
+     * <p>Resumes the last active tab — the standard browser behavior: on
+     * relaunch (even after removing the app from recents) you land back on
+     * the tab/address you were on. If the last active tab is a home tab, the
+     * nav graph's start destination (home) already covers it; if it's a
+     * non-home page, we navigate to BrowserFragment.</p>
      */
     private void handleActionMain(Intent intent, NavController navController) {
-
         // Check regular tabs first
         GeckoState geckoState = geckoStateViewModel.peekCurrentGeckoState();
 

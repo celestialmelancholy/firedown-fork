@@ -64,6 +64,15 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        // Fast iteration variant: same as release but with R8/resource shrinking
+        // OFF, so the fix-verify loop skips the slowest step. NOT for shipping —
+        // run a real assembleRelease before release (R8 can surface behavior
+        // differences a non-minified build won't).
+        releaseFast {
+            initWith release
+            minifyEnabled false
+            shrinkResources false
+        }
     }
     testOptions {
         // Let JVM unit tests run against the stubbed android.jar without each
@@ -133,6 +142,10 @@ ext {
 
 
 dependencies {
+
+    // EXIF orientation for the image-search downscale (handles rotated camera
+    // photos before we shrink them for upload).
+    implementation 'androidx.exifinterface:exifinterface:1.3.7'
 
     // Installs the bundled baseline profile (app/src/main/baseline-prof.txt)
     // at first launch so ART AOT-compiles the listed hot methods instead of

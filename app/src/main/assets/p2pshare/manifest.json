@@ -6,7 +6,7 @@
       "id": "p2pshare@solarized.dev"
     }
   },
-  "name": "Firedown P2P share engine",
+  "name": "P2P share engine",
   "description": "WebRTC DataChannel engine for direct device-to-device file transfer. The engine runs as a page script in a hidden loopback page (WebRTC needs a real content document); this extension only provides the native-messaging bridge. File bytes move over the loopback, never through JS strings.",
   "permissions": [
     "nativeMessaging",

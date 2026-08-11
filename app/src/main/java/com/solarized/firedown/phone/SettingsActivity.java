@@ -44,6 +44,11 @@ public class SettingsActivity extends BaseActivity {
      *  controls live. */
     public static final String EXTRA_OPEN_TRACKING = "com.solarized.firedown.extra.OPEN_TRACKING";
 
+    /** Intent boolean extra: open straight to the Extensions screen — the
+     *  browser 3-dot menu's "Extensions" row lands here (the Settings door
+     *  navigates the normal way). */
+    public static final String EXTRA_OPEN_EXTENSIONS = "com.solarized.firedown.extra.OPEN_EXTENSIONS";
+
     /** Activity-scoped, so {@link #restoreToolbarUp} can re-install the
      *  canonical Up listener after a fragment borrowed the toolbar. */
     private Toolbar mToolbar;
@@ -138,6 +143,16 @@ public class SettingsActivity extends BaseActivity {
             navController.navigate(R.id.settings_tracking, null, opts);
         }
 
+        // Deep-link straight to the Extensions screen (the browser 3-dot
+        // menu's "Extensions" row). Replace the settings list on the back
+        // stack so Back finishes this activity and returns to the browser.
+        if (getIntent().getBooleanExtra(EXTRA_OPEN_EXTENSIONS, false)) {
+            NavOptions opts = new NavOptions.Builder()
+                    .setPopUpTo(R.id.settings, true)
+                    .build();
+            navController.navigate(R.id.settings_extensions, null, opts);
+        }
+
         navController.addOnDestinationChangedListener((navController1, navDestination, bundle) -> {
             int id = navDestination.getId();
             if(id == R.id.settings)
@@ -162,6 +177,8 @@ public class SettingsActivity extends BaseActivity {
                 mToolbar.setTitle(R.string.settings_query_param_block_list);
             else if(id == R.id.settings_search)
                 mToolbar.setTitle(R.string.settings_search_engine);
+            else if(id == R.id.settings_extensions)
+                mToolbar.setTitle(R.string.settings_extensions_title);
             else if(id == R.id.settings_lock)
                 mToolbar.setTitle(R.string.settings_lock_title);
             else if(id == R.id.settings_sync)
