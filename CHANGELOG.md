@@ -1,3 +1,29 @@
+## [1.1.90] - 2026-08-12
+
+- YouTube: long downloads no longer stop about a minute in and end up as short truncated files — when YouTube asks the app to re-authorize mid-download it now gets a genuinely new token, instead of retrying with the one that was just refused
+
+## [1.1.89] - 2026-08-12
+
+- Send directly: a dropped transfer now resumes where it left off instead of restarting from the beginning, and a share link stays live for its full 15 minutes so the reply comes back on its own
+- A share link that no longer works now says the sender closed it, instead of blaming your Wi-Fi — and the transfer footer only claims a file never touched a server when that's actually been confirmed
+- Scrub through a video by dragging: frames preview as you go, and the 10-second skip buttons sit better beside play/pause
+- The update sheet keeps Install in reach, "Later" really does mean later, and it now speaks all 16 languages — plus Settings → About installs an update that's already downloaded rather than fetching it again
+- Downloads that are backed up to the cloud are marked in the list
+- Clearer, shorter wording throughout the app, in every language
+- Updated the GeckoView browser engine to 153.0.20260810162159 and FFmpeg to 9.0.1
+- Minor bugfixes and improvements
+
+## [1.1.88] - 2026-08-09
+
+- Play downloaded videos and music in the background — playback keeps going with the screen off or after leaving the app, with lock-screen controls. Picture-in-picture hands off to background playback, and dismissing the PiP window stops it
+- YouTube: downloads default to the original-language audio track with a new track picker, prefer H264 up to 1080p so thumbnails work everywhere, and interrupted downloads now re-authorize and continue instead of ending up as short truncated files
+- Instagram capture fixed for the current site — posts and reels again, plus carousels, the home feed, and clips whose video came without audio
+- Duplicate tabs are archived automatically, keeping the most recently used copy — and tab archive retention is now stated in Settings
+- Crash reports can be sent anonymously with one tap
+- Player polish: opens faster, double-tap seeking accumulates per tap, controller fixes after picture-in-picture
+- Updated the GeckoView browser engine to 153.0.20260803132010 and FFmpeg to 9.0
+- Minor bugfixes and improvements
+
 ## [1.1.87] - 2026-08-01
 
 - Access your backups from a computer — open firedown.app/backup and pair it by scanning a QR code instead of typing your recovery code; approve on the phone by matching the six-digit code both screens show

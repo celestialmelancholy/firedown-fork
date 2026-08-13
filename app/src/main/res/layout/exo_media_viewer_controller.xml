@@ -6,10 +6,15 @@
   single-video viewer actually uses.
 
   Root is <merge>: children are added directly to PlayerControlView
-  (a FrameLayout) — same shape as Media3's default. Sticking to
-  Media3's region IDs means PlayerControlView's built-in show/hide
-  animations (slide exo_bottom_bar, fade exo_top_controls, scale
-  exo_center_controls) keep working with no extra code.
+  (a FrameLayout) — same shape as Media3's default. Media3's region
+  IDs are kept so PlayerControlView still recognises and manages the
+  regions — but its show/hide ANIMATIONS are now DISABLED
+  (app:animation_enabled="false" on the PlayerView): the layout
+  manager's per-view translation animators (built for the stock
+  layout, where exo_progress sits OUTSIDE the bottom bar) stranded
+  the timebar's translationY across a PiP round-trip, leaving the
+  scrubber clipped invisible under the pinned 44dp row. See the
+  comment on the PlayerView in fragment_media_viewer.xml.
 
   Three regions, each declared once with @+id so the resource merger
   uniques the name against Media3's library copy:
@@ -62,30 +67,78 @@
           reserved for the gestural double-tap where the user needs
           reassurance that their tap registered).
         -->
+        <!--
+          BOX SIZES ARE THE SPACING CONTROL HERE, NOT THE MARGINS — the
+          margins are already 0. Each button draws a smaller glyph
+          inside it, so the dead space inside the box IS the visible
+          gap: 8dp on each seek side and 6dp on the play side, i.e.
+          14dp of air between glyphs. Both numbers are pinned in this
+          file (see the play button's fitCenter note), so changing a
+          glyph size without changing its box moves the spacing too.
+          At 72dp boxes with an 8dp margin the three controls read as
+          unrelated (an earlier pass cut the margin 24 → 8 and barely
+          moved it — the margin was never the bulk of it). 64dp play +
+          52dp seek + no margin is the current shape. Touch targets stay
+          52/64dp, both over the 48dp minimum, and the boxes don't
+          overlap so no button can steal its neighbour's taps (which is
+          why this is done with box sizes rather than a negative margin
+          on play/pause).
+
+          THE ±10s GLYPHS ARE DELIBERATELY SMALLER THAN PLAY/PAUSE
+          (36dp vs 52dp) — play is the primary action and every phone
+          player ranks it by size, YouTube included (~1.2:1 there).
+          Grow the PLAY side to widen that rank, never shrink these
+          further: the floor here is the "10" NUMERAL inside the arc,
+          and below ~32dp the digits turn to mush and the button stops
+          saying how far it seeks. Shrinking a glyph WITHOUT shrinking
+          its box would also widen the gap (centerInside centres it, so
+          lost glyph becomes dead space) — hence 40 → 36dp glyph AND
+          56 → 52dp box together, leaving the 8dp dead space, and
+          therefore the spacing, exactly where it was.
+        -->
         <ImageButton
             android:id="@+id/media_viewer_btn_seek_back"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/media_seek_back_10s_desc"
             android:scaleType="centerInside"
             android:src="@drawable/ic_media_replay_10_24" />
 
+        <!--
+          media3's PlayerControlView OVERWRITES this src at runtime with
+          its own styled-controls play/pause icon (a filled disc), so the
+          drawable below is only the pre-attach placeholder — it is NOT
+          what renders. To change the rendered icon itself, use the
+          controller's play_icon / pause_icon attributes, not this src.
+
+          scaleType is fitCenter, NOT centerInside, and that is the whole
+          point: centerInside only ever scales DOWN, so the rendered size
+          was media3's intrinsic icon size — a number this layout doesn't
+          control and can't see. The ±10s glyphs were sized against it by
+          guesswork, and a 40 → 36dp step on them produced no visible
+          change on device because the ratio's other half was unknown.
+          fitCenter scales UP too, so 64dp box − 6dp padding pins the
+          rendered disc at exactly 52dp whatever media3 ships, and the
+          rank is set here rather than by a dependency: 52dp play against
+          36dp seek is ~1.45:1, comfortably past the ~1.2:1 phone players
+          use. It also fixes the play side's dead space at 6dp, so the
+          gap below is now fully determined by this file.
+        -->
         <ImageButton
             android:id="@id/exo_play_pause"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/play"
-            android:scaleType="centerInside"
+            android:padding="6dp"
+            android:scaleType="fitCenter"
             android:src="@drawable/media_action_play" />
 
         <ImageButton
             android:id="@+id/media_viewer_btn_seek_forward"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/media_seek_forward_10s_desc"
             android:scaleType="centerInside"
@@ -144,8 +197,18 @@
                 android:textColor="@android:color/white"
                 android:textSize="12sp" />
 
+            <!--
+              @+id (not @id) so the app's own R carries the name:
+              android.nonTransitiveRClass=true means R only lists
+              resources this module DECLARES, and MediaViewerFragment
+              has to find this view to attach its scrub-preview
+              listener. The resource merger uniques the name against
+              Media3's library copy — same trick the three region ids
+              above use, and PlayerControlView still finds its timebar
+              (it resolves the same merged id).
+            -->
             <androidx.media3.ui.DefaultTimeBar
-                android:id="@id/exo_progress"
+                android:id="@+id/exo_progress"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"

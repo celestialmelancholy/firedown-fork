@@ -10,7 +10,10 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.ParcelFileDescriptor;
+import android.os.SystemClock;
 import android.transition.Transition;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -19,6 +22,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,7 +34,10 @@ import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.fragment.app.Fragment;
+import androidx.media3.common.AudioAttributes;
+import androidx.media3.common.C;
 import androidx.media3.common.MediaItem;
+import androidx.media3.common.PlaybackException;
 import androidx.media3.common.Player;
 import androidx.media3.common.VideoSize;
 import androidx.media3.common.util.UnstableApi;
@@ -38,12 +45,15 @@ import androidx.media3.datasource.DataSource;
 import androidx.media3.datasource.DefaultDataSource;
 import androidx.media3.datasource.FileDataSource;
 import androidx.media3.exoplayer.ExoPlayer;
+import androidx.media3.exoplayer.SeekParameters;
+import androidx.media3.exoplayer.mediacodec.MediaCodecRenderer;
 import androidx.media3.exoplayer.source.MediaSource;
 import androidx.media3.exoplayer.source.ProgressiveMediaSource;
 import androidx.media3.extractor.DefaultExtractorsFactory;
 import androidx.media3.extractor.ExtractorsFactory;
 import androidx.media3.ui.AspectRatioFrameLayout;
 import androidx.media3.ui.PlayerView;
+import androidx.media3.ui.TimeBar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -52,11 +62,13 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.signature.ObjectKey;
+import com.google.android.material.snackbar.Snackbar;
 import com.solarized.firedown.App;
 import com.solarized.firedown.BuildConfig;
 import com.solarized.firedown.GlideRequestOptions;
 import com.solarized.firedown.glide.MimeTypeThumbnail;
 import com.solarized.firedown.phone.PlayerActivity;
+import com.solarized.firedown.phone.player.PlaybackHub;
 import com.solarized.firedown.ui.AspectRatioImageView;
 import com.solarized.firedown.R;
 import com.solarized.firedown.data.RestoredFileAccess;
@@ -67,7 +79,9 @@ import com.solarized.firedown.utils.FileUriHelper;
 import com.solarized.firedown.Keys;
 import com.solarized.firedown.utils.FragmentArgs;
 
+import java.io.File;
 import java.io.InputStream;
+import java.util.Locale;
 
 public class MediaViewerFragment extends Fragment {
 
@@ -102,6 +116,15 @@ public class MediaViewerFragment extends Fragment {
     private static final long SEEK_DELTA_MS = 10_000L;
 
     /**
+     * After a double-tap seek, further taps within this window continue
+     * the streak (one more ±10 s each, window restarted per tap) — the
+     * YouTube model. YouTube's own continuation window is ~650-800 ms;
+     * the badge fade-out is tied to the same value so the feedback
+     * disappears exactly when the streak arms down.
+     */
+    private static final long SEEK_STREAK_WINDOW_MS = 800L;
+
+    /**
      * Cached so {@link #setChromeVisible(boolean)} can fire without
      * re-resolving from the activity each time. Nulled out by the
      * view-creation path being re-entered on configuration change.
@@ -110,6 +133,159 @@ public class MediaViewerFragment extends Fragment {
 
     private GestureDetector mPlayerGestureDetector;
 
+    // ── Double-tap seek streak state (main thread only) ──────────────
+    /** -1 = seeking back, +1 = forward, 0 = no streak. */
+    private int mSeekStreakDir;
+    /** uptimeMillis deadline after which the streak is over. */
+    private long mSeekStreakUntilMs;
+    /** Total nominal ms seeked this streak — drives the "−20 s" badge. */
+    private long mSeekStreakAccumMs;
+    /**
+     * Set when onSingleTapUp consumed a tap as a streak continuation so
+     * the same tap's later onSingleTapConfirmed doesn't ALSO toggle the
+     * controller (the detector fires both for a tap with no follow-up).
+     */
+    private boolean mStreakTapConsumed;
+
+    private TextView mSeekFeedbackLeft;
+    private TextView mSeekFeedbackRight;
+
+    // ── Scrub preview state (main thread only) ───────────────────────
+    /**
+     * How often a drag is allowed to seek. Media3 only seeks when the
+     * finger LIFTS, so without this the video sat on one frame for the
+     * whole drag and the user was scrubbing blind against the position
+     * text. ~10 preview frames/s is enough to read the video while
+     * dragging and cheap because the preview seeks are keyframe-only
+     * (CLOSEST_SYNC, restored to exact on lift).
+     */
+    private static final long SCRUB_PREVIEW_INTERVAL_MS = 100L;
+
+    private boolean mScrubbing;
+    /** Play state to restore on lift — a drag pauses playback. */
+    private boolean mResumeAfterScrub;
+    /** Position the drag started from, to restore on a CANCELLED scrub. */
+    private long mScrubStartPositionMs = C.TIME_UNSET;
+    /** Latest dragged-to position, consumed by {@link #flushScrubPreview()}. */
+    private long mPendingScrubMs = C.TIME_UNSET;
+    /** uptimeMillis of the last preview seek, for the fixed interval. */
+    private long mLastPreviewSeekAtMs;
+    private boolean mScrubPreviewScheduled;
+    private final Handler mScrubHandler = new Handler(Looper.getMainLooper());
+    private final Runnable mScrubPreviewTask = this::flushScrubPreview;
+
+    /**
+     * A field (not an inline anonymous listener) so it can be REMOVED
+     * without releasing the player — background playback can outlive this
+     * fragment (see onDestroy's ownership transfer), and a listener left
+     * behind would leak the fragment + activity through mActivity.
+     */
+    private final Player.Listener mPlayerListener = new Player.Listener() {
+        @Override
+        public void onIsPlayingChanged(boolean isPlaying) {
+            if (mActivity != null) mActivity.updatePipParams();
+        }
+
+        @Override
+        public void onVideoSizeChanged(@NonNull VideoSize videoSize) {
+            if (mActivity != null) mActivity.updatePipParams();
+            // Runtime backstop for the first-frame stretch. When the
+            // synchronous preset can't resolve the size — a RESTORED
+            // content:// clip that MMR can't read and that has no stored
+            // resolution (ffmpeg can't open its foreign-owned path) — the
+            // content frame is left MATCH_PARENT and the first frame paints
+            // fitXY-stretched. The decoder ALWAYS reports the true size
+            // here (e.g. 498x334), so correct the content frame the instant
+            // it does. media3 does this itself, but doing it explicitly
+            // also fixes the POSTER band's aspect so, if the poster is still
+            // showing, it matches the letterbox exactly (no peek). Applied
+            // to the width/height as reported (already display-oriented via
+            // pixelWidthHeightRatio).
+            if (videoSize.width > 0 && videoSize.height > 0) {
+                float par = videoSize.pixelWidthHeightRatio > 0f
+                        ? videoSize.pixelWidthHeightRatio : 1f;
+                float aspect = (videoSize.width * par) / videoSize.height;
+                applyVideoAspect(aspect);
+            }
+        }
+
+        /**
+         * Video only: hide the first-frame poster once the
+         * TextureView has something opaque to draw. For audio
+         * mPhotoView is the steady-state artwork renderer (see
+         * onCreateView), not a placeholder — it never hides. Fires
+         * again for each NEW surface (media3 per-surface semantics),
+         * which is what re-hides the poster when a relaunched fragment
+         * ADOPTS the already-playing background player.
+         */
+        @Override
+        public void onRenderedFirstFrame() {
+            if (mPhotoView != null) mPhotoView.setVisibility(View.GONE);
+        }
+
+        /**
+         * A failed playback must be VISIBLE — without this a decode
+         * failure (e.g. an AV1 download on a device whose MediaCodec
+         * can't decode AV1) left a silent black screen that read as
+         * "the video doesn't open", with the real cause only in logcat.
+         * Decode-class failures (the 4xxx PlaybackException family) get
+         * the specific "can't decode this format" string, suffixed with
+         * the codec name when the failure carries one — the on-device
+         * report was a generic "Unknown error occurred" on an AV1 clip,
+         * which named neither the problem nor the way out (re-download
+         * at ≤1080p, where YouTube serves H264). Everything else keeps
+         * the generic string; the full typed cause is always logged.
+         */
+        @OptIn(markerClass = UnstableApi.class)
+        @Override
+        public void onPlayerError(@NonNull PlaybackException error) {
+            Log.e(TAG, "onPlayerError: " + error.getErrorCodeName(), error);
+            if (mPlayerView == null || !isAdded()) return;
+            int code = error.errorCode;
+            boolean decodeFailure =
+                    code == PlaybackException.ERROR_CODE_DECODER_INIT_FAILED
+                    || code == PlaybackException.ERROR_CODE_DECODER_QUERY_FAILED
+                    || code == PlaybackException.ERROR_CODE_DECODING_FAILED
+                    || code == PlaybackException.ERROR_CODE_DECODING_FORMAT_EXCEEDS_CAPABILITIES
+                    || code == PlaybackException.ERROR_CODE_DECODING_FORMAT_UNSUPPORTED;
+            String message;
+            if (decodeFailure) {
+                message = getString(R.string.player_error_unsupported_format);
+                String label = null;
+                if (error.getCause() instanceof
+                        MediaCodecRenderer.DecoderInitializationException die) {
+                    label = codecLabel(die.mimeType);
+                }
+                if (label != null) {
+                    // Appended in code so the string stays argument-free
+                    // across the 16 locales.
+                    message = message + " (" + label + ")";
+                }
+            } else {
+                message = getString(R.string.error_unknown);
+            }
+            Snackbar.make(mPlayerView, message, Snackbar.LENGTH_LONG).show();
+        }
+    };
+
+    /**
+     * Short user-facing codec label from a decoder-failure mime type
+     * ("video/av01" → "AV1"); null stays null (no suffix shown).
+     */
+    @Nullable
+    private static String codecLabel(@Nullable String mimeType) {
+        if (mimeType == null) return null;
+        int slash = mimeType.indexOf('/');
+        String sub = slash >= 0 ? mimeType.substring(slash + 1) : mimeType;
+        switch (sub) {
+            case "av01": return "AV1";
+            case "avc": return "H.264";
+            case "hevc": return "HEVC";
+            case "x-vnd.on2.vp9": return "VP9";
+            case "x-vnd.on2.vp8": return "VP8";
+            default: return sub.toUpperCase(Locale.US);
+        }
+    }
 
 
     @Override
@@ -164,6 +340,10 @@ public class MediaViewerFragment extends Fragment {
         mPlayerView = v.findViewById(R.id.player_view);
 
         mPhotoView = v.findViewById(R.id.photo_view);
+
+        mSeekFeedbackLeft = v.findViewById(R.id.media_viewer_seek_feedback_left);
+
+        mSeekFeedbackRight = v.findViewById(R.id.media_viewer_seek_feedback_right);
 
         // player_view stays VISIBLE from the start regardless of how the
         // activity was launched. The previous "GONE until onTransitionEnd"
@@ -305,6 +485,7 @@ public class MediaViewerFragment extends Fragment {
 
         setupDoubleTapSeek();
         setupSeekButtons();
+        setupScrubPreview();
 
         mWindowInsetsController = WindowCompat.getInsetsController(
                 mActivity.getWindow(), mActivity.getWindow().getDecorView());
@@ -412,56 +593,72 @@ public class MediaViewerFragment extends Fragment {
 
         String mimeType = mDownloadEntity.getFileMimeType();
 
-        mExoPlayer = new ExoPlayer.Builder(mActivity).build();
+        // A relaunch onto the same file while background playback runs
+        // (notification tap) ADOPTS the live player instead of building a
+        // second one — two players over one file is a double-audio leak.
+        // The hub only matches the same file path; anything else builds
+        // fresh (the previous fragment's teardown handled the old player).
+        ExoPlayer adopted = PlaybackHub.adopt(mDownloadEntity);
+        boolean adopting = adopted != null;
+
+        if (adopting) {
+            mExoPlayer = adopted;
+        } else {
+            // Audio focus (handleAudioFocus=true) + becoming-noisy +
+            // wake mode are what make BACKGROUND playback well-behaved:
+            // media3 runs the full focus state machine (pause on loss,
+            // resume on transient regain, duck) and pauses on headphone
+            // unplug, so PlayerPlaybackService needs neither hand-rolled —
+            // don't re-add the GeckoMediaPlaybackService focus machinery
+            // there. WAKE_MODE_LOCAL holds a CPU wake lock only while
+            // playing (local files — no wifi lock needed), which is what
+            // keeps audio running with the screen off.
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                    .setUsage(C.USAGE_MEDIA)
+                    .setContentType(FileUriHelper.isAudio(mimeType)
+                            ? C.AUDIO_CONTENT_TYPE_MUSIC
+                            : C.AUDIO_CONTENT_TYPE_MOVIE)
+                    .build();
+            // APPLICATION context, never mActivity: the Builder's
+            // lazily-built components (DefaultRenderersFactory & co.)
+            // retain the raw context they were given, and this player is
+            // DESIGNED to outlive the activity — it sits in the static
+            // PlaybackHub and keeps playing under PlayerPlaybackService
+            // after the system reclaims the backgrounded activity. Built
+            // on mActivity it would pin the destroyed PlayerActivity for
+            // the whole background session.
+            mExoPlayer = new ExoPlayer.Builder(App.getAppContext())
+                    .setAudioAttributes(audioAttributes, true)
+                    .setHandleAudioBecomingNoisy(true)
+                    .setWakeMode(C.WAKE_MODE_LOCAL)
+                    .build();
+        }
 
         // Notify the activity when play-state or video size changes so
-        // it can refresh the PiP action icon / aspect ratio. Listener is
-        // released in onDestroy along with the player.
-        mExoPlayer.addListener(new Player.Listener() {
-            @Override
-            public void onIsPlayingChanged(boolean isPlaying) {
-                if (mActivity != null) mActivity.updatePipParams();
-            }
+        // it can refresh the PiP action icon / aspect ratio. A field
+        // listener (see its comment) so ownership transfer can remove it.
+        mExoPlayer.addListener(mPlayerListener);
 
-            @Override
-            public void onVideoSizeChanged(@NonNull VideoSize videoSize) {
-                if (mActivity != null) mActivity.updatePipParams();
-                // Runtime backstop for the first-frame stretch. When the
-                // synchronous preset can't resolve the size — a RESTORED
-                // content:// clip that MMR can't read and that has no stored
-                // resolution (ffmpeg can't open its foreign-owned path) — the
-                // content frame is left MATCH_PARENT and the first frame paints
-                // fitXY-stretched. The decoder ALWAYS reports the true size
-                // here (e.g. 498x334), so correct the content frame the instant
-                // it does. media3 does this itself, but doing it explicitly
-                // also fixes the POSTER band's aspect so, if the poster is still
-                // showing, it matches the letterbox exactly (no peek). Applied
-                // to the width/height as reported (already display-oriented via
-                // pixelWidthHeightRatio).
-                if (videoSize.width > 0 && videoSize.height > 0) {
-                    float par = videoSize.pixelWidthHeightRatio > 0f
-                            ? videoSize.pixelWidthHeightRatio : 1f;
-                    float aspect = (videoSize.width * par) / videoSize.height;
-                    applyVideoAspect(aspect);
-                }
-            }
-
-            /**
-             * Video only: hide the first-frame poster once the
-             * TextureView has something opaque to draw. For audio
-             * mPhotoView is the steady-state artwork renderer (see
-             * onCreateView), not a placeholder — it never hides.
-             */
-            @Override
-            public void onRenderedFirstFrame() {
-                if (mPhotoView != null) mPhotoView.setVisibility(View.GONE);
-            }
-        });
+        // Register with the hub either way: attach() refreshes the entity
+        // and records THIS fragment as the release owner (after an adopt,
+        // that supersedes the predecessor fragment — whose teardown may
+        // run AFTER this, see onDestroy's isOwner gate).
+        PlaybackHub.attach(mExoPlayer, mDownloadEntity, this);
 
         // Default: read the raw path with a FileDataSource (owned files; the
         // vault's encrypted/safe entries keep this exact path untouched).
+        //
+        // Uri.fromFile, NEVER Uri.parse(filePath): parse() treats the raw
+        // path as an ALREADY-ENCODED uri string, so a '%' in the filename
+        // acts as an escape introducer — "4% Of" decodes through
+        // Uri.getPath() into U+FFFD replacement chars and FileDataSource
+        // throws FileNotFoundException("Invalid file path") on a file that
+        // exists (shipped: a YouTube title with '%' was unplayable on every
+        // device and the mojibake path in the log was the tell; a '#' would
+        // truncate the path as a fragment marker the same way). fromFile()
+        // ENCODES the path, so getPath() round-trips it verbatim.
         DataSource.Factory dataSourceFactory = new FileDataSource.Factory();
-        Uri playUri = Uri.parse(mDownloadEntity.getFilePath());
+        Uri playUri = Uri.fromFile(new File(mDownloadEntity.getFilePath()));
 
         // A foreign-owned RESTORED file can't be opened by path (EACCES). When
         // it resolves to the persisted SAF content:// grant, play THAT through
@@ -471,19 +668,24 @@ public class MediaViewerFragment extends Fragment {
             Uri openable = RestoredFileAccess.openableUri(mActivity, mDownloadEntity.getFilePath());
             if (openable != null && "content".equals(openable.getScheme())) {
                 playUri = openable;
-                dataSourceFactory = new DefaultDataSource.Factory(mActivity);
+                // App context for the same reason as the Builder above —
+                // the factory rides inside the media source, inside the
+                // player, inside the static hub.
+                dataSourceFactory = new DefaultDataSource.Factory(App.getAppContext());
             }
         }
 
-        ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory()
-                .setConstantBitrateSeekingEnabled(true)
-                .setConstantBitrateSeekingAlwaysEnabled(true);
+        if (!adopting) {
+            ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory()
+                    .setConstantBitrateSeekingEnabled(true)
+                    .setConstantBitrateSeekingAlwaysEnabled(true);
 
-        MediaItem mediaItem = MediaItem.fromUri(playUri);
+            MediaItem mediaItem = MediaItem.fromUri(playUri);
 
-        MediaSource videoSource = new ProgressiveMediaSource.Factory(dataSourceFactory, extractorsFactory).createMediaSource(mediaItem);
+            MediaSource videoSource = new ProgressiveMediaSource.Factory(dataSourceFactory, extractorsFactory).createMediaSource(mediaItem);
 
-        mExoPlayer.setMediaSource(videoSource);
+            mExoPlayer.setMediaSource(videoSource);
+        }
 
         // Pre-set PlayerView's inner AspectRatioFrameLayout from the
         // file's own video dimensions so the content frame is the right
@@ -501,7 +703,9 @@ public class MediaViewerFragment extends Fragment {
         // is silently undone. setPlayWhenReady() below hasn't started
         // decoding yet, so the aspect set here is in place for the first
         // frame. (Verified against media3 1.10.1 PlayerView source.)
-        mExoPlayer.prepare();
+        if (!adopting) {
+            mExoPlayer.prepare();
+        }
 
         mPlayerView.setPlayer(mExoPlayer);
 
@@ -509,7 +713,9 @@ public class MediaViewerFragment extends Fragment {
             presetVideoAspectRatio(playUri);
         }
 
-        mExoPlayer.setPlayWhenReady(true);
+        if (!adopting) {
+            mExoPlayer.setPlayWhenReady(true);
+        }
 
         if(!mAvoidTransition){
             long interval = mDownloadEntity.getThumbnailDuration();
@@ -549,19 +755,41 @@ public class MediaViewerFragment extends Fragment {
     }
 
 
+    // There is deliberately NO onPause pause any more. It used to pause
+    // whenever the activity lost the resumed state (screen off, lock, a
+    // dialog over the player, split-screen), which is exactly what
+    // background playback must NOT do. The pause/stop decision now lives
+    // one level up: PlayerActivity.onStop arms background playback (the
+    // PlaybackHub flag + PlayerPlaybackService) BEFORE the fragment's
+    // onStop runs, and this fragment stops the player only when that
+    // didn't happen. Transient onPause states (permission dialog,
+    // split-screen focus loss) keep playing — the media-player norm.
+    // Audio-focus loss pauses via media3's own handling (the player is
+    // built with handleAudioFocus=true), which covers the "another app
+    // started playing" case onPause used to approximate.
+
     @Override
-    public void onPause() {
-        super.onPause();
-        // While the activity is in PiP it still receives onPause but
-        // playback must keep running — that's the whole point of PiP.
-        // onStop / onDestroy still pause/release when PiP is dismissed.
-        if (mExoPlayer != null && !isActivityInPip())
-            mExoPlayer.pause();
+    public void onStart() {
+        super.onStart();
+        // Resume path for a player that onStop stopped (paused + screen
+        // off): stop() parks it in IDLE with position + playWhenReady
+        // retained, so prepare() restores the frame at the same position
+        // without starting playback the user had paused. Without this the
+        // returning activity showed a dead player (the pre-background-
+        // playback bug: nothing ever re-prepared after onStop).
+        if (mExoPlayer != null && mExoPlayer.getPlaybackState() == Player.STATE_IDLE) {
+            mExoPlayer.prepare();
+        }
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        // Before the stop() below: a drag in flight when the activity
+        // goes away never gets its lift event, and the pause + keyframe
+        // seek parameters it installed would otherwise survive into
+        // background playback.
+        abortScrubPreview();
         Glide.with(App.getAppContext()).clear(mPhotoView);
         // No PiP guard here: while the floating window is visible the
         // activity sits in PAUSED, not STOPPED — onStop only fires when
@@ -571,12 +799,14 @@ public class MediaViewerFragment extends Fragment {
         // can still report true at onStop time on the finish path, so
         // the guard skipped stop() and the player kept emitting audio
         // until release().
-        if (mExoPlayer != null)
+        //
+        // The background-playback gate is SAFE against that same X-close
+        // trap because it is not derived from PiP state: PlayerActivity
+        // arms it only when the activity is NOT finishing (its onStop runs
+        // before super dispatches this one), so every finish path lands
+        // here with the flag false and stops the player exactly as before.
+        if (mExoPlayer != null && !PlaybackHub.isBackgroundActive())
             mExoPlayer.stop();
-    }
-
-    private boolean isActivityInPip() {
-        return mActivity != null && mActivity.isInPictureInPictureMode();
     }
 
     /**
@@ -603,6 +833,21 @@ public class MediaViewerFragment extends Fragment {
     }
 
     /**
+     * Whether this entity may keep playing after the activity backgrounds.
+     * Vault (safe/encrypted) entries are excluded on purpose: background
+     * playback puts the file's NAME on the lock screen and in the
+     * notification shade, and vault content is device-auth gated — the same
+     * "the vault never leaves its trust domain" contract as the backup
+     * mirror and P2P send. Those keep the old stop-on-background behavior.
+     */
+    public boolean isBackgroundPlaybackEligible() {
+        return mDownloadEntity != null
+                && !mDownloadEntity.isFileEncrypted()
+                && !mDownloadEntity.isFileSafe()
+                && (isVideoMime() || isAudioMime());
+    }
+
+    /**
      * Toggle play / pause from the PiP action receiver. Called on the
      * main thread (BroadcastReceiver dispatch runs there by default).
      */
@@ -615,36 +860,77 @@ public class MediaViewerFragment extends Fragment {
     // ── Double-tap-to-seek ───────────────────────────────────────────
 
     /**
-     * Wire a GestureDetector on the PlayerView so a double-tap on the
-     * left half seeks back {@value #SEEK_DELTA_MS} ms and a double-tap
-     * on the right half seeks forward by the same amount. The seek is
-     * silent — the scrubber jump (and the visible ±10 s buttons in the
-     * controller) provide sufficient feedback. A single confirmed tap
-     * toggles the playback controller (replacing the built-in
-     * PlayerView behaviour we disabled).
+     * Wire a GestureDetector on the PlayerView. Zones are THIRDS (the
+     * YouTube layout): double-tap on the left third seeks back
+     * {@value #SEEK_DELTA_MS} ms, on the right third forward, and on
+     * the middle toggles play/pause. A single confirmed tap toggles the
+     * playback controller (replacing the built-in PlayerView behaviour
+     * we disabled).
      *
-     * <p>The listener returns {@code false} from
-     * {@code onTouch} so PlayerView's children (notably the scrubber
-     * inside the controller) keep receiving touches — only the
-     * top-level tap/double-tap decisions are routed through the
-     * GestureDetector.</p>
+     * <p><b>The streak model</b> — after a double-tap seek, EVERY
+     * further tap in the same zone within {@link #SEEK_STREAK_WINDOW_MS}
+     * seeks again immediately (window restarted per tap), with a
+     * cumulative "−20 s" badge at the tapped edge. This is not just
+     * polish: a bare onDoubleTap classifier consumes taps in PAIRS —
+     * three rapid taps fired ONE seek, four fired two — which read
+     * on-device as "sometimes it only seeks 10 s no matter how much I
+     * tap". The streak makes tap count map 1:1 to seeks after the
+     * opening pair. Continuation taps arrive on ALTERNATING callbacks
+     * (odd taps as onSingleTapUp — fired for every first-of-pair tap —
+     * even taps as another onDoubleTap), so BOTH handlers feed
+     * {@link #continueSeekStreak()}; they can never double-count one
+     * tap because a tap is classified as exactly one of the two.</p>
+     *
+     * <p>The touch listener CONSUMES the event stream (returns true) so
+     * PlayerView's own onTouchEvent tap-toggle never runs — see the
+     * comment at the listener for the show-then-instant-hide race that
+     * returning false caused. The controller's children (scrubber,
+     * buttons) are unaffected: a parent's OnTouchListener only sees
+     * events no child claimed.</p>
      */
     @SuppressLint("ClickableViewAccessibility")
     private void setupDoubleTapSeek() {
         mPlayerGestureDetector = new GestureDetector(mActivity,
                 new GestureDetector.SimpleOnGestureListener() {
                     @Override
+                    public boolean onSingleTapUp(@NonNull MotionEvent e) {
+                        int zone = seekZone(e);
+                        if (zone != 0 && isSeekStreakActive() && zone == mSeekStreakDir) {
+                            continueSeekStreak();
+                            mStreakTapConsumed = true;
+                            return true;
+                        }
+                        mStreakTapConsumed = false;
+                        return false;
+                    }
+
+                    @Override
                     public boolean onDoubleTap(@NonNull MotionEvent e) {
                         if (mPlayerView == null || mExoPlayer == null) return false;
-                        boolean leftHalf = e.getX() < mPlayerView.getWidth() / 2f;
-                        applySeek(leftHalf ? -SEEK_DELTA_MS : SEEK_DELTA_MS);
-                        spinSeekIcon(leftHalf);
+                        int zone = seekZone(e);
+                        if (zone == 0) {
+                            togglePlayPause();
+                            return true;
+                        }
+                        if (isSeekStreakActive() && zone == mSeekStreakDir) {
+                            continueSeekStreak();
+                        } else {
+                            mSeekStreakDir = zone;
+                            mSeekStreakAccumMs = 0;
+                            continueSeekStreak();
+                        }
                         return true;
                     }
 
                     @OptIn(markerClass = UnstableApi.class)
                     @Override
                     public boolean onSingleTapConfirmed(@NonNull MotionEvent e) {
+                        // A tap already spent on a streak continuation
+                        // must not ALSO toggle the controller.
+                        if (mStreakTapConsumed) {
+                            mStreakTapConsumed = false;
+                            return true;
+                        }
                         if (mPlayerView == null) return false;
                         if (mPlayerView.isControllerFullyVisible()) {
                             mPlayerView.hideController();
@@ -655,10 +941,89 @@ public class MediaViewerFragment extends Fragment {
                     }
                 });
 
+        // CONSUME the event (return true) — this is load-bearing, not a
+        // formality. PlayerView.onTouchEvent has its OWN tap handler
+        // (performClick → toggleControllerVisibility) that SHOWS the
+        // controller on every tap-up; returning false let it run in
+        // parallel with this detector, so a single tap showed the
+        // controller instantly (PlayerView's path) and ~300 ms later
+        // onSingleTapConfirmed saw it visible and HID it again — bars
+        // flashing in and out per tap. The race existed all along but was
+        // MASKED while the controller had a show animation: during the
+        // slide-in isControllerFullyVisible() is still false, so the
+        // confirm's toggle landed as a (harmless) second show. Disabling
+        // controller animation (the stranded-timebar fix) made the show
+        // instant and flipped the toggle into a hide. Consuming here kills
+        // PlayerView's competing handler outright; the controller and its
+        // children (scrubber, buttons) are unaffected — a parent's
+        // OnTouchListener only ever sees events no child claimed.
         mPlayerView.setOnTouchListener((view, event) -> {
             mPlayerGestureDetector.onTouchEvent(event);
-            return false;
+            return true;
         });
+    }
+
+    /**
+     * Which seek zone a touch falls in: -1 = left third (back),
+     * +1 = right third (forward), 0 = middle third (no seek).
+     */
+    private int seekZone(MotionEvent e) {
+        if (mPlayerView == null) return 0;
+        float width = mPlayerView.getWidth();
+        if (width <= 0) return 0;
+        if (e.getX() < width / 3f) return -1;
+        if (e.getX() > width * 2f / 3f) return 1;
+        return 0;
+    }
+
+    private boolean isSeekStreakActive() {
+        return mSeekStreakDir != 0
+                && SystemClock.uptimeMillis() < mSeekStreakUntilMs;
+    }
+
+    /**
+     * One streak step: seek ±10 s, restart the continuation window, and
+     * refresh the cumulative badge. The accumulated figure is NOMINAL
+     * (10 s per tap) — near the clip edges the actual seek clamps to
+     * [0, duration] while the badge keeps counting, the same behavior
+     * YouTube shows; the scrubber tells the clamped truth.
+     */
+    private void continueSeekStreak() {
+        mSeekStreakUntilMs = SystemClock.uptimeMillis() + SEEK_STREAK_WINDOW_MS;
+        boolean back = mSeekStreakDir < 0;
+        applySeek(back ? -SEEK_DELTA_MS : SEEK_DELTA_MS);
+        mSeekStreakAccumMs += SEEK_DELTA_MS;
+        spinSeekIcon(back);
+        showSeekFeedback();
+    }
+
+    /**
+     * Show / refresh the cumulative seek badge on the streak's side and
+     * arm its fade-out for when the streak window closes. Re-entrant per
+     * continuation tap: cancel + full alpha + re-armed delay, so the
+     * badge sits solid while the user keeps tapping and fades only once
+     * they stop.
+     */
+    private void showSeekFeedback() {
+        boolean back = mSeekStreakDir < 0;
+        TextView badge = back ? mSeekFeedbackLeft : mSeekFeedbackRight;
+        TextView other = back ? mSeekFeedbackRight : mSeekFeedbackLeft;
+        if (badge == null) return;
+        if (other != null) {
+            other.animate().cancel();
+            other.setVisibility(View.GONE);
+        }
+        badge.setText(String.format(Locale.US, "%s%d s",
+                back ? "−" : "+", mSeekStreakAccumMs / 1000));
+        badge.animate().cancel();
+        badge.setAlpha(1f);
+        badge.setVisibility(View.VISIBLE);
+        badge.animate()
+                .alpha(0f)
+                .setStartDelay(SEEK_STREAK_WINDOW_MS)
+                .setDuration(250L)
+                .withEndAction(() -> badge.setVisibility(View.GONE))
+                .start();
     }
 
     /**
@@ -689,6 +1054,149 @@ public class MediaViewerFragment extends Fragment {
         long upper = dur > 0 ? dur : Long.MAX_VALUE;
         long target = Math.max(0L, Math.min(upper, pos + deltaMs));
         mExoPlayer.seekTo(target);
+    }
+
+    // ── Scrub preview ────────────────────────────────────────────────
+
+    /**
+     * Make dragging the scrubber show the video it is passing over,
+     * instead of moving a marker across a frozen frame.
+     *
+     * <p>Media3 does not do this on its own: PlayerControlView updates
+     * the position TEXT on every scrub move but only calls seekTo when
+     * the finger LIFTS, so the picture stays on whatever frame was
+     * showing when the drag began. Dragging back and forth was blind —
+     * you could read a timestamp but not see where you were. This adds a
+     * SECOND {@link TimeBar.OnScrubListener} that seeks while the finger
+     * moves; the surface renders each seek target even with playback
+     * paused, the same mechanism FrameGrabberFragment's slider relies
+     * on, so no second decoder is needed and every source the player can
+     * open (owned path, restored content:// grant, vault) previews.</p>
+     *
+     * <p>Three things keep it cheap enough to run on every drag:</p>
+     * <ul>
+     *   <li>{@link SeekParameters#CLOSEST_SYNC} while dragging, so a
+     *       preview costs ONE keyframe decode instead of decoding
+     *       forward from that keyframe to an exact position. Restored to
+     *       {@link SeekParameters#DEFAULT} on lift, so where the user
+     *       actually lands is unchanged.</li>
+     *   <li>A FIXED-INTERVAL throttle, never a reset-on-every-event
+     *       debounce: a debounce never fires under continuous movement,
+     *       the same starvation trap the session-persistence batching
+     *       documents. One seek per window, always the newest position.</li>
+     *   <li>Playback is paused for the drag and restored on lift —
+     *       otherwise each preview seek resumes playing and the audio
+     *       stutters across the whole drag.</li>
+     * </ul>
+     *
+     * <p>Video only. An audio file has no frame to preview and
+     * seek-per-move would just chop the audio, so it keeps the media3
+     * default (seek on lift).</p>
+     */
+    @OptIn(markerClass = UnstableApi.class)
+    private void setupScrubPreview() {
+        if (!isVideoMime()) return;
+        View progress = mPlayerView.findViewById(R.id.exo_progress);
+        if (!(progress instanceof TimeBar)) return;
+        ((TimeBar) progress).addListener(new TimeBar.OnScrubListener() {
+            @Override
+            public void onScrubStart(@NonNull TimeBar timeBar, long position) {
+                beginScrubPreview(position);
+            }
+
+            @Override
+            public void onScrubMove(@NonNull TimeBar timeBar, long position) {
+                previewFrameAt(position);
+            }
+
+            @Override
+            public void onScrubStop(@NonNull TimeBar timeBar, long position, boolean canceled) {
+                endScrubPreview(canceled ? mScrubStartPositionMs : position);
+            }
+        });
+    }
+
+    @OptIn(markerClass = UnstableApi.class)
+    private void beginScrubPreview(long positionMs) {
+        if (mExoPlayer == null) return;
+        mScrubbing = true;
+        mScrubStartPositionMs = mExoPlayer.getCurrentPosition();
+        mResumeAfterScrub = mExoPlayer.getPlayWhenReady();
+        if (mResumeAfterScrub) {
+            mExoPlayer.setPlayWhenReady(false);
+        }
+        mExoPlayer.setSeekParameters(SeekParameters.CLOSEST_SYNC);
+        // Preview the touch-down position at once: a tap on the bar is a
+        // start + stop with no move in between, and making the first
+        // preview wait out a window reads as lag on a slow drag.
+        mLastPreviewSeekAtMs = 0L;
+        previewFrameAt(positionMs);
+    }
+
+    /** Record the dragged-to position and seek at most once per window. */
+    private void previewFrameAt(long positionMs) {
+        if (!mScrubbing || mExoPlayer == null) return;
+        mPendingScrubMs = positionMs;
+        if (mScrubPreviewScheduled) return;
+        long wait = mLastPreviewSeekAtMs + SCRUB_PREVIEW_INTERVAL_MS - SystemClock.uptimeMillis();
+        if (wait <= 0L) {
+            flushScrubPreview();
+            return;
+        }
+        mScrubPreviewScheduled = true;
+        mScrubHandler.postDelayed(mScrubPreviewTask, wait);
+    }
+
+    private void flushScrubPreview() {
+        mScrubPreviewScheduled = false;
+        if (!mScrubbing || mExoPlayer == null || mPendingScrubMs == C.TIME_UNSET) return;
+        long target = mPendingScrubMs;
+        mPendingScrubMs = C.TIME_UNSET;
+        mLastPreviewSeekAtMs = SystemClock.uptimeMillis();
+        mExoPlayer.seekTo(target);
+    }
+
+    /**
+     * End a drag: exact seek parameters back, land on {@code targetMs}
+     * (pass {@link C#TIME_UNSET} to land nowhere), resume playback if the
+     * drag paused it.
+     *
+     * <p>PlayerControlView's own scrub-stop handler runs BEFORE this one
+     * (it registered first, in its constructor) and seeks while
+     * CLOSEST_SYNC is still set, so the exact seek here is what makes the
+     * released position land where the user let go. A CANCELLED scrub
+     * gets no seek from media3 at all, which is why the caller passes the
+     * start position back rather than leaving the player on the last
+     * previewed keyframe.</p>
+     */
+    @OptIn(markerClass = UnstableApi.class)
+    private void endScrubPreview(long targetMs) {
+        mScrubHandler.removeCallbacks(mScrubPreviewTask);
+        mScrubPreviewScheduled = false;
+        mPendingScrubMs = C.TIME_UNSET;
+        mScrubStartPositionMs = C.TIME_UNSET;
+        mScrubbing = false;
+        if (mExoPlayer == null) return;
+        mExoPlayer.setSeekParameters(SeekParameters.DEFAULT);
+        if (targetMs != C.TIME_UNSET) {
+            mExoPlayer.seekTo(targetMs);
+        }
+        if (mResumeAfterScrub) {
+            mResumeAfterScrub = false;
+            mExoPlayer.setPlayWhenReady(true);
+        }
+    }
+
+    /**
+     * A drag interrupted by the activity leaving (Home mid-scrub, PiP
+     * entry, teardown) never gets its lift event, so restore the player
+     * here instead of leaving it paused on a keyframe with CLOSEST_SYNC
+     * still set — the state would then outlive the drag into background
+     * playback.
+     */
+    private void abortScrubPreview() {
+        if (!mScrubbing) return;
+        endScrubPreview(C.TIME_UNSET);
     }
 
     /**
@@ -739,8 +1247,24 @@ public class MediaViewerFragment extends Fragment {
         Log.d(TAG, "[onPipModeChanged] inPip=" + inPip);
         if (mPlayerView == null) return;
         if (inPip) {
+            // Entering PiP hides the controller out from under a finger
+            // that may still be on the scrubber (Home mid-drag). The
+            // activity stays PAUSED rather than STOPPED in PiP, so
+            // onStop's abort does not run for this path.
+            abortScrubPreview();
             mPlayerView.hideController();
             setChromeVisible(false);
+        } else {
+            // Re-assert the controller ↔ chrome lockstep on exit. The
+            // controller was hidden on entry, so this normally KEEPS the
+            // ActionBar + system bars hidden (immersive, matching the
+            // hidden controller) — the activity used to force
+            // actionBar.show() here instead, leaving the title bar
+            // floating alone over the video until two taps cycled it.
+            // Derived from the controller's live state rather than
+            // hardcoded false so a visible controller (nothing hides it
+            // during PiP teardown races) keeps its bars.
+            setChromeVisible(mPlayerView.isControllerFullyVisible());
         }
         // No reset on exit. The bottom-bar inner row is pinned at
         // android:layout_height="44dp" + layout_gravity="bottom" in
@@ -831,29 +1355,60 @@ public class MediaViewerFragment extends Fragment {
         mFallbackDrawable = null;
         if (mPlayerView != null)
             mPlayerView.setPlayer(null);
-        if (mExoPlayer != null)
-            mExoPlayer.release();
+        if (mExoPlayer != null) {
+            mExoPlayer.removeListener(mPlayerListener);
+            // The replace transaction runs with setReorderingAllowed(true),
+            // so a SUCCESSOR fragment may already have gone through
+            // onViewCreated BEFORE this teardown runs. Two distinct
+            // successor cases, told apart by whether the hub still holds
+            // THIS fragment's player:
+            //  - same file (notification tap): the successor ADOPTED this
+            //    very player — hands off entirely. Neither release (it's
+            //    the live player under the new UI) nor markOwnerDetached
+            //    (that flags the service to release it on shutdown, which
+            //    killed the adopted player under the new fragment — every
+            //    control click then hit media3's dead internal thread).
+            //  - different file: the successor attached its OWN fresh
+            //    player, so this one is unregistered — it must be released
+            //    here or it leaks and keeps playing under the new video.
+            boolean adoptedBySuccessor = !PlaybackHub.isOwner(this)
+                    && PlaybackHub.player() == mExoPlayer;
+            if (adoptedBySuccessor) {
+                // Successor owns it now; nothing to do.
+            } else if (PlaybackHub.isOwner(this)
+                    && PlaybackHub.isBackgroundActive()
+                    && mActivity != null && !mActivity.isFinishing()) {
+                // Background playback outlives this fragment (the system
+                // reclaimed the backgrounded activity): hand release duty
+                // to PlayerPlaybackService instead of killing the audio
+                // mid-stream. A later same-file relaunch adopts the
+                // player back before the service ever shuts down.
+                PlaybackHub.markOwnerDetached();
+            } else {
+                mExoPlayer.release();
+                PlaybackHub.clearIfHolds(mExoPlayer);
+            }
+        }
         mExoPlayer = null;
         mPlayerView = null;
+        mSeekFeedbackLeft = null;
+        mSeekFeedbackRight = null;
         mWindowInsetsController = null;
     }
 
 
     /**
      * Reach into PlayerView, find its inner exo_content_frame
-     * (an AspectRatioFrameLayout), and set its aspect ratio
-     * synchronously so the layout is the right shape BEFORE the first
-     * frame paints. Without it the content frame stays MATCH_PARENT
-     * until onVideoSizeChanged and the first frame renders stretched
-     * to full screen (see the call site).
+     * (an AspectRatioFrameLayout), and set its aspect ratio so the layout
+     * is the right shape BEFORE the first frame paints. Without it the
+     * content frame stays MATCH_PARENT until onVideoSizeChanged and the
+     * first frame renders stretched to full screen (see the call site).
      *
-     * The read is on the UI thread (cold launch), so it must be a
-     * cheap metadata read, and it must be reliable — a stretched frame
-     * only appears when this fails to resolve the size. Sources, in
-     * order (see {@link #readVideoAspectRatio}):
+     * Sources, in order:
      *   1. the entity's stored capture resolution ("WxH") — instant,
-     *      in-memory, no file I/O; the only reliable source for a
-     *      restored content:// clip and free of main-thread jank.
+     *      in-memory, applied SYNCHRONOUSLY; the only reliable source for
+     *      a restored content:// clip and free of main-thread jank. This
+     *      is the common case (parsers and probes stamp a resolution).
      *   2. MediaMetadataRetriever — rotation-aware, covers most owned
      *      files; returns nothing for the odd container (498x334,
      *      timescale-100) and pays disk I/O over a content:// grant.
@@ -861,17 +1416,44 @@ public class MediaViewerFragment extends Fragment {
      *      parses files the platform extractors reject, and (unlike a
      *      path open) works for a foreign-owned restored file via the
      *      SAF grant, the same fd path Glide's FFmpegPfdDecoder uses.
-     * If all miss, onVideoSizeChanged applies the decoder's true size at
-     * runtime (see the Player.Listener), with the opaque shutter masking
-     * the gap.
+     *
+     * <p><b>Tiers 2+3 run on a WORKER thread — never re-inline them.</b>
+     * They used to run synchronously in onViewCreated, and on a
+     * resolution-less entity they froze the tap-to-open for seconds: the
+     * StrictMode log showed ~2.2 s of main-thread disk I/O (143 skipped
+     * frames) on a SABR-downloaded AV1 clip — ffmpeg's find_stream_info
+     * grinds long on a codec the build can't decode, and FUSE storage
+     * makes every read expensive. The user read it as "the video doesn't
+     * open". The async result is applied only if the DECODER hasn't
+     * reported first — onVideoSizeChanged's value is PAR-corrected and
+     * authoritative, and it also remains the backstop when every tier
+     * misses (the opaque shutter masks the gap). The worker captures the
+     * app context + path, not fragment fields (mActivity can be nulled
+     * mid-probe); it retains the fragment only for the probe's bounded
+     * duration via the completion lambda, which self-guards on a dead
+     * view.
      */
     @OptIn(markerClass = UnstableApi.class)
     private void presetVideoAspectRatio(Uri uri) {
         if (uri == null) return;
-        float aspect = readVideoAspectRatio(uri);
-        if (aspect > 0f) {
-            applyVideoAspect(aspect);
+        float fromEntity = aspectFromResolution(mDownloadEntity.getFileResolution());
+        if (fromEntity > 0f) {
+            applyVideoAspect(fromEntity);
+            return;
         }
+        final Context appContext = App.getAppContext();
+        final String filePath = mDownloadEntity.getFilePath();
+        final Handler main = new Handler(Looper.getMainLooper());
+        new Thread(() -> {
+            float aspect = readVideoAspectRatioBlocking(appContext, uri, filePath);
+            if (aspect <= 0f) return;
+            main.post(() -> {
+                if (mPlayerView == null || mExoPlayer == null) return;
+                VideoSize reported = mExoPlayer.getVideoSize();
+                if (reported.width > 0 && reported.height > 0) return;
+                applyVideoAspect(aspect);
+            });
+        }, "aspect-probe").start();
     }
 
     /**
@@ -897,36 +1479,26 @@ public class MediaViewerFragment extends Fragment {
         }
     }
 
-    /** Display width/height ratio for the video, or 0 if unresolved. */
-    private float readVideoAspectRatio(@NonNull Uri uri) {
-        // 1. Stored capture resolution ("WxH"). Tried FIRST on purpose: it is
-        //    an in-memory string read — no file I/O, no main-thread jank — and
-        //    it is the ONLY reliable source for a RESTORED (content://) file
-        //    whose bytes the platform extractors can't read. The reported
-        //    failing clip (498x334, timescale-100, played via a SAF content://
-        //    grant) is exactly this case: MediaMetadataRetriever returns
-        //    nothing for it AND the native ffmpeg tier can't open the
-        //    foreign-owned path (EACCES — the same reason playback uses the
-        //    grant), so both other tiers miss and the content frame stayed
-        //    MATCH_PARENT, stretching the first frame fitXY. Doing this read
-        //    first also drops the ~400 ms of main-thread content:// disk I/O
-        //    the MMR-first order paid on every open (visible as repeated
-        //    StrictMode DiskReadViolations), which itself widened the
-        //    pre-first-frame window. No rotation info here, but tier 2 handles
-        //    rotated files; capture resolution is already display-oriented.
-        float fromEntity = aspectFromResolution(mDownloadEntity.getFileResolution());
-        if (fromEntity > 0f) {
-            return fromEntity;
-        }
-
-        // 2. MediaMetadataRetriever (rotation-aware). Pick the overload by
+    /**
+     * File-probing aspect tiers (MMR, then native ffmpeg over a PFD) —
+     * BLOCKING, called from the worker thread in
+     * {@link #presetVideoAspectRatio} only. Static + parameterized on
+     * purpose: it must not touch fragment fields (mActivity can be nulled
+     * by onDetach mid-probe). Returns the display width/height ratio, or
+     * 0 if unresolved. The stored-resolution tier lives in the caller
+     * (in-memory, applied synchronously).
+     */
+    private static float readVideoAspectRatioBlocking(@NonNull Context context,
+                                                      @NonNull Uri uri,
+                                                      @Nullable String filePath) {
+        // 1. MediaMetadataRetriever (rotation-aware). Pick the overload by
         //    scheme: a raw path uri (owned file) needs the String overload;
         //    a content:// SAF grant (restored file) needs (Context, Uri).
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
         try {
             String scheme = uri.getScheme();
             if ("content".equals(scheme)) {
-                retriever.setDataSource(mActivity, uri);
+                retriever.setDataSource(context, uri);
             } else if (uri.getPath() != null) {
                 retriever.setDataSource(uri.getPath());
             }
@@ -953,7 +1525,7 @@ public class MediaViewerFragment extends Fragment {
             try { retriever.release(); } catch (Exception ignored) {}
         }
 
-        // 3. Native ffmpeg over a ParcelFileDescriptor — the reliable backstop
+        // 2. Native ffmpeg over a ParcelFileDescriptor — the reliable backstop
         //    for files the platform extractors reject, INCLUDING a restored
         //    content:// clip. The native reader can't open a foreign-owned
         //    *path* (EACCES), but it reads fine from a file DESCRIPTOR:
@@ -962,14 +1534,13 @@ public class MediaViewerFragment extends Fragment {
         //    the very same fd path Glide's FFmpegPfdDecoder already uses to
         //    thumbnail these clips. Feeding that fd's stream to the InputStream
         //    metadata reader resolves the 498x334, timescale-100 case MMR can't
-        //    (and that tier 1 only covers when a resolution was stored).
-        ParcelFileDescriptor pfd = RestoredFileAccess.openReadOnly(
-                mActivity, mDownloadEntity.getFilePath());
+        //    (the caller's stored-resolution tier only covers stamped files).
+        ParcelFileDescriptor pfd = RestoredFileAccess.openReadOnly(context, filePath);
         if (pfd != null) {
             FFmpegMetaDataReader reader = new FFmpegMetaDataReader();
             try (InputStream in = new ParcelFileDescriptor.AutoCloseInputStream(pfd)) {
                 FFmpegMetaData meta = reader.getStreamInfo(
-                        in, mDownloadEntity.getFilePath(), pfd.getStatSize(), false);
+                        in, filePath, pfd.getStatSize(), false);
                 if (meta != null) {
                     int w = meta.getWidth();
                     int h = meta.getHeight();

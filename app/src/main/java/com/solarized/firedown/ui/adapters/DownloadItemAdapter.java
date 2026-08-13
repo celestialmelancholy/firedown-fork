@@ -3,10 +3,16 @@ package com.solarized.firedown.ui.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +24,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.ColorUtils;
-import androidx.core.widget.ImageViewCompat;
 import androidx.paging.PagingDataAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
@@ -90,6 +95,12 @@ public class DownloadItemAdapter extends PagingDataAdapter<Object, RecyclerView.
     private final int mColorSelected;
     private final Drawable mChecked;
     private final Drawable mUnChecked;
+    /** Cloud mark for the LIST row's facts line; see cloudTagDrawable. */
+    private Drawable mCloudTag;
+    /** Where the mark's centre sits relative to the baseline (negative = up). */
+    private int mCloudBaselineOffset;
+    /** Gap between the mark and the text it leads. */
+    private int mCloudGap;
     private final RequestOptions mRequestOptions;
     /** Backgrounds for download rows. Active and finished now share
      *  the same surface — the live signal moved to a thicker, tinted
@@ -472,6 +483,118 @@ public class DownloadItemAdapter extends PagingDataAdapter<Object, RecyclerView.
     /** Whether this FINISHED, non-safe file is backed up to the cloud (its
      *  content key is in {@link #mBackedUpKeys}). Safe-folder files never leave
      *  the device, so they're never badged. */
+    /**
+     * '{@code [cloud] 11:53 · 27 MB}' — the mark as a leading span on the facts
+     * line. Returns the text unchanged if the glyph can't be built, so a failed
+     * resource lookup degrades instead of handing ImageSpan a null.
+     */
+    private CharSequence withLeadingCloud(TextView view, String facts) {
+        Drawable glyph = cloudTagDrawable(view);
+        if (glyph == null) {
+            return facts;
+        }
+        SpannableStringBuilder text = new SpannableStringBuilder();
+        // One character to hang the span on; its WIDTH comes from the span.
+        text.append(' ');
+        text.setSpan(new CenteredImageSpan(glyph, mCloudBaselineOffset, mCloudGap),
+                0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return text.append(facts);
+    }
+
+    /**
+     * The facts-line cloud, built once, tinted to that line's own ink.
+     *
+     * <p>FILLED, and at text size that is not a compromise: an outlined icon has
+     * a size floor a filled one doesn't. cloud_queue's contour is ~2/24 of its
+     * box, so here the stroke lands near 1dp with a counter a few pixels across,
+     * and both antialias into a grey smudge — tried on device, rejected. A
+     * filled silhouette stays crisp all the way down. Its own earlier blob
+     * problem was SIZE (1.15x on a path that fills its box edge to edge is
+     * taller than the capitals and wider than any letter), not the fill.
+     */
+    private Drawable cloudTagDrawable(TextView view) {
+        if (mCloudTag == null) {
+            Drawable glyph = Utils.tintDrawableColor(mContext, R.drawable.cloud_24,
+                    view.getCurrentTextColor());
+            if (glyph != null) {
+                // The cloud stands 16 of its 24 units tall, so 0.9x the text
+                // size lands between the x-height and the caps — about the ink
+                // of a letter. This is the dial if it reads heavy or slight.
+                int size = Math.round(view.getTextSize() * 0.9f);
+                glyph.setBounds(0, 0, size, size);
+                measureCloudMetrics(view.getPaint(), view.getTextSize());
+            }
+            mCloudTag = glyph;
+        }
+        return mCloudTag;
+    }
+
+    /**
+     * Where the mark sits and how much air follows it, measured once from the
+     * line's own paint.
+     *
+     * <p>Vertically it centres on the '·' this line already separates its facts
+     * with — measured, not derived. The midpoint of ascent/descent rides ~1dp
+     * high because ascent carries the font's accent headroom, and any fixed
+     * ratio of the text size is font-dependent where a measurement isn't.
+     *
+     * <p>Only ONE gutter exists for a leading mark: the gap after it. It is
+     * keyed to the TEXT size rather than the glyph's, so tuning the glyph can't
+     * quietly retighten the spacing. 0.55x reads as ~6dp on the 11sp facts
+     * line, tuned on device across 0.34x (~3.7dp) and 0.44x (~4.8dp), both of
+     * which sat tight against the leading duration.
+     */
+    private void measureCloudMetrics(Paint paint, float textSize) {
+        Rect bounds = new Rect();
+        paint.getTextBounds("·", 0, 1, bounds);
+        if (bounds.height() <= 0) {
+            paint.getTextBounds("x", 0, 1, bounds);
+        }
+        mCloudBaselineOffset = bounds.height() > 0
+                ? (bounds.top + bounds.bottom) / 2
+                : Math.round(paint.ascent() / 3f);
+        mCloudGap = Math.max(1, Math.round(textSize * 0.55f));
+    }
+
+    /**
+     * An {@link ImageSpan} that sits on the text's optical centre and keeps its
+     * hands off the line's metrics.
+     *
+     * <p>ALIGN_BASELINE rests the drawable's BOTTOM on the baseline, so a box
+     * even slightly taller than the cap height climbs above the text and reads
+     * as detached. And {@code DynamicDrawableSpan.getSize} rewrites the line's
+     * ascent/descent from the drawable, which would let this glyph set the row
+     * height on backed-up rows and the text set it everywhere else.
+     */
+    private static final class CenteredImageSpan extends ImageSpan {
+        private final int mBaselineOffset;
+        private final int mGapAfter;
+
+        CenteredImageSpan(Drawable drawable, int baselineOffset, int gapAfter) {
+            super(drawable, ImageSpan.ALIGN_BASELINE);
+            mBaselineOffset = baselineOffset;
+            mGapAfter = gapAfter;
+        }
+
+        @Override
+        public int getSize(@NonNull Paint paint, CharSequence text, int start, int end,
+                           @Nullable Paint.FontMetricsInt fm) {
+            // Advance only — fm deliberately untouched.
+            return getDrawable().getBounds().width() + mGapAfter;
+        }
+
+        @Override
+        public void draw(@NonNull Canvas canvas, CharSequence text, int start, int end,
+                         float x, int top, int y, int bottom, @NonNull Paint paint) {
+            Drawable glyph = getDrawable();
+            canvas.save();
+            // Flush with the line start — the gap is carried after the glyph.
+            canvas.translate(x, y + mBaselineOffset - glyph.getBounds().height() / 2f);
+            glyph.draw(canvas);
+            canvas.restore();
+        }
+    }
+
     private boolean isBackedUp(DownloadEntity entity) {
         if (mBackedUpKeys.isEmpty() || entity.isFileSafe()) {
             return false;
@@ -869,61 +992,24 @@ public class DownloadItemAdapter extends PagingDataAdapter<Object, RecyclerView.
         // logic, so the ground matches what actually paints. See its javadoc.
         boolean realThumbnail = !GlideHelper.rendersMimeFallback(entity);
 
-        // ── Cloud-backup badge ──────────────────────────────────────
-        // A quiet mark for a FINISHED file that's backed up to the cloud.
-        // Only-when-true — absence is the signal, so the list stays quiet (and
-        // non-users see none). Not on progress/error/queued rows (an in-flight
-        // or failed download isn't backed up).
+        // ── Cloud-backup badge (GRID tile only) ─────────────────────
+        // The grid keeps the corner overlay on the thumbnail; the LIST row
+        // carries its mark at the head of the facts line instead (see the
+        // statusText bind above). The split is not inconsistency: a tile has no
+        // facts line with room to prefix, and it sits on artwork where an
+        // overlay reads cleanly, while a list row has a dim housekeeping line
+        // that opens with a variable-width duration — no column to break.
+        // cloudBadge is null on a list holder now, hence the guard.
         //
-        // It sits in a DIFFERENT place per surface, hence the isGrid split
-        // below: a corner overlay on the grid tile's artwork, but INLINE in the
-        // list row's meta line (see fragment_download_item.xml for why — the
-        // 78×64dp list thumbnail can't spare the corner, and the list has a
-        // meta line the grid's scrim caption doesn't).
+        // The glyph is a BARE cloud, no check mark: at 12-14dp the tick inside
+        // the silhouette is mush and reads as a smudge rather than a state —
+        // and since the badge only appears for a positively-backed-up file, its
+        // presence already carries the "done". Don't swap it back to the
+        // cloud_done_* pair (cloud_done_24 is the BOOKMARK-SYNC state icon, a
+        // larger surface with two real states — that one keeps its tick).
         if (holder.cloudBadge != null) {
             boolean backed = status == Download.FINISHED && isBackedUp(entity);
             holder.cloudBadge.setVisibility(backed ? View.VISIBLE : View.GONE);
-            if (backed) {
-                // Tint the marker by the GROUND it sits on, not by theme alone —
-                // a photo's brightness doesn't follow the theme. Every GRID badge
-                // is over artwork or over the generated fallback ground, and BOTH
-                // are dark-or-arbitrary, so the grid always takes the white cloud
-                // with a baked shadow (cloud_badge) — it reads on bright or dark
-                // pictures alike, and on the flat fallback ground the shadow is
-                // simply invisible.
-                //
-                // This used to split on realThumbnail as well, because the
-                // fallback tile was a PALE pastel in light theme where a flat
-                // white cloud vanished. That ground is now one dark colour in
-                // both themes (MimeTypeThumbnail.COLOR_FALLBACK_GROUND), so the
-                // split is gone with it — and the old colorOnSurfaceVariant
-                // branch would now be actively wrong: in light theme it resolves
-                // to a DARK glyph, which on the dark tile is the very
-                // disappearance it was added to prevent.
-                //
-                // The LIST badge is inline on the theme ground, so it takes the
-                // plain tinted glyph — the ink of the domain beside it. (isGrid,
-                // not realThumbnail: a list row with a real video frame must NOT
-                // get the white-on-shadow variant, which would be invisible
-                // against the light-theme meta line.)
-                //
-                // Both glyphs are a BARE cloud, no check mark: at 12-14dp the tick
-                // inside the silhouette is mush and reads as a smudge rather than
-                // a state — and since the badge only appears for a
-                // positively-backed-up file, its presence already carries the
-                // "done". Don't swap these back to the cloud_done_* pair
-                // (cloud_done_24 is still the BOOKMARK-SYNC state icon, a larger
-                // surface with two real states — that one keeps its tick).
-                if (isGrid) {
-                    holder.cloudBadge.setImageResource(R.drawable.cloud_badge);
-                    ImageViewCompat.setImageTintList(holder.cloudBadge, null);
-                } else {
-                    holder.cloudBadge.setImageResource(R.drawable.cloud_24);
-                    ImageViewCompat.setImageTintList(holder.cloudBadge,
-                            ColorStateList.valueOf(MaterialColors.getColor(holder.cloudBadge,
-                                    com.google.android.material.R.attr.colorOnSurfaceVariant)));
-                }
-            }
         }
 
         applyGridTileGround(holder, isGrid, status, realThumbnail);
@@ -1150,9 +1236,41 @@ public class DownloadItemAdapter extends PagingDataAdapter<Object, RecyclerView.
             holder.statusText.setTextColor(MaterialColors.getColor(
                     holder.statusText,
                     com.google.android.material.R.attr.colorOnSurfaceVariant));
-            holder.statusText.setText(getFinishedLabel(holder, entity,
+            String facts = getFinishedLabel(holder, entity,
                     headerStatesDate(entity.getFileDate()),
-                    mGroupingSort == Sorting.SORT_SIZE));
+                    mGroupingSort == Sorting.SORT_SIZE);
+            // ── Cloud-backup mark, LEADING this line (Drive's placement) ──
+            // Drive puts its status glyphs — shared, starred, unread — at the
+            // head of the row's secondary line, at text size, and simply lets
+            // rows without one start flush. Its meta line is therefore ragged
+            // between rows and reads fine, which is the evidence that the
+            // "ragged column" objection recorded against the 1.1.87 mark was
+            // overweighted.
+            //
+            // It goes on THIS line and not the one above because line 2 opens
+            // with the all-caps VIDEO label, which forms a hard vertical column
+            // down the list — that column is the only thing that made an indent
+            // visible. This line opens with a duration (0:26, 11:53, 2:38:25),
+            // already a different width on every row, so there is no column for
+            // the mark to break. It is also the dimmer housekeeping line, which
+            // is the right register for a quiet state.
+            //
+            // LEADING, not inside the line: the three earlier attempts put the
+            // mark BETWEEN the separator and the domain, i.e. inside a phrase,
+            // where it interrupted the reading rather than prefixing it. A
+            // leading mark also has only ONE gutter to get right.
+            // No status check: bindFinishedInner is only reached from
+            // 'case Download.FINISHED ->', so the row is finished by
+            // construction (an in-flight or failed download isn't backed up).
+            if (isBackedUp(entity)) {
+                holder.statusText.setText(withLeadingCloud(holder.statusText, facts));
+                // The span is invisible to TalkBack; say the state out loud.
+                holder.statusText.setContentDescription(
+                        mContext.getString(R.string.cloud_backed_up_desc) + ", " + facts);
+            } else {
+                holder.statusText.setText(facts);
+                holder.statusText.setContentDescription(null);
+            }
             holder.statusText.setVisibility(View.VISIBLE);
         }
 
@@ -1163,8 +1281,8 @@ public class DownloadItemAdapter extends PagingDataAdapter<Object, RecyclerView.
 
 
     /**
-     * Returns the cached "<size> - <date>" label, rebuilding only when
-     * the holder is bound to a different entity or the row's size /
+     * Returns the cached "<duration> · <size> · <date>" label, rebuilding only
+     * when the holder is bound to a different entity or the row's size /
      * date actually changed (rare for FINISHED — these are terminal
      * fields). Saves one Utils.getFileSize, one DateUtils.getFileDate,
      * and one String concatenation per scroll re-bind of the same row.
@@ -1187,15 +1305,24 @@ public class DownloadItemAdapter extends PagingDataAdapter<Object, RecyclerView.
         }
         Tracing.begin("finishedLabel:miss");
         try {
-            // Built from PARTS rather than a fixed two-arg format, because either
-            // of the first two can be dropped when the section header already
-            // groups by it (see setGroupingSort). The third — the type's
-            // secondary metadatum (duration / resolution / language) — is never
-            // dropped; nothing groups by it. Joined with the same " · " the
-            // download_finished_meta string uses, so the line is identical when
-            // nothing is omitted.
+            // Built from PARTS rather than a fixed format, because size and
+            // date can each be dropped when the section header already groups
+            // by it (see setGroupingSort). The type's secondary metadatum
+            // (duration / resolution / language) is never dropped; nothing
+            // groups by it — and it LEADS the line, matching the grid caption's
+            // "duration · size" order: the two presentations of this screen
+            // used to state the same facts in opposite orders (grid
+            // "3:51 · 40,1 MB", list "40,1 MB · 3:51"). Identifying fact
+            // first, housekeeping after.
             StringBuilder label = new StringBuilder();
+            String secondary = secondaryMetaLabel(entity, entity.getFileMimeType());
+            if (!TextUtils.isEmpty(secondary)) {
+                label.append(secondary);
+            }
             if (!omitSize) {
+                if (label.length() > 0) {
+                    label.append(" · ");
+                }
                 label.append(Utils.getFileSize(size));
             }
             if (!omitDate) {
@@ -1203,13 +1330,6 @@ public class DownloadItemAdapter extends PagingDataAdapter<Object, RecyclerView.
                     label.append(" · ");
                 }
                 label.append(DateUtils.getFileDate(date));
-            }
-            String secondary = secondaryMetaLabel(entity, entity.getFileMimeType());
-            if (!TextUtils.isEmpty(secondary)) {
-                if (label.length() > 0) {
-                    label.append(" · ");
-                }
-                label.append(secondary);
             }
             String text = label.toString();
             holder.cachedFinishedKeyId = id;
@@ -1263,12 +1383,24 @@ public class DownloadItemAdapter extends PagingDataAdapter<Object, RecyclerView.
     }
 
     private void bindQueuedInner(DownloadViewHolder holder, DownloadEntity entity, boolean isGrid) {
-        // Grid QUEUED leans on the title + mime chip in the bottom block; no
-        // dedicated grid status label yet.
-        if (!isGrid && holder.statusText != null) {
-            holder.statusText.setTextColor(MaterialColors.getColor(
-                    holder.statusText,
-                    com.google.android.material.R.attr.colorOnSurfaceVariant));
+        // Both surfaces state the pending state in words — without the label, a
+        // grid QUEUED tile is just glyph + title + mime and reads as a broken
+        // FINISHED tile (nothing says it hasn't started; the X action icon is
+        // the only tell). The INK splits per surface, the CloudBackup
+        // TransferVH rule: the grid label sits on the dark fallback ground,
+        // where colorOnSurfaceVariant is ~1.47:1 in light theme — there it
+        // takes mDefaultPrimary, the ink the tile's other two status lines
+        // ("Finishing…", errors) already use on that ground (see bindErrorInner
+        // for the contrast math). The list label is on the theme surface and
+        // keeps the muted colorOnSurfaceVariant — coral there would make a calm
+        // waiting state read like an error. (Dense-mosaic QUEUED is untouched:
+        // its bottom_block stays hidden, the pure-thumbnail contract.)
+        if (holder.statusText != null) {
+            holder.statusText.setTextColor(isGrid
+                    ? mDefaultPrimary
+                    : MaterialColors.getColor(
+                            holder.statusText,
+                            com.google.android.material.R.attr.colorOnSurfaceVariant));
             holder.statusText.setText(R.string.download_queued);
             holder.statusText.setVisibility(View.VISIBLE);
         }
@@ -1385,13 +1517,13 @@ public class DownloadItemAdapter extends PagingDataAdapter<Object, RecyclerView.
         final @Nullable TextView mimeDuration;
         final @Nullable View bottomBlock;
         /** Quiet "backed up to cloud" marker, shown only for a FINISHED backed-up
-         *  file. Same placement in EVERY layout (the adapter only toggles
-         *  visibility): a bare ~70%-white cloud in the THUMBNAIL's top-START corner
-         *  — the Google Photos "backed up" convention, so list and grid read
-         *  identically. Off the mime·domain meta line (a backup STATE is not the
-         *  row's identity), and off the right gutter (a lone glyph there read as
-         *  orphaned). The list selection check lives in the ⋮ slot, not on the
-         *  thumbnail, so there's no collision. Not the old disc — no filled circle. */
+         *  file: the white shadowed cloud_badge on the THUMBNAIL's top-START
+         *  corner, in list and grid alike (Google Photos convention). The list
+         *  spent a round inline in the meta line — leading, it indented the
+         *  mime label out of column; trailing, it floated at the row's edge —
+         *  before returning to the overlay, whose old light-theme washout
+         *  objection died with the dark fallback ground. Fully declared in the
+         *  layouts; the adapter only toggles visibility. */
         final @Nullable AppCompatImageView cloudBadge;
 
         // Cache for the FINISHED row's "<size> - <date>" label. Built

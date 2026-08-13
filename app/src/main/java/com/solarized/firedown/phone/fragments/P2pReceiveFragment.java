@@ -205,8 +205,9 @@ public class P2pReceiveFragment extends P2pShareBaseFragment
     private void showReading() {
         setStage(R.id.p2p_status_group);
         ((TextView) mView.findViewById(R.id.p2p_status)).setText(R.string.p2p_preparing);
-        // Optimistic footer until onTransport reports the live path.
-        ((TextView) mView.findViewById(R.id.p2p_footer)).setText(R.string.p2p_footer);
+        // Path-neutral footer until onTransport reports the live path. NOT the
+        // "never touches a server" copy — see onTransport.
+        ((TextView) mView.findViewById(R.id.p2p_footer)).setText(R.string.p2p_footer_connecting);
     }
 
     @Override
@@ -216,6 +217,15 @@ public class P2pReceiveFragment extends P2pShareBaseFragment
         }
         // Honest footer: relayed through firedown.app (still E2E encrypted) vs
         // a direct peer-to-peer path that never touches a server.
+        //
+        // "Never touches a server" is only ever set HERE, because it is only
+        // true once the engine has actually read the selected candidate pair.
+        // The stages default to p2p_footer_connecting instead: reportTransport
+        // is best-effort and stays silent when getStats is missing, its promise
+        // rejects, or no pair matches — and with the old optimistic default,
+        // every one of those left a RELAYED transfer claiming the file never
+        // touched a server. An unverified privacy claim must degrade to the
+        // weaker statement, never to the stronger one.
         ((TextView) mView.findViewById(R.id.p2p_footer)).setText(
                 relayed ? R.string.p2p_footer_relayed : R.string.p2p_footer);
         maybeHintVpnRelay(relayed);
@@ -335,6 +345,40 @@ public class P2pReceiveFragment extends P2pShareBaseFragment
         MaterialButton done = mView.findViewById(R.id.p2p_stop);
         done.setText(R.string.p2p_done);
         done.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * A no-path on a LINK-delivered offer is usually a DEAD SENDER, not a
+     * network topology problem, and the generic copy sent the user to fix the
+     * wrong thing.
+     *
+     * The offer code is self-contained — name, size, mime, and the sender's ICE
+     * candidates + DTLS fingerprint, all minted when the share screen was open.
+     * The offer mailbox then serves it for its whole TTL with a NON-destructive
+     * read, so a link keeps producing a full, convincing preview long after the
+     * sender closed the share and released those ports. Accept therefore
+     * succeeds, connectivity checks go to nothing, and 30s later the user is
+     * told to try the same Wi-Fi with the VPN off — advice for a live peer they
+     * can't reach, when the peer isn't there at all.
+     *
+     * Scoped to {@code mArrivedRemote} because the QR path is the opposite
+     * case: the sender is standing right there with the share screen open, so a
+     * no-path really is about the network and the existing copy is correct.
+     *
+     * The wording asserts no cause it hasn't verified ("may have closed") —
+     * a genuine CGNAT↔CGNAT pair still lands here, and the actionable step is
+     * the same either way. Same rule as the transfer footer: an unverified
+     * claim degrades to the weaker statement.
+     *
+     * A VPN on THIS device still wins, being both more specific and directly
+     * actionable.
+     */
+    @Override
+    protected int errorText(@NonNull String code) {
+        if ("no-path".equals(code) && mArrivedRemote && !isVpnActive()) {
+            return R.string.p2p_error_no_path_link;
+        }
+        return super.errorText(code);
     }
 
     @Override

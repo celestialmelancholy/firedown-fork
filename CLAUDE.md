@@ -647,7 +647,231 @@ YouTube isn't HLS/DASH — it's Google's SABR (itag formats, a
 `PoTokenGenerator`). The `youtube@` extension emits adaptive video+audio
 itag-pair variants + the shared SABR data; routed via `UrlType.SABR`, downloaded
 by `SabrStrategy`. `VariantProcessor` skips ffprobe for SABR variants (empty
-media URLs) and trusts the JS codec/resolution/duration. Captions use the
+media URLs) and trusts the JS codec/resolution/duration.
+
+**Attestation (STREAM_PROTECTION_STATUS 3) recovers by RE-MINTING, and a
+server-refused download ERRORS — it never finalizes.** The server can demand
+attestation MID-STREAM (seen in the wild ~60 s into a download whose
+start-time token it had accepted). `SabrDownloader` reacts by minting a fresh
+per-video PO token through `PoTokenRefresher` (wired by `SabrStrategy` to
+`mintFreshPoToken`, set unconditionally so a download whose initial mint
+failed gets its chance here too) and resuming from position; after
+`MAX_ATTESTATION_REFRESHES` (2) failed re-mints the token is being REJECTED,
+not missing, and it throws `SabrException`. **That budget is CONSECUTIVE —
+it resets on forward progress (`playerTimeMs > prevPlayerTime`).** It was a
+lifetime cap, so a download challenged a third time was failed even though
+both earlier recoveries had succeeded. Demands track MEDIA POSITION, not
+elapsed time — the first lands around a minute of media, which on a fast
+connection is a second or two into the transfer — so a long video
+legitimately draws several within one short download (a 6 h video transfers
+in minutes; do not reason about this in wall-clock). The reset must use the
+SAME progress test the stall detector uses, not merely "segments arrived".
+
+**Three separate bounds stop a status-3 → re-mint → status-3 loop, and all
+three are load-bearing.** (1) The consecutive cap (2): the same token being
+refused twice in a row with no progress between ends the download — more
+minting cannot change that answer. (2) `attestationBudgetTotal()`, a
+never-reset ceiling, because the consecutive cap resets on progress and a
+server answering with segments AND status=3 together would otherwise
+re-mint every pass forever; it is **scaled** (one per five minutes of
+media, floor eight) rather than fixed, since a flat ceiling fails exactly
+the long videos it would be meant to protect — a previous version used a
+flat 10 and was wrong for that reason. (3) A mint that returns NOTHING
+fails the download immediately instead of spending the second attempt: the
+page was unreachable or the attestation timed out, which is a CONNECTION
+failure, not a refused token. It used to report "PO token rejected" for
+that, sending the next debugging round after YouTube instead of after the
+network. Re-minting seconds later over the same broken network only repeats
+it; the honest end state is an ERROR row the user retries with signal,
+which restarts cleanly. **All of it is covered by
+`sh scripts/sabr-harness/run.sh`**, which drives the REAL `SabrDownloader`
+against a scripted SABR server (17 assertions, seconds, JDK only — the
+`sabr` package touches just five external types, so `okhttp3.*` +
+`android.util.Log`/`Base64` + `BuildConfig` are stubbed and OkHttp answers
+from a queue the test writes). `SabrTestServer` builds genuine UMP frames:
+the varint encoder mirrors the scheme documented on
+`UmpReader.readUmpVarint` and assertion 0 round-trips it through the real
+reader before anything else runs, while message bodies use the app's own
+`ProtobufWire.Writer` — so a CODEC bug would cancel out, which is accepted
+because what is under test is the downloader's state machine. Written
+against the pre-fix downloader first, where exactly three assertions fail
+(the network-vs-rejected message, a download killed at its third demand
+after two SUCCESSFUL recoveries, and the old 2-mint bound where the scaled
+budget allows 72). One case throwing is reported as a failed case, never an
+aborted suite — the first version aborted at case 5 and silently hid every
+case after it. Two shipped bugs guard this shape
+— don't reintroduce either: the downloader used to log-and-RETURN the partial
+`Result` on attestation, and `SabrStrategy`'s catch used to SALVAGE-mux
+whatever temp segments existed — together they finalized a 62-second
+truncation of a 100-minute video as a FINISHED entry, a broken-looking file
+with no honest error anywhere (and it misdirected a whole debugging round
+toward codecs and filenames). The deliberate partial-mux path is the USER's
+stop/finish (`stopped`), never a `SabrException`.
+
+**The re-mint MUST bypass every token cache — a cache-first "refresh" is a
+no-op that only looks like recovery.** The refresher goes through
+`PoTokenGenerator.generateFresh`, NOT `generate`, because the token is cached
+at TWO layers and on this path both hold exactly the token the server just
+refused: (1) `PoTokenGenerator.tokenCache` (videoId → token, session-lived),
+and (2) the page's cached `WebPoMinter` in `content.js` (`cm`, ~5 h) — bound
+to ONE integrity token and minting over the identifier, so re-minting through
+it reproduces the same refused bytes. **Clearing only (1) would still recover
+nothing**, which is why `generateFresh` evicts its entry AND sets
+`forceFresh` on the port `mint` message so `content.js` drops `cm` and re-runs
+the full BotGuard attestation (att/get → interpreter VM → snapshot →
+GenerateIT → new minter). Shipped bug: both "fresh PO token" attempts logged
+`generate: cache hit ... (0ms)`, so a 100-minute download died ~4 s after the
+demand having never once asked the page to mint anything — the logs read like
+YouTube hard-rejecting us when the recovery had simply never run. Cost is a
+real ~3 s attestation instead of ~100 ms, correct when the alternative is
+failing the download. **The eviction happens BEFORE the mint** so a failed
+refresh can't leave the rejected token behind as a future "hit", and
+`SabrStrategy`'s `SabrException` catch calls `PoTokenGenerator.invalidate`
+when `SabrDownloader.isAttestationRejected()` — otherwise the refused token
+survives ~5 h in the cache and the user's obvious next move (retry the ERROR
+row) starts from the very token that just failed. Don't "simplify" the
+refresher back to the plain cache-first mint, and don't add a cache layer
+under it without a force-fresh path through it.
+
+**The page must honour the integrity token's OWN lifetime, and every
+PoTokenGenerator change is verified by `sh scripts/potoken-harness/run.sh`.**
+`GenerateIT` answers `[integrityToken, estimatedTtlSecs, …]` and
+`content.js` used only `[0]`, trusting the derived `WebPoMinter` for a
+hardcoded 5 h. Every token a minter produces is bound to THAT integrity
+token, so once the server expires it every later mint is refused — a
+well-formed 120-char token the server rejects, intermittently, depending
+only on how long the hidden session had been up. That is the shape to
+recognise: **attestation failures that come and go with session age are a
+TTL problem, not a token-content problem.** `cml` is now bounded by
+`ij[1]` minus a 5-minute margin (the 5 h survives only as the
+no-value-from-server fallback), the attestation is **single-flight**
+(`cmp`) so a video and its subtitles don't each run their own att/get →
+VM-fetch → GenerateIT, and `tokenCache` entries expire after 10 min.
+**Note what is and isn't a prediction here.** A PO token's own lifetime
+is NOT predictable — yt-dlp's guide puts observed validity anywhere from
+~12 h to several months, and their issue asking for a figure is still
+unanswered — so the only authority on whether a token works is the
+server refusing it, which is what the status-3 recovery reacts to. The
+integrity token is the opposite: the server STATES its TTL in
+`GenerateIT`'s reply, and minting from one it has already retired
+produces a token guaranteed to be refused. Honour `ij[1]`; never invent
+a PO-token expiry. The 10-min `tokenCache` window is scope, not
+prophecy: minting is DOWNLOAD-time only (`SabrStrategy` /
+`TimedTextStrategy` are the sole callers — nothing mints at capture), so
+it covers a download and its timedtext sibling seconds apart and
+declines to reuse across unrelated later downloads, where a warm re-mint
+is ~100 ms and no network. Four recovery paths were fixed with it, each invisible to the
+class's own liveness test (`session != null && port != null`): a STALE
+port's `onDisconnect` used to tear down the LIVE session it had just been
+replaced on; a mint the page never answered left the session wedged for
+its whole 5 h TTL (so `mint` now distinguishes no-answer → recycle from
+an error REPLY → keep, since the page is alive and recycling would burn
+~3 s to land in the same place); `INIT_TIMEOUT_MS` was 3 s AND destroyed
+a session that was merely still loading, so a slow connection restarted
+from zero forever and never converged (now 10 s, with
+`SESSION_INIT_GRACE_MS` bounding how long a not-yet-ready session is left
+alone); and a `forceFresh` mint ran under the 15 s ceiling though the
+page allows its snapshot step alone 10 s, so the recovery timed out
+exactly on the slow devices needing it (now `MINT_FRESH_TIMEOUT_MS`, with
+`content.js`'s own ceiling kept ABOVE it so Java gives up first — a
+page-side timeout arrives as an error reply, which by the rule above must
+NOT recycle). The harness compiles the REAL class against stubs and drives
+all of it (34 assertions, ~65 s — four cases wait out real timeouts because
+the constants' relationship to each other is what is under test); it was
+written by running it against the pre-fix class first, where exactly the
+8 assertions covering these defects fail. **Why none of this was caught
+earlier: the class had no test at all, and every one of these bugs lives
+in a RECOVERY path** — code that only runs once something else has already
+gone wrong, which on-device looks like YouTube being flaky rather than a
+bug. Reading the happy path, and reading a log of the happy path, can't
+find them. Run the harness.
+
+**Four resource leaks came out of the same audit — `LeakHarness` (the
+second suite in `run.sh`) exists to keep them out.** An open
+`GeckoSession` holds a content process, so the rule is that every session
+opened must end up closed, and a session nothing references can never be
+closed by anyone: (1) an exception ANYWHERE after `open()` — `setActive`,
+`loadUri`, the registrar — left an opened session that was never stored,
+so no later `closeSessionLocked` could reach it; it is now closed on the
+failure path, which is why `s`/`opened` live outside the runnable's try.
+(2) The create runnable is queued behind whatever else the main thread is
+doing, so `ensureReady` can time out and give up (or `shutdown` can run,
+or a later caller can start its own session) BEFORE it lands — it then
+created a session nothing held; it now adopts only while
+`readyFuture == future` and closes the orphan otherwise, and that
+identity check is the whole mechanism, so don't replace it with a null
+check. (3) `postMessage` throwing (Gecko's answer for a dead port)
+escaped `mint()` past its `finally`, stranding the just-registered
+`pending` entry and a future nobody would ever complete, and propagating
+the throw into the download; it is caught, swept, and treated as a dead
+session. (4) `tokenCache`'s TTL is enforced lazily on a read of the SAME
+videoId, so a token for a video never asked about again was never
+examined and never removed — browsing minted one per captured video and
+the map only emptied when the session recycled hours later. Bounded now
+by `pruneTokenCacheLocked` (`MAX_CACHED_TOKENS`) on insert. Known
+residual, bounded and deliberately not fixed: each page-side
+re-attestation orphans a BotGuard VM (we hold only the minter, not the
+`BotGuardClient`, and shutting the VM down would break a minter still
+closing over it) — at most a few per 5 h session, which the session
+recycle then clears.
+
+**Video codec pick prefers H264 over AV1 at equal heights** (both
+`buildAdaptiveVariants` and `buildSabrOnlyVariants` sort with an avc-first
+tie-break before bitrate). AV1's higher-bitrate rendition used to win every
+rung, and AV1 files can't produce thumbnails on this app: Samsung's
+MediaMetadataRetriever fails AV1 frame extraction (a42xq confirmed), and the
+FFmpeg fallback hits the native `av1` decoder, a hwaccel-only stub that
+returns `AVERROR(ENOSYS)` (-38) under the build's `--disable-hwaccels` — so
+every AV1 download wore a permanent mime glyph and "Regenerate thumbnail"
+visibly did nothing. AV1 still fills the >1080p rungs (1440p/4K), where
+YouTube serves no H264. The real decode fix is building firedown-ffmpeg with
+`-dav1d` (its build.sh conditionally adds `libdav1d` to the decoder
+allow-list — see that repo's CLAUDE.md "AV1 needs `-dav1d`" section); until
+that `.so` rebuild ships, existing AV1 downloads keep the glyph, and the
+codec preference keeps new ≤1080p downloads thumbnail-able either way.
+
+**Multi-audio-track videos (auto-dubbing): the ORIGINAL-language track is the
+default, never a dub.** A multi-track video repeats the SAME audio itags once
+per track (one itag-140 per language, near-identical bitrates), YouTube lists
+the viewer-locale dub first and marks IT `audioIsDefault` — so the old plain
+best-bitrate pick downloaded the dub. `selectDefaultAudio` (`background.js`,
+used by BOTH `buildAdaptiveVariants` and `buildSabrOnlyVariants`) scores
+tracks: xtags `acont=original` (xtags in the player JSON is base64url
+protobuf — decode before searching; locale-independent, the authoritative
+signal) > displayName containing "original" (localized but latin locales keep
+the word) > `audioIsDefault` (marker-less pre-autodub sets, where the default
+IS the original); dubbed/descriptive markers push a track down (descriptive =
+audio-description, never a wanted default) and a small DRC penalty prefers the
+untouched rendition WITHIN a track. Single-track videos carry no `audioTrack`
+field and reduce to the old best-bitrate pick. The chosen track's id rides on
+EVERY variant as `audioTrackId`, and `JsonHelper.parseVariants` prefers that
+variant-level field — its itag-keyed SABR format map is LAST-WINS across the
+per-track duplicates of one itag, so the map's `audioTrackId` (and any
+fallback field read from it) is an arbitrary track on multi-track videos; the
+variant-level fields are authoritative (`SabrStrategy` sends the track id as
+AbrState field 69 plus the track's own audio FormatId, which is what makes
+the SABR server serve that track). The muxed itag-18 fallback can't choose (a
+single pre-muxed stream with YouTube's default audio) — accepted. **Track
+choice is its own SECTION in the quality sheet, never resolution×track
+variant rows** (dozens of dubs on big channels would explode the sheet): the
+emit carries `audioTracks` — one entry per distinct track (original first +
+flagged, each entry the track's best non-DRC AAC rendition:
+id/name/itag/lastModified/xtags/n-param-transformed url; empty for
+single-track videos) — which rides
+`JsonHelper.parseAudioTracks` → `GeckoInspectEntity` → `GeckoInspectTask` →
+`BrowserDownloadEntity.mAudioTracks` (parcelled) into an "Audio track"
+radio section in `BrowserOptionVariantsFragment` (between Quality and
+Captions, `BrowserOptionAudioTrackAdapter` — self-contained clicks, NOT the
+quality adapter's fragment round-trip: both lists reuse the same row layout
+id, so a shared listener couldn't tell them apart). Selecting a non-default
+track overlays the built request via `toBuilder()`: `audioUrl` (the
+FFmpegMergeStrategy path) + the SABR audio FormatId/track id (SabrStrategy).
+The default (position 0 = original) applies no override, so the no-pick path
+is byte-identical to the pre-picker behavior. The picker strings
+(`audio_track_*`) are deliberately base-locale-only, matching the whole
+picker-sheet family (`quality_section_title`/`captions_section_title` are
+untranslated too — translating only the new section would mix languages in
+one sheet). Captions use the
 separate `timedtext` path. **YouTube LIVE is the exception: HLS, not SABR** —
 `isLive` → the `hlsManifestUrl` (n-param-transformed), emitted as
 **`type:"hls-master"`, NOT `type:"media"`**. This matters: `type:"media"` →
@@ -936,6 +1160,143 @@ This section exists because a Threads bug took ~8 rounds that should have taken
 - Don't reach for a "logged-in vs logged-out" explanation without evidence; it
   was a red herring.
 
+#### Instagram — SSR doc filter first; the shortcode GraphQL fetch is only a fallback
+
+A post/reel page (2025 shape, HAR-verified logged-out) SSR-inlines the media
+item into the document's `<script data-sjs>` Relay blobs —
+`result.data.xig_polaris_media.if_not_gated_logged_out` is the item
+(`video_versions` with type-only tiers 101/102/103, usually the SAME url —
+the lean-item shape `buildInstagramVariants` dedups; `user.username`,
+`caption.text`, `image_versions2`, no `video_duration`) — and the page's own
+graphql XHRs carry ONLY experiments + Bloks login-wall payloads. So
+`listenerInstagramPage` is a **main_frame doc filter** (`readFilteredBody`,
+the Threads pattern — read the network response, never the DOM) running the
+shared media-item walk; the parser's own GraphQL fetch by shortcode
+(`fetchInstagramByShortcode`, `doc_id`-based — the thing that broke when the
+API changed) fires ONLY when the doc yielded no media. The XHR filter's
+graphql scan also unwraps the `if_not_gated_logged_out` gating wrapper for
+SPA navigations. **The media-item walk lives in `instagram.js`**
+(`collectInstagramMediaItems` + `walkInstagramMediaItems` /
+`instagramItemRichness`) **and `threads.js` imports it** — one walker for the
+one Meta item shape, so the depth-cap class of bug can't reappear in a
+drifted copy (the import direction is threads→instagram, matching the
+existing `sendInstagramItem` import; don't fork it back). The new fbcdn
+`o1/v/…AQ….mp4?…` URLs still match the `instagram.*\.mp4` block rule
+(HAR-verified), so the cardinal rule holds unchanged — and it covers the
+DASH track URLs below too (same host/extension shape).
+
+**Inline DASH (`video_dash_manifest`) is the primary source when present —
+and on dash-eligible clips the "progressive" URL is a SILENT video-only
+file.** Meta's MPD is the Bilibili model: SegmentBase, each Representation
+one whole-track fbcdn `.mp4` BaseURL (XML-escaped — `decodeHtmlEntities`),
+so a rendition downloads as a video+audio URL pair merged by
+`FFmpegMergeStrategy` — no manifest is handed to ffmpeg, no `manifest` flag.
+HAR-verified: the reel's `video_versions` URL has the IDENTICAL PATH to the
+MPD's 720p avc1 Representation BaseURL (844-byte single-track init), and the
+live player range-fetches that very URL as its video track while pulling
+audio from a separate file — i.e. `video_versions` on these clips IS the
+video-only DASH track, and a progressive-only capture downloads no audio.
+`buildInstagramItemVariants` (used for the item AND each carousel entry)
+therefore emits the DASH renditions (each paired with the best audio
+rendition's URL) and appends only progressive rows that are genuinely
+distinct files — same-path rows (the silent track) and height-duplicates are
+dropped; with no/unparseable MPD it reduces exactly to the old
+progressive-only list, and a video-only MPD (no audio AdaptationSet) emits
+unpaired renditions. The MPD's `mediaPresentationDuration` fills in
+`duration` for the lean SSR item shape (which carries no `video_duration`);
+separate-audio pairs still probe at capture (the `sendVariants` rule), so
+codecs/duration land regardless. `parseInstagramDashManifest` is a regex
+reader over Representation blocks on purpose — the manifest is one
+machine-generated shape, and this keeps it runnable under node for the
+HAR-replay tests (no DOMParser). `isInstagramMediaItem` also matches
+DASH-only items (`video_dash_manifest` with no `video_versions`), so the
+shape walk can't miss them.
+
+**Robustness architecture — the shape walk is the backbone, wrappers are
+fast paths.** The item shape (`video_versions`/`carousel_media` + `code`)
+has been stable across Meta surfaces for years; the WRAPPERS (query names,
+gating objects, edge nesting, endpoint paths) churn every few months, and
+every historical break was a wrapper change. So the parser is built so a
+wrapper change degrades metadata precision at worst, never loses the video:
+- **`walkAndSend` (the bounded shape walk) runs on EVERY filtered API
+  response, after the specific handlers** — not only when they found
+  nothing, because one response can mix a known shape with a new wrapper.
+  The walk matches every item family by SHAPE: `video_versions`,
+  DASH-only (`video_dash_manifest`, top-level or `dash_info`-nested),
+  carousel parents, AND the old web-GraphQL `video_url` node — so a
+  wrapper rename can't lose any of them. `parseInstagramQuery` stays for
+  its precise sidecar-child semantics (per-node thumbnails/durations),
+  not as the only door to the `video_url` shape anymore. Overlap is
+  collapsed by the `sentOrigins` dedup: both paths emit the same
+  canonical origin, so a walk re-find of a handler-sent item is a no-op.
+  Handlers emit FIRST so their richer records win the repository race.
+- **Item identity is pk-first** (`instagramItemKey`: `pk || id || code ||
+  shortcode`): pk is the canonical media id both the rich record and the
+  lean Relay fragments of one clip carry, so richness folding survives a
+  copy that lacks `code`; a code-less item still emits (origin falls back
+  to `/p/<pk>` — origins are identity, not fetchable URLs). Field
+  fallbacks in `sendInstagramItem` span both families (`caption.text` /
+  `edge_media_to_caption`, `user.username` / `owner.username`,
+  `code`/`shortcode`). The walk does NOT descend into a matched item's
+  `carousel_media` — slides emit via the parent's per-slide `dedupKey`,
+  and collecting them standalone would double-emit each slide.
+- **`IG_API_PATTERNS` is deliberately broad AND host-agnostic**
+  (`*://*.instagram.com/graphql*` + `/api/*` — matches the bare apex and
+  any subdomain): a renamed endpoint OR a host shuffle must not be a
+  capture miss; over-matching is cheap because the filter is pass-through
+  and the walk ignores anything without a video. The doc filter's
+  main_frame registration is `*.instagram.com` for the same reason.
+- **NDJSON fallback + prefix tolerance**: a body that fails whole-JSON
+  parse is re-parsed per line (Meta streams deferred GraphQL payloads
+  newline-delimited), and both passes go through `tolerantParseJson` —
+  on a parse failure it retries from the first JSON delimiter, so an
+  anti-hijack prefix change (`for (;;);` today, `while(1);` elsewhere)
+  can't kill the parse.
+- **Doc filter hedge**: if the `data-sjs` pass finds nothing, rescan every
+  `type="application/json"` script (attribute-rename insurance), and only
+  then fall back to the shortcode GraphQL fetch.
+- **A PERMALINK document emits only the ADDRESSED item** (the doc-filter
+  gate on the URL's shortcode): a logged-in reel/post page preloads
+  SUGGESTED/next clips into the same SSR blobs, drawn from recent activity
+  — on-device that surfaced as "a video from my other Instagram tab
+  appears in this tab's Captured sheet" (the suggestion engine had picked
+  the just-watched clip). Suggested reels the user actually swipes to
+  arrive as XHRs the API filter captures then, so nothing viewed is lost.
+  Falls back to emitting all collected items when NO item matches the
+  shortcode (a wrapper that renamed `code` must degrade to over-capture,
+  not a miss); feed/profile/explore docs (no shortcode) keep
+  capture-everything.
+- **The doc filter runs on ALL `www.instagram.com` main_frames, not just
+  `/p/`+`/reel/`**: the logged-in HOME FEED (and profile/explore) documents
+  SSR-inline the first screenful of posts into the same `data-sjs` blobs
+  (HAR-verified 26-08-09, `xdt_api__v1__feed__timeline__connection` — the
+  scroll-time copies arrive as `graphql/query` XHRs the API filter reads,
+  but the SSR ones exist nowhere else on the wire, and with fbcdn media
+  block-listed a path-gated registration lost them entirely). The GraphQL
+  fetch fallback stays shortcode-gated, so a feed/profile document never
+  fires it.
+- **Carousel slides emit with a per-CLIP `dedupKey`**
+  (`origin#<slide pk>`): all slides share the post's `/p/<code>` origin, and
+  `sendVariants`' origin-dedup dropped every carousel video after the first
+  (HAR-verified: a 20-slide carousel with two videos emitted one). The pk is
+  stable across re-reads where the signed URL rotates, so refresh dedup
+  still holds.
+- `sendInstagramItem`/`parseInstagramQuery` return their EMIT COUNT — that
+  is what gates the fetch-path fallbacks; keep the returns accurate.
+Verified by HAR replay driving the real registered listeners: unknown
+wrappers/endpoints/NDJSON/renamed-attribute shapes all still capture, the
+HAR's real login-wall Bloks bodies emit nothing (their payloads are
+serialized STRINGS, which the walk correctly can't see into), and mixed
+known+unknown responses emit each item exactly once. **The regression net
+is `node scripts/instagram-replay.mjs`** — it drives the real registered
+listeners (real match-pattern semantics included) with SANITIZED fixtures
+under `scripts/fixtures/instagram/` (structure/nesting from real HARs;
+identities, captions, locations and URL signatures scrubbed): home-feed
+SSR doc, feed graphql with carousel + explore_story nesting, the gated
+reel doc with inline DASH, the legacy `video_url` node under an unknown
+wrapper, prefixed NDJSON. Run it alongside `webrequests-smoke.mjs` after
+any Instagram/Threads walker change.
+
 #### Threads has NO content script — two `filterResponseData` paths only
 
 Threads capture lives entirely in `background.js`: `listenerThreadsPage`
@@ -979,6 +1340,9 @@ still does).
   dropped listener registration, a duplicate router kind, syntax errors —
   ES modules need `node --input-type=module --check`, plain `node --check`
   rejects `import`).
+- **For Instagram/Threads walker changes, ALSO run
+  `node scripts/instagram-replay.mjs`** — the fixture-backed replay of the
+  real registered listeners (see the Instagram section).
 - Re-run your HAR simulation with the **final** code (caps included) and confirm
   it finds the expected item(s) with `user`, `caption`, and `video_versions` —
   and since the split, **import the real walker from the site's module** in the
@@ -1028,6 +1392,23 @@ Design points that are easy to undo:
   dismissal sweeps, and only success dismisses; Copy/Report stay available as
   the fallback. The button disables for the in-flight window (double-tap =
   double POST otherwise).
+- **A collected trace is obfuscated, so ARCHIVE `mapping.txt` with every
+  release** (`app/build/outputs/mapping/release/mapping.txt`). Release builds
+  are `minifyEnabled true` with no `-dontobfuscate` — the targeted
+  `-keep class` rules in `proguard-rules.pro` (Gecko, Rhino, a few
+  ffmpegutils classes) keep *those* classes, not everything, so a report
+  arrives as `o71.d(...)` and is undecodable without the matching mapping.
+  Match a report to its build by the `versionCode`/`versionName` the report
+  already carries. `-keepattributes SourceFile,LineNumberTable` IS set, so
+  the file and line in each frame are true and readable on sight; only the
+  class needs retracing. `-renamesourcefileattribute` is deliberately NOT
+  set — it hides file names, which protects nothing in an open-source app
+  and would throw away the one readable part of a frame. **Retrace by
+  METHOD, never by class name:** R8's horizontal merging puts a method in an
+  unrelated class's slot, so grepping the mapping for the obfuscated class
+  gives a confident wrong answer (a `SavedStateRegistryImpl.performSave`
+  frame resolved to `TrackingPermissionDao_Impl` this way); match the
+  method's line range instead.
 
 ## Logging discipline
 
@@ -1474,6 +1855,108 @@ CGNAT↔CGNAT, full-tunnel VPN — still fails honestly (`no-path` →
 `p2p_error_no_path`). Don't reintroduce a multi-STUN fallback list, and never
 replace the fetched-ephemeral-creds design with a static credential.
 
+**The footer's "never touches a server" claim is set in exactly ONE place —
+`onTransport(relayed=false)` — and every other surface defaults to the
+path-NEUTRAL `p2p_footer_connecting`.** The engine's `reportTransport` reads
+the selected ICE candidate pair from `getStats` after `connectionState:
+connected` and posts `{type:"transport", relayed}`; both fragments then choose
+`p2p_footer` (direct) or `p2p_footer_relayed` (through firedown.app, still
+E2E). That probe is **best-effort and silent on failure** — it bails when
+`getStats` is missing, when its promise rejects, and when no candidate-pair
+matches the transport pointer or the `selected`/`nominated` fallbacks. The two
+layouts and both stage methods used to default to `p2p_footer`, so each of
+those silent failures left a **relayed** transfer asserting the file never
+touched a server — a false privacy claim, at full confidence, on the one
+surface where the user is deciding whether to trust the transfer. The rule
+that fixes it generalises: **an unverified claim degrades to the WEAKER
+statement, never the stronger one.** `p2p_footer_connecting` ("Encrypted
+end-to-end.") is true on every path, so it costs nothing to show while
+unknown. Note this also applies to the RESTING entry screen, whose layout
+default is the neutral string too: with the relay on by default,
+"never touches a server" isn't reliably true as a general product claim
+either. Adding a new footer state means adding it to BOTH layouts and BOTH
+`onTransport`s.
+
+Diagnosing "did this touch a server?" from a log: `typ srflx` among the
+gathered candidates only proves **STUN** answered (it reveals the public
+address; it carries no bytes), and an answer delivered via
+`api.firedown.app/v1/p2p/a/<id>` is the rendezvous mailbox carrying ~1 KB of
+SDP, not the file. The file path is the **selected pair**, which
+`reportTransport` logs as `selected pair: host <-> host` / `srflx <-> srflx` /
+anything containing `relay` (and `selected pair: unknown` when it couldn't
+tell — the case that keeps the neutral footer). `relayed` alone can't
+distinguish host from srflx, which is why the pair types are logged
+separately.
+
+**A LINK-delivered offer outlives the sender's session, so a `no-path` there
+means "sender gone", not "bad network".** The `FDS1.` code is self-contained
+(name/size/mime + the sender's ICE candidates + DTLS fingerprint, all minted
+while the share screen was open) and the offer mailbox serves it for its whole
+TTL with a NON-destructive read. So a link keeps producing a full, convincing
+preview long after `P2pShareBaseFragment.onDestroyView` → `controller.stop()`
+released those ports and destroyed the key behind that fingerprint: Accept
+succeeds, connectivity checks reach nothing, and `CONNECT_TIMEOUT_MS` (30s)
+later the receiver was told to "try the same Wi-Fi with any VPN off" — advice
+for a live peer it can't reach, when the peer isn't there at all.
+`P2pReceiveFragment.errorText` overrides `no-path` to
+`p2p_error_no_path_link` when `mArrivedRemote`. Keep it scoped to that flag:
+the QR path is the opposite case (the sender is standing there with the screen
+open, so a no-path really is the network), and a VPN on the receiver still
+wins, being more specific and directly actionable. The copy says "may have
+closed" rather than naming the cause — a real CGNAT↔CGNAT pair still lands
+here, and the next step is the same either way (same degrade-to-the-weaker-
+claim rule as the transfer footer).
+
+**The sender LISTENS for the whole window its link advertises —
+`P2pSignalingClient.POLL_DEADLINE_MS` mirrors the server's `offerTTL` (15 min)
+and must stay in step with it.** It was 150 s, justified by a comment blaming
+a "~3 min relay TTL" that does not exist: the server's `waiter()`
+(firedown-api `handler_rendezvous.go` — READ THE SERVER before trusting a
+client comment about it) CREATES, or re-creates when expired, the answer
+mailbox entry on every poll and parks 25 s, so there is no server-side poll
+cutoff, and the client's "404 = session gone" branch described a response the
+server never sends (200/204/400/503 only). The answer store's 5-min TTL bites
+only an answer nobody collects; a live long-poll is woken instantly on
+delivery. Consequence of the old value: a remote share's ONLY automatic
+answer path was dead from minute 2.5 to minute 15 — the link previewed fine
+and Accept no-pathed even with the sender sitting on the share screen. A poll
+that gives up is a silent no-op on the sender (LAN return and the
+human-relayed reply still stand), which is why extending it changed no UI.
+
+**Failing FAST on a dead link (rather than merely honestly) was DECIDED
+AGAINST — but for TWO reasons, not the four first written down.** The two
+that hold: it only buys the ~30 s `CONNECT_TIMEOUT_MS` wait on a path that
+fails either way (the valuable half — saying the right thing — is the
+`p2p_error_no_path_link` fix, which cost nothing), and a liveness signal can
+never GATE Accept (a false "gone" blocks a working transfer; a false "maybe
+there" costs 30 s — so it degrades to an advisory, i.e. the same honest copy
+shown earlier). Two reasons originally given were WRONG and are recorded so
+they don't get re-derived: "rollout breaks old senders" and "periodic wakeup
+per share" both assumed the heartbeat must be new client behavior — in fact
+the server can derive liveness from whether anyone is currently long-polling
+`/a/<id>` (the connection already exists; old APKs poll too), and with the
+poll window now spanning the offer TTL that presence signal would be accurate
+for the whole window. Still unbuilt because the two surviving reasons stand.
+Note what the signal actually is, if ever exposed: ANSWER-PATH liveness, not
+sender liveness. Don't fake fast-fail by shortening `CONNECT_TIMEOUT_MS` —
+and doing it for the link case specifically is BACKWARDS: a link-delivered
+offer is more likely cross-network/relayed and needs MORE connect time.
+
+**Known residual, recorded not decided: the sender never RETRACTS a brokered
+offer.** `P2pSignalingClient` has no DELETE — `stopSession()` releases the
+ports and destroys the DTLS key but leaves the offer serving from
+`/v1/p2p/o/<id>` for the rest of its TTL, which is what makes ghost links
+preview convincingly. A best-effort DELETE at teardown (plus draining a stale
+answer from `/a/<id>`) would turn a deliberately-closed share into the clean
+"link expired" flow instantly, pre-Accept, with a perfect failure asymmetry
+(retraction is affirmative — a crash that skips it just degrades to today's
+honest-slow copy). Needs the firedown-api endpoint; if built, prefer it over
+any liveness scheme. A "wanted marker" (receiver's dead-link tap flags the
+id; sender polls its own ids on foreground) was considered and is WEAK: the
+back-channel already exists — a link-delivered share arrived through a
+messenger, and "link's dead" travels back through the same thread faster than
+any app surface.
+
 **The answer returns automatically — the human-relayed reply is the last
 resort.** WebRTC needs an answer back (the receiver's candidates/DTLS
 fingerprint don't exist until Accept), and the answer has three tiers:
@@ -1620,10 +2103,69 @@ a `FINISHED` `DownloadEntity` (`file_url = "p2p://<device-slug>"` so the row's
 `MIME · domain` meta line names the transport honestly; mime is derived from
 the FILE, not the entity's stored label; Room invalidation refreshes the list,
 no poke) and calls `GalleryPublisher.publish`. An aborted/failed receive
-deletes the `.part`. **A bad scanned/pasted answer is SOFT** (`bad-code`): the
+KEEPS a non-empty `.part` (only an empty one is deleted) — it is the resume
+capital, see below. **A bad scanned/pasted answer is SOFT** (`bad-code`): the
 engine keys softness on `signalingState` and treats every decode/apply failure
 before connect as recoverable (the offer QR stays valid) — never `fail()` the
 session on a mangled paste.
+
+**Transfers RESUME across a dropped connection — re-share the same file,
+re-accept, and only the remainder streams.** No new UI: the receiver's kept
+`.part` is found automatically at the next Accept (same offer → same
+uniquified target name → same part path) and the progress bar simply starts
+at the resumed position. The handshake is versioned by FIELD PRESENCE, so
+every old↔new APK pairing keeps working:
+- The offer (`FDS1`) carries `res:1` (this sender serves ranged loopback
+  reads and verifies a tail). The answer (`FDR1`) carries `off` (bytes on
+  disk) + `tail` (base64url SHA-256 of the part's last 64 KB) — computed by
+  JAVA at accept time (`tailHash` in the controller; it owns the file), only
+  when the offer had `res` (an old sender can't serve ranges and must never
+  be asked). The sender hashes ITS OWN bytes at the same range (ranged
+  `GET /read?from=&len=` + `crypto.subtle` — the loopback origin is
+  potentially-trustworthy, so subtle exists) and opens the DataChannel with
+  `{"t":"begin","off":X}`: X = the offset when the tails match, 0 when they
+  don't (a DIFFERENT file behind the same name — resuming would splice two
+  files; restart instead). `begin` is sent ONLY when the answer requested a
+  resume, so an old receiver never sees an unknown control message; ordered
+  channel = begin precedes every chunk, and a chunk arriving before it fails
+  the transfer (`data before begin`) rather than guessing offsets.
+- **The tail-window size lives in TWO constants that must stay equal** —
+  engine `RESUME_TAIL` and controller `RESUME_TAIL_BYTES` (both 64 KB). They
+  hash "the last min(window, offset) bytes"; unequal windows hash different
+  ranges, so every resume would LOOK like a mismatch and silently restart
+  from 0 — a working-but-never-resuming state with no error anywhere.
+- **Restart-from-0 needs no extra round trip**: the loopback write target is
+  armed at the kept byte count (`setWriteTarget(part, keepBytes)`), and its
+  offset check has ONE sanctioned exception — `off=0` against a non-empty
+  target truncates and restarts (the engine's POSTs are promise-chained and
+  never retried, so a mid-transfer `off=0` cannot recur). That also
+  self-heals the old-sender case: Java arms a resume it can't know the
+  engine discarded (the `res` gate lives engine-side), and the plain
+  from-zero stream just truncates through it.
+- **Every byte in a kept `.part` is a correct prefix, even after a
+  mid-batch cut**: the channel is reliable+ordered and the loopback writes
+  the body sequentially as it reads, so a torn last POST leaves a SHORTER
+  correct prefix, never wrong bytes — file length IS the resume offset, no
+  journal needed. (OS page-cache loss on power failure is accepted; the
+  tail hash catches any corruption by restarting.)
+- Retention is bounded: `pruneStaleParts` (7 days) sweeps `*.part` in the
+  download dir from TWO triggers — every accept, AND `MediaListenerWorker`
+  on every DownloadsActivity resume. The second trigger is load-bearing:
+  accept-only pruning kept a failed receive's partial FOREVER for a user who
+  never accepts another share, and that user is exactly the likely one after
+  a big transfer died near the end (a ~98 GB `.part` with no DownloadEntity
+  row — invisible to the Downloads UI and the missing-file sweep, reclaimable
+  only via a file manager). Safe from anywhere because ONLY this feature
+  writes `.part` there (verified; the download pipeline doesn't) and the age
+  gate means a live session's minutes-old partial is never touched. So the
+  honest policy answer is: a never-resumed partial lives 7 days past its
+  last write, reclaimed the next time the user opens Downloads. `eof.bytes`
+  and `done.bytes` remain the file TOTAL (progress counts from the resume
+  point), so `finalizeReceivedFile`'s byte-count verify is unchanged.
+- Engine changes ride `assets/p2pshare/` → the usual `manifest.json` version
+  bump (3.0). The wire-protocol delta (`res`/`off`/`tail`/`begin`) must be
+  mirrored in any future browser-recipient receive page — it is part of the
+  shared wire format the "SECOND IMPLEMENTATION" warning below records.
 
 **Scanner is a full-screen `DialogFragment` (`<dialog>` destination), NOT a
 `<fragment>` — load-bearing.** A `<fragment>` scanner destination would
@@ -1707,9 +2249,12 @@ nothing to take down — Firedown stays not-a-host.
   `scripts/p2pshare-smoke.mjs` to drive the receiver too. Don't hand-copy.
 - **Other honest limits:** the sender must stay on the share screen for the whole
   transfer (session lifetime = view lifetime — fine at 50 MB, painful at 5 GB
-  over a phone uplink); there is no resume, so a dropped connection restarts at
-  byte 0 (true today, but a browser recipient on flaky wifi meets it more);
-  Safari is the worst tier. Privacy delta: the recipient's IP now touches
+  over a phone uplink); the app-to-app flow resumes a dropped connection (the
+  `res`/`off`/`tail`/`begin` handshake above), but a BROWSER recipient only
+  gets that if the page implements the same handshake AND has somewhere
+  durable to keep the partial — File System Access can, the service-worker
+  and Blob tiers cannot, so those still restart at byte 0; Safari is the
+  worst tier. Privacy delta: the recipient's IP now touches
   firedown.app and possibly the TURN relay — where today a non-Firedown recipient
   could not participate at all.
 - **The DTLS fingerprint rides in the code**, so the browser page authenticates
@@ -3502,6 +4047,25 @@ regress any layer independently:
   closes any session they had. **Never add an eager create-sessions-for-all
   loop** — one Gecko content session at cold start is the design (Fenix's
   suspended-tabs model).
+- **The archive sweep is TWO passes: inactivity + DUPLICATES (the Brave
+  model).** The duplicate pass (`SETTINGS_TABS_ARCHIVE_DUPLICATES`, default
+  ON, its own toggle on the tabs settings screen) archives same-page copies
+  keeping the most recently used one — the case the inactivity timer
+  structurally can't catch, because re-opening a duplicate REFRESHES its
+  `lastAccess`. Grouping is by `GeckoState.getPageIdentityKey()` (the
+  visit-identity normalization — fragment + tracking-noise params ignored),
+  so share-link copies differing only in `?utm_*` collapse; a null key
+  (opaque host) never dupe-matches. Exclusions mirror the inactivity pass
+  (home/incognito never participate); the ACTIVE tab joins its group but
+  always wins it. The pass is deliberately INDEPENDENT of the interval —
+  it runs even with the interval on "Never", so every sweep gate is
+  `threshold > 0 || duplicates` (init in `DatabaseModule`, the settings
+  screen's immediate sweeps, the tabs sheet's 6-hour debounced trigger).
+  The archive's retention (90-day age purge + 200-entry cap,
+  `purgeSync`) is DISCLOSED on the settings screen via a footnote row
+  whose summary is formatted from the SAME `Preferences` constants
+  `purgeSync` enforces — the honest-copy rule; don't hardcode the figures
+  into the string.
 - **Per-tab session-state files (v3) — the Chromium model, with Chromium's
   bugs pre-fixed.** The remaining unbounded retention after v2 was every
   tab's serialized session-state string held in `mGeckoStates` (Fenix retains
@@ -3735,6 +4299,47 @@ probe (about:config, no build needed): set `ui.textSelectDisabledBackground`
 to `#ff0000` — selection turning red proves the disabled-state wedge; a
 selection that follows `ui.highlight` instead means focus is fine and the
 accent pipeline is the suspect.
+
+### Password autofill comes from the GeckoView WIDGET — a display refactor kills it silently
+
+Bitwarden / 1Password / Proton Pass fill login forms **inside pages** today,
+and the app contains **no autofill code for it**: no `Autofill` import, no
+`setAutofillDelegate`, no `getAutofillSession`. It works because
+`NestedGeckoView extends GeckoView` and `BrowserFragment.setGeckoViewSession`
+calls `mGeckoView.setSession(...)` — and `GeckoView.setSession` is where the
+widget installs its OWN delegate (`if (mAutofillEnabled) session
+.setAutofillDelegate(mAutofillDelegate)`, and `mAutofillEnabled` defaults to
+`true`). The widget also implements `onProvideAutofillVirtualStructure()` /
+`autofill(SparseArray)`, and its inner `AndroidAutofillDelegate` drives
+`AutofillManager.notifyViewEntered/notifyViewExited/notifyValueChanged/cancel/
+commit`. `minSdkVersion 26` is the Autofill framework's own minimum, so
+there's no version gate.
+
+**The trap: anything that stops routing the session through the `GeckoView`
+widget** — driving a `GeckoDisplay` into a `SurfaceView`/`TextureView`
+directly, or wrapping the session in a custom view — takes the delegate with
+it. There is no crash, no log, no error: password managers just quietly stop
+offering to fill, which reads as a bug in the user's password manager. If
+that refactor ever happens, the session needs
+`session.setAutofillDelegate(...)` + the two `View` overrides re-implemented
+by hand. Same for `android:importantForAutofill="no"`: it's set on the app's
+own EditTexts (URL bar, rename/save dialogs, list search fields) on purpose
+and must never land on the GeckoView.
+
+**Three things deliberately NOT built.** (1) A per-app autofill off switch
+(`setAutofillEnabled(false)`). The privacy cost is real — the delegate hands
+the page's field structure and value-change events to whatever app is the
+autofill service — but that service is the user's own password manager and
+the SYSTEM already owns that control, which the Settings → "Passwords &
+autofill" row links straight to; a second switch duplicating a system setting
+is the pref-that-gets-misread that killed the WebRTC toggle. (2) Disabling
+autofill for incognito: logging into a second account in a private tab is a
+primary use of private browsing, and Chrome/Firefox both keep filling enabled
+there. (3) Firedown stores NO logins of its own — no
+`Autocomplete.StorageDelegate` is set, so GeckoView never persists a password
+and the system autofill service is the only credential path. Keep it that
+way; a built-in password store means encryption, backup and a security
+surface a downloader has no business owning.
 
 ## Page titles, history, bookmarks & favicons
 
@@ -4714,9 +5319,26 @@ here:
   decoration (identical on every row, redundant with both the domain text and
   the `·`). Don't reintroduce a domain icon here; if you ever do want a
   per-site favicon, that's a different, data-bound feature, not the old static
-  globe. The third line (`size · date · duration/resolution/language`) is the
-  informative density and stays. The two layouts and the grid tile are kept in
-  lockstep — change the meta line in both list rows together.
+  globe. The third line (`duration/resolution/language · size · date`) is the
+  informative density and stays — the secondary metadatum LEADS, matching the
+  grid caption's `duration · size` order (they used to disagree: grid
+  `3:51 · 40,1 MB`, list `40,1 MB · 3:51` — same screen, same facts, opposite
+  orders). The Downloads CLOUD badge is the SAME white shadowed `cloud_badge`
+  overlay on the thumbnail's top-START corner in list, grid AND dense tile —
+  declared fully in the layouts (alpha 0.7 included), the adapter only toggles
+  visibility; there is no per-surface asset/tint split any more. The list spent
+  one round with the badge INLINE in this meta line and both placements failed
+  on sight: LEADING it indented the mime label ~16dp on backed-up rows only
+  (the line's brightest token fell out of column), TRAILING it floated the
+  glyph at the row's right edge next to the ⋮ (read as asymmetric clutter).
+  The overlay's own historical objection — white washing out on the pale
+  pastel audio-fallback tile in light theme — is STALE: the fallback ground
+  is one dark colour in both themes now (`COLOR_FALLBACK_GROUND`), and the
+  baked shadow covers arbitrary artwork. Also deliberately NOT coral: brand
+  coral on the light surface is ~2.9:1 (under the 3:1 glyph floor — the
+  flips-with-theme defect class), and a marker on ~90% of a heavy backup
+  user's rows should be quiet, not brand-loud. The two layouts and the grid
+  tile are kept in lockstep — change the meta line in both list rows together.
 - **Durations are TRIMMED for display, never re-formatted in storage.**
   `fileDurationFormatted` is stored padded to `HH:MM:SS`, so a 39-second clip
   spent two fields on zeros. `DownloadItemAdapter.compactDuration` drops
@@ -5154,6 +5776,41 @@ object streamed + decrypted on read) share `Theme.FireDown.Play` and the same
   did not, and rendered a back arrow over an empty toolbar. `setDisplayOptions`
   **replaces** the flag set, so `setDisplayHomeAsUpEnabled(true)` must come
   AFTER it. Any new activity on this theme needs the same call.
+- **The local player's controller runs with `animation_enabled="false"` —
+  load-bearing, don't re-enable.** `PlayerControlViewLayoutManager`'s show/hide
+  animations move `exo_progress` with its OWN translation animators, separate
+  from `exo_bottom_bar` (built for media3's stock layout where the timebar
+  sits OUTSIDE the bar; ours nests it inside the pinned 44dp row). A
+  `hideController()` across a PiP transition stranded that translationY and
+  the row CLIPPED the scrubber — after PiP exit the controller showed the
+  time texts but no progress bar (reported on-device). This is the same
+  animation machinery the exo_media_viewer_controller.xml comments (#100–#105)
+  already pinned two workarounds against; with animations off, show/hide is a
+  plain visibility flip and the whole stranded-animation class is gone.
+  Related gesture UX in `MediaViewerFragment.setupDoubleTapSeek`: zones are
+  THIRDS (left/right seek, middle double-tap = play/pause), and seeking uses
+  a YouTube-style STREAK — after a double-tap, every further tap in the same
+  zone within `SEEK_STREAK_WINDOW_MS` seeks again with a cumulative "−20 s"
+  badge. The streak is a fix, not polish: a bare `onDoubleTap` classifier
+  consumes taps in PAIRS (3 rapid taps = 1 seek, 4 = 2), which read as
+  "sometimes it only seeks 10 s". Continuation taps arrive on ALTERNATING
+  callbacks (`onSingleTapUp` for odd taps, `onDoubleTap` for even), so both
+  handlers feed `continueSeekStreak()` — keep both wired.
+- **A raw file path becomes a Uri via `Uri.fromFile()`, NEVER
+  `Uri.parse(path)`.** parse() treats the string as ALREADY-ENCODED, so a
+  `%` in a filename acts as an escape introducer: "4% Of" decodes through
+  `Uri.getPath()` into U+FFFD replacement chars and media3's FileDataSource
+  throws FileNotFoundException("Invalid file path") on a file that exists
+  (`#` would truncate the path as a fragment marker the same way). Shipped:
+  a YouTube title containing '%' was unplayable on EVERY device, and the
+  hunt went through codecs (AV1), filename sanitizing, and a real-but-
+  unrelated SABR truncation before the log's mojibake path
+  (`4���Of`) named it — `%` is legal in filenames on every filesystem this
+  app writes, so the sanitizer rightly passes it through. Fixed in
+  MediaViewerFragment + FrameGrabberFragment + GifMakerFragment (all three
+  had the identical line). The diagnostic tell for this class:
+  ERROR_CODE_IO_FILE_NOT_FOUND on a file the Downloads list shows, with
+  replacement characters in the logged path.
 - **A PlayerView needs all FOUR timebar colours, not just `played_color`.**
   media3's defaults are white (`played` 0xFFFFFFFF, `buffered` 0xCCFFFFFF,
   `unplayed` 0x33FFFFFF). Both players set only `played_color`, so the bar read
@@ -5173,6 +5830,125 @@ already reports it, honestly and only when there is something to report, whereas
 a subtitle restates it on every frame of every playback including the ones that
 never stall. If this ever needs strengthening, it should stay in that register —
 something subtle tied to actual buffering state, not a persistent label.
+
+### Background playback (local player) — `PlaybackHub` + `PlayerPlaybackService`
+
+Playing a downloaded file keeps playing with the screen off / activity
+backgrounded. Architecture: the ExoPlayer stays OWNED BY `MediaViewerFragment`
+(no MediaSessionService refactor); a `mediaPlayback` FGS
+(`phone/player/PlayerPlaybackService`, modeled on `GeckoMediaPlaybackService`)
+attaches to that player via the main-thread singleton
+`phone/player/PlaybackHub` and shows the MediaSession/MediaStyle notification
+(notification id `PLAYER_MEDIA_ID`, distinct from browser media's `MEDIA_ID`
+so both can notify at once). Invariants, each load-bearing:
+
+- **PiP ↔ background is ONE coordinated contract, not two features:** Home
+  while playing (screen on) → **PiP** (the on-screen continuation,
+  onUserLeaveHint), with background as the FALLBACK when PiP entry is
+  denied; screen off / lock — from fullscreen OR from inside PiP → the
+  **background service** (the off-screen continuation); **PiP closed with
+  X → the session ENDS** — no background arm, no orphan notification;
+  notification tap → reopen + ADOPT. Exactly one continuation mode is ever
+  active, and the modes hand off (PiP → screen off → background → tap →
+  fullscreen → Home → PiP). PiP dismissal (X button AND drag-to-dismiss)
+  needs THREE defenses because OEMs disagree on the teardown ordering: an
+  `mPipTeardown` flag (set on onPictureInPictureModeChanged(false), cleared
+  on onResume — an EXPAND passes through the same window but always
+  resumes) gates the arm; the **in-PiP interactive-display gate** — while
+  `isInPictureInPictureMode()`, the arm additionally requires
+  `!PowerManager.isInteractive()`, because Samsung One UI's DRAG-TO-DISMISS
+  delivers onStop still in PiP, not finishing, with no mode-change(false)
+  beforehand (byte-identical to screen-off-in-PiP) and then destroys the
+  activity WITHOUT the finishing flag — the display state is the only
+  OEM-proof discriminator (a dismissal gesture necessarily happens with the
+  screen ON; screen-off is the one legitimate in-PiP background arm); and a
+  FINISHING `onDestroy` sweeps any service that still raced through (never
+  on a system destroy — that's the case background playback must outlive).
+  Without these, dismissing PiP left audio + a notification behind, and
+  tapping it reopened a torn-down session that restarted from zero.
+- **The decision lives in `PlayerActivity.onStop`, BEFORE `super.onStop()`** —
+  FragmentActivity's super dispatches the fragments' onStop, and
+  `MediaViewerFragment.onStop` stops the player unless
+  `PlaybackHub.isBackgroundActive()` is already armed. Finishing paths (back
+  press, PiP X-close) never arm it, so they keep the immediate-stop behavior.
+  `onStart` disarms + stops the
+  service AFTER `super.onStart()` (see the adopt ordering below).
+- **`MediaViewerFragment` has deliberately NO onPause pause any more.** The
+  old unconditional pause is what killed screen-off playback, and it also
+  paused on dialogs/split-screen. "Another app started playing" is covered
+  properly now: the player is built with
+  `setAudioAttributes(..., handleAudioFocus=true)` +
+  `setHandleAudioBecomingNoisy(true)` + `setWakeMode(C.WAKE_MODE_LOCAL)` —
+  media3 runs the whole focus machine, so `PlayerPlaybackService` carries
+  NEITHER the audio-focus state machine NOR the noisy receiver its Gecko twin
+  hand-rolls. Don't re-add either there.
+- **`onStart` re-`prepare()`s an IDLE player.** `onStop`'s `stop()` parks the
+  player in IDLE with position + playWhenReady retained, and before this
+  feature NOTHING re-prepared — returning after screen-off showed a dead
+  player. The guard (`getPlaybackState() == STATE_IDLE`) makes it a no-op on
+  first launch and on the background-playback path.
+- **Ownership: exactly one release, ever — and it is an owner IDENTITY, not
+  a flag.** The fragment owns `release()`; when it is destroyed while
+  background playback runs (system reclaimed the backgrounded activity), it
+  `markOwnerDetached()`s instead of releasing and the service releases in its
+  own onDestroy. The notification tap reopens `PlayerActivity` (singleTask →
+  onNewIntent) and the fresh fragment **ADOPTS** the live player
+  (`PlaybackHub.adopt`, matched on file path) instead of layering a second
+  player over the audio — skipping only
+  setMediaSource/prepare/setPlayWhenReady; the poster still self-hides
+  because `onRenderedFirstFrame` re-fires per new surface. The activity's
+  onStart stops the service only after super has run that replacement, so
+  the service's onDestroy sees ownership re-attached and leaves the player
+  alone. **The hub records WHICH fragment owns release duty
+  (`attach(player, entity, owner)` / `isOwner`), because the replace runs
+  with `setReorderingAllowed(true)` — the NEW fragment can come up (adopt +
+  attach) BEFORE the OLD one's onDestroy runs.** Without the identity, the
+  old teardown marked the just-adopted player owner-detached and the
+  service's shutdown released it under the live UI — every control click
+  after that hit media3's dead internal thread ("sending message to a
+  Handler on a dead thread", shipped bug: background → pause in
+  notification → tap notification → play dead). The old fragment's
+  teardown branches on `hub.player() == mExoPlayer`: same player + not
+  owner = adopted by the successor (hands off entirely); different player =
+  the successor built its own (foreground switch to another file), so this
+  one is unregistered and MUST still be released or it leaks and keeps
+  playing. The fragment's Player.Listener is a FIELD so the transfer can
+  `removeListener` without releasing (an orphaned inline listener would leak
+  the activity).
+- **Leak audit invariants (each fixed a real hole — re-verify all three if
+  you touch the lifecycle):** (1) the ExoPlayer and its
+  `DefaultDataSource.Factory` are built on the APPLICATION context, never
+  `mActivity` — the Builder's components retain the raw context, and this
+  player by design outlives the activity (static hub + service), so an
+  activity-context build pins the destroyed PlayerActivity for the whole
+  background session. (2) `PlaybackHub.attach` RELEASES a detached
+  predecessor player it supersedes (different player + `sOwnerDetached`):
+  in the background-A-then-open-B flow with the old fragment tearing down
+  first, the old player is owner-detached and attach resets the very flag
+  the service releases through — without the attach-release nobody ever
+  frees A. A living owner's player is deliberately not touched (its own
+  fragment's orphan branch releases it, either transaction order). (3) The
+  `backgroundActive` DISARM lives in `stopPlaybackAndSelf` (notification
+  dismiss / task removed / ENDED / null-player start), `clearIfHolds`, and
+  the activity's onStart — deliberately NOT in the service's onDestroy: a
+  rapid resume→re-background cycle processes the previous instance's
+  destroy AFTER the new session armed, and a blanket disarm there left the
+  new session running unflagged (a later fragment reclaim then released the
+  player under the live service). STATE_ENDED routes through
+  `stopPlaybackAndSelf` for the same reason — an armed flag surviving the
+  service means a later reclaim marks the player detached with no service
+  left to release it. `startForeground` is guarded (Gecko-service stance):
+  promotion denied → pause + stop, never crash or play unprotected.
+- **Vault (safe/encrypted) entries are excluded on purpose**
+  (`isBackgroundPlaybackEligible`): background playback puts the file NAME on
+  the lock screen and shade, and vault content is device-auth gated — same
+  trust-domain contract as the backup mirror and P2P send. They keep the old
+  stop-on-background behavior.
+- Notification X / swipe-from-recents pause playback and stop the service
+  (the paused player stays in memory, so returning resumes at position);
+  playback ENDED stops the service by itself. `CloudBackupStreamActivity`
+  has its own player and is NOT covered — a backed-up stream still stops in
+  background (candidate follow-up, same hub pattern would apply).
 
 ## Thumbnails (native `thumbnailer.c`)
 

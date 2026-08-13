@@ -33,9 +33,13 @@ import dagger.hilt.android.AndroidEntryPoint;
  * surface: it reads the same verified "ready" record UpdateDownloader writes and
  * offers the install in-app, so a notification denial no longer means the user
  * can never update. It's modal but infrequent (only a ready, newer, not-yet
- * dismissed update triggers it) and follows the CrashReportSheet pattern:
+ * snoozed update triggers it) and follows the CrashReportSheet pattern:
  * idempotent {@link #showIfReady} from {@code onResume}, crash sheet has
  * priority.
+ *
+ * <p>A dismissal SNOOZES rather than suppresses — see {@link #onDismiss}. At
+ * most {@link #MAX_PROMPTS} appearances per version, {@link #SNOOZE_INTERVAL_MS}
+ * apart, then quiet for good.
  */
 @AndroidEntryPoint
 public class UpdateAvailableSheet extends BaseBottomSheetDialogFragment {
@@ -45,6 +49,24 @@ public class UpdateAvailableSheet extends BaseBottomSheetDialogFragment {
     // from BaseActivity.onResume and takes priority over this one.
     private static final String CRASH_SHEET_TAG = "CrashReportSheet";
     private static final String ARG_PREVIEW = "preview";
+
+    /**
+     * How long a dismissal holds the sheet back. "Later" has to MEAN later, or
+     * the button is a lie — and for the user this sheet exists for (the one who
+     * denied notifications, and so has no other surface), a permanent
+     * suppression from one tap re-opens the very gap the sheet was built to
+     * close: the update sits verified on disk, and nothing ever offers it
+     * again.
+     */
+    private static final long SNOOZE_INTERVAL_MS = 24L * 60 * 60 * 1000;
+
+    /**
+     * Total times the sheet may appear for ONE version, after which a dismissal
+     * is permanent. A reminder that never stops is nagging, and this sheet is
+     * modal — so it gets the initial showing plus two reminders, then goes
+     * quiet and leaves the notification (and Settings) to carry the update.
+     */
+    private static final int MAX_PROMPTS = 3;
 
     private int mReadyVersionCode;
 
@@ -66,8 +88,13 @@ public class UpdateAvailableSheet extends BaseBottomSheetDialogFragment {
         }
         int readyVc = UpdateDownloader.readyVersionCode(context);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        if (prefs.getInt(Keys.UPDATE_PROMPT_DISMISSED_VERSION, -1) == readyVc) {
-            return; // user chose "Later" for this exact version
+        // Snoozed for THIS version and the snooze hasn't elapsed. A different
+        // stored version means a newer update arrived — show it regardless of
+        // how the previous one was dismissed.
+        if (prefs.getInt(Keys.UPDATE_PROMPT_SNOOZE_VERSION, -1) == readyVc
+                && System.currentTimeMillis()
+                        < prefs.getLong(Keys.UPDATE_PROMPT_SNOOZE_UNTIL, 0L)) {
+            return;
         }
         new UpdateAvailableSheet().show(fm, TAG);
     }
@@ -144,21 +171,24 @@ public class UpdateAvailableSheet extends BaseBottomSheetDialogFragment {
         String shown = (name == null || name.isEmpty())
                 ? getString(R.string.app_name) : name;
 
-        // The version being installed — prominent.
+        // The version being installed — prominent, and carrying the DOWNLOAD
+        // SIZE. The size used to hang off the line below ("Current version
+        // 1.1.87 · 205 MB"), which reads as the size of what you already have;
+        // it is the size of the APK waiting to be installed, so it belongs to
+        // the new version's line. (Skipped in preview — no real file there.)
         TextView version = view.findViewById(R.id.update_sheet_version);
-        version.setText(shown);
-
-        // ...and the version it replaces, plus the downloaded APK size when it's
-        // on disk (skipped in preview, where there's no real file).
-        TextView current = view.findViewById(R.id.update_sheet_current);
         File apk = Preferences.getUpdateApkFile(context);
         long bytes = (apk != null && apk.exists()) ? apk.length() : 0L;
         if (bytes > 0) {
-            current.setText(getString(R.string.update_available_sheet_current_size,
-                    App.getVersionName(), Formatter.formatShortFileSize(context, bytes)));
+            version.setText(getString(R.string.update_available_sheet_version_size,
+                    shown, Formatter.formatShortFileSize(context, bytes)));
         } else {
-            current.setText(getString(R.string.update_available_sheet_current, App.getVersionName()));
+            version.setText(shown);
         }
+
+        // ...and the version it replaces.
+        TextView current = view.findViewById(R.id.update_sheet_current);
+        current.setText(getString(R.string.update_available_sheet_current, App.getVersionName()));
 
         // "What's new" header + release notes — both shown only when status.json
         // carries a changelog for this version.
@@ -181,6 +211,10 @@ public class UpdateAvailableSheet extends BaseBottomSheetDialogFragment {
                 onInstall(name);
             }
         });
+
+        // No decline button on purpose — the drag handle, back and tap-outside
+        // dismiss, and onDismiss snoozes all of them identically. See the
+        // footer comment in fragment_dialog_update_available.xml.
     }
 
     private void onInstall(String name) {
@@ -225,18 +259,44 @@ public class UpdateAvailableSheet extends BaseBottomSheetDialogFragment {
     }
 
     /**
-     * Any dismissal — Install, Later, swipe-down, back, tap-outside — suppresses
-     * the sheet for THIS version so it doesn't re-pop on every resume. A newer
-     * version resets it (the stored value is the dismissed versionCode), and the
-     * notification still carries the update either way.
+     * Any dismissal — Install, swipe-down, back, tap-outside — SNOOZES the
+     * sheet for this version so it can't re-pop on the next resume, and the
+     * {@link #MAX_PROMPTS}th one makes that permanent.
+     *
+     * <p>It used to suppress permanently on the FIRST dismissal. That is worst
+     * for the user the sheet exists for — POST_NOTIFICATIONS denied, so no
+     * notification either — who swipes it away meaning "not right now" and is
+     * never offered the update again, with the verified APK sitting on disk.
+     * Rescheduling is also what lets the sheet carry no decline button: a
+     * dismissal gesture now means the same "later" a button would have, so
+     * the button was only a second name for it (see the layout's footer
+     * comment for the misclick objection that finished it off).
+     *
+     * <p>Every exit path snoozes, INSTALL INCLUDED, and that is deliberate
+     * rather than sloppy: a successful install needs no suppression at all
+     * (the new versionCode fails {@code showIfReady}'s newer-than-installed
+     * check, so the sheet can never return for it), while an install the user
+     * cancels at Android's package-installer prompt is exactly a case that
+     * SHOULD be offered again tomorrow. The snooze also stops the sheet
+     * re-popping on the resume that follows the installer prompt.
      */
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
         Context context = getContext();
         if (context != null && mReadyVersionCode > 0) {
-            PreferenceManager.getDefaultSharedPreferences(context)
-                    .edit()
-                    .putInt(Keys.UPDATE_PROMPT_DISMISSED_VERSION, mReadyVersionCode)
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            // A different stored version = the first dismissal of this update:
+            // start its count fresh rather than inheriting the previous one's.
+            int count = prefs.getInt(Keys.UPDATE_PROMPT_SNOOZE_VERSION, -1) == mReadyVersionCode
+                    ? prefs.getInt(Keys.UPDATE_PROMPT_SNOOZE_COUNT, 0) + 1
+                    : 1;
+            long until = count >= MAX_PROMPTS
+                    ? Long.MAX_VALUE
+                    : System.currentTimeMillis() + SNOOZE_INTERVAL_MS;
+            prefs.edit()
+                    .putInt(Keys.UPDATE_PROMPT_SNOOZE_VERSION, mReadyVersionCode)
+                    .putInt(Keys.UPDATE_PROMPT_SNOOZE_COUNT, count)
+                    .putLong(Keys.UPDATE_PROMPT_SNOOZE_UNTIL, until)
                     .apply();
         }
         super.onDismiss(dialog);

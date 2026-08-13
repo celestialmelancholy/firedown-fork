@@ -14,6 +14,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.util.Rational;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,6 +39,8 @@ import com.solarized.firedown.data.RestoredFileAccess;
 import com.solarized.firedown.data.entity.DownloadEntity;
 import com.solarized.firedown.phone.fragments.ImageViewerFragment;
 import com.solarized.firedown.phone.fragments.MediaViewerFragment;
+import com.solarized.firedown.phone.player.PlaybackHub;
+import com.solarized.firedown.phone.player.PlayerPlaybackService;
 import com.solarized.firedown.utils.BuildUtils;
 import com.solarized.firedown.utils.FileUriHelper;
 import com.solarized.firedown.utils.ContentUriUtils;
@@ -96,6 +99,22 @@ public class PlayerActivity extends AppCompatActivity {
      * without bringing the activity back to the foreground.
      */
     private BroadcastReceiver mPipReceiver;
+
+    /**
+     * True from onPictureInPictureModeChanged(false) until the next
+     * onResume — the PiP-teardown window. Load-bearing for the PiP ↔
+     * background coordination contract (see onStop): closing the PiP
+     * window with X must END the session, but on some devices the
+     * X-close delivers onStop BEFORE isFinishing() turns true, so the
+     * isFinishing gate alone let the background service arm for a dying
+     * activity — audio and a notification survived the X, and tapping
+     * that notification reopened a player whose session had been torn
+     * down, restarting from zero (reported on-device as "PiP and
+     * background need flow coordination"). An EXPAND back to fullscreen
+     * also passes through this window, but it always ends in onResume,
+     * which clears the flag before any onStop can consult it.
+     */
+    private boolean mPipTeardown;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -413,6 +432,7 @@ public class PlayerActivity extends AppCompatActivity {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig);
 
         if (isInPictureInPictureMode) {
+            mPipTeardown = false;
             // Defensive: some OEM ROMs deliver onPictureInPictureModeChanged(true)
             // twice in a row without an intervening (false). Without this
             // unregister the previous BroadcastReceiver would stay registered
@@ -439,28 +459,139 @@ public class PlayerActivity extends AppCompatActivity {
                     new IntentFilter(ACTION_PIP_CONTROL),
                     ContextCompat.RECEIVER_NOT_EXPORTED);
         } else {
+            // Exiting PiP — expand (→ onResume clears this) or X-close
+            // (→ onStop must NOT arm background playback; see the field).
+            mPipTeardown = true;
             if (mPipReceiver != null) {
                 unregisterReceiver(mPipReceiver);
                 mPipReceiver = null;
             }
         }
 
+        // The fragment owns ALL chrome sync (ActionBar + system bars +
+        // controller, via setChromeVisible). There used to be an
+        // unconditional actionBar.show() here on PiP exit, which broke the
+        // lockstep: the controller and system bars stay hidden after exit,
+        // so the title bar floated alone over the video until the user
+        // tapped twice (reported on-device). onPipModeChanged's exit branch
+        // now re-asserts chrome from the controller's actual visibility.
         MediaViewerFragment fragment = getMediaFragment();
         if (fragment != null) fragment.onPipModeChanged(isInPictureInPictureMode);
+    }
 
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            if (isInPictureInPictureMode) actionBar.hide();
-            else actionBar.show();
-        }
+    /**
+     * Foreground again — background playback (if any) hands the reins back
+     * to the UI. Order matters: super.onStart() first, so a singleTask
+     * relaunch's fragment replacement (old fragment transfers ownership,
+     * new one adopts the live player — see PlaybackHub) has completed
+     * BEFORE the service is stopped; its onDestroy then sees ownership
+     * re-attached and leaves the player alone.
+     */
+    @Override
+    protected void onStart() {
+        super.onStart();
+        PlaybackHub.setBackgroundActive(false);
+        stopService(new Intent(this, PlayerPlaybackService.class));
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        // A PiP exit that lands back in the foreground was an EXPAND, not
+        // an X-close — the teardown window is over (see mPipTeardown).
+        mPipTeardown = false;
+    }
+
+    /**
+     * The background-playback decision — one half of the PiP ↔ background
+     * coordination contract. The full contract:
+     *
+     *   • Home while playing (screen on)  → PiP (the on-screen
+     *     continuation; onUserLeaveHint). Background is the FALLBACK when
+     *     PiP entry is denied — the activity then stops and arms here.
+     *   • Screen off / lock — fullscreen OR from inside PiP → background
+     *     service (the off-screen continuation; this method, the PiP case
+     *     passes because the mode is still active, not tearing down).
+     *   • PiP dismissed — X button OR drag-to-dismiss → the session ENDS:
+     *     no background arm. Three defenses, because OEMs disagree on the
+     *     ordering: the mPipTeardown gate (isFinishing alone misses OEMs
+     *     that deliver this onStop before recording the finish), the
+     *     in-PiP interactive-display gate (Samsung's drag-dismiss looks
+     *     byte-identical to screen-off-in-PiP at onStop and then destroys
+     *     WITHOUT the finishing flag — the display state is the only
+     *     OEM-proof discriminator), and onDestroy sweeping any service
+     *     that still raced through a finishing teardown.
+     *   • Notification tap → reopen + ADOPT the live session
+     *     (PlaybackHub's ownership machinery).
+     *
+     * MUST run BEFORE super.onStop() — FragmentActivity.onStop dispatches
+     * the fragments' onStop, and MediaViewerFragment.onStop stops the
+     * player unless the PlaybackHub flag is already armed. Finishing
+     * paths (back press, PiP X-close) never arm it, so they keep the
+     * immediate-stop behavior.
+     *
+     * Starting the FGS from here is inside the "recently visible" window
+     * of the background-start restriction; if an OEM still denies it, the
+     * catch disarms the flag so the fragment's onStop falls back to the
+     * old stop-the-player behavior instead of playing on unprotected.
+     */
+    @Override
     protected void onStop() {
+        MediaViewerFragment fragment = getMediaFragment();
+        // While IN PiP, the only legitimate background arm is screen-off —
+        // and it is the only in-PiP stop with a NON-INTERACTIVE display.
+        // This is the OEM-proof discriminator the lifecycle can't provide:
+        // on Samsung One UI, DRAG-TO-DISMISS delivers onStop still in PiP
+        // mode, not finishing, with no mode-change(false) beforehand —
+        // byte-identical to screen-off-in-PiP — and then destroys the
+        // activity WITHOUT the finishing flag, so both the mPipTeardown
+        // gate and the onDestroy sweep missed it: playback ghosted on in
+        // the background with a notification after the user had thrown
+        // the window away (reported on-device). A dismissal gesture
+        // necessarily happens with the screen ON, so in-PiP + interactive
+        // display = a dismissal in progress, never a screen-off.
+        boolean inPipInteractiveStop = false;
+        if (isInPictureInPictureMode()) {
+            PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+            inPipInteractiveStop = pm == null || pm.isInteractive();
+        }
+        if (!isFinishing() && !mPipTeardown && !inPipInteractiveStop
+                && fragment != null
+                && fragment.isPlaying()
+                && fragment.isBackgroundPlaybackEligible()) {
+            PlaybackHub.setBackgroundActive(true);
+            try {
+                ContextCompat.startForegroundService(this,
+                        new Intent(this, PlayerPlaybackService.class)
+                                .setAction(PlayerPlaybackService.ACTION_START));
+            } catch (IllegalStateException e) {
+                PlaybackHub.setBackgroundActive(false);
+            }
+        }
         super.onStop();
         if (mPipReceiver != null) {
             unregisterReceiver(mPipReceiver);
             mPipReceiver = null;
+        }
+    }
+
+    /**
+     * FINISHING destroy sweeps the background service — the belt under
+     * the mPipTeardown gate. If any OEM ordering still armed the service
+     * on a dying activity (X-close rarities), the fragment has released
+     * the player by now (its onDestroy sees isFinishing) and an orphan
+     * service would sit on a dead session with a live notification; the
+     * sweep stops it and the notification goes with it. Gated on
+     * isFinishing: a SYSTEM destroy (memory reclaim, not finishing) is
+     * exactly the case background playback must OUTLIVE — never sweep
+     * there.
+     */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (isFinishing()) {
+            PlaybackHub.setBackgroundActive(false);
+            stopService(new Intent(this, PlayerPlaybackService.class));
         }
     }
 
