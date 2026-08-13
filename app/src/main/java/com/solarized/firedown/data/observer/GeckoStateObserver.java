@@ -166,7 +166,13 @@ public final class GeckoStateObserver implements Observer<List<GeckoStateEntity>
             // already cleaned up by writeSessionFile.
             Log.e(TAG, "saveToDiskIO", e);
         } finally {
-            if (entities == null || entities.isEmpty()) {
+            // Only wipe thumbnails on a CONFIRMED empty persist (the user
+            // closed every tab). A null snapshot is NOT that — it's the
+            // transient boot/clear signal (GeckoStateDataRepository posts
+            // null on init races), and wiping here deleted every thumbnail
+            // file while tabs still existed, leaving all tab cards blank
+            // grey after a restart. Chrome never drops previews this way.
+            if (entities != null && entities.isEmpty()) {
                 deleteThumbnails();
             }
         }

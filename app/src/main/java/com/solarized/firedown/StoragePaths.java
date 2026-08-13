@@ -152,7 +152,12 @@ public final class StoragePaths {
     }
 
     public static String getThumbsPath(@NonNull Context context) {
-        return context.getCacheDir() + File.separator + THUMBS_FOLDERNAME;
+        // PERSISTENT (getFilesDir), not cache: Android freely evicts
+        // getCacheDir() (low storage / idle app), which made tab thumbnails
+        // vanish on restart while the tabs themselves (session file in
+        // getFilesDir) survived. Chrome persists its tab previews the same
+        // way — the files dir is never auto-cleared.
+        return context.getFilesDir() + File.separator + THUMBS_FOLDERNAME;
     }
 
     /**

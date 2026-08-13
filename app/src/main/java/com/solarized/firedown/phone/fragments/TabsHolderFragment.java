@@ -678,24 +678,31 @@ public class TabsHolderFragment extends BaseFocusFragment {
     private void addNewTab() {
         boolean incognito = mViewPager.getCurrentItem() == PAGE_INCOGNITO;
 
-        // Create the tab state FIRST (unchanged).
-        GeckoStateEntity entity = new GeckoStateEntity(true);
+        // Chrome-style reveal: the overlay expands over the LIVE tray first.
+        // The tab state is created + navigation happens ONLY once the overlay
+        // FULLY covers the screen — so the grid behind stays frozen at its
+        // current state (no premature new-tab card popping into an empty slot
+        // mid-animation). The new tab materializes underneath, invisible.
+        NewTabReveal.play(mActivity, incognito, () -> {
+            GeckoStateEntity entity = new GeckoStateEntity(true);
 
-        GeckoState geckoState;
-        if (incognito) {
-            entity.setIncognito(true);
-            geckoState = new GeckoState(entity);
-            mIncognitoStateViewModel.setGeckoState(geckoState, true);
-        } else {
-            geckoState = new GeckoState(entity);
-            mGeckoStateViewModel.setGeckoState(geckoState, true);
-        }
+            GeckoState geckoState;
+            if (incognito) {
+                entity.setIncognito(true);
+                geckoState = new GeckoState(entity);
+                mIncognitoStateViewModel.setGeckoState(geckoState, true);
+            } else {
+                geckoState = new GeckoState(entity);
+                mGeckoStateViewModel.setGeckoState(geckoState, true);
+            }
 
-        // Chrome-style reveal: the overlay expands over the LIVE tray first;
-        // only when it FULLY covers the screen do we navigate to Home (which
-        // then happens invisibly underneath). No homepage flash, no snap.
-        NewTabReveal.play(mActivity, incognito, () ->
-                NavigationUtils.navigateToHome(mNavController, incognito));
+            // A new tab is a HOME tab — open the native home UI directly (no
+            // browser push, no Gecko session, no search-engine homepage load).
+            // Navigate home the same way the top-bar + and 3-dot New tab do
+            // (pop to the existing home — no crossfade), so there is no
+            // mid-fade layout snap from the home fragment's async sections.
+            NavigationUtils.navigateToHome(mNavController, incognito);
+        });
     }
 
     // ── ViewPager Adapter ───────────────────────────────────────────

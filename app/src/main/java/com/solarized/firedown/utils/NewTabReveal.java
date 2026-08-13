@@ -1,6 +1,7 @@
 package com.solarized.firedown.utils;
 
 import android.app.Activity;
+import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -58,7 +59,15 @@ public final class NewTabReveal {
 
         final View overlay = new View(activity);
         overlay.setTag(OVERLAY_TAG);
-        overlay.setBackgroundColor(IncognitoColors.getSurface(activity, incognito));
+        // Rounded corners matching the app's tab-card radius (Chrome's
+        // expanding new-tab surface is rounded too — the overlay starts as a
+        // rounded card and only reads as square once it exceeds the screen).
+        float radiusPx = activity.getResources().getDimension(
+                com.solarized.firedown.R.dimen.tab_card_radius);
+        GradientDrawable bg = new GradientDrawable();
+        bg.setColor(IncognitoColors.getSurface(activity, incognito));
+        bg.setCornerRadius(radiusPx);
+        overlay.setBackground(bg);
         overlay.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));

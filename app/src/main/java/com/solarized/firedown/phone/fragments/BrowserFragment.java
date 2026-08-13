@@ -327,6 +327,12 @@ public class BrowserFragment extends BaseBrowserFragment
                     if (previousGeckoState != null) {
                         openSession(previousGeckoState);
                     } else {
+                        // Backing out of a tab that has no previous session:
+                        // the tab's LIVE last position is home — record it so
+                        // the tab persists + restores as a home tab (standard
+                        // browser behavior: the homepage becomes this tab's
+                        // last address).
+                        geckoState.setHome(true);
                         popToCorrectHome(incognito);
                         setEnabled(false);
                     }
@@ -341,6 +347,10 @@ public class BrowserFragment extends BaseBrowserFragment
 
                 Log.d(TAG, "onBackPressed back to home");
                 mGeckoMediaController.stopMediaForSession(geckoState.getEntityId());
+                // Back reached the homepage: this tab's last LIVE position is
+                // now home — persist it so reopen restores to home, not the
+                // URL the tab was at before the back presses.
+                geckoState.setHome(true);
                 popToCorrectHome(incognito);
                 setEnabled(false);
             }

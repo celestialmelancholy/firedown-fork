@@ -82,3 +82,6 @@ fabric.properties
 # Python bytecode (from running the scripts/ diagnostics)
 __pycache__/
 *.pyc
+
+# Wrangler local cache (Cloudflare account metadata) — never commit
+relay/.wrangler/
